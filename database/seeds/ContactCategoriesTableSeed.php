@@ -19,7 +19,7 @@ class ContactCategoriesTableSeeder extends Seeder {
             array('name'=>'Fire Fighters'),
             array('name'=>'Services'),
             array('name'=>'Misc'),
-            
+
         ));
     }
 
