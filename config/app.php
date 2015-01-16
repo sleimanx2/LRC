@@ -145,6 +145,12 @@ return [
 		'App\Providers\EventServiceProvider',
 		'App\Providers\RouteServiceProvider',
 
+
+        /*
+         * Additional Service Providers
+         */
+        'Way\Generators\GeneratorsServiceProvider',
+
 	],
 
 	/*
