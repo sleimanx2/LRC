@@ -1,0 +1,40 @@
+<?php
+use Illuminate\Database\Seeder;
+use LRC\Data\Contacts\ContactCategory;
+use LRC\Data\Contacts\Contact;
+use Faker\Factory as Faker;
+
+class ContactsTableSeeder extends Seeder {
+
+    public function run()
+    {
+        // Delete Table
+        DB::table('contacts')->delete();
+
+        $faker = Faker::create();
+
+        if ( app()->environment() == 'local' )
+        {
+            // List contacts categories
+            $categories = ContactCategory::lists('id');
+
+
+            for ($i = 0; $i < 50; $i ++)
+            {
+                $randKey = array_rand($categories, 1);
+
+                Contact::create(array(
+                    'name'           => $faker->company.rand(0,100),
+                    'phonePrimary'   => $faker->phoneNumber,
+                    'phoneSecondary' => $faker->phoneNumber,
+                    'location'       => $faker->address,
+                    'lat'            => $faker->latitude,
+                    'long'           => $faker->longitude,
+                    'category_id'    => $categories[$randKey]
+                ));
+            }
+        }
+
+    }
+
+}

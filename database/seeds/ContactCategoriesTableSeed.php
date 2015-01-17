@@ -8,7 +8,7 @@ class ContactCategoriesTableSeeder extends Seeder {
         // Delete Table
         DB::table('contact_categories')->delete();
 
-        //insert some dummy records
+        // Insert some dummy records
         DB::table('contact_categories')->insert(array(
 
             array('name'=>'Hospitals'),

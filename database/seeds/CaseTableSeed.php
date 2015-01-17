@@ -8,7 +8,7 @@ class CaseTableSeeder extends Seeder {
         // Delete Table
         DB::table('cases')->delete();
 
-        //insert some dummy records
+        // Insert some dummy records
         DB::table('cases')->insert(array(
 
             array('name'=>'AVP'),

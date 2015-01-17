@@ -21,8 +21,8 @@ class CreateContactsTable extends Migration {
             $table->string('location');
             $table->decimal('lat', 18, 14);
             $table->decimal('long', 18, 14);
+            $table->integer('category_id');
             $table->timestamps();
-
         });
     }
 
