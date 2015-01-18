@@ -306,12 +306,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "417f0c101192df6e2e3171a31145a79f6de59bfe"
+                "reference": "641b8a09fc7043b7d8ac5c66c7d99137c59b44d5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/417f0c101192df6e2e3171a31145a79f6de59bfe",
-                "reference": "417f0c101192df6e2e3171a31145a79f6de59bfe",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/641b8a09fc7043b7d8ac5c66c7d99137c59b44d5",
+                "reference": "641b8a09fc7043b7d8ac5c66c7d99137c59b44d5",
                 "shasum": ""
             },
             "require": {
@@ -417,7 +417,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2015-01-18 04:55:28"
+            "time": "2015-01-18 09:36:46"
         },
         {
             "name": "league/flysystem",
@@ -1913,16 +1913,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/phpspec.git",
-                "reference": "7177e3b265223e10977c2957ba6a1e6db8ccd030"
+                "reference": "3b8bf83f08cbcb19bf89676f0ea682a5217c46a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/7177e3b265223e10977c2957ba6a1e6db8ccd030",
-                "reference": "7177e3b265223e10977c2957ba6a1e6db8ccd030",
+                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/3b8bf83f08cbcb19bf89676f0ea682a5217c46a3",
+                "reference": "3b8bf83f08cbcb19bf89676f0ea682a5217c46a3",
                 "shasum": ""
             },
             "require": {
-                "doctrine/instantiator": "~1.0,>=1.0.1",
+                "doctrine/instantiator": "^1.0.1",
                 "php": ">=5.3.3",
                 "phpspec/php-diff": "~1.0.0",
                 "phpspec/prophecy": "~1.1",
@@ -1934,7 +1934,7 @@
                 "symfony/yaml": "~2.1"
             },
             "require-dev": {
-                "behat/behat": "~3.0,>=3.0.11",
+                "behat/behat": "^3.0.11",
                 "bossa/phpspec2-expect": "~1.0",
                 "symfony/filesystem": "~2.1"
             },
@@ -1981,7 +1981,7 @@
                 "testing",
                 "tests"
             ],
-            "time": "2015-01-17 16:39:09"
+            "time": "2015-01-18 11:31:05"
         },
         {
             "name": "phpspec/prophecy",
@@ -2364,12 +2364,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit-mock-objects.git",
-                "reference": "b8b8772521ce1fe61f878dce003d42a2a93da3ff"
+                "reference": "b752b41e3fead4feee99f3a2f2972cef517abb8b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/b8b8772521ce1fe61f878dce003d42a2a93da3ff",
-                "reference": "b8b8772521ce1fe61f878dce003d42a2a93da3ff",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/b752b41e3fead4feee99f3a2f2972cef517abb8b",
+                "reference": "b752b41e3fead4feee99f3a2f2972cef517abb8b",
                 "shasum": ""
             },
             "require": {
@@ -2411,7 +2411,7 @@
                 "mock",
                 "xunit"
             ],
-            "time": "2015-01-16 06:47:20"
+            "time": "2015-01-18 10:44:19"
         },
         {
             "name": "sebastian/comparator",
