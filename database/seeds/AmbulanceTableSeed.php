@@ -1,7 +1,7 @@
 <?php
 use Illuminate\Database\Seeder;
 
-class AmbulancesTableSeeder extends Seeder {
+class AmbulanceTableSeeder extends Seeder {
 
     public function run()
     {
@@ -14,9 +14,9 @@ class AmbulancesTableSeeder extends Seeder {
         {
             DB::table('ambulances')->insert(array(
 
-                array('plateNumber' => '224','brand'=>'BMW','year'=>2001),
-                array('plateNumber' => '225','brand'=>'Renault','year'=>1999),
-                array('plateNumber' => '226','brand'=>'Nissan','year'=>2001),
+                array('plate_number' => '224', 'brand' => 'BMW', 'year' => 2001),
+                array('plate_number' => '225', 'brand' => 'Renault', 'year' => 1999),
+                array('plate_number' => '226', 'brand' => 'Nissan', 'year' => 2001),
             ));
         }
     }

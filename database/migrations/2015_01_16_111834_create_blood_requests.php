@@ -5,13 +5,13 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateBloodRequests extends Migration {
 
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
         Schema::create('blood_requests', function (Blueprint $table)
         {
             $table->increments('id');
@@ -25,8 +25,8 @@ class CreateBloodRequests extends Migration {
 
             // Parents info
             $table->integer('contact_name');
-            $table->string('phonePrimary');
-            $table->string('phoneSecondary');
+            $table->string('phone_primary');
+            $table->string('phone_secondary');
 
             // Hospital or blood bank id;
             $table->integer('blood_bank_id');
@@ -42,16 +42,16 @@ class CreateBloodRequests extends Migration {
             $table->timestamps();
 
         });
-	}
+    }
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
         Schema::drop('blood_requests');
-	}
+    }
 
 }

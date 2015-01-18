@@ -16,11 +16,11 @@ class CreateContactsTable extends Migration {
         {
             $table->increments('id');
             $table->string('name')->unique();
-            $table->string('phonePrimary');
-            $table->string('phoneSecondary');
+            $table->string('phone_primary');
+            $table->string('phone_secondary');
             $table->string('location');
-            $table->decimal('lat', 18, 14);
-            $table->decimal('long', 18, 14);
+            $table->decimal('latitude', 18, 14);
+            $table->decimal('longitude', 18, 14);
             $table->integer('category_id');
             $table->timestamps();
         });

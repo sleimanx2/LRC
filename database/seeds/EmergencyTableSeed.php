@@ -30,30 +30,30 @@ class EmergencyTableSeeder extends Seeder {
                 $randomUserIds     = array_rand($users, 4);
 
                 Emergency::create(array(
-                    'patientName'     => $faker->name,
-                    'parentName'      => $faker->name,
-                    'survived'        => $faker->boolean(),
-                    'case_id'         => $cases[$randomCaseId],
-                    'phonePrimary'    => $faker->phoneNumber,
-                    'phoneSecondary'  => $faker->phoneNumber,
+                    'patient_name'          => $faker->name,
+                    'parent_name'           => $faker->name,
+                    'survived'              => $faker->boolean(),
+                    'case_id'               => $cases[$randomCaseId],
+                    'phone_primary'         => $faker->phoneNumber,
+                    'phone_secondary'       => $faker->phoneNumber,
 
-                    'location'        => $faker->address,
-                    'locationLat'     => $faker->latitude,
-                    'locationLong'    => $faker->longitude,
+                    'location'              => $faker->address,
+                    'location_latitude'     => $faker->latitude,
+                    'location_longitude'    => $faker->longitude,
 
-                    'destination'     => $faker->address,
-                    'destinationLat'  => $faker->latitude,
-                    'destinationLong' => $faker->longitude,
+                    'destination'           => $faker->address,
+                    'destination_latitude'  => $faker->latitude,
+                    'destination_longitude' => $faker->longitude,
 
-                    'note'            => $faker->sentence(5),
+                    'note'                  => $faker->sentence(5),
 
-                    'ambulance_id'    => $ambulances[$randomAmbulanceId],
+                    'ambulance_id'          => $ambulances[$randomAmbulanceId],
 
-                    'driver_id'       => $users[$randomUserIds[0]],
-                    'aiderOne_id'     => $users[$randomUserIds[1]],
-                    'aiderTwo_id'     => $users[$randomUserIds[2]],
-                    'aiderThree_id'   => $users[$randomUserIds[3]],
-                    
+                    'driver_id'             => $users[$randomUserIds[0]],
+                    'aider_one_id'          => $users[$randomUserIds[1]],
+                    'aider_two_id'          => $users[$randomUserIds[2]],
+                    'aider_three_id'        => $users[$randomUserIds[3]],
+
                 ));
             }
         }

@@ -12,7 +12,7 @@ class CreateDonorsTable extends Migration {
 	 */
 	public function up()
 	{
-        Schema::create('donors', function (Blueprint $table)
+        Schema::create('blood_donors', function (Blueprint $table)
         {
             $table->increments('id');
 
@@ -21,16 +21,22 @@ class CreateDonorsTable extends Migration {
 
             $table->integer('blood_type_id');
 
-            $table->string('phonePrimary');
-            $table->string('phoneSecondary');
+            $table->string('phone_primary');
+            $table->string('phone_secondary');
             $table->string('email')->unique();
 
             $table->string('location');
-            $table->decimal('lat', 18, 14);
-            $table->decimal('long', 18, 14);
+            $table->decimal('latitude', 18, 14);
+            $table->decimal('longitude', 18, 14);
 
             $table->integer('donation_requested');
             $table->integer('donation_completed');
+
+            // if the donor wants to donate regularly
+            $table->boolean('regular');
+
+            // the last time the user donated
+            $table->dateTime('last_donation');
 
             $table->timestamps();
 
@@ -47,7 +53,7 @@ class CreateDonorsTable extends Migration {
 	 */
 	public function down()
 	{
-        Schema::drop('donors');
+        Schema::drop('blood_donors');
 	}
 
 }

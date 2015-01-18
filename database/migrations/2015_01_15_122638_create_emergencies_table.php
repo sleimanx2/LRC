@@ -18,20 +18,20 @@ class CreateEmergenciesTable extends Migration {
 
             // Patient info
             $table->boolean('survived');
-            $table->string('patientName');
-            $table->string('parentName');
+            $table->string('patient_name');
+            $table->string('parent_name');
             $table->string('case_id');
-            $table->string('phonePrimary');
-            $table->string('phoneSecondary');
+            $table->string('phone_primary');
+            $table->string('phone_secondary');
 
             // Location info start - end
             $table->string('location');
-            $table->decimal('locationLat', 18, 14);
-            $table->decimal('locationLong', 18, 14);
+            $table->decimal('location_latitude', 18, 14);
+            $table->decimal('location_longitude', 18, 14);
 
             $table->string('destination');
-            $table->decimal('destinationLat', 18, 14);
-            $table->decimal('destinationLong', 18, 14);
+            $table->decimal('destination_latitude', 18, 14);
+            $table->decimal('destination_longitude', 18, 14);
 
 
             // Misc
@@ -41,14 +41,14 @@ class CreateEmergenciesTable extends Migration {
             // Team info
             $table->integer('ambulance_id');
             $table->integer('driver_id');
-            $table->integer('aiderOne_id');
-            $table->integer('aiderTwo_id');
-            $table->integer('aiderThree_id');
+            $table->integer('aider_one_id');
+            $table->integer('aider_two_id');
+            $table->integer('aider_three_id');
 
 
             // Timing
-            $table->dateTime('startTime');
-            $table->dateTime('endTime');
+            $table->dateTime('start_time');
+            $table->dateTime('end_time');
             $table->timestamps();
         });
 	}

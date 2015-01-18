@@ -11,11 +11,11 @@ class CaseTableSeeder extends Seeder {
         // Insert some dummy records
         DB::table('cases')->insert(array(
 
-            array('name'=>'AVP'),
-            array('name'=>'Burns'),
-            array('name'=>'Unconscious'),
-            array('name'=>'Mission'),
-            array('name'=>'Misc'),
+            array('name' => 'AVP'),
+            array('name' => 'Burns'),
+            array('name' => 'Unconscious'),
+            array('name' => 'Mission'),
+            array('name' => 'Misc'),
 
         ));
     }

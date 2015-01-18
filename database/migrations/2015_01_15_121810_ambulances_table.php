@@ -15,7 +15,7 @@ class AmbulancesTable extends Migration {
         Schema::create('ambulances', function(Blueprint $table)
         {
             $table->increments('id');
-            $table->integer('plateNumber')->unique();
+            $table->integer('plate_number')->unique();
             $table->string('brand');
             $table->integer('year');
             $table->timestamps();

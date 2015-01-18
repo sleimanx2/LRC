@@ -4,7 +4,7 @@ use LRC\Data\Contacts\ContactCategory;
 use LRC\Data\Contacts\Contact;
 use Faker\Factory as Faker;
 
-class ContactsTableSeeder extends Seeder {
+class ContactTableSeeder extends Seeder {
 
     public function run()
     {
@@ -24,13 +24,13 @@ class ContactsTableSeeder extends Seeder {
                 $randKey = array_rand($categories, 1);
 
                 Contact::create(array(
-                    'name'           => $faker->company.rand(0,100),
-                    'phonePrimary'   => $faker->phoneNumber,
-                    'phoneSecondary' => $faker->phoneNumber,
-                    'location'       => $faker->address,
-                    'lat'            => $faker->latitude,
-                    'long'           => $faker->longitude,
-                    'category_id'    => $categories[$randKey]
+                    'name'            => $faker->company . rand(0, 100),
+                    'phone_primary'   => $faker->phoneNumber,
+                    'phone_secondary' => $faker->phoneNumber,
+                    'location'        => $faker->address,
+                    'latitude'        => $faker->latitude,
+                    'longitude'       => $faker->longitude,
+                    'category_id'     => $categories[$randKey]
                 ));
             }
         }
