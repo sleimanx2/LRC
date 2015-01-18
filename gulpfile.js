@@ -35,6 +35,25 @@ elixir(function (mix) {
         ],
         'resources/assets/scripts',
         'public/dist/app.min.js'
-    )
+    );
+
+    mix.scripts(
+        [
+            'vendor/jquery-2.1.1.min.js',
+            'vendor/bootstrap.min.js'
+        ],
+        'resources/assets/scripts',
+        'public/dist/app-header.min.js'
+    );
+
+    mix.styles(
+        [
+            'bootstrap.min.css',
+            'bootstrap-theme.min.css',
+            'main.css',
+        ],
+        'resources/assets/styles',
+        'public/dist/main.min.css'
+    );
 });
 

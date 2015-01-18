@@ -14,20 +14,11 @@
         <link rel="stylesheet" href="/fonts/font-awesome/css/font-awesome.min.css">
         <link rel="stylesheet" href="/fonts/weather-icons/css/weather-icons.min.css">
 
-        <!-- Include Jquery in the vendor folder -->
-        <script src="/scripts/vendor/jquery-2.1.1.min.js"></script>
-
-        <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="/styles/bootstrap.min.css">
-
-        <!-- Optional theme -->
-        <link rel="stylesheet" href="/styles/bootstrap-theme.min.css">
-
-        <!-- Latest compiled and minified JavaScript -->
-        <script src="/scripts/vendor/bootstrap.min.js"></script>
+        <!-- Include App-Header in the vendor folder -->
+        <script type="text/javascript" src="/dist/app-header.min.js"></script>
 
         <!-- Theme's own CSS file -->
-        <link rel="stylesheet" href="/dist/main.css">
+        <link rel="stylesheet" href="/dist/main.min.css">
 
     </head>
     <body data-ng-app="app" id="app" data-custom-background="" data-off-canvas-nav="" data-ng-controller="AdminAppCtrl">
