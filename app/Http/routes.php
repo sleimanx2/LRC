@@ -19,3 +19,7 @@ Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
+
+// Users
+
+Route::get('users',['as' => 'users-list','uses'=>'UsersController@index']);

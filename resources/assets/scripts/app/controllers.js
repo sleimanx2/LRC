@@ -3,16 +3,10 @@
  Main controllers for the app
  */
 
-angular.module("app.controllers", []).controller("AdminAppCtrl", ["$scope", "$location",
-        function($scope, $location) {
-            $scope.checkIfOwnPage = function() {
-
-                return _.contains(["/404", "/pages/500", "/pages/login", "/pages/signin", "/pages/signin1", "/pages/signin2", "/pages/signup", "/pages/signup1", "/pages/signup2", "/pages/forgot", "/pages/lock-screen"], $location.path());
-
-            };
-
+angular.module("app.controllers", []).controller("AdminAppCtrl", ["$scope",
+        function($scope) {
             $scope.info = {
-                theme_name: "ADMIN BOX",
+                theme_name: "LRC Intranet",
                 user_name: "Jane Doe"
             };
 
@@ -21,10 +15,6 @@ angular.module("app.controllers", []).controller("AdminAppCtrl", ["$scope", "$lo
     ]).controller("NavCtrl", ["$scope",
         function($scope) {
 
-            $scope.navInfo = {
-                tasks_number: 5,
-                widgets_number: 13
-            };
 
         }
     ]).controller("DashboardCtrl", ["$scope",
