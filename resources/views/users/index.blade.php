@@ -8,14 +8,15 @@
                 </div>
                 <div class="table-filters">
                     <div class="row">
-                        <form class="ng-pristine ng-valid" role="form" method="GET" action="{{ route('users-list') }}" >
+                        <form class="ng-pristine ng-valid" role="form" method="GET" action="{{ route('users-list') }}">
                             <div class="col-sm-5 hidden-xs pull-right">
                                 <a class="btn btn-success btn-width-long pull-right">
                                     Register First Aider <i class="fa fa-plus-circle"></i>
                                 </a>
                             </div>
                             <div class="col-sm-4 col-xs-6">
-                                <input type="text" name="search" placeholder="Search first aider"
+                                <input type="text" name="search" value="{{ Request::get('search') }}"
+                                       placeholder="Search first aider"
                                        class="form-control ng-pristine ng-valid">
                             </div>
                             <div class="col-sm-3 col-xs-6">
@@ -27,33 +28,41 @@
                     </div>
                 </div>
             </div>
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Phone</th>
-                    <th class="hidden-xs" >Email</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach($users as $user)
+
+            @if(!$users->count())
+                <div class="alert alert-warning">No result found !</div>
+            @else
+
+                <table class="table">
+                    <thead>
                     <tr>
-                        <td>{{$user->first_name}} {{$user->last_name}}</td>
-                        <td >{{$user->phone_primary}}</td>
-                        <td class="hidden-xs"> {{$user->email}} </td>
-                        <td>
-                            <button class="btn btn-info btn-xs " popover="Edit" popover-trigger="mouseenter"><i
-                                        class="fa fa-edit "></i></button>
-                            <button class="btn btn-danger btn-xs hidden-xs" popover="Suspend" popover-trigger="mouseenter"><i
-                                        class="fa fa-gavel"></i></button>
-                            <button class="btn btn-danger btn-xs hidden-xs" popover="Delete" popover-trigger="mouseenter"><i
-                                        class="fa fa-remove"></i></button>
-                        </td>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th class="hidden-xs">Email</th>
+                        <th>Actions</th>
                     </tr>
-                @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    @foreach($users as $user)
+                        <tr>
+                            <td>{{$user->first_name}} {{$user->last_name}}</td>
+                            <td>{{$user->phone_primary}}</td>
+                            <td class="hidden-xs"> {{$user->email}} </td>
+                            <td>
+                                <button class="btn btn-info btn-xs " popover="Edit" popover-trigger="mouseenter"><i
+                                            class="fa fa-edit "></i></button>
+                                <button class="btn btn-danger btn-xs hidden-xs" popover="Suspend"
+                                        popover-trigger="mouseenter"><i
+                                            class="fa fa-gavel"></i></button>
+                                <button class="btn btn-danger btn-xs hidden-xs" popover="Delete"
+                                        popover-trigger="mouseenter"><i
+                                            class="fa fa-remove"></i></button>
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            @endif
             <div class="col-md-12  ">
                 <span class="pull-right">
                     <?php echo $users->appends(Request::except('page'))->render() ?>

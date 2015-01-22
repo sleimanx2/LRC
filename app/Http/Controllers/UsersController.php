@@ -1,5 +1,6 @@
 <?php namespace LRC\Http\Controllers;
 
+use Illuminate\Support\Facades\Input;
 use LRC\Data\Users\UserRepository;
 use LRC\Http\Requests;
 use LRC\Http\Controllers\Controller;
@@ -23,7 +24,17 @@ class UsersController extends Controller {
      */
     public function index()
     {
-        $users = $this->userRepository->findByPage(10);
+
+        $searchQuery = Input::get('search');
+
+
+        if ( !$searchQuery )
+        {
+            $users = $this->userRepository->getPaginated(10);
+        } else
+        {
+            $users = $this->userRepository->searchPaginated($searchQuery, 10);
+        }
 
         return view('users.index', ['users' => $users]);
     }

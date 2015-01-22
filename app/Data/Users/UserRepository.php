@@ -4,8 +4,6 @@
 namespace LRC\Data\Users;
 
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Input;
-use LRC\Data\Users\User;
 
 /**
  * Class UserRepository
@@ -32,21 +30,28 @@ class UserRepository {
      * @param int $limit
      * @return mixed
      */
-    public function findByPage($limit = 25)
+    public function getPaginated($limit = 25)
     {
-        $query = Input::get('search');
-        if ( !$query )
-        {
-            $pagination = $this->userModel->paginate($limit);
-        } else
-        {
-            $query = str_replace(" ", "%", '%' . $query . '%');
+        $pagination = $this->userModel->paginate($limit);
 
-            $pagination = $this->userModel
-                ->select('*')
-                ->where(DB::raw('concat_ws(" ",first_Name,last_Name)'), 'like', $query)
-                ->paginate($limit);
-        }
+        return $pagination;
+    }
+
+
+    /**
+     * It search for users by first name and last name
+     * @param $query
+     * @param int $limit
+     * @return mixed
+     */
+    public function searchPaginated($query, $limit = 25)
+    {
+        $query = str_replace(" ", "%", '%' . $query . '%');
+
+        $pagination = $this->userModel
+            ->select('*')
+            ->where(DB::raw('concat_ws(" ",first_Name,last_Name)'), 'like', $query)
+            ->paginate($limit);
 
         return $pagination;
     }
