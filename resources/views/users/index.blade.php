@@ -10,7 +10,7 @@
                     <div class="row">
                         <form class="ng-pristine ng-valid" role="form" method="GET" action="{{ route('users-list') }}">
                             <div class="col-sm-5 hidden-xs pull-right">
-                                <a class="btn btn-success btn-width-long pull-right">
+                                <a href="/auth/register" class="btn btn-success btn-width-long pull-right">
                                     Register First Aider <i class="fa fa-plus-circle"></i>
                                 </a>
                             </div>

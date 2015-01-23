@@ -4,6 +4,7 @@ use LRC\Http\Controllers\Controller;
 use Illuminate\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller {
 
@@ -34,6 +35,29 @@ class AuthController extends Controller {
 
         $this->middleware('auth', ['only' => ['postRegister','getRegister','getLogout']]);
 
+    }
+
+    /**
+     * Handle a registration request for the application.
+     *
+     * @param \Illuminate\Foundation\Http\FormRequest|Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function postRegister(Request $request)
+    {
+
+        $validator = $this->registrar->validator($request->all());
+
+        if ($validator->fails())
+        {
+            $this->throwValidationException(
+                $request, $validator
+            );
+        }
+
+        $this->registrar->create($request->all());
+
+        return redirect(route('users-list'))->with('success', 'First Aider Registered Successfully.');;
     }
 
 
