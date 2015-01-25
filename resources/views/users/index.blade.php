@@ -49,8 +49,8 @@
                             <td>{{$user->phone_primary}}</td>
                             <td class="hidden-xs"> {{$user->email}} </td>
                             <td>
-                                <button class="btn btn-info btn-xs " popover="Edit" popover-trigger="mouseenter"><i
-                                            class="fa fa-edit "></i></button>
+                                <a class="btn btn-info btn-xs" href="{{ route('user-edit',[$user->id]) }}" popover="Edit" popover-trigger="mouseenter"><i
+                                            class="fa fa-edit "></i></a>
                                 <button class="btn btn-danger btn-xs hidden-xs" popover="Suspend"
                                         popover-trigger="mouseenter"><i
                                             class="fa fa-gavel"></i></button>

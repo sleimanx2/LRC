@@ -69,7 +69,9 @@ class UsersController extends Controller {
      */
     public function edit($id)
     {
-        //
+        $user = $this->userRepository->findById($id);
+
+        return view('users.edit', ['user' => $user]);
     }
 
     /**

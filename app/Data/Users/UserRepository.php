@@ -55,4 +55,15 @@ class UserRepository {
 
         return $pagination;
     }
+
+
+    /**
+     * Function to find user by id
+     * @param $id
+     * @return \Illuminate\Support\Collection|static
+     */
+    public function findById($id)
+    {
+        return $this->userModel->findOrFail($id);
+    }
 }

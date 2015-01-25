@@ -48,7 +48,7 @@
                 <section class="panel panel-default">
                     <div class="panel-body">
                         <div class="callout-elem callout-elem-success">
-                            <h5>$success</h5>
+                            <h5>{{ $success }}</h5>
                         </div>
                     </div>
                 </section>

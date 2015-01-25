@@ -16,10 +16,14 @@ Route::get('/', 'WelcomeController@index');
 Route::get('home', 'HomeController@index');
 
 Route::controllers([
-	'auth' => 'Auth\AuthController',
-	'password' => 'Auth\PasswordController',
+    'auth'     => 'Auth\AuthController',
+    'password' => 'Auth\PasswordController',
 ]);
 
 // Users
 
-Route::get('users',['as' => 'users-list','uses'=>'UsersController@index']);
+Route::get('users', ['as' => 'users-list', 'uses' => 'UsersController@index']);
+
+Route::get('users/edit/{id}', ['as' => 'user-edit', 'uses' => 'UsersController@edit']);
+
+Route::post('users/update/{id}', ['as' => 'user-update', 'uses' => 'UsersController@update']);

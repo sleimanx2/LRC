@@ -955,8 +955,8 @@ angular.module("app.task", []).factory("taskStorage", function () {
  Validator functions for form elements
  */
 
-angular.module("app.form.validation", [])
-    .controller("userRegisterFormCtrl", ["$scope",
+angular.module("app.form.map", [])
+    .controller("locationFormCtrl", ["$scope",
         function ($scope) {
 
             //Initializing Google map
@@ -970,43 +970,46 @@ angular.module("app.form.validation", [])
                 };
                 $scope.formMap = new google.maps.Map(document.getElementById('map-canvas'),
                     mapOptions);
+
                 $scope.$apply();
+
+                $scope.moveMap();
             }
 
             google.maps.event.addDomListener(window, 'load', initialize);
             //End Google map Init
 
-            // Form Logic
-            return $scope.form = {
-                password: "",
-                password_confirm: "",
-                location: "",
-                latitude: "",
-                longitude: ""
-            }, original = angular.copy($scope.form), $scope.revert = function () {
-                return $scope.form = angular.copy(original), $scope.user_register_form.$setPristine();
-            }, $scope.canRevert = function () {
-                return !angular.equals($scope.form, original) || !$scope.user_register_form.$pristine;
-            }, $scope.canSubmit = function () {
-                return $scope.user_register_form.$valid && !angular.equals($scope.form, original);
+
+            function moveMap() {
+                // Setting up the marker
+                var position = new google.maps.LatLng($scope.form.latitude, $scope.form.longitude);
+
+                console.log($scope.formMap);
+
+                $scope.marker = new google.maps.Marker({
+                    position: position,
+                    map: $scope.formMap,
+                    title: $scope.form.location
+                });
+
+                // Moving the map to the marker
+                $scope.formMap.panTo(position);
+                $scope.formMap.setZoom(12);
+
+            }
+
+            $scope.moveMap = moveMap;
+
+            // Form content
+            $scope.form = {
+
+                location: $('#location').val(),
+                latitude: $('#latitude').val(),
+                longitude: $('#longitude').val()
             };
-        }
-    ]).directive("validateEquals", [
-        function () {
-            return {
-                require: "ngModel",
-                link: function (scope, ele, attrs, ngModelCtrl) {
-                    var validateEqual;
-                    return validateEqual = function (value) {
-                        var valid;
-                        return valid = value === scope.$eval(attrs.validateEquals), ngModelCtrl.$setValidity("equal", valid), "function" == typeof valid ? valid({
-                            value: void 0
-                        }) : void 0;
-                    }, ngModelCtrl.$parsers.push(validateEqual), ngModelCtrl.$formatters.push(validateEqual), scope.$watch(attrs.validateEquals, function (newValue, oldValue) {
-                        return newValue !== oldValue ? ngModelCtrl.$setViewValue(ngModelCtrl.$ViewValue) : void 0;
-                    });
-                }
-            };
+
+
+            return $scope.form;
         }
     ])
     .directive('googlePlaces', function () {
@@ -1014,16 +1017,17 @@ angular.module("app.form.validation", [])
             restrict: 'E',
             replace: true,
             scope: true,
-            template: '<input id="google_places_ac" name="google_places_ac" type="text" class="form-control" required/>',
+            template: '<input id="google_places_ac" name="google_places_ac" type="text" class="form-control" data-ng-model="form.location" data-ng-value="form.location" required/>',
             link: function ($scope, elm, attrs) {
+
                 var autocomplete = new google.maps.places.Autocomplete($("#google_places_ac")[0], {});
                 google.maps.event.addListener(autocomplete, 'place_changed', function () {
 
                     //Removing markers if available
-                    if($scope.marker !== null)
-                    {
+                    if ($scope.marker !== null) {
                         $scope.marker.setMap(null);
                     }
+
 
                     // Getting place info from autocomplete
                     var place = autocomplete.getPlace();
@@ -1032,20 +1036,9 @@ angular.module("app.form.validation", [])
                     $scope.form.latitude = place.geometry.location.lat();
                     $scope.form.longitude = place.geometry.location.lng();
 
-                    // Setting up the marker
-                    var position = new google.maps.LatLng($scope.form.latitude ,$scope.form.longitude);
-
-                    $scope.marker = new google.maps.Marker({
-                        position: position,
-                        map: $scope.formMap,
-                        title: $scope.form.location
-                    });
-
-                    // Moving the map to the marker
-                    $scope.formMap.panTo(position);
-                    $scope.formMap.setZoom(12);
-
                     $scope.$apply();
+                    $scope.moveMap();
+
                 });
             }
         }

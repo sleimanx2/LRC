@@ -15,9 +15,9 @@ class Registrar implements RegistrarContract {
     public function validator(array $data)
     {
         $messages = [
-            'location.required'  => 'Make sure you select a valid suggested location',
-            'latitude.required'  => 'We cant find latitude',
-            'longitude.required' => 'We cant find longitude'
+            'location.required'  => 'Location not found',
+            'latitude.required'  => 'We cant find latitude or logitude',
+            'longitude.required' => 'Make sure you select a valid suggested location'
         ];
 
         return Validator::make($data, [
