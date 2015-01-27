@@ -15,14 +15,14 @@ class UserRepository {
      * Variable containing User model
      * @var User
      */
-    private $userModel;
+    private $user;
 
     /**
-     * @param User $userModel
+     * @param User $user
      */
-    function __construct(User $userModel)
+    function __construct(User $user)
     {
-        $this->userModel = $userModel;
+       $this->user = $user;
     }
 
     /**
@@ -32,9 +32,9 @@ class UserRepository {
      */
     public function getPaginated($limit = 25)
     {
-        $pagination = $this->userModel->paginate($limit);
+        $users =$this->user->paginate($limit);
 
-        return $pagination;
+        return $users;
     }
 
 
@@ -48,12 +48,12 @@ class UserRepository {
     {
         $query = str_replace(" ", "%", '%' . $query . '%');
 
-        $pagination = $this->userModel
+        $users =$this->user
             ->select('*')
             ->where(DB::raw('concat_ws(" ",first_Name,last_Name)'), 'like', $query)
             ->paginate($limit);
 
-        return $pagination;
+        return $users;
     }
 
 
@@ -64,6 +64,6 @@ class UserRepository {
      */
     public function findOrFail($id)
     {
-        return $this->userModel->findOrFail($id);
+        return$this->user->findOrFail($id);
     }
 }

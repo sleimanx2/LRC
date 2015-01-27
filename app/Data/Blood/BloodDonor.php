@@ -22,4 +22,9 @@ class BloodDonor extends Model {
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
+    public function blood_type()
+    {
+        return $this->belongsTo('LRC\Data\Blood\BloodType');
+    }
+
 }

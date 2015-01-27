@@ -6,7 +6,7 @@ use LRC\Http\Requests;
 use LRC\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
-use LRC\Http\Requests\SaveContact;
+use LRC\Http\Requests\SaveContactRequest;
 
 class ContactsController extends Controller {
 
@@ -43,7 +43,7 @@ class ContactsController extends Controller {
             $contacts = $this->contactRepository->searchPaginated(['search' => $searchQuery, 'category' => $categoryQuery], 10);
         }
 
-        $categories = $this->contactRepository->getCategories()->lists('name', 'id');
+        $categories = $this->contactRepository->getCategoriesList();
 
         return view('contacts.index', [
             'contacts'   => $contacts,
@@ -58,7 +58,7 @@ class ContactsController extends Controller {
      */
     public function create()
     {
-        $categories = $this->contactRepository->getCategories()->lists('name', 'id');
+        $categories = $this->contactRepository->getCategoriesList();
 
         return view('contacts.create', ['categories' => $categories]);
     }
@@ -66,25 +66,14 @@ class ContactsController extends Controller {
     /**
      * Store a newly created resource in storage.
      *
-     * @param SaveContact $request
+     * @param SaveContactRequest $request
      * @return Response
      */
-    public function store(SaveContact $request)
+    public function store(SaveContactRequest $request)
     {
         $this->contactRepository->store($request->all());
 
         return redirect()->intended(route('contacts-list'))->with('success', 'A new contact was added successfully.');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -97,7 +86,7 @@ class ContactsController extends Controller {
     {
         $contact = $this->contactRepository->findOrFail($id);
 
-        $categories = $this->contactRepository->getCategories()->lists('name', 'id');
+        $categories = $this->contactRepository->getCategoriesList();
 
         return view('contacts.edit', ['contact' => $contact, 'categories' => $categories]);
     }
@@ -106,18 +95,18 @@ class ContactsController extends Controller {
      * Update the specified resource in storage.
      *
      * @param  int $id
-     * @param SaveContact $request
+     * @param SaveContactRequest $request
      * @return Response
      */
-    public function update($id,SaveContact $request)
+    public function update($id, SaveContactRequest $request)
     {
         $contact = $this->contactRepository->findOrFail($id);
 
         $data = $request->all();
 
-        $this->contactRepository->update($data,$contact);
+        $this->contactRepository->update($data, $contact);
 
-        return redirect()->intended(route('contacts-list'))->with('success', 'Then contact '.$data['name'].' was successfully updated.');
+        return redirect()->intended(route('contacts-list'))->with('success', 'Then contact ' . $data['name'] . ' was successfully updated.');
     }
 
     /**
@@ -132,7 +121,7 @@ class ContactsController extends Controller {
 
         $this->contactRepository->destroy($id);
 
-        return redirect()->intended(route('contacts-list'))->with('success', 'Then contact '.$contact->name.' has been deleted.');
+        return redirect()->intended(route('contacts-list'))->with('success', 'Then contact ' . $contact->name . ' has been deleted.');
 
 
     }

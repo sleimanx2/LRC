@@ -42,8 +42,26 @@ Route::post('contacts/store', ['as' => 'contact-store', 'uses' => 'ContactsContr
 
 Route::get('contacts/edit/{id}', ['as' => 'contact-edit', 'uses' => 'ContactsController@edit']);
 
-Route::post('contacts/update/{id}', ['before' => 'csrf', 'as' => 'contact-update', 'uses' => 'ContactsController@update']);
+Route::post('contacts/update/{id}', ['as' => 'contact-update', 'uses' => 'ContactsController@update']);
 
-Route::delete('contacts/destroy/{id}', ['before' => 'csrf', 'as' => 'contact-destroy', 'uses' => 'ContactsController@destroy']);
+Route::delete('contacts/destroy/{id}', ['as' => 'contact-destroy', 'uses' => 'ContactsController@destroy']);
+
+/*
+ * BLOOD
+*/
+
+// Donors
+
+Route::get('donors', ['as' => 'blood-donors-list', 'uses' => 'BloodDonorsController@index']);
+
+Route::get('donors/create', ['as' => 'blood-donor-create', 'uses' => 'BloodDonorsController@create']);
+
+Route::post('donors/store', ['as' => 'blood-donor-store', 'uses' => 'BloodDonorsController@store']);
+
+Route::get('donors/edit/{id}', ['as' => 'blood-donor-edit', 'uses' => 'BloodDonorsController@edit']);
+
+Route::post('donors/update/{id}', ['as' => 'blood-donor-update', 'uses' => 'BloodDonorsController@update']);
+
+Route::delete('donors/destroy/{id}', ['as' => 'blood-donor-destroy', 'uses' => 'BloodDonorsController@destroy']);
 
 

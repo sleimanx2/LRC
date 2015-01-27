@@ -1,5 +1,3 @@
-{{--Setting form settings --}}
-<?php  $password = isset($password) ? $password : 'true'  ?>
 <span data-ng-controller="locationFormCtrl">
 <div class="form-group">
     <label for="">First Name</label>
@@ -12,31 +10,16 @@
     'form-control','pattern'=>'.{2,}','require'=>'','title'=>'2 characters minimum']) !!}
 </div>
 <div class="form-group">
+    <label for="">Blood Type</label>
+    {!! Form::select('blood_type_id',$bloodTypes,
+    old('blood_type_id'), ['class' => 'form-control']) !!}
+</div>
+<div class="form-group">
     <label for="">Email</label>
     {!! Form::email('email', old('email') , ['class' => 'form-control','required'=>'true']) !!}
 
     <span></span>
 </div>
-@if($password == 'true')
-    <div class="form-group">
-        <div class="row">
-            <div class="col-md-6">
-                <label for="">Password</label>
-                {!! Form::password('password', ['class' =>
-                'form-control','pattern'=>'.{6,16}','required'=>'true','title'=>'6 characters minimum and 16
-                characters maximum']) !!}
-                <span></span>
-            </div>
-            <div class="col-md-6">
-                <label for="">Confirm Password</label>
-                {!! Form::password('password_confirmation', ['class' =>
-                'form-control','pattern'=>'.{6,16}','required'=>'true','title'=>'6 characters minimum and 16
-                characters maximum']) !!}
-                <span></span>
-            </div>
-        </div>
-    </div>
-@endif
 <div class="form-group">
     <label for="">Phone Primary</label>
     {!! Form::text(
@@ -62,7 +45,8 @@
     ,['id'=>'latitude','class'=>'form-control','data-ng-model'=>'form.latitude','data-ng-value'=>'form.latitude']) !!}
 
     {!! Form::hidden('longitude', old('longitude')
-    ,['id'=>'longitude','class'=>'form-control','data-ng-model'=>'form.longitude','data-ng-value'=>'form.longitude']) !!}
+    ,['id'=>'longitude','class'=>'form-control','data-ng-model'=>'form.longitude','data-ng-value'=>'form.longitude'])
+    !!}
 
 </div>
 

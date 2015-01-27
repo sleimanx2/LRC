@@ -10,7 +10,7 @@ class Registrar {
      */
     private $messages = [
         'location.required'  => 'Location not found',
-        'latitude.required'  => 'We cant find latitude or logitude',
+        'latitude.required'  => 'We cant find latitude or longitude',
         'longitude.required' => 'Make sure you select a valid suggested location'
     ];
 

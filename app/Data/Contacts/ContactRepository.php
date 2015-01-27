@@ -60,9 +60,9 @@ class ContactRepository {
     /**
      * Returns all contacts category
      */
-    public function getCategories()
+    public function getCategoriesList()
     {
-        return $this->contactCategory->all();
+        return $this->contactCategory->all()->lists('name','id');
     }
 
 
@@ -97,7 +97,7 @@ class ContactRepository {
     }
 
 
-    public function store($data, Contact $contact)
+    public function store($data)
     {
         return $this->contact->create([
             'name'            => $data['name'],

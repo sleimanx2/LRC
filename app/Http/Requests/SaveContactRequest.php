@@ -2,7 +2,7 @@
 
 use LRC\Http\Requests\Request;
 
-class SaveContact extends Request {
+class SaveContactRequest extends Request {
 
     /**
      * Determine if the user is authorized to make this request.
@@ -42,12 +42,11 @@ class SaveContact extends Request {
     public function messages()
     {
         return [
-            [
                 'category_id.required' => 'You should provide a valid category',
                 'location.required'    => 'Location not found',
-                'latitude.required'    => 'We cant find latitude or logitude',
+                'latitude.required'    => 'We cant find latitude or longitude',
+                'longitude.required'   => 'Make sure you select a valid suggested location',
                 'longitude.required'   => 'Make sure you select a valid suggested location'
-            ]
         ];
     }
 
