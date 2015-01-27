@@ -15,10 +15,11 @@
         <li>
             <a href="users"> <i class="fa fa-users"></i> <span>Users</span></a>
             <ul>
-                <li><a href="users"><i class="fa fa-angle-right"></i><span> List </span></a></li>
+                <li><a href="{{route('users-list')}}"><i class="fa fa-angle-right"></i><span> List </span></a></li>
                 <li><a href="/auth/register"><i class="fa fa-angle-right"></i><span> Register</span></a></li>
             </ul>
         </li>
+
         <li>
             <a href="users"> <i class="fa fa-ambulance"></i> <span>Emergencies</span></a>
             <ul>
@@ -39,6 +40,9 @@
                 <li><a href=""><i class="fa fa-angle-right"></i><span> List </span></a></li>
                 <li><a href=""><i class="fa fa-angle-right"></i><span>Add</span></a></li>
             </ul>
+        </li>
+        <li>
+            <a href="{{route('contacts-list')}}"> <i class="fa fa-book"></i> <span>Contacts</span></a>
         </li>
 
 

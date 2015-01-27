@@ -1,8 +1,6 @@
 {{--Setting form settings --}}
 <?php  $password = isset($password) ? $password : 'true'  ?>
 <span data-ng-controller="locationFormCtrl">
-<input type="hidden" name="_token" value="{{ csrf_token() }}">
-
 <div class="form-group">
     <label for="">First Name</label>
     {!! Form::text('first_name', old('first_name'), ['class' =>

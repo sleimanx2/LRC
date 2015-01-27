@@ -2,6 +2,7 @@
 
 
 namespace LRC\Data\Contacts;
+
 use Illuminate\Database\Eloquent\Model;
 
 class Contact extends Model {
@@ -22,5 +23,9 @@ class Contact extends Model {
 
     protected $guarded = ['id','created_at','updated_at'];
 
+    public function category()
+    {
+        return $this->belongsTo('LRC\Data\Contacts\ContactCategory');
+    }
 
 }

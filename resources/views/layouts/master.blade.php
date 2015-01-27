@@ -53,9 +53,6 @@
                     </div>
                 </section>
             @endif
-
-
-
             @yield('content')
         </section>
     </div>

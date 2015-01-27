@@ -3,10 +3,10 @@
 @section('content')
     <div class="page page-form ng-scope">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2 ng-scope">
+            <div class="col-md-6 col-md-offset-3 ng-scope">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><strong><i class="fa fa-pencil panel-ico"></i>Register a first
-                            aider</strong>
+                    <div class="panel-heading"><strong><i class="fa fa-pencil panel-ico"></i>Add a system
+                            contact</strong>
                     </div>
 
                     <div class="panel-body">
@@ -20,8 +20,8 @@
                                 </ul>
                             </div>
                         @endif
-                        {!! Form::open(['url'=>'/auth/register','name'=>'user_register_form']); !!}
-                        @include('forms.user')
+                        {!! Form::open(['route'=>'contact-store','name'=>'contact_add_form']); !!}
+                        @include('forms.contact')
                         {!! Form::close(); !!}
                     </div>
                 </div>

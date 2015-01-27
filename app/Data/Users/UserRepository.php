@@ -26,7 +26,7 @@ class UserRepository {
     }
 
     /**
-     * It paginate users with name search
+     * It paginate users
      * @param int $limit
      * @return mixed
      */
@@ -39,7 +39,7 @@ class UserRepository {
 
 
     /**
-     * It search for users by first name and last name
+     * It search for users by first name and last name paginated
      * @param $query
      * @param int $limit
      * @return mixed
@@ -62,7 +62,7 @@ class UserRepository {
      * @param $id
      * @return \Illuminate\Support\Collection|static
      */
-    public function findById($id)
+    public function findOrFail($id)
     {
         return $this->userModel->findOrFail($id);
     }

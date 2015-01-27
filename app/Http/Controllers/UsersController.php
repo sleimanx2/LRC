@@ -1,19 +1,24 @@
 <?php namespace LRC\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use LRC\Data\Users\UserRepository;
 use LRC\Http\Requests;
 use LRC\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use LRC\Services\Registrar;
 
 class UsersController extends Controller {
 
     private $userRepository;
 
-    function __construct(UserRepository $userRepository)
+    private $registrar;
+
+    function __construct(UserRepository $userRepository, Registrar $registrar)
     {
         $this->userRepository = $userRepository;
+        $this->registrar      = $registrar;
     }
 
 
@@ -41,16 +46,6 @@ class UsersController extends Controller {
 
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @return Response
-     */
-    public function store()
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  int $id
@@ -69,7 +64,7 @@ class UsersController extends Controller {
      */
     public function edit($id)
     {
-        $user = $this->userRepository->findById($id);
+        $user = $this->userRepository->findOrFail($id);
 
         return view('users.edit', ['user' => $user]);
     }
@@ -78,10 +73,25 @@ class UsersController extends Controller {
      * Update the specified resource in storage.
      *
      * @param  int $id
+     * @param Request $request
      * @return Response
      */
-    public function update($id)
+    public function update($id, Request $request)
     {
+        $user = $this->userRepository->findOrFail($id);
+
+        $validator = $this->registrar->validator($request->all(), ['withoutPassword' => true, 'userId' => $id]);
+
+        if ( $validator->fails() )
+        {
+            $this->throwValidationException(
+                $request, $validator
+            );
+        }
+
+        $this->registrar->update($request->all(),$user);
+
+        return redirect(route('users-list'))->with('success', 'First Aider '.$user->first_name.' '.$user->last_name.' updated Successfully.');
         //
     }
 
@@ -93,7 +103,19 @@ class UsersController extends Controller {
      */
     public function destroy($id)
     {
-        //
+
+        $currentUserId = Auth::user()->id;
+
+        $user = $this->userRepository->findOrFail($id);
+
+        $this->registrar->destroy($id);
+
+        if($id == $currentUserId)
+        {
+            return Auth::logout();
+        }
+
+        return redirect(route('users-list'))->with('success', 'First Aider '.$user->first_name.' '.$user->last_name.' deleted Successfully.');
     }
 
 }

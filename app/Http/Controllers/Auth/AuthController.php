@@ -2,7 +2,7 @@
 
 use LRC\Http\Controllers\Controller;
 use Illuminate\Auth\Guard;
-use Illuminate\Contracts\Auth\Registrar;
+use LRC\Services\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
 
@@ -57,7 +57,7 @@ class AuthController extends Controller {
 
         $this->registrar->create($request->all());
 
-        return redirect(route('users-list'))->with('success', 'First Aider Registered Successfully.');;
+        return redirect(route('users-list'))->with('success', 'First Aider Registered Successfully.');
     }
 
 
