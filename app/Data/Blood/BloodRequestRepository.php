@@ -22,6 +22,10 @@ class BloodRequestRepository {
         $this->bloodRequest = $bloodRequest;
     }
 
+    public function findOrFail($id)
+    {
+        return $this->bloodRequest->findOrFail($id);
+    }
     /**
      * Finds blood requests paginated
      * @param int $limit
@@ -66,5 +70,31 @@ class BloodRequestRepository {
         ];
 
         return $this->bloodRequest->create($attributes);
+    }
+
+    public function update($data , BloodRequest $bloodRequest)
+    {
+        $attributes = [
+            'patient_name'       => $data['patient_name'],
+            'due_date'           => $data['due_date'],
+            'blood_type_id'      => $data['blood_type_id'],
+            'blood_bank_id'      => $data['blood_bank_id'],
+            'blood_quantity'     => $data['blood_quantity'],
+            'platelets_quantity' => $data['platelets_quantity'],
+            'contact_name'       => $data['contact_name'],
+            'phone_primary'      => $data['phone_primary'],
+            'phone_secondary'    => $data['phone_secondary'],
+            'case'               => $data['case'],
+            'user_id'            => $data['user_id'],
+        ];
+
+        $bloodRequest->fill($attributes);
+
+        $bloodRequest->save();
+    }
+
+    public function destroy($id)
+    {
+        return $this->bloodRequest->destroy($id);
     }
 }

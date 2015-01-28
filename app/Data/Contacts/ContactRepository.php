@@ -76,7 +76,7 @@ class ContactRepository {
             $q->where('serves_blood','=',1);
 
         })->orderBy('name')->lists('name','id');
-        
+
         return $list;
     }
 

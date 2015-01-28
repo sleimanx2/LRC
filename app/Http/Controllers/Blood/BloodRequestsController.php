@@ -87,11 +87,11 @@ class BloodRequestsController extends Controller {
      */
     public function store(SaveBloodRequestRequest $bloodRequestRequest)
     {
-        $bloodRequestRequest = $bloodRequestRequest->all();
+        $data = $bloodRequestRequest->all();
 
-        $bloodRequestRequest['user_id'] = Auth::user()->id;
+        $data['user_id'] = Auth::user()->id;
 
-        $this->bloodRequestRepository->store($bloodRequestRequest);
+        $this->bloodRequestRepository->store($data);
 
         return redirect()->intended(route('blood-requests-list'))->with('success', 'A new blood request was added successfully.');
     }
@@ -104,7 +104,7 @@ class BloodRequestsController extends Controller {
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -115,18 +115,34 @@ class BloodRequestsController extends Controller {
      */
     public function edit($id)
     {
-        //
+        $bloodRequest = $this->bloodRequestRepository->findOrFail($id);
+
+        $bloodTypes = $this->bloodTypeRepository->getList();
+
+        $bloodBanks = $this->contactRepository->getBloodBanksList();
+
+
+        return view('blood.requests.edit',['bloodRequest'=>$bloodRequest,'bloodTypes' => $bloodTypes, 'bloodBanks' => $bloodBanks]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  int $id
+     * @param SaveBloodRequestRequest $bloodRequestRequest
      * @return Response
      */
-    public function update($id)
+    public function update($id,SaveBloodRequestRequest $bloodRequestRequest)
     {
-        //
+        $bloodRequest = $this->bloodRequestRepository->findOrFail($id);
+
+        $data = $bloodRequestRequest->all();
+
+        $data['user_id'] = Auth::user()->id;
+
+        $this->bloodRequestRepository->update($data,$bloodRequest);
+
+        return redirect()->intended(route('blood-requests-list'))->with('success', $bloodRequest->patient_name."'s blood request was added successfully.");
     }
 
     /**
@@ -137,7 +153,11 @@ class BloodRequestsController extends Controller {
      */
     public function destroy($id)
     {
-        //
+        $bloodRequest = $this->bloodRequestRepository->findOrFail($id);
+
+        $this->bloodRequestRepository->destroy($id);
+
+        return redirect()->intended(route('blood-requests-list'))->with('success', $bloodRequest->patient_name." blood request was deleted successfully.");
     }
 
 }

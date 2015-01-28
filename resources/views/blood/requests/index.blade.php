@@ -57,15 +57,14 @@
                             <td>{{$bloodRequest->due_date}}</td>
                             <td>
                                 <a class="btn btn-info btn-xs"
-                                   href="{{ route('blood-donor-edit',[$bloodRequest->id]) }}"
+                                   href="{{ route('blood-request-edit',[$bloodRequest->id]) }}"
                                    popover="Edit" popover-trigger="mouseenter"><i
                                             class="fa fa-edit "></i></a>
                                 {!! Form::open([
                                 'method'=>'delete',
-                                'route'=>['blood-donor-destroy',$bloodRequest->id],
+                                'route'=>['blood-request-destroy',$bloodRequest->id],
                                 'style'=>'display:inline',
-                                'onsubmit'=>'return confirm("Are you sure you want to delete
-                                '.$bloodRequest->patient_name.' ?");'
+                                'onsubmit'=>'return confirm("Are you sure you want to delete '.$bloodRequest->patient_name.'\'s request?");'
                                 ]) !!}
 
                                 <button type="submit" class="btn btn-danger btn-xs hidden-xs" popover="Delete"
