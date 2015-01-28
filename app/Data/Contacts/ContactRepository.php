@@ -52,7 +52,7 @@ class ContactRepository {
      */
     public function getPaginated($limit = 25)
     {
-        $pagination = $this->contact->paginate($limit);
+        $pagination = $this->contact->with('category')->paginate($limit);
 
         return $pagination;
     }
@@ -90,6 +90,8 @@ class ContactRepository {
             $pagination->where('category_id', '=', $categoryQuery);
 
         }
+
+        $pagination->with('category');
 
         $contacts = $pagination->paginate($limit);
 

@@ -12,10 +12,7 @@ class BloodDonorRepository {
      * @var BloodDonor
      */
     private $bloodDonor;
-    /**
-     * @var BloodType
-     */
-    private $bloodType;
+
 
     /**
      * @param BloodDonor $bloodDonor
@@ -24,18 +21,26 @@ class BloodDonorRepository {
     function __construct(BloodDonor $bloodDonor, BloodType $bloodType)
     {
         $this->bloodDonor = $bloodDonor;
-        $this->bloodType  = $bloodType;
     }
 
 
+    /**
+     * @param $id
+     * @return \Illuminate\Support\Collection|static
+     */
     public function findOrFail($id)
     {
         return $this->bloodDonor->findOrFail($id);
     }
 
+    /**
+     * Gets blood donors paginated
+     * @param int $limit
+     * @return mixed
+     */
     public function getPaginated($limit = 25)
     {
-        $bloodDonors = $this->bloodDonor->paginate($limit);
+        $bloodDonors = $this->bloodDonor->with('blood_type')->paginate($limit);
 
         return $bloodDonors;
 
@@ -53,18 +58,12 @@ class BloodDonorRepository {
 
         $bloodDonors = $this->bloodDonor
             ->select('*')
+            ->with('blood_type')
             ->where(DB::raw('concat_ws(" ",first_Name,last_Name)'), 'like', $query)
             ->paginate($limit);
 
         return $bloodDonors;
     }
-
-
-    public function getBloodTypesList()
-    {
-        return $this->bloodType->all()->lists('name', 'id');
-    }
-
 
     /**
      * Create a new user instance after a valid registration.
@@ -119,6 +118,11 @@ class BloodDonorRepository {
 
     }
 
+    /**
+     * Deletes blood donor
+     * @param $id
+     * @return int
+     */
     public function destroy($id)
     {
         return $this->bloodDonor->destroy($id);

@@ -30,8 +30,8 @@
         <li>
             <a href="users"> <i class="fa fa-tint"></i> <span>Blood</span></a>
             <ul>
-                <li><a href=""><i class="fa fa-angle-right"></i><span> List </span></a></li>
-                <li><a href=""><i class="fa fa-angle-right"></i><span>Add</span></a></li>
+                <li><a href="{{ route('blood-donors-list') }}"><i class="fa fa-angle-right"></i><span> Donors </span></a></li>
+                <li><a href="{{ route('blood-requests-list') }}"><i class="fa fa-angle-right"></i><span> Requests </span></a></li>
             </ul>
         </li>
         <li>

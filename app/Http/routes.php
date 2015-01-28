@@ -49,19 +49,40 @@ Route::delete('contacts/destroy/{id}', ['as' => 'contact-destroy', 'uses' => 'Co
 /*
  * BLOOD
 */
+Route::group(['prefix' => 'blood','namespace'=>'Blood'], function()
+{
+    // Donors
 
-// Donors
+    Route::get('donors', ['as' => 'blood-donors-list', 'uses' => 'BloodDonorsController@index']);
 
-Route::get('donors', ['as' => 'blood-donors-list', 'uses' => 'BloodDonorsController@index']);
+    Route::get('donors/create', ['as' => 'blood-donor-create', 'uses' => 'BloodDonorsController@create']);
 
-Route::get('donors/create', ['as' => 'blood-donor-create', 'uses' => 'BloodDonorsController@create']);
+    Route::post('donors/store', ['as' => 'blood-donor-store', 'uses' => 'BloodDonorsController@store']);
 
-Route::post('donors/store', ['as' => 'blood-donor-store', 'uses' => 'BloodDonorsController@store']);
+    Route::get('donors/edit/{id}', ['as' => 'blood-donor-edit', 'uses' => 'BloodDonorsController@edit']);
 
-Route::get('donors/edit/{id}', ['as' => 'blood-donor-edit', 'uses' => 'BloodDonorsController@edit']);
+    Route::post('donors/update/{id}', ['as' => 'blood-donor-update', 'uses' => 'BloodDonorsController@update']);
 
-Route::post('donors/update/{id}', ['as' => 'blood-donor-update', 'uses' => 'BloodDonorsController@update']);
+    Route::delete('donors/destroy/{id}', ['as' => 'blood-donor-destroy', 'uses' => 'BloodDonorsController@destroy']);
 
-Route::delete('donors/destroy/{id}', ['as' => 'blood-donor-destroy', 'uses' => 'BloodDonorsController@destroy']);
+
+
+    // Blood Requests
+
+    Route::get('requests', ['as' => 'blood-requests-list', 'uses' => 'BloodRequestsController@index']);
+
+    Route::get('requests/create', ['as' => 'blood-request-create', 'uses' => 'BloodRequestsController@create']);
+
+    Route::post('requests/store', ['as' => 'blood-request-store', 'uses' => 'BloodRequestsController@store']);
+
+    Route::get('requests/edit/{id}', ['as' => 'blood-request-edit', 'uses' => 'BloodRequestsController@edit']);
+
+    Route::post('requests/update/{id}', ['as' => 'blood-request-update', 'uses' => 'BloodRequestsController@update']);
+
+    Route::delete('requests/destroy/{id}', ['as' => 'blood-request-destroy', 'uses' => 'BloodRequestsController@destroy']);
+
+});
+
+
 
 

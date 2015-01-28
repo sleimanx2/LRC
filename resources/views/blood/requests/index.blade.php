@@ -4,27 +4,18 @@
     <div class="page">
         <section class="panel panel-default table-dynamic">
             <div class="panel panel-default">
-                <div class="panel-heading"><strong><i class="fa fa-list panel-ico"></i>List of system contacts</strong>
+                <div class="panel-heading"><strong><i class="fa fa-list panel-ico"></i>List of blood requests</strong>
                 </div>
                 <div class="table-filters">
                     <div class="row">
-                        <div class="col-sm-5 hidden-xs pull-right">
-                            <a href="{{ route('contact-create') }}" class="btn btn-success btn-width-long pull-right">
-                                Add a contact <i class="fa fa-plus-circle"></i>
-                            </a>
-                        </div>
                         <div class="col-sm-7">
                             <form class="form-inline ng-pristine ng-valid" role="form" method="GET"
-                                  action="{{ route('contacts-list') }}">
+                                  action="{{ route('blood-requests-list') }}">
 
                                 <div class="form-group">
                                     <input type="text" name="search" value="{{ Request::get('search') }}"
-                                           placeholder="Search contacts"
+                                           placeholder="Search patient name"
                                            class="form-control ng-pristine ng-valid">
-                                </div>
-                                <div class="form-group">
-                                    {!! Form::select('category', ['All','Categorised'=>$categories] ,
-                                    Request::get('category') , ['class' => 'form-control']) !!}
                                 </div>
                                 <div class="form-group">
                                 <span>
@@ -37,34 +28,39 @@
                 </div>
             </div>
 
-            @if(!$contacts->count())
+            @if(!$bloodRequests->count())
                 <div class="alert alert-warning">No result found !</div>
             @else
                 <table class="table">
                     <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Phone</th>
-                        <th class="hidden-xs">Category</th>
+                        <th>Patient Name</th>
+                        <th>Blood Type</th>
+                        <th>Quantity</th>
+                        <th>Blood Bank</th>
+                        <th>Due Date</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($contacts as $contact)
+                    @foreach($bloodRequests as $bloodRequest)
                         <tr>
-                            <td>{{$contact->name}}</td>
-                            <td>{{$contact->phone_primary}}</td>
-                            <td class="hidden-xs"> {{$contact->category->name}} </td>
+                            <td>{{$bloodRequest->patient_name}}</td>
+                            <td>{{$bloodRequest->blood_type->name or 'Not assigned' }}</td>
+                            <td>{{$bloodRequest->quantity}}</td>
+                            <td>{{$bloodRequest->blood_bank->name or 'Not assigned' }}</td>
+                            <td>{{$bloodRequest->due_date}}</td>
                             <td>
-                                <a class="btn btn-info btn-xs" href="{{ route('contact-edit',[$contact->id]) }}"
+                                <a class="btn btn-info btn-xs"
+                                   href="{{ route('blood-donor-edit',[$bloodRequest->id]) }}"
                                    popover="Edit" popover-trigger="mouseenter"><i
                                             class="fa fa-edit "></i></a>
-                                {!!Form::open([
+                                {!! Form::open([
                                 'method'=>'delete',
-                                'route'
-                                =>['contact-destroy',$contact->id],
+                                'route'=>['blood-donor-destroy',$bloodRequest->id],
                                 'style'=>'display:inline',
-                                'onsubmit'=>'return confirm("Are you sure you want to delete '.$contact->name.' ?");'
+                                'onsubmit'=>'return confirm("Are you sure you want to delete
+                                '.$bloodRequest->patient_name.' ?");'
                                 ]) !!}
 
                                 <button type="submit" class="btn btn-danger btn-xs hidden-xs" popover="Delete"
@@ -82,7 +78,7 @@
             @endif
             <div class="col-md-12  ">
                 <span class="pull-right">
-                    <?php echo $contacts->appends(Request::except('page'))->render() ?>
+                    <?php echo $bloodRequests->appends(Request::except('page'))->render() ?>
                 </span>
             </div>
         </section>

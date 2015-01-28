@@ -22,4 +22,15 @@ class BloodRequest extends Model {
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
+
+    public function blood_type()
+    {
+        return $this->belongsTo('LRC\Data\Blood\BloodType');
+    }
+
+    public function blood_bank()
+    {
+        return $this->belongsTo('LRC\Data\Contacts\Contact','blood_bank_id');
+    }
+
 }

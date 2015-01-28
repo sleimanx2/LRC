@@ -1,7 +1,8 @@
-<?php namespace LRC\Http\Controllers;
+<?php namespace LRC\Http\Controllers\Blood;
 
 use Illuminate\Support\Facades\Input;
 use LRC\Data\Blood\BloodDonorRepository;
+use LRC\Data\Blood\BloodTypeRepository;
 use LRC\Http\Requests;
 use LRC\Http\Controllers\Controller;
 
@@ -14,13 +15,19 @@ class BloodDonorsController extends Controller {
      * @var BloodDonorRepository
      */
     private $bloodDonorRepository;
+    /**
+     * @var BloodTypeRepository
+     */
+    private $bloodTypeRepository;
 
     /**
      * @param BloodDonorRepository $bloodDonorRepository
+     * @param BloodTypeRepository $bloodTypeRepository
      */
-    function __construct(BloodDonorRepository $bloodDonorRepository)
+    function __construct(BloodDonorRepository $bloodDonorRepository , BloodTypeRepository $bloodTypeRepository)
     {
         $this->bloodDonorRepository = $bloodDonorRepository;
+        $this->bloodTypeRepository = $bloodTypeRepository;
     }
 
 
@@ -52,7 +59,7 @@ class BloodDonorsController extends Controller {
      */
     public function create()
     {
-        $bloodTypes = $this->bloodDonorRepository->getBloodTypesList();
+        $bloodTypes = $this->bloodTypeRepository->getList();
 
         return view('blood.donors.create', ['bloodTypes' => $bloodTypes]);
     }
@@ -81,7 +88,7 @@ class BloodDonorsController extends Controller {
     {
         $bloodDonor = $this->bloodDonorRepository->findOrFail($id);
 
-        $bloodTypes = $this->bloodDonorRepository->getBloodTypesList();
+        $bloodTypes = $this->bloodTypeRepository->getList();
 
         return view('blood.donors.edit', ['bloodDonor'=>$bloodDonor,'bloodTypes'=>$bloodTypes]);
     }
