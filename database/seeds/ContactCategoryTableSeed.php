@@ -1,5 +1,6 @@
 <?php
 use Illuminate\Database\Seeder;
+use LRC\Data\Contacts\ContactCategory;
 
 class ContactCategoryTableSeeder extends Seeder {
 
@@ -8,19 +9,14 @@ class ContactCategoryTableSeeder extends Seeder {
         // Delete Table
         DB::table('contact_categories')->delete();
 
-        // Insert some dummy records
-        DB::table('contact_categories')->insert(array(
-
-            array('name' => 'Hospitals'),
-            array('name' => 'Blood Banks'),
-            array('name' => 'Insurances'),
-            array('name' => 'Radio Stations'),
-            array('name' => 'DC'),
-            array('name' => 'Fire Fighters'),
-            array('name' => 'Services'),
-            array('name' => 'Misc'),
-
-        ));
+        ContactCategory::create(['name' => 'Hospitals', 'serves_blood' => true]);
+        ContactCategory::create(['name' => 'Blood Banks', 'serves_blood' => true]);
+        ContactCategory::create(['name' => 'Insurances', 'serves_blood' => false]);
+        ContactCategory::create(['name' => 'Radio Stations', 'serves_blood' => false]);
+        ContactCategory::create(['name' => 'DC', 'serves_blood' => false]);
+        ContactCategory::create(['name' => 'Fire Fighters', 'serves_blood' => false]);
+        ContactCategory::create(['name' => 'Services', 'serves_blood' => false]);
+        ContactCategory::create(['name' => 'Misc', 'serves_blood' => false]);
     }
 
 }

@@ -43,7 +43,7 @@
                             </a>
                         </li>
                         <li class="list-group-item">
-                            <a href="#/pages/signin">
+                            <a href="/auth/logout">
                                 <i class="fa fa-sign-out color-danger"></i>
                                 <span>Log out</span>
                             </a>
@@ -61,7 +61,7 @@
                 <a class="btn btn-primary">
                     Emergency &nbsp;&nbsp;<i class="fa fa-plus-circle"></i>
                 </a>
-                <a class="btn btn-warning">
+                <a href="{{ route('blood-request-create') }}" class="btn btn-warning">
                     Blood &nbsp;&nbsp;<i class="fa fa-plus-circle"></i>
                 </a>
             </li>

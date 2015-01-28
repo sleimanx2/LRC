@@ -8,6 +8,11 @@
                 </div>
                 <div class="table-filters">
                     <div class="row">
+                        <div class="col-sm-5 hidden-xs pull-right">
+                            <a href="{{ route('blood-request-create') }}" class="btn btn-warning btn-width-long pull-right">
+                                Add a blood request <i class="fa fa-plus-circle"></i>
+                            </a>
+                        </div>
                         <div class="col-sm-7">
                             <form class="form-inline ng-pristine ng-valid" role="form" method="GET"
                                   action="{{ route('blood-requests-list') }}">

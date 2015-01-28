@@ -19,12 +19,13 @@ class CreateBloodRequests extends Migration {
             // Patient info
             $table->string('patient_name');
             $table->integer('blood_type_id');
-            $table->integer('quantity');
-            $table->integer('quantity_confirmed');
+            $table->integer('blood_quantity');
+            $table->integer('platelets_quantity');
+            $table->boolean('completed');
             $table->string('case');
 
             // Parents info
-            $table->integer('contact_name');
+            $table->string('contact_name');
             $table->string('phone_primary');
             $table->string('phone_secondary');
 
@@ -33,7 +34,7 @@ class CreateBloodRequests extends Migration {
 
             // Request info - importance of the request (High - Medium - Low)
             $table->integer('urgent_level');
-            $table->dateTime('due_date');
+            $table->date('due_date');
             $table->text('note');
 
             // Who created the request

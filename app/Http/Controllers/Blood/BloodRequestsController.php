@@ -1,11 +1,16 @@
 <?php namespace LRC\Http\Controllers\Blood;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 use LRC\Data\Blood\BloodRequestRepository;
 use LRC\Data\Blood\BloodTypeRepository;
+use LRC\Data\Contacts\Contact;
+use LRC\Data\Contacts\ContactRepository;
 use LRC\Http\Requests;
 use LRC\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use LRC\Http\Requests\SaveBloodRequestRequest;
 
 class BloodRequestsController extends Controller {
 
@@ -17,16 +22,23 @@ class BloodRequestsController extends Controller {
      * @var BloodTypeRepository
      */
     private $bloodTypeRepository;
+    /**
+     * @var ContactRepository
+     */
+    private $contactRepository;
 
     /**
      * @param BloodRequestRepository $bloodRequestRepository
      * @param BloodTypeRepository $bloodTypeRepository
+     * @param ContactRepository $contactRepository
+     * @internal param Contact $contact
      */
-    function __construct(BloodRequestRepository $bloodRequestRepository, BloodTypeRepository $bloodTypeRepository)
+    function __construct(BloodRequestRepository $bloodRequestRepository, BloodTypeRepository $bloodTypeRepository, ContactRepository $contactRepository)
     {
 
         $this->bloodRequestRepository = $bloodRequestRepository;
         $this->bloodTypeRepository    = $bloodTypeRepository;
+        $this->contactRepository      = $contactRepository;
     }
 
 
@@ -37,11 +49,20 @@ class BloodRequestsController extends Controller {
      */
     public function index()
     {
-        $bloodRequests = $this->bloodRequestRepository->getPaginated(10);
+
+        $searchQuery = Input::get('search');
+
+        if ( !$searchQuery )
+        {
+            $bloodRequests = $this->bloodRequestRepository->getPaginated(10);
+        } else
+        {
+            $bloodRequests = $this->bloodRequestRepository->searchPaginated($searchQuery, 10);
+        }
 
         $bloodTypes = $this->bloodTypeRepository->getList();
 
-        return view('blood.requests.index', ['bloodRequests' => $bloodRequests,'bloodTypes'=>$bloodTypes]);
+        return view('blood.requests.index', ['bloodRequests' => $bloodRequests, 'bloodTypes' => $bloodTypes]);
     }
 
     /**
@@ -51,17 +72,28 @@ class BloodRequestsController extends Controller {
      */
     public function create()
     {
-        //
+        $bloodTypes = $this->bloodTypeRepository->getList();
+
+        $bloodBanks = $this->contactRepository->getBloodBanksList();
+
+        return view('blood.requests.create', ['bloodTypes' => $bloodTypes, 'bloodBanks' => $bloodBanks]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
+     * @param SaveBloodRequestRequest $bloodRequestRequest
      * @return Response
      */
-    public function store()
+    public function store(SaveBloodRequestRequest $bloodRequestRequest)
     {
-        //
+        $bloodRequestRequest = $bloodRequestRequest->all();
+
+        $bloodRequestRequest['user_id'] = Auth::user()->id;
+
+        $this->bloodRequestRepository->store($bloodRequestRequest);
+
+        return redirect()->intended(route('blood-requests-list'))->with('success', 'A new blood request was added successfully.');
     }
 
     /**

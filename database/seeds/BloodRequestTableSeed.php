@@ -39,8 +39,9 @@ class BloodRequestTableSeeder extends Seeder {
                 BloodRequest::create(array(
                     'patient_name'       => $faker->name,
                     'blood_type_id'      => $bloodTypes[$randomBloodTypeId],
-                    'quantity'           => $faker->numberBetween(0, 3),
-                    'quantity_confirmed' => $faker->numberBetween(0, 3),
+                    'blood_quantity'     => $faker->numberBetween(0, 3),
+                    'platelets_quantity' => $faker->numberBetween(0, 3),
+                    'completed'          => $faker->boolean(),
                     'case'               => $faker->sentence(1),
 
                     'contact_name'       => $faker->name,
@@ -50,7 +51,7 @@ class BloodRequestTableSeeder extends Seeder {
                     'blood_bank_id'      => $contacts[$randomBloodBankId],
                     'urgent_level'       => $faker->numberBetween(0, 5),
 
-                    'due_date'           => $faker->dateTime,
+                    'due_date'           => $faker->date(),
                     'note'               => $faker->realText(),
                     'user_id'            => $users[$randomUserId],
 

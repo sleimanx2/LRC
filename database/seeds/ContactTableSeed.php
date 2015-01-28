@@ -30,7 +30,7 @@ class ContactTableSeeder extends Seeder {
                     'location'        => $faker->address,
                     'latitude'        => $faker->latitude,
                     'longitude'       => $faker->longitude,
-                    'category_id'     => $categories[$randKey]
+                    'category_id'     => $categories[$randKey],
                 ));
             }
         }

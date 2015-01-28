@@ -65,6 +65,21 @@ class ContactRepository {
         return $this->contactCategory->all()->lists('name','id');
     }
 
+    /**
+     * Returns all contacts category
+     */
+    public function getBloodBanksList()
+    {
+
+        $list = $this->contact->whereHas('category',function($q){
+
+            $q->where('serves_blood','=',1);
+
+        })->orderBy('name')->lists('name','id');
+        
+        return $list;
+    }
+
 
     /**
      * Search for contact by name and category id / Paginated
