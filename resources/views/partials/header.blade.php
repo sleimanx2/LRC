@@ -18,7 +18,7 @@
             </li>
             <li class="dropdown text-normal nav-profile">
                 <a href="javascript:;" class="dropdown-toggle">
-                    <span class="text-small">Sleiman Sleiman</span>
+                    <span class="text-small">{{Auth::user()->first_name}} {{Auth::user()->last_name}}</span>
                 </a>
 
                 <div class="dropdown-menu pull-left with-arrow panel panel-default">

@@ -83,6 +83,8 @@ Route::group(['middleware' => 'auth'], function()
 
         Route::delete('requests/destroy/{id}', ['as' => 'blood-request-destroy', 'uses' => 'BloodRequestsController@destroy']);
 
+        Route::get('requests/rescue/{id}', ['as' => 'blood-request-rescue', 'uses' => 'BloodRequestsController@rescue']);
+
     });
 
 });

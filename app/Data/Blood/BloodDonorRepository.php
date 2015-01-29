@@ -33,6 +33,22 @@ class BloodDonorRepository {
         return $this->bloodDonor->findOrFail($id);
     }
 
+    public function findBestMatch(array $options = ['latitude' => null, 'logitude' => null, 'blood_type_id' => null,'limit'=>25])
+    {
+        $bloodDonors = $this->bloodDonor
+            ->select('*', DB::raw('
+            ( 6371 * acos( cos( radians('.$options['latitude'].') ) * cos( radians(latitude) ) * cos( radians(longitude) - radians('.$options['longitude'].')) + sin( radians('.$options['latitude'].') ) * sin( radians(latitude) ) )) AS distance
+            '))
+            ->where('blood_type_id', $options['blood_type_id'])
+            ->orderBy('distance')
+            ->limit($options['limit'])
+            ->get();
+
+       return $bloodDonors;
+
+
+    }
+
     /**
      * Gets blood donors paginated
      * @param int $limit

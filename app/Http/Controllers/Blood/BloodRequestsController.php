@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
+use LRC\Data\Blood\BloodDonorRepository;
 use LRC\Data\Blood\BloodRequestRepository;
 use LRC\Data\Blood\BloodTypeRepository;
 use LRC\Data\Contacts\Contact;
@@ -26,19 +27,25 @@ class BloodRequestsController extends Controller {
      * @var ContactRepository
      */
     private $contactRepository;
+    /**
+     * @var BloodDonorRepository
+     */
+    private $bloodDonorRepository;
 
     /**
      * @param BloodRequestRepository $bloodRequestRepository
      * @param BloodTypeRepository $bloodTypeRepository
      * @param ContactRepository $contactRepository
+     * @param BloodDonorRepository $bloodDonorRepository
      * @internal param Contact $contact
      */
-    function __construct(BloodRequestRepository $bloodRequestRepository, BloodTypeRepository $bloodTypeRepository, ContactRepository $contactRepository)
+    function __construct(BloodRequestRepository $bloodRequestRepository, BloodTypeRepository $bloodTypeRepository, ContactRepository $contactRepository, BloodDonorRepository $bloodDonorRepository)
     {
 
         $this->bloodRequestRepository = $bloodRequestRepository;
         $this->bloodTypeRepository    = $bloodTypeRepository;
         $this->contactRepository      = $contactRepository;
+        $this->bloodDonorRepository   = $bloodDonorRepository;
     }
 
 
@@ -102,9 +109,18 @@ class BloodRequestsController extends Controller {
      * @param  int $id
      * @return Response
      */
-    public function show($id)
+    public function rescue($id)
     {
+        $bloodRequest = $this->bloodRequestRepository->findOrFail($id);
 
+        $bloodDonors = $this->bloodDonorRepository->findBestMatch([
+            'latitude'      => $bloodRequest->blood_bank->latitude,
+            'longitude'     => $bloodRequest->blood_bank->longitude,
+            'blood_type_id' => $bloodRequest->blood_type_id,
+            'limit'         => 20
+        ]);
+
+        return view('blood.requests.rescue', ['bloodRequest' => $bloodRequest, 'bloodDonors' => $bloodDonors]);
     }
 
     /**
@@ -122,7 +138,7 @@ class BloodRequestsController extends Controller {
         $bloodBanks = $this->contactRepository->getBloodBanksList();
 
 
-        return view('blood.requests.edit',['bloodRequest'=>$bloodRequest,'bloodTypes' => $bloodTypes, 'bloodBanks' => $bloodBanks]);
+        return view('blood.requests.edit', ['bloodRequest' => $bloodRequest, 'bloodTypes' => $bloodTypes, 'bloodBanks' => $bloodBanks]);
     }
 
     /**
@@ -132,7 +148,7 @@ class BloodRequestsController extends Controller {
      * @param SaveBloodRequestRequest $bloodRequestRequest
      * @return Response
      */
-    public function update($id,SaveBloodRequestRequest $bloodRequestRequest)
+    public function update($id, SaveBloodRequestRequest $bloodRequestRequest)
     {
         $bloodRequest = $this->bloodRequestRepository->findOrFail($id);
 
@@ -140,9 +156,9 @@ class BloodRequestsController extends Controller {
 
         $data['user_id'] = Auth::user()->id;
 
-        $this->bloodRequestRepository->update($data,$bloodRequest);
+        $this->bloodRequestRepository->update($data, $bloodRequest);
 
-        return redirect()->intended(route('blood-requests-list'))->with('success', $bloodRequest->patient_name."'s blood request was added successfully.");
+        return redirect()->intended(route('blood-requests-list'))->with('success', $bloodRequest->patient_name . "'s blood request was updated successfully.");
     }
 
     /**
@@ -157,7 +173,8 @@ class BloodRequestsController extends Controller {
 
         $this->bloodRequestRepository->destroy($id);
 
-        return redirect()->intended(route('blood-requests-list'))->with('success', $bloodRequest->patient_name." blood request was deleted successfully.");
+        return redirect()->intended(route('blood-requests-list'))->with('success', $bloodRequest->patient_name . " blood request was deleted successfully.");
     }
+
 
 }

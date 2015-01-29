@@ -9,7 +9,8 @@
                 <div class="table-filters">
                     <div class="row">
                         <div class="col-sm-5 hidden-xs pull-right">
-                            <a href="{{ route('blood-request-create') }}" class="btn btn-warning btn-width-long pull-right">
+                            <a href="{{ route('blood-request-create') }}"
+                               class="btn btn-warning btn-width-long pull-right">
                                 Add a blood request <i class="fa fa-plus-circle"></i>
                             </a>
                         </div>
@@ -56,15 +57,24 @@
                             <td>{{$bloodRequest->blood_bank->name or 'Not assigned' }}</td>
                             <td>{{$bloodRequest->due_date}}</td>
                             <td>
+                                <a class="btn btn-bordered-warning btn-xs"
+                                   href="{{ route('blood-request-rescue',[$bloodRequest->id]) }}" popover="Rescue"
+                                   popover-trigger="mouseenter">
+
+                                    <i class="fa fa-life-ring"></i>
+
+                                </a>
                                 <a class="btn btn-info btn-xs"
-                                   href="{{ route('blood-request-edit',[$bloodRequest->id]) }}"
-                                   popover="Edit" popover-trigger="mouseenter"><i
-                                            class="fa fa-edit "></i></a>
+                                   href="{{ route('blood-request-edit',[$bloodRequest->id]) }}" popover="Edit"
+                                   popover-trigger="mouseenter">
+                                    <i class="fa fa-edit "></i>
+                                </a>
                                 {!! Form::open([
                                 'method'=>'delete',
                                 'route'=>['blood-request-destroy',$bloodRequest->id],
                                 'style'=>'display:inline',
-                                'onsubmit'=>'return confirm("Are you sure you want to delete '.$bloodRequest->patient_name.'\'s request?");'
+                                'onsubmit'=>'return confirm("Are you sure you want to delete
+                                '.$bloodRequest->patient_name.'\'s request?");'
                                 ]) !!}
 
                                 <button type="submit" class="btn btn-danger btn-xs hidden-xs" popover="Delete"
