@@ -40,6 +40,7 @@ class BloodDonorRepository {
             ( 6371 * acos( cos( radians('.$options['latitude'].') ) * cos( radians(latitude) ) * cos( radians(longitude) - radians('.$options['longitude'].')) + sin( radians('.$options['latitude'].') ) * sin( radians(latitude) ) )) AS distance
             '))
             ->where('blood_type_id', $options['blood_type_id'])
+            ->orderBy('golden_donor','desc')
             ->orderBy('distance')
             ->limit($options['limit'])
             ->get();

@@ -18,18 +18,22 @@ class BloodDonorTableSeeder extends Seeder {
         {
             $bloodTypes = BloodType::lists('id');
 
+            $genders = ['male', 'female'];
+
             for ($i = 0; $i < 200; $i ++)
             {
                 $bloodTypeId = array_rand($bloodTypes, 1);
 
+                $genderKey   = array_rand($genders);
+                $genderValue = $genders[$genderKey];
 
                 BloodDonor::create(array(
 
                     'first_name'         => $faker->firstName,
                     'last_name'          => $faker->lastName,
                     'blood_type_id'      => $bloodTypes[$bloodTypeId],
-
-
+                    'gender'             => $genderValue,
+                    'birthday'           => $faker->date(),
                     'phone_primary'      => $faker->phoneNumber,
                     'phone_secondary'    => $faker->phoneNumber,
 
@@ -41,8 +45,8 @@ class BloodDonorTableSeeder extends Seeder {
 
                     'donation_requested' => $faker->numberBetween(0, 10),
                     'donation_completed' => $faker->numberBetween(0, 10),
-                    'regular'            => $faker->boolean(),
-                    'last_donation'      => $faker->dateTime(),
+                    'golden_donor'       => $faker->boolean(),
+                    'incapable_till'     => $faker->date(),
 
                 ));
             }

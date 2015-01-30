@@ -3426,28 +3426,28 @@ fieldset[disabled] .btn-danger.active {
   top: -1px; }
 
 .badge-primary {
-  background-color: #cd2026; }
+  background-color: #cd2026 !important; }
 
 .badge-theme {
-  background-color: #cd2026; }
+  background-color: #cd2026 !important; }
 
 .badge-success {
-  background-color: #45825A; }
+  background-color: #45825A !important; }
 
 .badge-info {
-  background-color: #383d43; }
+  background-color: #383d43 !important; }
 
 .badge-warning {
-  background-color: #eec95a; }
+  background-color: #eec95a !important; }
 
 .badge-danger {
-  background-color: #C05F44; }
+  background-color: #C05F44 !important; }
 
 .badge-info-alt {
-  background-color: #8170ca; }
+  background-color: #8170ca !important; }
 
 .badge-dark {
-  background-color: #272b2f; }
+  background-color: #272b2f !important; }
 
 /************************************
 6 - Dropdowns / Toolbars / Navigation

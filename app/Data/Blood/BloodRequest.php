@@ -23,14 +23,31 @@ class BloodRequest extends Model {
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
 
+    /**
+     * Belong to relation with user
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo('LRC\Data\Users\User','user_id');
+    }
+
+    /**
+     * Belong to relation with blood type
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function blood_type()
     {
         return $this->belongsTo('LRC\Data\Blood\BloodType');
     }
 
+    /**
+     * Belong to relation with blood banks / contact
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function blood_bank()
     {
-        return $this->belongsTo('LRC\Data\Contacts\Contact','blood_bank_id');
+        return $this->belongsTo('LRC\Data\Contacts\Contact', 'blood_bank_id');
     }
 
 }

@@ -29,14 +29,19 @@ class CreateDonorsTable extends Migration {
             $table->decimal('latitude', 18, 14);
             $table->decimal('longitude', 18, 14);
 
+            $table->date('birthday');
+            $table->string('gender',40);
+
+
             $table->integer('donation_requested');
             $table->integer('donation_completed');
 
             // if the donor wants to donate regularly
-            $table->boolean('regular');
+            $table->boolean('golden_donor');
 
             // the last time the user donated
-            $table->dateTime('last_donation');
+            $table->date('incapable_till');
+
 
             $table->timestamps();
 

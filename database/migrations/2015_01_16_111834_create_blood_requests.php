@@ -20,8 +20,11 @@ class CreateBloodRequests extends Migration {
             $table->string('patient_name');
             $table->integer('blood_type_id');
             $table->integer('blood_quantity');
+            $table->integer('blood_quantity_confirmed');
             $table->integer('platelets_quantity');
+            $table->integer('platelets_quantity_confirmed');
             $table->boolean('completed');
+            $table->string('patient_gender', 40);
             $table->string('case');
 
             // Parents info

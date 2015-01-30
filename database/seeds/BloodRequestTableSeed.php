@@ -29,6 +29,7 @@ class BloodRequestTableSeeder extends Seeder {
             $users      = User::lists('id');
             $bloodTypes = BloodType::lists('id');
 
+            $genders = ['male', 'female'];
 
             for ($i = 0; $i < 40; $i ++)
             {
@@ -36,24 +37,41 @@ class BloodRequestTableSeeder extends Seeder {
                 $randomUserId      = array_rand($users, 1);
                 $randomBloodTypeId = array_rand($bloodTypes, 1);
 
+                $platelets_quantity  = $faker->numberBetween(0, 5);
+                $platelets_confirmed = rand(0, $platelets_quantity);
+
+                $blood_quantity  = $faker->numberBetween(0, 5);
+                $blood_confirmed = rand(0, $blood_quantity);
+                $completed       = 0;
+
+                if ( $blood_quantity == $blood_confirmed and $platelets_quantity == $platelets_confirmed )
+                {
+                    $completed = 1;
+                }
+
+                $genderKey = array_rand($genders);
+                $genderValue = $genders[$genderKey];
+
                 BloodRequest::create(array(
-                    'patient_name'       => $faker->name,
-                    'blood_type_id'      => $bloodTypes[$randomBloodTypeId],
-                    'blood_quantity'     => $faker->numberBetween(0, 3),
-                    'platelets_quantity' => $faker->numberBetween(0, 3),
-                    'completed'          => $faker->boolean(),
-                    'case'               => $faker->sentence(1),
+                    'patient_name'                 => $faker->name,
+                    'blood_type_id'                => $bloodTypes[$randomBloodTypeId],
+                    'blood_quantity'               => $blood_quantity,
+                    'blood_quantity_confirmed'     => $blood_confirmed,
+                    'platelets_quantity'           => $platelets_quantity,
+                    'platelets_quantity_confirmed' => $platelets_confirmed,
+                    'completed'                    => $completed,
+                    'case'                         => $faker->sentence(1),
+                    'patient_gender'               => $genderValue,
+                    'contact_name'                 => $faker->name,
+                    'phone_primary'                => $faker->phoneNumber,
+                    'phone_secondary'              => $faker->phoneNumber,
 
-                    'contact_name'       => $faker->name,
-                    'phone_primary'      => $faker->phoneNumber,
-                    'phone_secondary'    => $faker->phoneNumber,
+                    'blood_bank_id'                => $contacts[$randomBloodBankId],
+                    'urgent_level'                 => $faker->numberBetween(0, 5),
 
-                    'blood_bank_id'      => $contacts[$randomBloodBankId],
-                    'urgent_level'       => $faker->numberBetween(0, 5),
-
-                    'due_date'           => $faker->date(),
-                    'note'               => $faker->realText(),
-                    'user_id'            => $users[$randomUserId],
+                    'due_date'                     => date('Y-m-d', strtotime('+' . rand(0, 3) . 'days')),
+                    'note'                         => $faker->realText(),
+                    'user_id'                      => $users[$randomUserId],
 
                 ));
             }

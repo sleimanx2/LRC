@@ -143,9 +143,8 @@ return [
         'LRC\Providers\ConfigServiceProvider',
         'LRC\Providers\EventServiceProvider',
         'LRC\Providers\RouteServiceProvider',
+        'LRC\Providers\ExtendedHtmlServiceProvider',
         'Barryvdh\Debugbar\ServiceProvider',
-        'Illuminate\Html\HtmlServiceProvider',
-
     ],
 
     /*

@@ -3,6 +3,19 @@
 @section('content')
     <div class="page ng-scope">
         <div class="row">
+            @if($bloodRequest->note)
+
+                <div class="panel panel-default">
+
+                    <div class="panel-body">
+                        <div class="callout-elem callout-elem-info">
+                            <h4>Request Note</h4>
+
+                            <p>{{$bloodRequest->note}}</p>
+                        </div>
+                    </div>
+                </div>
+            @endif
             <div class="col-md-6">
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -26,11 +39,11 @@
                                     <li>
                                         <i class="icon fa fa-crosshairs"></i>
                                         <label>Blood</label>
-                                        {{ $bloodRequest->blood_quantity }}/2
+                                        {{ $bloodRequest->blood_quantity_confirmed }}/{{ $bloodRequest->blood_quantity }}
                                         &nbsp;&nbsp; <strong>/</strong>&nbsp;&nbsp;
                                         <i class="icon fa fa-crosshairs"></i>
                                         <label>Platelets </label>
-                                        {{ $bloodRequest->platelets_quantity }}/3
+                                        {{ $bloodRequest->platelets_quantity_confirmed }}/{{ $bloodRequest->platelets_quantity }}
                                     </li>
 
                                     <li>
@@ -51,9 +64,10 @@
                                         {{$bloodRequest->phone_secondary }}
                                     </li>
                                     <li>
-                                        <span class="icon fa fa-h-square"></span>
-                                        <label>Blood Banks</label>
-                                        {{ $bloodRequest->blood_bank->name or 'Not defined' }}
+                                        <span class="icon fa fa-question"></span>
+                                        <label>Blame: </label>
+                                        {{ $bloodRequest->user->first_name or 'Not defined' }}
+                                        .{{ $bloodRequest->user->last_name or 'Not defined' }}
                                     </li>
                                 </ul>
 
@@ -105,46 +119,58 @@
                         <strong><i class="fa fa-list panel-ico"></i>Blood Donors Suggestions</strong>
                     </div>
 
+                    <div class="panel-body">
+                        <accordion close-others="oneAtATime" class="ui-accordion ui-accordion-info">
+                            @foreach($bloodDonors as $bloodDonor)
 
-                    <ul class="list-group">
-                        @foreach($bloodDonors as $bloodDonor)
-                            <li class="list-group-item">
+                                <accordion-group>
+                                    <accordion-heading>
 
-                                <span class="badge">~{{ round($bloodDonor->distance) }} KM</span>
-                                <span class="badge">{{ 32 }} Years </span>
-                                <span class="badge badge-warning">GD</span>
-                                <span class="badge badge-info-alt"><i class="fa fa-male"></i></span>
+                                        @if($bloodDonor->golden_donor)
+                                            <span class="badge badge-warning">GD</span>
+                                        @endif
 
+                                        <span class="text-small">{{ $bloodDonor->first_name }} {{$bloodDonor->last_name}}</span>
 
-                            <div class="dropdown text-normal nav-profile">
-                                <a href="javascript:;" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
-                                    <span class="text-small"> <i class="fa fa-chevron-down color-gray-light"></i> </span>
-                                </a>
-                                <span class="text-small">{{ $bloodDonor->first_name }} {{$bloodDonor->last_name}}</span>
+                                    <span class="pull-right">
+                                        <span class="badge">~{{ round($bloodDonor->distance) }} KM</span>
+                                        <span class="badge">{{ Html::age($bloodDonor->birthday) }}
+                                            Years </span>
 
-                                <div class="dropdown-menu pull-left with-arrow panel panel-default">
+                                        <span class="badge badge-info-alt"><i
+                                                    class="fa fa-{{$bloodDonor->gender or "question" }}"></i></span>
+                                    </span>
 
-                                    <ul class="list-group">
-                                        <li class="list-group-item">
-                                            <a href="#/pages/profile">
-                                                <i class="fa fa-check color-success"></i>
-                                                <span>Will Donate</span>
-                                            </a>
+                                    </accordion-heading>
+                                    <ul class="list-unstyled list-infolist-unstyled list-info">
+                                        <li>
+                                            <span class="icon fa fa-phone"></span>
+                                            <label>Phone</label>
+
+                                            {{ $bloodDonor->phone_primary or 'Not defined'}}
+                                            /
+                                            {{ $bloodDonor->phone_secondary or ''}}
                                         </li>
-                                        <li class="list-group-item">
-                                            <a href="#/tasks">
-                                                <i class="fa fa-close color-danger"></i>
-                                                <span>Can't donate today</span>
-                                            </a>
-                                        </li>
+                                        <li>
+                                            <span class="icon fa fa-envelope"></span>
+                                            <label>Email</label>
 
+                                            {{ $bloodDonor->email or 'Not defined'}}
+
+                                        </li>
+                                        <li>
+                                            <button class="btn btn-bordered-success">
+                                                Will Donate
+                                            </button>
+                                            <button class="btn btn-bordered-danger">
+                                                Can't Donate
+                                            </button>
+                                        </li>
                                     </ul>
-                                </div>
-                            </div>
-                            </li>
-                        @endforeach
-                    </ul>
-
+                                </accordion-group>
+                            @endforeach
+                        </accordion>
+                    </div>
 
                 </div>
 
