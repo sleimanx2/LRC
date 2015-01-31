@@ -133,12 +133,10 @@
                                         <span class="text-small">{{ $bloodDonor->first_name }} {{$bloodDonor->last_name}}</span>
 
                                     <span class="pull-right">
-                                        <span class="badge">~{{ round($bloodDonor->distance) }} KM</span>
+                                        <span class="badge badge-distance">~{{ round($bloodDonor->distance) }} KM</span>
                                         <span class="badge">{{ Html::age($bloodDonor->birthday) }}
                                             Years </span>
-
-                                        <span class="badge badge-info-alt"><i
-                                                    class="fa fa-{{$bloodDonor->gender or "question" }}"></i></span>
+                                        {!! Html::gender($bloodDonor->gender) !!}
                                     </span>
 
                                     </accordion-heading>

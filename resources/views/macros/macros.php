@@ -6,3 +6,20 @@ Html::macro('age', function($birthday)
 
 });
 
+
+Html::macro('gender', function($gender)
+{
+    switch($gender){
+
+        case 'male':
+            return '<span class="badge badge-male"><i class="fa fa-male"></i></span>';
+            break;
+        case 'female':
+            return '<span class="badge badge-female"><i class="fa fa-female"></i></span>';
+            break;
+        default:
+            return '';
+    }
+
+});
+

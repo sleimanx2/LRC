@@ -14,6 +14,24 @@
     {!! Form::select('blood_type_id',$bloodTypes,
     old('blood_type_id'), ['class' => 'form-control']) !!}
 </div>
+<div class="form-group" data-ng-controller="DatepickerCtrl">
+ <label for="">Birth Date</label>
+
+ <div class="input-group ui-datepicker">
+     {!! Form::text('birthday', old('birthday'), [
+     'class' => 'form-control',
+     'datepicker-popup'=>'yyyy-M-dd',
+     'ng-model'=>'dt',
+     'is-open'=>'opened',
+     'datepicker-options'=>'dateOptions',
+     'date-disabled'=>'disabled(date, mode)',
+     'ng-required'=>'true',
+     'close-text'=>'Close',
+     ]) !!}
+
+     <span class="input-group-addon" ng-click="open($event)"><i class="fa fa-calendar"></i></span>
+ </div>
+</div>
 <div class="form-group">
     <label for="">Email</label>
     {!! Form::email('email', old('email') , ['class' => 'form-control','required'=>'true']) !!}
@@ -32,6 +50,13 @@
     {!! Form::text(
     'phone_secondary',old('phone_secondary'),['class'=>'form-control','pattern'=>'.{8,8}','title'=>'The number
     should contain 8 digits']) !!}
+</div>
+<div class="form-group">
+    <label for="">Male</label>
+    {!! Form::radio('gender', 'male', true); !!}
+    &nbsp;&nbsp;
+    <label for="">Female</label>
+    {!! Form::radio('gender', 'female', false); !!}
 </div>
 <hr/>
 <div class="form-group">

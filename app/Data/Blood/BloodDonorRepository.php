@@ -33,19 +33,19 @@ class BloodDonorRepository {
         return $this->bloodDonor->findOrFail($id);
     }
 
-    public function findBestMatch(array $options = ['latitude' => null, 'logitude' => null, 'blood_type_id' => null,'limit'=>25])
+    public function findBestMatch(array $options = ['latitude' => null, 'logitude' => null, 'blood_type_id' => null, 'limit' => 25])
     {
         $bloodDonors = $this->bloodDonor
             ->select('*', DB::raw('
-            ( 6371 * acos( cos( radians('.$options['latitude'].') ) * cos( radians(latitude) ) * cos( radians(longitude) - radians('.$options['longitude'].')) + sin( radians('.$options['latitude'].') ) * sin( radians(latitude) ) )) AS distance
+            ( 6371 * acos( cos( radians(' . $options['latitude'] . ') ) * cos( radians(latitude) ) * cos( radians(longitude) - radians(' . $options['longitude'] . ')) + sin( radians(' . $options['latitude'] . ') ) * sin( radians(latitude) ) )) AS distance
             '))
             ->where('blood_type_id', $options['blood_type_id'])
-            ->orderBy('golden_donor','desc')
+            ->orderBy('golden_donor', 'desc')
             ->orderBy('distance')
             ->limit($options['limit'])
             ->get();
 
-       return $bloodDonors;
+        return $bloodDonors;
 
 
     }
@@ -99,7 +99,9 @@ class BloodDonorRepository {
             'phone_secondary' => $data['phone_secondary'],
             'location'        => $data['location'],
             'latitude'        => $data['latitude'],
-            'longitude'       => $data['longitude']
+            'longitude'       => $data['longitude'],
+            'gender'          => $data['gender'],
+            'birthday'        => $data['birthday']
         ];
 
         return $this->bloodDonor->create($data);
@@ -121,7 +123,9 @@ class BloodDonorRepository {
             'phone_secondary' => $data['phone_secondary'],
             'location'        => $data['location'],
             'latitude'        => $data['latitude'],
-            'longitude'       => $data['longitude']
+            'longitude'       => $data['longitude'],
+            'gender'          => $data['gender'],
+            'birthday'        => $data['birthday']
         ];
 
         if ( $bloodDonor->email != $data['email'] )

@@ -3449,6 +3449,14 @@ fieldset[disabled] .btn-danger.active {
 .badge-dark {
   background-color: #272b2f !important; }
 
+.badge-male {
+    background-color: #3498db !important; }
+
+.badge-female {
+    background-color: #9b59b6 !important; }
+.badge-distance{
+    background-color: #1abc9c !important;  }
+
 /************************************
 6 - Dropdowns / Toolbars / Navigation
 *************************************/
