@@ -26,6 +26,7 @@ class BloodRequestRepository {
     {
         return $this->bloodRequest->findOrFail($id);
     }
+
     /**
      * Finds blood requests paginated
      * @param int $limit
@@ -67,12 +68,13 @@ class BloodRequestRepository {
             'case'               => $data['case'],
             'user_id'            => $data['user_id'],
             'completed'          => 0,
+            'patient_gender'     => $data['patient_gender'],
         ];
 
         return $this->bloodRequest->create($attributes);
     }
 
-    public function update($data , BloodRequest $bloodRequest)
+    public function update($data, BloodRequest $bloodRequest)
     {
         $attributes = [
             'patient_name'       => $data['patient_name'],
@@ -86,6 +88,7 @@ class BloodRequestRepository {
             'phone_secondary'    => $data['phone_secondary'],
             'case'               => $data['case'],
             'user_id'            => $data['user_id'],
+            'patient_gender'     => $data['patient_gender'],
         ];
 
         $bloodRequest->fill($attributes);

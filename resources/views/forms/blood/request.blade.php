@@ -72,6 +72,13 @@
         </div>
     </div>
     <div class="form-group">
+        <label for="">Male</label>
+        {!! Form::radio('patient_gender', 'male', true); !!}
+        &nbsp;&nbsp;
+        <label for="">Female</label>
+        {!! Form::radio('patient_gender', 'female', false); !!}
+    </div>
+    <div class="form-group">
         <label for="">Blood Bank</label>
         {!! Form::select('blood_bank_id',$bloodBanks,
         old('blood_bank_id'), ['class' => 'form-control']) !!}
