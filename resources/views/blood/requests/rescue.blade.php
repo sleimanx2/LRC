@@ -29,7 +29,7 @@
                                     <li>
                                         <span class="icon fa fa-heart-o"></span>
                                         <label>Patient Name</label>
-                                        {{ $bloodRequest->patient_name }}
+                                        {!! Html::gender($bloodRequest->patient_gender)!!} {{ $bloodRequest->patient_name }}
                                     </li>
                                     <li>
                                         <i class="icon fa fa-tint"></i>
@@ -125,6 +125,7 @@
 
                                 <accordion-group>
                                     <accordion-heading>
+                                        {!! Html::gender($bloodDonor->gender) !!}
 
                                         @if($bloodDonor->golden_donor)
                                             <span class="badge badge-warning">GD</span>
@@ -136,7 +137,7 @@
                                         <span class="badge badge-distance">~{{ round($bloodDonor->distance) }} KM</span>
                                         <span class="badge">{{ Html::age($bloodDonor->birthday) }}
                                             Years </span>
-                                        {!! Html::gender($bloodDonor->gender) !!}
+
                                     </span>
 
                                     </accordion-heading>
