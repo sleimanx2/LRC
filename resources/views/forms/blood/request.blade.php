@@ -57,6 +57,7 @@
         <div class="input-group ui-datepicker">
             {!! Form::text('due_date', old('due_date'), [
             'class' => 'form-control',
+            'id' => 'datepicker',
             'datepicker-popup'=>'yyyy-M-dd',
             'ng-model'=>'dt',
             'is-open'=>'opened',

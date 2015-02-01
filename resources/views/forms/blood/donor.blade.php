@@ -20,8 +20,10 @@
  <div class="input-group ui-datepicker">
      {!! Form::text('birthday', old('birthday'), [
      'class' => 'form-control',
+     'id'=>'datepicker',
      'datepicker-popup'=>'yyyy-M-dd',
      'ng-model'=>'dt',
+     'ng-value'=> old('birthday'),
      'is-open'=>'opened',
      'datepicker-options'=>'dateOptions',
      'date-disabled'=>'disabled(date, mode)',

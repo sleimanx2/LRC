@@ -1059,7 +1059,14 @@ angular.module("app.ui.form.ctrls", [])
 ]).controller("DatepickerCtrl", ["$scope",
     function ($scope) {
         return $scope.today = function () {
-            $scope.dt = new Date();
+            if($('#datepicker').val() != undefined)
+            {
+                $scope.dt = $('#datepicker').val();
+            }
+            else{
+                $scope.dt = new Date();
+            }
+
         }, $scope.today(), $scope.showWeeks = !0, $scope.toggleWeeks = function () {
             $scope.showWeeks = !$scope.showWeeks;
         }, $scope.clear = function () {
@@ -1442,7 +1449,6 @@ angular.module("app.ui.ctrls", []).controller("NotifyCtrl", ["$scope", "loggit",
     }
 ]).controller("MapDemoCtrl", ["$scope", "$http", "$interval",
     function ($scope, $http, $interval) {
-        console.log($scope.map);
         var i, markers;
         for (markers = [], i = 0; 8 > i;) {
             markers[i] = new google.maps.Marker({
