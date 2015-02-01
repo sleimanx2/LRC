@@ -4,8 +4,6 @@
 namespace LRC\Data\Blood;
 
 
-use Illuminate\Support\Facades\Auth;
-
 class BloodRequestRepository {
 
 
