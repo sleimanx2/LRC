@@ -19,7 +19,7 @@ Route::controllers([
     'password' => 'Auth\PasswordController',
 ]);
 
-Route::group(['middleware' => 'auth'], function()
+Route::group(['middleware' => 'auth'], function ()
 {
     // Users
 
@@ -50,7 +50,7 @@ Route::group(['middleware' => 'auth'], function()
     /*
      * BLOOD
     */
-    Route::group(['prefix' => 'blood','namespace'=>'Blood'], function()
+    Route::group(['prefix' => 'blood', 'namespace' => 'Blood'], function ()
     {
         // Donors
 
@@ -66,6 +66,9 @@ Route::group(['middleware' => 'auth'], function()
 
         Route::delete('donors/destroy/{id}', ['as' => 'blood-donor-destroy', 'uses' => 'BloodDonorsController@destroy']);
 
+        Route::post('donors/willDonate', ['as' => 'blood-donor-will-donate', 'uses' => 'BloodDonorsController@willDonate']);
+
+        Route::post('donors/wontDonate', ['as' => 'blood-donor-wont-donate', 'uses' => 'BloodDonorsController@wontDonate']);
 
 
         // Blood Requests

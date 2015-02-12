@@ -120,7 +120,13 @@ class BloodRequestsController extends Controller {
             'limit'         => 20
         ]);
 
-        return view('blood.requests.rescue', ['bloodRequest' => $bloodRequest, 'bloodDonors' => $bloodDonors]);
+        $bloodDonations = $bloodRequest->blood_donations;
+
+        return view('blood.requests.rescue', [
+            'bloodRequest'   => $bloodRequest,
+            'bloodDonors'    => $bloodDonors,
+            'bloodDonations' => $bloodDonations
+        ]);
     }
 
     /**

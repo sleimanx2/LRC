@@ -50,4 +50,31 @@ class BloodRequest extends Model {
         return $this->belongsTo('LRC\Data\Contacts\Contact', 'blood_bank_id');
     }
 
+    /**
+     * Has many relation with blood donations
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function blood_donations()
+    {
+        return $this->hasMany('LRC\Data\Blood\BloodDonation','blood_request_id')->with(['user','donor']);
+    }
+
+    /**
+     * Get the number of platelets donation
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function platelets_donations_count()
+    {
+        return $this->hasMany('LRC\Data\Blood\BloodDonation','blood_request_id')->where('platelets',1)->count();
+    }
+
+    /**
+     * Get the number of platelets donation
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function blood_donations_count()
+    {
+        return $this->hasMany('LRC\Data\Blood\BloodDonation','blood_request_id')->where('blood',1)->count();
+    }
+
 }

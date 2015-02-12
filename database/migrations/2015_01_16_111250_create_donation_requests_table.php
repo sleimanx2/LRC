@@ -12,18 +12,17 @@ class CreateDonationRequestsTable extends Migration {
      */
     public function up()
     {
-        Schema::create('blood_donation_requests', function (Blueprint $table)
+        Schema::create('blood_donations', function (Blueprint $table)
         {
             $table->increments('id');
 
             $table->integer('user_id');
             $table->integer('donor_id');
             $table->integer('blood_request_id');
-            $table->boolean('confirmed');
-            $table->boolean('declined');
-
+            $table->boolean('blood');
+            $table->boolean('platelets');
+            $table->date('will_donate_on');
             $table->text('note');
-
             $table->timestamps();
 
         });
@@ -36,7 +35,7 @@ class CreateDonationRequestsTable extends Migration {
      */
     public function down()
     {
-        Schema::drop('blood_donation_requests');
+        Schema::drop('blood_donations');
     }
 
 }

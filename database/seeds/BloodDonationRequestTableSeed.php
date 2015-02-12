@@ -1,18 +1,21 @@
 <?php
 use Illuminate\Database\Seeder;
+use LRC\Data\Blood\BloodDonation;
 use LRC\Data\Blood\BloodDonor;
 use LRC\Data\Blood\BloodRequest;
 use LRC\Data\Users\User;
-use LRC\Data\Blood\BloodDonationRequest;
 
 use Faker\Factory as Faker;
 
 class BloodDonationRequestTableSeeder extends Seeder {
 
+    /**
+     *
+     */
     public function run()
     {
         // Delete Table
-        DB::table('blood_donation_requests')->delete();
+        DB::table('blood_donations')->delete();
 
         $faker = Faker::create();
 
@@ -30,16 +33,14 @@ class BloodDonationRequestTableSeeder extends Seeder {
                 $randomDonorsId       = array_rand($donors, 1);
 
 
-                BloodDonationRequest::create(array(
+                BloodDonation::create(array(
 
                     'user_id'          => $users[$randomUserId],
                     'donor_id'         => $donors[$randomDonorsId],
                     'blood_request_id' => $bloodRequests[$randomBloodRequestId],
-
-
-                    'confirmed'        => $faker->boolean(),
-                    'declined'         => $faker->boolean(),
-
+                    'blood'            => $faker->boolean(),
+                    'platelets'        => $faker->boolean(),
+                    'will_donate_on'   => date('Y-m-d',strtotime('+1 day')),
                     'note'             => $faker->realText(),
 
                 ));

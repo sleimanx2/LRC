@@ -1391,40 +1391,70 @@ angular.module("app.ui.ctrls", []).controller("NotifyCtrl", ["$scope", "loggit",
     function ($scope) {
         $scope.isCollapsed = !1;
     }
-]).controller("ModalDemoCtrl", ["$scope", "$modal", "$log",
+]).controller("BloodDonationModalCtrl", ["$scope", "$modal", "$log",
     function ($scope, $modal, $log) {
-        $scope.items = ['item1', 'item2', 'item3'];
 
-        $scope.open = function (size) {
+        $scope.data = {
+            userId:null,
+            userName:null
+        }
+
+        $scope.openWontDonate = function (id) {
+
+            $scope.data.userId = id;
 
             var modalInstance = $modal.open({
-                templateUrl: 'myModalContent.html',
-                controller: 'ModalInstanceCtrl',
-                size: size,
+                templateUrl: 'wontDonate.html',
+                controller: 'wontDonateCtrl',
                 resolve: {
-                    items: function () {
-                        return $scope.items;
+                    data: function () {
+                        return $scope.data;
                     }
                 }
             });
 
-            modalInstance.result.then(function (selectedItem) {
-                $scope.selected = selectedItem;
-            }, function () {
-                $log.info('Modal dismissed at: ' + new Date());
+
+        };
+
+        $scope.openWillDonate = function (id) {
+
+            $scope.data.userId = id;
+
+            var modalInstance = $modal.open({
+                templateUrl: 'willDonate.html',
+                controller: 'willDonateCtrl',
+                resolve: {
+                    data: function () {
+                        return $scope.data;
+                    }
+                }
             });
         };
     }
-]).controller("ModalInstanceCtrl", ["$scope", "$modalInstance", "items",
-    function ($scope, $modalInstance, items) {
-        $scope.items = items;
-        $scope.selected = {
-            item: $scope.items[0]
-        };
+]).controller("wontDonateCtrl", ["$scope", "$modalInstance", "data",
+    function ($scope, $modalInstance, data) {
 
-        $scope.ok = function () {
-            $modalInstance.close($scope.selected.item);
+        $scope.user = {
+            id:null,
+            name:null
+        }
+
+        $scope.user.id = data.userId;
+
+        $scope.cancel = function () {
+            $modalInstance.dismiss('cancel');
         };
+    }
+]).controller("willDonateCtrl", ["$scope", "$modalInstance", "data",
+    function ($scope, $modalInstance, data) {
+
+        $scope.user = {
+            id:null,
+            name:null
+        }
+        console.log(data.userId);
+
+        $scope.user.id = data.userId;
 
         $scope.cancel = function () {
             $modalInstance.dismiss('cancel');

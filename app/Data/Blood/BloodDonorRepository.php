@@ -140,6 +140,17 @@ class BloodDonorRepository {
 
     }
 
+    public function postponeDuty($unixTime , BloodDonor $donor)
+    {
+        $attributes = [
+            'incapable_till' => date('Y-m-d',$unixTime)
+        ];
+
+        $donor->fill($attributes);
+
+        return $donor->save();
+    }
+
     /**
      * Deletes blood donor
      * @param $id
