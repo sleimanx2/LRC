@@ -94,6 +94,24 @@ class BloodRequestRepository {
         $bloodRequest->save();
     }
 
+    public function updateBloodStatistics(BloodRequest $bloodRequest)
+    {
+        $confirmedBlood     = $bloodRequest->blood_donations_count();
+        $confirmedPlatelets = $bloodRequest->platelets_donations_count();
+
+        $bloodRequest['completed'] = 0;
+        $bloodRequest['blood_quantity_confirmed']     = $confirmedBlood;
+        $bloodRequest['platelets_quantity_confirmed'] = $confirmedPlatelets;
+
+        if ( $bloodRequest['blood_quantity'] == $confirmedBlood and $bloodRequest['platelets_quantity'] == $confirmedPlatelets )
+        {
+            $bloodRequest['completed'] = 1;
+        }
+
+        $bloodRequest->save();
+
+    }
+
     public function destroy($id)
     {
         return $this->bloodRequest->destroy($id);

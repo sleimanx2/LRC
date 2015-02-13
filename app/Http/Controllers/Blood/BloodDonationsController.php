@@ -53,9 +53,13 @@ class BloodDonationsController extends Controller{
 
         $bloodDonor = $this->bloodDonorRepository->findOrFail($data['donor_id']);
 
+        $bloodRequest = $this->bloodRequestRepository->findOrFail($data['blood_request_id']);
+
         $this->bloodDonorRepository->postponeDuty(strtotime('+3 months'), $bloodDonor);
 
         $this->bloodDonationRepository->create($data);
+
+        $this->bloodRequestRepository->updateBloodStatistics($bloodRequest);
 
         return redirect()->back()->with('success', $bloodDonor->first_name . ' ' . $bloodDonor->last_name . ' was successfully added as a potential donor.');
 
@@ -84,6 +88,8 @@ class BloodDonationsController extends Controller{
         $this->bloodDonorRepository->postponeDuty($data['delay'], $bloodDonor);
 
         $this->bloodDonationRepository->destroyRelatedDonation($bloodDonor->id , $bloodRequest->id);
+
+        $this->bloodRequestRepository->updateBloodStatistics($bloodRequest);
 
         return redirect()->back()->with('success', $bloodDonor->first_name . ' ' . $bloodDonor->last_name . ' was successfully removed from duty till ' . date('Y-m-d', $data['delay']));
 
