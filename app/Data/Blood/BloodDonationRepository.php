@@ -44,9 +44,19 @@ class BloodDonationRepository {
             'blood_request_id' => $data['blood_request_id'],
             'blood'            => $blood,
             'platelets'        => $platelets,
-            'will_donate_on'   => date('Y-m-d',$data['will_donate_on']),
+            'will_donate_on'   => date('Y-m-d', $data['will_donate_on']),
         ];
 
         return $this->bloodDonation->create($data);
+    }
+
+    /**
+     * It destroy all the donation of a donor for a blood request
+     * @param $donorId
+     * @param $bloodRequestId
+     */
+    public function destroyRelatedDonation($donorId, $bloodRequestId)
+    {
+        return $this->bloodDonation->where('donor_id', $donorId)->where('blood_request_id', $bloodRequestId)->delete();
     }
 }

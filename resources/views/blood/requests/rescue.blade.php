@@ -116,7 +116,86 @@
                 </div>
 
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6" data-ng-controller="BloodDonationModalCtrl">
+                {{--Start Modal Scripts--}}
+
+                <script type="text/ng-template" id="wontDonate.html">
+                    <div class="modal-header">
+                        <h3>This donor can't donate before </h3>
+                    </div>
+                    {!! Form::open(['route' => 'blood-donor-wont-donate', 'method' => 'post']) !!}
+
+                    <div class="modal-body">
+                        <input type="hidden" name="bloodDonorId" data-ng-model="user.id"
+                               data-ng-value="user.id"/>
+                        <input type="hidden" name="bloodRequestId" value="{{$bloodRequest->id}}"/>
+                            <span class="list-unstyled">
+                                <label class="ui-radio">
+                                    <input name="delay" checked="checked" type="radio"
+                                           value="{{strtotime('+1 day')}}"><span> Tomorrow</span>
+                                </label>
+                                <label class="ui-radio">
+                                    <input name="delay" type="radio"
+                                           value="{{strtotime('+3 months')}}"><span> 3 Months</span>
+                                </label>
+                                <label class="ui-radio">
+                                    <input name="delay" type="radio"
+                                           value="{{strtotime('+6 months')}}"><span> 6 Months</span>
+                                </label>
+                                <label class="ui-radio">
+                                    <input name="delay" type="radio"
+                                           value="{{strtotime('+1 year')}}"><span> 1 Year</span>
+                                </label>
+                            </span>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" type="submit">Save</button>
+                        <button class="btn btn-warning" type="reset" ng-click="cancel()">Cancel</button>
+                    </div>
+                    {!! Form::close() !!}
+                </script>
+
+                <script type="text/ng-template" id="willDonate.html">
+                    <div class="modal-header">
+                        <h3>This donor will donate </h3>
+                    </div>
+                    {!! Form::open(['route' => 'blood-donor-will-donate', 'method' => 'post']) !!}
+                    <div class="modal-body">
+
+                        <input type="hidden" name="donor_id" data-ng-model="user.id"
+                               data-ng-value="user.id"/>
+                        <input type="hidden" name="blood_request_id" value="{{$bloodRequest->id}}"/>
+
+                            <span class="list-unstyled">
+                                <label class="ui-radio">
+                                    <input name="will_donate_on" checked="checked" type="radio"
+                                           value="{{strtotime('+1 day')}}"><span> Tomorrow</span>
+                                </label>
+                                <label class="ui-radio">
+                                    <input name="will_donate_on" type="radio" value="{{strtotime('+2 day')}}"><span> After tomorrow</span>
+                                </label>
+                            </span>
+
+                        <h4>Donation Type</h4>
+                            <span class="list-unstyled">
+                                <label class="ui-radio">
+                                    <input name="donation_type" checked="checked" type="radio"
+                                           value="blood"><span> Blood</span>
+                                </label>
+                                <label class="ui-radio">
+                                    <input name="donation_type" type="radio" value="platelets"><span> Platelets</span>
+                                </label>
+                            </span>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" type="submit">Save</button>
+                        <button class="btn btn-warning" type="reset" ng-click="cancel()">Cancel</button>
+                    </div>
+                    {!! Form::close() !!}
+                </script>
+
+                {{--End Modal Scripts --}}
+
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <strong><i class="fa fa-check panel-ico"></i>Successful Blood Donation</strong>
@@ -179,81 +258,7 @@
                         <strong><i class="fa fa-list panel-ico"></i>Blood Donors Suggestions</strong>
                     </div>
 
-                    <div data-ng-controller="BloodDonationModalCtrl" class="panel-body">
-                        <script type="text/ng-template" id="wontDonate.html">
-                            <div class="modal-header">
-                                <h3>This donor can't donate before </h3>
-                            </div>
-                            {!! Form::open(['route' => 'blood-donor-wont-donate', 'method' => 'post']) !!}
-
-                            <div class="modal-body">
-                                <input type="hidden" name="bloodDonorId" data-ng-model="user.id"
-                                       data-ng-value="user.id"/>
-                                <input type="hidden" name="bloodRequestId" value="{{$bloodRequest->id}}"/>
-                            <span class="list-unstyled">
-                                <label class="ui-radio">
-                                    <input name="delay" checked="checked" type="radio"
-                                           value="{{strtotime('+1 day')}}"><span> Tomorrow</span>
-                                </label>
-                                <label class="ui-radio">
-                                    <input name="delay" type="radio"
-                                           value="{{strtotime('+3 months')}}"><span> 3 Months</span>
-                                </label>
-                                <label class="ui-radio">
-                                    <input name="delay" type="radio"
-                                           value="{{strtotime('+6 months')}}"><span> 6 Months</span>
-                                </label>
-                                <label class="ui-radio">
-                                    <input name="delay" type="radio"
-                                           value="{{strtotime('+1 year')}}"><span> 1 Year</span>
-                                </label>
-                            </span>
-                            </div>
-                            <div class="modal-footer">
-                                <button class="btn btn-primary" type="submit">Save</button>
-                                <button class="btn btn-warning" type="reset" ng-click="cancel()">Cancel</button>
-                            </div>
-                            {!! Form::close() !!}
-                        </script>
-
-                        <script type="text/ng-template" id="willDonate.html">
-                            <div class="modal-header">
-                                <h3>This donor will donate </h3>
-                            </div>
-                            {!! Form::open(['route' => 'blood-donor-will-donate', 'method' => 'post']) !!}
-                            <div class="modal-body">
-
-                                <input type="hidden" name="donor_id" data-ng-model="user.id"
-                                       data-ng-value="user.id"/>
-                                <input type="hidden" name="blood_request_id" value="{{$bloodRequest->id}}"/>
-
-                            <span class="list-unstyled">
-                                <label class="ui-radio">
-                                    <input name="will_donate_on" checked="checked" type="radio"
-                                           value="{{strtotime('+1 day')}}"><span> Tomorrow</span>
-                                </label>
-                                <label class="ui-radio">
-                                    <input name="will_donate_on" type="radio" value="{{strtotime('+2 day')}}"><span> After tomorrow</span>
-                                </label>
-                            </span>
-
-                                <h4>Donation Type</h4>
-                            <span class="list-unstyled">
-                                <label class="ui-radio">
-                                    <input name="donation_type" checked="checked" type="radio"
-                                           value="blood"><span> Blood</span>
-                                </label>
-                                <label class="ui-radio">
-                                    <input name="donation_type" type="radio" value="platelets"><span> Platelets</span>
-                                </label>
-                            </span>
-                            </div>
-                            <div class="modal-footer">
-                                <button class="btn btn-primary" type="submit">Save</button>
-                                <button class="btn btn-warning" type="reset" ng-click="cancel()">Cancel</button>
-                            </div>
-                            {!! Form::close() !!}
-                        </script>
+                    <div class="panel-body">
 
                         <accordion close-others="oneAtATime" class="ui-accordion ui-accordion-info">
 

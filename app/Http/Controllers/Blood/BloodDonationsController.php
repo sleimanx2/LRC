@@ -8,17 +8,28 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use LRC\Data\Blood\BloodDonationRepository;
 use LRC\Data\Blood\BloodDonorRepository;
+use LRC\Data\Blood\BloodRequestRepository;
 use LRC\Http\Controllers\Controller;
 
 class BloodDonationsController extends Controller{
 
     protected $bloodDonorRepository;
     protected $bloodDonationRepository;
+    /**
+     * @var BloodRequestRepository
+     */
+    private $bloodRequestRepository;
 
-    function __construct(BloodDonationRepository $bloodDonationRepository, BloodDonorRepository $bloodDonorRepository )
+    /**
+     * @param BloodDonationRepository $bloodDonationRepository
+     * @param BloodDonorRepository $bloodDonorRepository
+     * @param BloodRequestRepository $bloodRequestRepository
+     */
+    function __construct(BloodDonationRepository $bloodDonationRepository, BloodDonorRepository $bloodDonorRepository,BloodRequestRepository $bloodRequestRepository )
     {
         $this->bloodDonorRepository    = $bloodDonorRepository;
         $this->bloodDonationRepository = $bloodDonationRepository;
+        $this->bloodRequestRepository = $bloodRequestRepository;
     }
 
 
@@ -68,7 +79,11 @@ class BloodDonationsController extends Controller{
 
         $bloodDonor = $this->bloodDonorRepository->findOrFail($data['bloodDonorId']);
 
+        $bloodRequest = $this->bloodRequestRepository->findOrFail($data['bloodRequestId']);
+
         $this->bloodDonorRepository->postponeDuty($data['delay'], $bloodDonor);
+
+        $this->bloodDonationRepository->destroyRelatedDonation($bloodDonor->id , $bloodRequest->id);
 
         return redirect()->back()->with('success', $bloodDonor->first_name . ' ' . $bloodDonor->last_name . ' was successfully removed from duty till ' . date('Y-m-d', $data['delay']));
 
