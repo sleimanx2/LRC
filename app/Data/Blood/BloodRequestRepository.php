@@ -32,7 +32,7 @@ class BloodRequestRepository {
      */
     public function getPaginated($limit = 25)
     {
-        $bloodRequests = $this->bloodRequest->with('blood_type', 'blood_bank')->paginate($limit);
+        $bloodRequests = $this->bloodRequest->with('blood_type', 'blood_bank')->orderBy('completed','asc')->orderBy('due_date')->paginate($limit);
 
         return $bloodRequests;
 

@@ -33,7 +33,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <strong><i class="fa fa-list panel-ico"></i>Blood Request Info</strong>
-                        <span class="badge badge-success pull-right">Due: {{ $bloodRequest->due_date }} </span>
+                        <span class="badge {{$bloodRequest->due_date == date('Y-m-d',time()) ? 'badge-warning' : ''}} {{$bloodRequest->due_date < date('Y-m-d',time()) ? 'badge-danger' : 'badge-success'}} pull-right">Due: {{ $bloodRequest->due_date }} </span>
                     </div>
                     <div class="panel-body">
                         <div class="media">

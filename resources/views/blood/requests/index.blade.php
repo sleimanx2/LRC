@@ -42,7 +42,8 @@
                     <tr>
                         <th>Patient Name</th>
                         <th>Blood Type</th>
-                        <th>Quantity</th>
+                        <th>Blood</th>
+                        <th>Platelets</th>
                         <th>Blood Bank</th>
                         <th>Due Date</th>
                         <th>Actions</th>
@@ -50,12 +51,25 @@
                     </thead>
                     <tbody>
                     @foreach($bloodRequests as $bloodRequest)
-                        <tr>
+                        <tr class="{{{ $bloodRequest->completed ? 'success' : 'warning' }}}">
                             <td>{{$bloodRequest->patient_name}}</td>
                             <td>{{$bloodRequest->blood_type->name or 'Not assigned' }}</td>
-                            <td>{{$bloodRequest->quantity}}</td>
+                            <td>
+                                <span class="badge {{{ $bloodRequest->blood_quantity_confirmed == $bloodRequest->blood_quantity ? 'badge-success' :'badge-danger'  }}}">
+                                    {{$bloodRequest->blood_quantity_confirmed}} / {{$bloodRequest->blood_quantity}}
+                                </span>
+                            </td>
+                            <td>
+                                <span class="badge {{{ $bloodRequest->platelets_quantity_confirmed == $bloodRequest->platelets_quantity ? 'badge-success' :'badge-danger'  }}}">
+                                    {{$bloodRequest->platelets_quantity_confirmed}} / {{$bloodRequest->platelets_quantity}}
+                                </span>
+                            </td>
                             <td>{{$bloodRequest->blood_bank->name or 'Not assigned' }}</td>
-                            <td>{{$bloodRequest->due_date}}</td>
+                            <td>
+                                <span class="badge {{$bloodRequest->due_date == date('Y-m-d',time()) ? 'badge-warning' : ''}} {{$bloodRequest->due_date < date('Y-m-d',time()) ? 'badge-danger' : 'badge-success'}}">
+                                      {{$bloodRequest->due_date}}
+                                </span>
+                            </td>
                             <td>
                                 <a class="btn btn-bordered-warning btn-xs"
                                    href="{{ route('blood-request-rescue',[$bloodRequest->id]) }}" popover="Rescue"
