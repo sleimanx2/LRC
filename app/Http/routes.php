@@ -66,9 +66,6 @@ Route::group(['middleware' => 'auth'], function ()
 
         Route::delete('donors/destroy/{id}', ['as' => 'blood-donor-destroy', 'uses' => 'BloodDonorsController@destroy']);
 
-        Route::post('donors/willDonate', ['as' => 'blood-donor-will-donate', 'uses' => 'BloodDonorsController@willDonate']);
-
-        Route::post('donors/wontDonate', ['as' => 'blood-donor-wont-donate', 'uses' => 'BloodDonorsController@wontDonate']);
 
 
         // Blood Requests
@@ -86,6 +83,13 @@ Route::group(['middleware' => 'auth'], function ()
         Route::delete('requests/destroy/{id}', ['as' => 'blood-request-destroy', 'uses' => 'BloodRequestsController@destroy']);
 
         Route::get('requests/rescue/{id}', ['as' => 'blood-request-rescue', 'uses' => 'BloodRequestsController@rescue']);
+
+
+        // Blood Donations
+
+        Route::post('donation/willDonate', ['as' => 'blood-donor-will-donate', 'uses' => 'BloodDonationsController@willDonate']);
+
+        Route::post('donation/wontDonate', ['as' => 'blood-donor-wont-donate', 'uses' => 'BloodDonationsController@wontDonate']);
 
     });
 
