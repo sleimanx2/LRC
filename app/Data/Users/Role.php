@@ -24,7 +24,7 @@ class Role extends Model {
      */
     public function users()
     {
-        $this->belongsToMany('LRC\Data\Users\User');
+       return $this->belongsToMany('LRC\Data\Users\User');
     }
 
 }

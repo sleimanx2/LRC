@@ -83,7 +83,9 @@ class Registrar {
             'longitude'       => $data['longitude']
         ];
 
-        return User::create($data);
+        $user =  User::create($data);
+
+        $this->syncRoles($data, $user);
     }
 
     /**
@@ -110,6 +112,8 @@ class Registrar {
         }
 
         $user->fill($attributes);
+
+        $this->syncRoles($data, $user);
 
         return $user->save();
 
@@ -142,5 +146,15 @@ class Registrar {
         User::findOrFail($id);
         User::destroy($id);
     }
+
+    /**
+     * @param array $data
+     * @param User $user
+     */
+    public function syncRoles(array $data, User $user)
+    {
+        $user->roles()->sync($data['role_id']);
+    }
+
 
 }
