@@ -12,7 +12,7 @@ class CreateUserRolePivotTable extends Migration {
      */
     public function up()
     {
-        Schema::create('user_role', function (Blueprint $table)
+        Schema::create('role_user', function (Blueprint $table)
         {
             $table->increments('id');
 
@@ -31,7 +31,7 @@ class CreateUserRolePivotTable extends Migration {
      */
     public function down()
     {
-        Schema::drop('user_role');
+        Schema::drop('role_user');
     }
 
 }
