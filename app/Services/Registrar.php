@@ -71,7 +71,7 @@ class Registrar {
      */
     public function create(array $data)
     {
-        $data = [
+        $attributes = [
             'first_name'      => $data['first_name'],
             'last_name'       => $data['last_name'],
             'email'           => $data['email'],
@@ -83,9 +83,9 @@ class Registrar {
             'longitude'       => $data['longitude']
         ];
 
-        $user =  User::create($data);
+        $user =  User::create($attributes);
 
-        $this->syncRoles($data, $user);
+        return $this->syncRoles($data, $user);
     }
 
     /**

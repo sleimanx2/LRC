@@ -83,7 +83,6 @@ class UsersController extends Controller {
         $this->registrar->update($request->all(),$user);
 
         return redirect(route('users-list'))->with('success', 'First Aider '.$user->first_name.' '.$user->last_name.' updated Successfully.');
-        //
     }
 
     /**
