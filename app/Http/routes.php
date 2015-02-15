@@ -84,6 +84,8 @@ Route::group(['middleware' => 'auth'], function ()
 
         Route::get('requests/rescue/{id}', ['as' => 'blood-request-rescue', 'uses' => 'BloodRequestsController@rescue']);
 
+        Route::post('requests/complete/{id}', ['as' => 'blood-request-set-completed', 'uses' => 'BloodRequestsController@setComplete']);
+
 
         // Blood Donations
 

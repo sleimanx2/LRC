@@ -167,6 +167,23 @@ class BloodRequestsController extends Controller {
         return redirect()->intended(route('blood-requests-list'))->with('success', $bloodRequest->patient_name . "'s blood request was updated successfully.");
     }
 
+
+    /**
+     * Set resource as complete
+     *
+     * @param  int $id
+     * @return Response
+     */
+    public function setComplete($id)
+    {
+        $bloodRequest = $this->bloodRequestRepository->findOrFail($id);
+
+        $data['user_id'] = Auth::user()->id;
+
+        $this->bloodRequestRepository->setComplete($data, $bloodRequest);
+
+        return redirect()->back()->with('success', $bloodRequest->patient_name . "'s blood request was updated successfully.");
+    }
     /**
      * Remove the specified resource from storage.
      *

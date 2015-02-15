@@ -23,4 +23,6 @@ class BloodTypeTableSeeder extends Seeder {
         ));
     }
 
+
+
 }

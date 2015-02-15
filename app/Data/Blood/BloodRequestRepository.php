@@ -32,7 +32,7 @@ class BloodRequestRepository {
      */
     public function getPaginated($limit = 25)
     {
-        $bloodRequests = $this->bloodRequest->with('blood_type', 'blood_bank')->orderBy('completed','asc')->orderBy('due_date')->paginate($limit);
+        $bloodRequests = $this->bloodRequest->with('blood_type', 'blood_bank')->orderBy('completed', 'asc')->orderBy('due_date')->paginate($limit);
 
         return $bloodRequests;
 
@@ -92,6 +92,24 @@ class BloodRequestRepository {
         $bloodRequest->fill($attributes);
 
         $bloodRequest->save();
+
+        $this->updateBloodStatistics($bloodRequest);
+
+    }
+
+    public function setComplete($data, BloodRequest $bloodRequest)
+    {
+        $attributes = [
+            'user_id'            => $data['user_id'],
+            'blood_quantity'     => $bloodRequest['blood_quantity_confirmed'],
+            'platelets_quantity' => $bloodRequest['platelets_quantity_confirmed'],
+            'completed'          => 1,
+        ];
+
+        $bloodRequest->fill($attributes);
+
+        $bloodRequest->save();
+
     }
 
     public function updateBloodStatistics(BloodRequest $bloodRequest)
@@ -99,11 +117,11 @@ class BloodRequestRepository {
         $confirmedBlood     = $bloodRequest->blood_donations_count();
         $confirmedPlatelets = $bloodRequest->platelets_donations_count();
 
-        $bloodRequest['completed'] = 0;
+        $bloodRequest['completed']                    = 0;
         $bloodRequest['blood_quantity_confirmed']     = $confirmedBlood;
         $bloodRequest['platelets_quantity_confirmed'] = $confirmedPlatelets;
 
-        if ( $bloodRequest['blood_quantity'] == $confirmedBlood and $bloodRequest['platelets_quantity'] == $confirmedPlatelets )
+        if ( $bloodRequest['blood_quantity'] <= $confirmedBlood and $bloodRequest['platelets_quantity'] <= $confirmedPlatelets )
         {
             $bloodRequest['completed'] = 1;
         }

@@ -50,6 +50,10 @@
     'phone_secondary',old('phone_secondary'),['class'=>'form-control','pattern'=>'.{8,8}','title'=>'The number
     should contain 8 digits']) !!}
 </div>
+    <hr/>
+    <div class="form-group">
+        {!! Form::select('role_id[]', $roles, Input::old('material_id'), array('multiple')) !!}
+    </div>
 <hr/>
 <div class="form-group">
     {!! Form::hidden('location', old('location')

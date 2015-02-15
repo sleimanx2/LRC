@@ -20,15 +20,22 @@
                                 </ul>
                             </div>
                         @endif
-                        {!! Form::model($bloodRequest,['route'=>['blood-request-update',$bloodRequest->id],'name'=>'blood_request_edit_form']); !!}
+                        {!!
+                        Form::model($bloodRequest,['route'=>['blood-request-update',$bloodRequest->id],'name'=>'blood_request_edit_form']);
+                        !!}
                         @include('forms.blood.request')
                         {!! Form::close(); !!}
                         <hr/>
+
+                        <a href="{{ route('blood-request-rescue',[$bloodRequest->id]) }}"
+                           class="btn btn-success btn-block"><i class="fa fa-life-ring"></i> Rescue this request</a>
+                            <hr/>
                         {!!Form::open([
                         'method'=>'delete',
                         'route'=>['blood-request-destroy',$bloodRequest->id],
                         'style'=>'display:inline',
-                        'onsubmit'=>'return confirm("Are you sure you want to delete '.$bloodRequest->patient_name.'\'s request?");'
+                        'onsubmit'=>'return confirm("Are you sure you want to delete '.$bloodRequest->patient_name.'\'s
+                        request?");'
                         ]) !!}
 
                         <button type="submit" class="btn btn-danger btn-block" popover="Delete"

@@ -4,31 +4,28 @@
     <div class="page ng-scope">
         <div class="row">
 
-            @if($bloodRequest->completed)
+            @if($bloodRequest->completed or $bloodRequest->note)
+                <div class="col-xs-12">
+                    <div class="panel panel-default">
 
-                <div class="panel panel-success">
+                        <div class="panel-body">
+                            @if($bloodRequest->completed)
+                                <div class="callout-elem callout-elem-success">
+                                    <h4><i class="fa fa-check"></i> This blood request was successfuly completed.</h4>
+                                </div>
+                            @endif
+                            @if($bloodRequest->note)
+                                <div class="callout-elem callout-elem-info">
+                                    <h4>Request Note</h4>
 
-                    <div class="panel-body">
-                        <div class="callout-elem callout-elem-success">
-                            <h4><i class="fa fa-check"></i> This blood request was successfuly completed.</h4>
+                                    <p>{{$bloodRequest->note}}</p>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
             @endif
 
-            @if($bloodRequest->note)
-
-                <div class="panel panel-default">
-
-                    <div class="panel-body">
-                        <div class="callout-elem callout-elem-info">
-                            <h4>Request Note</h4>
-
-                            <p>{{$bloodRequest->note}}</p>
-                        </div>
-                    </div>
-                </div>
-            @endif
             <div class="col-md-6">
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -127,7 +124,28 @@
                         </div>
                     </div>
                 </div>
+                <div class="panel panel-default">
+                    <div class="panel-body">
 
+
+                        <a href="{{ route('blood-request-edit',[$bloodRequest->id]) }}" class="btn btn-info">Edit</a>
+                        @if(!$bloodRequest->completed)
+
+                            {!! Form::open([
+                            'method'=>'post',
+                            'route'=>['blood-request-set-completed',$bloodRequest->id],
+                            'style'=>'display:inline',
+                            'onsubmit'=>'return confirm("Are you sure you want mark
+                            '.$bloodRequest->patient_name.'\'s request as complete ?");'
+                            ]) !!}
+
+                            <button class="btn btn-success">Set as complete</button>
+
+                            {!!Form::close()!!}
+
+                        @endif
+                    </div>
+                </div>
             </div>
             <div class="col-md-6" data-ng-controller="BloodDonationModalCtrl">
                 {{--Start Modal Scripts--}}

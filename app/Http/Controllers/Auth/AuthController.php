@@ -1,5 +1,6 @@
 <?php namespace LRC\Http\Controllers\Auth;
 
+use LRC\Data\Users\UserRepository;
 use LRC\Http\Controllers\Controller;
 use Illuminate\Auth\Guard;
 use LRC\Services\Registrar;
@@ -20,6 +21,10 @@ class AuthController extends Controller {
     */
 
     use AuthenticatesAndRegistersUsers;
+    /**
+     * @var UserRepository
+     */
+    private $userRepository;
 
 
     /**
@@ -27,14 +32,28 @@ class AuthController extends Controller {
      *
      * @param \Illuminate\Contracts\Auth\Guard|Guard $auth
      * @param \Illuminate\Contracts\Auth\Registrar|Registrar $registrar
+     * @param UserRepository $userRepository
      */
-    public function __construct(Guard $auth, Registrar $registrar)
+    public function __construct(Guard $auth, Registrar $registrar,UserRepository $userRepository)
     {
         $this->auth      = $auth;
         $this->registrar = $registrar;
+        $this->userRepository = $userRepository;
 
         $this->middleware('auth', ['only' => ['postRegister','getRegister','getLogout']]);
 
+    }
+
+    /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getRegister()
+    {
+        $roles = $this->userRepository->rolesList();
+
+        return view('auth.register',['roles'=>$roles]);
     }
 
     /**
