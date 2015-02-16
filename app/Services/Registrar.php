@@ -153,7 +153,9 @@ class Registrar {
      */
     public function syncRoles(array $data, User $user)
     {
-        $user->roles()->sync($data['role_id']);
+        if( ! isset($data['roles_ids'])){ $data['roles_ids']=[]; }
+
+        $user->roles()->sync($data['roles_ids']);
     }
 
 

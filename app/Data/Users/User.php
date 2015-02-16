@@ -8,29 +8,29 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
 
-	use Authenticatable, CanResetPassword;
+    use Authenticatable, CanResetPassword;
 
-	/**
-	 * The database table used by the model.
-	 *
-	 * @var string
-	 */
-	protected $table = 'users';
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = 'users';
 
-	/**
-	 * The attributes that are guarded against mass assignable.
-	 *
-	 * @var array
-	 */
+    /**
+     * The attributes that are guarded against mass assignable.
+     *
+     * @var array
+     */
 
-    protected $guarded = ['id', 'remember_token','created_at','updated_at'];
+    protected $guarded = ['id', 'remember_token', 'created_at', 'updated_at'];
 
-	/**
-	 * The attributes excluded from the model's JSON form.
-	 *
-	 * @var array
-	 */
-	protected $hidden = ['password', 'remember_token'];
+    /**
+     * The attributes excluded from the model's JSON form.
+     *
+     * @var array
+     */
+    protected $hidden = ['password', 'remember_token'];
 
 
     /**
@@ -38,7 +38,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function roles()
     {
-       return $this->belongsToMany('LRC\Data\Users\Role');
+        return $this->belongsToMany('LRC\Data\Users\Role');
+    }
+
+    /**
+     * Return the roles list that belongs to a certain user
+     * @return mixed
+     */
+    public function getRolesIdsAttribute()
+    {
+        return $this->roles()->lists('id');
     }
 
 }
