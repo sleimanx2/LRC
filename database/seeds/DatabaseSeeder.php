@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder {
 
         $this->call('RoleTableSeeder');
 
-        $this->call('CaseTableSeeder');
+        $this->call('ReportCategoryTableSeeder');
         $this->call('AmbulanceTableSeeder');
 
         $this->call('EmergencyTableSeeder');

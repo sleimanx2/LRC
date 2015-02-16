@@ -1,15 +1,15 @@
 <?php
 use Illuminate\Database\Seeder;
 
-class CaseTableSeeder extends Seeder {
+class ReportCategoryTableSeeder extends Seeder {
 
     public function run()
     {
         // Delete Table
-        DB::table('cases')->delete();
+        DB::table('report_categories')->delete();
 
         // Insert some dummy records
-        DB::table('cases')->insert(array(
+        DB::table('report_categories')->insert(array(
 
             array('name' => 'AVP'),
             array('name' => 'Burns'),

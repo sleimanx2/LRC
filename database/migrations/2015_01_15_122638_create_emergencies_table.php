@@ -20,7 +20,7 @@ class CreateEmergenciesTable extends Migration {
             $table->boolean('survived');
             $table->string('patient_name');
             $table->string('parent_name');
-            $table->string('case_id');
+            $table->string('report_category_id');
             $table->string('phone_primary');
             $table->string('phone_secondary');
 
@@ -41,9 +41,9 @@ class CreateEmergenciesTable extends Migration {
             // Team info
             $table->integer('ambulance_id');
             $table->integer('driver_id');
-            $table->integer('aider_one_id');
-            $table->integer('aider_two_id');
-            $table->integer('aider_three_id');
+            $table->integer('scout_id');
+            $table->integer('patient_aider_id');
+            $table->integer('assistant_id');
 
 
             // Timing

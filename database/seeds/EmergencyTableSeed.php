@@ -1,8 +1,8 @@
 <?php
 use Illuminate\Database\Seeder;
+use LRC\Data\Emergencies\ReportCategory;
 use LRC\Data\Users\User;
 use LRC\Data\Emergencies\Emergency;
-use LRC\Data\Emergencies\EmergencyCase;
 use LRC\Data\Emergencies\Ambulance;
 
 use Faker\Factory as Faker;
@@ -18,22 +18,22 @@ class EmergencyTableSeeder extends Seeder {
 
         if ( app()->environment() == 'local' )
         {
-            $cases      = EmergencyCase::lists('id');
-            $users      = User::lists('id');
-            $ambulances = Ambulance::lists('id');
+            $report_categories = ReportCategory::lists('id');
+            $users             = User::lists('id');
+            $ambulances        = Ambulance::lists('id');
 
 
             for ($i = 0; $i < 40; $i ++)
             {
-                $randomCaseId      = array_rand($cases, 1);
-                $randomAmbulanceId = array_rand($ambulances, 1);
-                $randomUserIds     = array_rand($users, 4);
+                $randomReportCategoryId = array_rand($report_categories, 1);
+                $randomAmbulanceId      = array_rand($ambulances, 1);
+                $randomUserIds          = array_rand($users, 4);
 
                 Emergency::create(array(
                     'patient_name'          => $faker->name,
                     'parent_name'           => $faker->name,
                     'survived'              => $faker->boolean(),
-                    'case_id'               => $cases[$randomCaseId],
+                    'report_category_id'    => $report_categories[$randomReportCategoryId],
                     'phone_primary'         => $faker->phoneNumber,
                     'phone_secondary'       => $faker->phoneNumber,
 
@@ -50,9 +50,9 @@ class EmergencyTableSeeder extends Seeder {
                     'ambulance_id'          => $ambulances[$randomAmbulanceId],
 
                     'driver_id'             => $users[$randomUserIds[0]],
-                    'aider_one_id'          => $users[$randomUserIds[1]],
-                    'aider_two_id'          => $users[$randomUserIds[2]],
-                    'aider_three_id'        => $users[$randomUserIds[3]],
+                    'scout_id'              => $users[$randomUserIds[1]],
+                    'patient_aider_id'      => $users[$randomUserIds[2]],
+                    'assistant_id'          => $users[$randomUserIds[3]],
 
                 ));
             }
