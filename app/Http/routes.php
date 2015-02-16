@@ -67,7 +67,6 @@ Route::group(['middleware' => 'auth'], function ()
         Route::delete('donors/destroy/{id}', ['as' => 'blood-donor-destroy', 'uses' => 'BloodDonorsController@destroy']);
 
 
-
         // Blood Requests
 
         Route::get('requests', ['as' => 'blood-requests-list', 'uses' => 'BloodRequestsController@index']);
@@ -92,6 +91,26 @@ Route::group(['middleware' => 'auth'], function ()
         Route::post('donation/willDonate', ['as' => 'blood-donor-will-donate', 'uses' => 'BloodDonationsController@willDonate']);
 
         Route::post('donation/wontDonate', ['as' => 'blood-donor-wont-donate', 'uses' => 'BloodDonationsController@wontDonate']);
+
+    });
+
+
+    /*
+     * EMERGENCIES
+    */
+    Route::group(['prefix' => 'emergencies', 'namespace' => 'Emergencies'], function ()
+    {
+        Route::get('emergencies', ['as' => 'emergencies-list', 'uses' => 'EmergenciesController@index']);
+
+        Route::get('emergencies/create', ['as' => 'emergency-create', 'uses' => 'EmergenciesController@create']);
+
+        Route::post('emergencies/store', ['as' => 'emergency-store', 'uses' => 'EmergenciesController@store']);
+
+        Route::get('emergencies/edit/{id}', ['as' => 'emergency-edit', 'uses' => 'EmergenciesController@edit']);
+
+        Route::post('emergencies/update/{id}', ['as' => 'emergency-update', 'uses' => 'EmergenciesController@update']);
+
+        Route::delete('emergencies/destroy/{id}', ['as' => 'emergency-destroy', 'uses' => 'EmergenciesController@destroy']);
 
     });
 

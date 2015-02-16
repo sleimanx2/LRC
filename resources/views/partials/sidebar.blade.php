@@ -23,7 +23,7 @@
         <li>
             <a href="users"> <i class="fa fa-ambulance"></i> <span>Emergencies</span></a>
             <ul>
-                <li><a href=""><i class="fa fa-angle-right"></i><span> List </span></a></li>
+                <li><a href="{{route('emergencies-list')}}"><i class="fa fa-angle-right"></i><span> List </span></a></li>
                 <li><a href=""><i class="fa fa-angle-right"></i><span>Add</span></a></li>
             </ul>
         </li>

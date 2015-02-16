@@ -32,7 +32,7 @@ class UserRepository {
     }
 
     /**
-     * It paginate users
+     * It paginates users
      * @param int $limit
      * @return mixed
      */
