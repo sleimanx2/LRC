@@ -30,6 +30,7 @@ elixir(function (mix) {
             'vendor/angular-wizard.js',
             'vendor/angular-ui-tree.js',
             'vendor/jquery.vmap.min.js',
+            'vendor/select2.min.js',
             'extras.js',
             'app/*.js'
         ],
@@ -50,6 +51,7 @@ elixir(function (mix) {
         [
             'bootstrap.min.css',
             'bootstrap-theme.min.css',
+            'select2.css',
             'main.css',
         ],
         'resources/assets/styles',

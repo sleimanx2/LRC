@@ -47,14 +47,21 @@
         <section id="content" class="animate-fade-up">
             <?php $success = Session::get('success') ?>
             @if($success)
-                <section class="panel panel-default">
-                    <div class="panel-body">
-                        <div class="callout-elem callout-elem-success">
-                            <h5>{{ $success }}</h5>
+                <div class="page ng-scope">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <section class="panel panel-default">
+                                <div class="panel-body">
+                                    <div class="callout-elem callout-elem-success">
+                                        <h5>{{ $success }}</h5>
+                                    </div>
+                                </div>
+                            </section>
                         </div>
                     </div>
-                </section>
+                </div>
             @endif
+
             @yield('content')
         </section>
     </div>

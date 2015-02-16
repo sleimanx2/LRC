@@ -13,6 +13,7 @@ var app = angular.module("app", ["ngRoute", "ngAnimate", "ui.bootstrap", "easypi
                 $('.load_circle_wrapper').addClass("loaded");
             },1000);
 
+            $('select').select2();
         });
 
     }] );
