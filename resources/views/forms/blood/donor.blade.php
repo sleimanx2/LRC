@@ -15,24 +15,24 @@
     old('blood_type_id'), ['class' => 'form-control']) !!}
 </div>
 <div class="form-group" data-ng-controller="DatepickerCtrl">
- <label for="">Birth Date</label>
+    <label for="">Birth Date</label>
 
- <div class="input-group ui-datepicker">
-     {!! Form::text('birthday', old('birthday'), [
-     'class' => 'form-control',
-     'id'=>'datepicker',
-     'datepicker-popup'=>'yyyy-M-dd',
-     'ng-model'=>'dt',
-     'ng-value'=> old('birthday'),
-     'is-open'=>'opened',
-     'datepicker-options'=>'dateOptions',
-     'date-disabled'=>'disabled(date, mode)',
-     'ng-required'=>'true',
-     'close-text'=>'Close',
-     ]) !!}
+    <div class="input-group ui-datepicker">
+        {!! Form::text('birthday', old('birthday'), [
+        'class' => 'form-control',
+        'id'=>'datepicker',
+        'datepicker-popup'=>'yyyy-M-dd',
+        'ng-model'=>'dt',
+        'ng-value'=> old('birthday'),
+        'is-open'=>'opened',
+        'datepicker-options'=>'dateOptions',
+        'date-disabled'=>'disabled(date, mode)',
+        'ng-required'=>'true',
+        'close-text'=>'Close',
+        ]) !!}
 
-     <span class="input-group-addon" ng-click="open($event)"><i class="fa fa-calendar"></i></span>
- </div>
+        <span class="input-group-addon" ng-click="open($event)"><i class="fa fa-calendar"></i></span>
+    </div>
 </div>
 <div class="form-group">
     <label for="">Email</label>
@@ -61,25 +61,12 @@
     {!! Form::radio('gender', 'female', false); !!}
 </div>
 <hr/>
-<div class="form-group">
-    {!! Form::hidden('location', old('location')
-    ,['id'=>'location','class'=>'form-control','data-ng-value'=>'form.location']) !!}
-    <google-places location=location></google-places>
-</div>
-<div class="form-group">
-
-    {!! Form::hidden('latitude', old('latitude')
-    ,['id'=>'latitude','class'=>'form-control','data-ng-model'=>'form.latitude','data-ng-value'=>'form.latitude']) !!}
-
-    {!! Form::hidden('longitude', old('longitude')
-    ,['id'=>'longitude','class'=>'form-control','data-ng-model'=>'form.longitude','data-ng-value'=>'form.longitude'])
-    !!}
-
-</div>
-
-<div class="form-group">
-    <div class="ui-map" id="map-canvas"></div>
-</div>
+    {{--Location Field--}}
+    @include('partials.location')
+    {{--End Location Field--}}
+    <div class="form-group">
+        <div class="ui-map" id="map-canvas"></div>
+    </div>
 <hr/>
 <button type="submit" class="btn btn-success">
     Save

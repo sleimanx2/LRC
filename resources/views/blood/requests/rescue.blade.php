@@ -251,10 +251,10 @@
 
                                     <span class="pull-right">
                                         @if($bloodDonation->platelets)
-                                            <i popover="Blood" popover-trigger="mouseenter"
+                                            <i popover="Platelets" popover-trigger="mouseenter"
                                                class="fa fa-heart color-warning"></i>
                                         @else
-                                            <i popover="Platelet" popover-trigger="mouseenter"
+                                            <i popover="Blood" popover-trigger="mouseenter"
                                                class="fa fa-heart color-danger"></i>
                                         @endif
 

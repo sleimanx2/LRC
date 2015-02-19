@@ -21,7 +21,9 @@
 
     <!-- Theme's own CSS file -->
     <link rel="stylesheet" href="/dist/main.min.css">
-    <!--Uncomment for deployment using Grunt-->
+
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
+
     <script type="text/javascript" src="/dist/app.min.js"></script>
 
     <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>

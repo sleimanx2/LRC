@@ -16,7 +16,6 @@ elixir(function (mix) {
 
     mix.scripts(
         [
-            'vendor/gmap.js',
             'vendor/angular.min.js',
             'vendor/angular-animate.min.js',
             'vendor/angular-route.min.js',

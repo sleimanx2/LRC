@@ -79,4 +79,20 @@ class UserRepository {
     {
         return $this->user->findOrFail($id);
     }
+
+    public function getDriversList()
+    {
+        return $this->user->select('*', DB::raw('CONCAT(first_name, " ", last_Name) AS full_name'))->where('id','3')->lists('full_name','id');
+    }
+
+    public function getSeniorsList()
+    {
+        return $this->user->select('*', DB::raw('CONCAT(first_name, " ", last_Name) AS full_name'))->where('id','5')->lists('full_name','id');
+    }
+
+    public function getAllList()
+    {
+        return $this->user->select('*', DB::raw('CONCAT(first_name, " ", last_Name) AS full_name'))->lists('full_name','id');
+    }
+
 }

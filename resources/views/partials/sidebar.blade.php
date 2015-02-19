@@ -1,4 +1,3 @@
-
 <!-- Logo -->
 <div class="logo" data-ng-controller="AdminAppCtrl">
     <a href="#/">
@@ -19,12 +18,11 @@
                 <li><a href="/auth/register"><i class="fa fa-angle-right"></i><span> Register</span></a></li>
             </ul>
         </li>
-
         <li>
             <a href="users"> <i class="fa fa-ambulance"></i> <span>Emergencies</span></a>
             <ul>
                 <li><a href="{{route('emergencies-list')}}"><i class="fa fa-angle-right"></i><span> List </span></a></li>
-                <li><a href=""><i class="fa fa-angle-right"></i><span>Add</span></a></li>
+                <li><a href="{{route('emergency-create')}}"><i class="fa fa-angle-right"></i><span>Add</span></a></li>
             </ul>
         </li>
         <li>
@@ -44,8 +42,5 @@
         <li>
             <a href="{{route('contacts-list')}}"> <i class="fa fa-book"></i> <span>Contacts</span></a>
         </li>
-
-
     </ul>
-
 </div>

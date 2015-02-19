@@ -17,9 +17,7 @@ class CreateEmergenciesTable extends Migration {
             $table->increments('id');
 
             // Patient info
-            $table->boolean('survived');
-            $table->string('patient_name');
-            $table->string('parent_name');
+            $table->string('contact_name');
             $table->string('report_category_id');
             $table->string('phone_primary');
             $table->string('phone_secondary');

@@ -30,9 +30,7 @@ class EmergencyTableSeeder extends Seeder {
                 $randomUserIds          = array_rand($users, 4);
 
                 Emergency::create(array(
-                    'patient_name'          => $faker->name,
-                    'parent_name'           => $faker->name,
-                    'survived'              => $faker->boolean(),
+                    'contact_name'          => $faker->name,
                     'report_category_id'    => $report_categories[$randomReportCategoryId],
                     'phone_primary'         => $faker->phoneNumber,
                     'phone_secondary'       => $faker->phoneNumber,

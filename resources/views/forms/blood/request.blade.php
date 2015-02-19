@@ -18,7 +18,7 @@
                 <div class="input-group ui-spinner" data-ui-spinner="">
                     <span class="input-group-btn">
                     <button type="button" class="btn btn-primary" data-spin="up">
-                        <i class="fa fa-plus"></i>
+                        <i class="fa fa-plus">{{----}}</i>
                     </button>
                     </span>
                     {!! Form::text(

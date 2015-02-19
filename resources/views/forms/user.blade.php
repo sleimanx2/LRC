@@ -55,21 +55,9 @@
         {!! Form::select('roles_ids[]', $roles, old('roles_ids'), array('multiple')) !!}
     </div>
 <hr/>
-<div class="form-group">
-    {!! Form::hidden('location', old('location')
-    ,['id'=>'location','class'=>'form-control','data-ng-value'=>'form.location']) !!}
-    <google-places location=location></google-places>
-</div>
-<div class="form-group">
-
-    {!! Form::hidden('latitude', old('latitude')
-    ,['id'=>'latitude','class'=>'form-control','data-ng-model'=>'form.latitude','data-ng-value'=>'form.latitude']) !!}
-
-    {!! Form::hidden('longitude', old('longitude')
-    ,['id'=>'longitude','class'=>'form-control','data-ng-model'=>'form.longitude','data-ng-value'=>'form.longitude'])
-    !!}
-
-</div>
+    {{--Location Field--}}
+    @include('partials.location')
+    {{--End Location Field--}}
 
 <div class="form-group">
     <div class="ui-map" id="map-canvas"></div>

@@ -58,7 +58,7 @@
         <ul class="nav-right-button pull-right list-unstyled">
 
             <li>
-                <a class="btn btn-primary">
+                <a href="{{route('emergency-create')}}" class="btn btn-primary">
                     Emergency &nbsp;&nbsp;<i class="fa fa-plus-circle"></i>
                 </a>
                 <a href="{{ route('blood-request-create') }}" class="btn btn-warning">

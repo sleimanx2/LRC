@@ -960,7 +960,8 @@ angular.module("app.form.map", [])
         function ($scope) {
 
             //Initializing Google map
-            $scope.marker = null;
+            $scope.location_marker = null;
+            $scope.destination_marker = null;
 
 
             function initialize() {
@@ -981,19 +982,52 @@ angular.module("app.form.map", [])
 
 
             function moveMap() {
-                // Setting up the marker
-                var position = new google.maps.LatLng($scope.form.latitude, $scope.form.longitude);
+                // Getting coordinates
+                var location_coordinates = new google.maps.LatLng($scope.form.location_latitude, $scope.form.location_longitude);
+                var destination_coordinates = new google.maps.LatLng($scope.form.destination_latitude, $scope.form.destination_longitude);
 
-                console.log($scope.formMap);
+                //Removing destination marker if available
+                if ($scope.destination_marker !== null) {
+                    $scope.destination_marker.setMap(null);
+                }
 
-                $scope.marker = new google.maps.Marker({
-                    position: position,
+                //Removing location marker if available
+                if ($scope.location_marker !== null) {
+                    $scope.location_marker.setMap(null);
+                }
+
+                // Setting up the location marker.
+                var location_pinColor = "E74C3C";
+                var location_pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + location_pinColor,
+                    new google.maps.Size(21, 34),
+                    new google.maps.Point(0,0),
+                    new google.maps.Point(10, 34));
+
+                $scope.location_marker = new google.maps.Marker({
+                    position: location_coordinates,
                     map: $scope.formMap,
-                    title: $scope.form.location
+                    title: $scope.form.location,
+                    icon:location_pinImage
+                });
+
+
+
+                // Setting up the location marker.
+                var destination_pinColor = "27AE60";
+                var destination_pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + destination_pinColor,
+                    new google.maps.Size(21, 34),
+                    new google.maps.Point(0,0),
+                    new google.maps.Point(10, 34));
+
+                $scope.destination_marker = new google.maps.Marker({
+                    position: destination_coordinates,
+                    map: $scope.formMap,
+                    title: $scope.form.destination,
+                    icon:destination_pinImage
                 });
 
                 // Moving the map to the marker
-                $scope.formMap.panTo(position);
+                $scope.formMap.panTo(location_coordinates);
                 $scope.formMap.setZoom(12);
 
             }
@@ -1004,37 +1038,59 @@ angular.module("app.form.map", [])
             $scope.form = {
 
                 location: $('#location').val(),
-                latitude: $('#latitude').val(),
-                longitude: $('#longitude').val()
+                location_latitude: $('#location_latitude').val(),
+                location_longitude: $('#location_longitude').val(),
+                destination: $('#destination').val(),
+                destination_latitude: $('#destination_latitude').val(),
+                destination_longitude: $('#destination_longitude').val()
             };
 
 
             return $scope.form;
         }
     ])
-    .directive('googlePlaces', function () {
+    .directive('googleLocation', function () {
         return {
             restrict: 'E',
             replace: true,
             scope: true,
-            template: '<input id="google_places_ac" name="google_places_ac" type="text" class="form-control" data-ng-model="form.location" data-ng-value="form.location" required/>',
+            template: '<input id="google_places_location" name="google_places_location" type="text" class="form-control" data-ng-model="form.location" data-ng-value="form.location" required/>',
             link: function ($scope, elm, attrs) {
 
-                var autocomplete = new google.maps.places.Autocomplete($("#google_places_ac")[0], {});
+                var autocomplete = new google.maps.places.Autocomplete($("#google_places_location")[0], {});
                 google.maps.event.addListener(autocomplete, 'place_changed', function () {
-
-                    //Removing markers if available
-                    if ($scope.marker !== null) {
-                        $scope.marker.setMap(null);
-                    }
-
 
                     // Getting place info from autocomplete
                     var place = autocomplete.getPlace();
 
                     $scope.form.location = place.formatted_address;
-                    $scope.form.latitude = place.geometry.location.lat();
-                    $scope.form.longitude = place.geometry.location.lng();
+                    $scope.form.location_latitude = place.geometry.location.lat();
+                    $scope.form.location_longitude = place.geometry.location.lng();
+
+                    $scope.$apply();
+                    $scope.moveMap();
+
+                });
+            }
+        }
+    })
+    .directive('googleDestination', function () {
+        return {
+            restrict: 'E',
+            replace: true,
+            scope: true,
+            template: '<input id="google_places_destination" placeholder="Enter a destination" name="google_places_destination" type="text" class="form-control" data-ng-model="form.destination" data-ng-value="form.destination" required/>',
+            link: function ($scope, elm, attrs) {
+
+                var autocomplete = new google.maps.places.Autocomplete($("#google_places_destination")[0], {});
+                google.maps.event.addListener(autocomplete, 'place_changed', function () {
+
+                    // Getting place info from autocomplete
+                    var place = autocomplete.getPlace();
+
+                    $scope.form.destination = place.formatted_address;
+                    $scope.form.destination_latitude = place.geometry.location.lat();
+                    $scope.form.destination_longitude = place.geometry.location.lng();
 
                     $scope.$apply();
                     $scope.moveMap();
@@ -1053,78 +1109,77 @@ angular.module("app.form.map", [])
 
 angular.module("app.ui.form.ctrls", [])
     .controller("TagsDemoCtrl", ["$scope",
-    function ($scope) {
-        $scope.tags = ["foo", "bar"];
-    }
-]).controller("DatepickerCtrl", ["$scope",
-    function ($scope) {
-        return $scope.today = function () {
-            if($('#datepicker').val() != undefined)
-            {
-                $scope.dt = $('#datepicker').val();
-            }
-            else{
-                $scope.dt = new Date();
-            }
+        function ($scope) {
+            $scope.tags = ["foo", "bar"];
+        }
+    ]).controller("DatepickerCtrl", ["$scope",
+        function ($scope) {
+            return $scope.today = function () {
+                if ($('#datepicker').val() != undefined) {
+                    $scope.dt = $('#datepicker').val();
+                }
+                else {
+                    $scope.dt = new Date();
+                }
 
-        }, $scope.today(), $scope.showWeeks = !0, $scope.toggleWeeks = function () {
-            $scope.showWeeks = !$scope.showWeeks;
-        }, $scope.clear = function () {
-            $scope.dt = null;
-        }, $scope.disabled = function (date, mode) {
-            return "day" === mode && (0 === date.getDay() || 6 === date.getDay());
-        }, $scope.toggleMin = function () {
-            var _ref;
-            $scope.minDate = null !== (_ref = $scope.minDate) ? _ref : {
-                "null": new Date()
+            }, $scope.today(), $scope.showWeeks = !0, $scope.toggleWeeks = function () {
+                $scope.showWeeks = !$scope.showWeeks;
+            }, $scope.clear = function () {
+                $scope.dt = null;
+            }, $scope.disabled = function (date, mode) {
+                return "day" === mode && (0 === date.getDay() || 6 === date.getDay());
+            }, $scope.toggleMin = function () {
+                var _ref;
+                $scope.minDate = null !== (_ref = $scope.minDate) ? _ref : {
+                    "null": new Date()
+                };
+            }, $scope.toggleMin(), $scope.open = function ($event) {
+                return $event.preventDefault(), $event.stopPropagation(), $scope.opened = !0;
+            }, $scope.dateOptions = {
+                "year-format": "'yy'",
+                "starting-day": 1
+            }, $scope.formats = ["dd-MMMM-yyyy", "yyyy/MM/dd", "shortDate"], $scope.format = $scope.formats[0];
+        }
+    ]).controller("TimepickerDemoCtrl", ["$scope",
+        function ($scope) {
+            return $scope.mytime = new Date(), $scope.hstep = 1, $scope.mstep = 15, $scope.options = {
+                hstep: [1, 2, 3],
+                mstep: [1, 5, 10, 15, 25, 30]
+            }, $scope.ismeridian = !0, $scope.toggleMode = function () {
+                $scope.ismeridian = !$scope.ismeridian;
+            }, $scope.update = function () {
+                var d;
+                return d = new Date(), d.setHours(14), d.setMinutes(0), $scope.mytime = d;
+            }, $scope.changed = function () {
+                return void 0;
+            }, $scope.clear = function () {
+                $scope.mytime = null;
             };
-        }, $scope.toggleMin(), $scope.open = function ($event) {
-            return $event.preventDefault(), $event.stopPropagation(), $scope.opened = !0;
-        }, $scope.dateOptions = {
-            "year-format": "'yy'",
-            "starting-day": 1
-        }, $scope.formats = ["dd-MMMM-yyyy", "yyyy/MM/dd", "shortDate"], $scope.format = $scope.formats[0];
-    }
-]).controller("TimepickerDemoCtrl", ["$scope",
-    function ($scope) {
-        return $scope.mytime = new Date(), $scope.hstep = 1, $scope.mstep = 15, $scope.options = {
-            hstep: [1, 2, 3],
-            mstep: [1, 5, 10, 15, 25, 30]
-        }, $scope.ismeridian = !0, $scope.toggleMode = function () {
-            $scope.ismeridian = !$scope.ismeridian;
-        }, $scope.update = function () {
-            var d;
-            return d = new Date(), d.setHours(14), d.setMinutes(0), $scope.mytime = d;
-        }, $scope.changed = function () {
-            return void 0;
-        }, $scope.clear = function () {
-            $scope.mytime = null;
-        };
-    }
-]).controller("TypeaheadCtrl", ["$scope",
-    function ($scope) {
-        return $scope.selected = void 0, $scope.states = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Dakota", "North Carolina", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"];
-    }
-]).controller("RatingDemoCtrl", ["$scope",
-    function ($scope) {
-        return $scope.rate = 7, $scope.max = 10, $scope.isReadonly = !1, $scope.hoveringOver = function (value) {
-            return $scope.overStar = value, $scope.percent = 100 * (value / $scope.max);
-        }, $scope.ratingStates = [{
-            stateOn: "glyphicon-ok-sign",
-            stateOff: "glyphicon-ok-circle"
-        }, {
-            stateOn: "glyphicon-star",
-            stateOff: "glyphicon-star-empty"
-        }, {
-            stateOn: "glyphicon-heart",
-            stateOff: "glyphicon-ban-circle"
-        }, {
-            stateOn: "glyphicon-heart"
-        }, {
-            stateOff: "glyphicon-off"
-        }];
-    }
-]);
+        }
+    ]).controller("TypeaheadCtrl", ["$scope",
+        function ($scope) {
+            return $scope.selected = void 0, $scope.states = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Dakota", "North Carolina", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"];
+        }
+    ]).controller("RatingDemoCtrl", ["$scope",
+        function ($scope) {
+            return $scope.rate = 7, $scope.max = 10, $scope.isReadonly = !1, $scope.hoveringOver = function (value) {
+                return $scope.overStar = value, $scope.percent = 100 * (value / $scope.max);
+            }, $scope.ratingStates = [{
+                stateOn: "glyphicon-ok-sign",
+                stateOff: "glyphicon-ok-circle"
+            }, {
+                stateOn: "glyphicon-star",
+                stateOff: "glyphicon-star-empty"
+            }, {
+                stateOn: "glyphicon-heart",
+                stateOff: "glyphicon-ban-circle"
+            }, {
+                stateOn: "glyphicon-heart"
+            }, {
+                stateOff: "glyphicon-off"
+            }];
+        }
+    ]);
 
 
 /*
@@ -1395,8 +1450,8 @@ angular.module("app.ui.ctrls", []).controller("NotifyCtrl", ["$scope", "loggit",
     function ($scope, $modal, $log) {
 
         $scope.data = {
-            userId:null,
-            userName:null
+            userId: null,
+            userName: null
         }
 
         $scope.openWontDonate = function (id) {
@@ -1435,8 +1490,8 @@ angular.module("app.ui.ctrls", []).controller("NotifyCtrl", ["$scope", "loggit",
     function ($scope, $modalInstance, data) {
 
         $scope.user = {
-            id:null,
-            name:null
+            id: null,
+            name: null
         }
 
         $scope.user.id = data.userId;
@@ -1449,8 +1504,8 @@ angular.module("app.ui.ctrls", []).controller("NotifyCtrl", ["$scope", "loggit",
     function ($scope, $modalInstance, data) {
 
         $scope.user = {
-            id:null,
-            name:null
+            id: null,
+            name: null
         }
         console.log(data.userId);
 
