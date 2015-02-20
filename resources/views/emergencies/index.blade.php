@@ -60,6 +60,11 @@
                             <td class="hidden-xs"> {{$emergency->destination}} </td>
                             <td class="hidden-xs"> {{$emergency->created_at}} </td>
                             <td>
+
+                                <a class="btn btn-info btn-xs" href="{{ route('emergency-manage',[$emergency->id]) }}"
+                                   popover="Manage" popover-trigger="mouseenter"><i
+                                            class="fa fa-cog "></i></a>
+
                                 <a class="btn btn-info btn-xs" href="{{ route('emergency-edit',[$emergency->id]) }}"
                                    popover="Edit" popover-trigger="mouseenter"><i
                                             class="fa fa-edit "></i></a>

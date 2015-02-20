@@ -1,0 +1,165 @@
+@extends('layouts.master')
+
+@section('content')
+    <div class="page ng-scope">
+        <div class="row">
+
+            {{--@if($bloodRequest->completed or $bloodRequest->note)--}}
+                {{--<div class="col-xs-12">--}}
+                    {{--<div class="panel panel-default">--}}
+
+                        {{--<div class="panel-body">--}}
+                            {{--@if($bloodRequest->completed)--}}
+                                {{--<div class="callout-elem callout-elem-success">--}}
+                                    {{--<h4><i class="fa fa-check"></i> This blood request was successfuly completed.</h4>--}}
+                                {{--</div>--}}
+                            {{--@endif--}}
+                            {{--@if($bloodRequest->note)--}}
+                                {{--<div class="callout-elem callout-elem-info">--}}
+                                    {{--<h4>Request Note</h4>--}}
+
+                                    {{--<p>{{$bloodRequest->note}}</p>--}}
+                                {{--</div>--}}
+                            {{--@endif--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--@endif--}}
+
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <strong><i class="fa fa-list panel-ico"></i>Emergency Info</strong>
+                        <span class="badge pull-right">Started: {{ $emergency->start_time }} </span>
+                    </div>
+                    <div class="panel-body">
+                        <div class="media">
+                            <div class="media-body">
+                                <ul class="list-unstyled list-info">
+                                    <li>
+                                        <span class="icon fa fa-heart-o"></span>
+                                        <label>Contact Name</label>
+                                         {{ $emergency->contact_name }}
+                                    </li>
+                                    <li>
+                                        <span class="icon fa fa-phone"></span>
+                                        <label>Contact Phone</label>
+                                        {{ $emergency->phone_primary  }}
+                                        /
+                                        {{$emergency->phone_secondary }}
+                                    </li>
+
+                                    <li>
+                                        <i class="icon fa fa-ambulance"></i>
+                                        <label>Ambulance</label>
+                                        {{ $emergency->ambulance->plate_number }}
+                                    </li>
+
+                                    <li>
+                                        <i class="icon fa fa-user-md"></i>
+                                        <label>Report Case</label>
+                                        Avp
+                                    </li>
+                                    <li>
+                                        <span class="icon fa fa-group"></span>
+                                        <label><strong>Team</strong></label>
+
+                                    </li>
+                                    <li>
+                                        <span class="icon fa fa-user"></span>
+                                        <label>Driver</label>
+                                        {{ $emergency->driver->full_name }}
+                                    </li>
+                                    <li>
+                                        <span class="icon fa fa-user"></span>
+                                        <label>Scout</label>
+                                        {{ $emergency->scout->full_name }}
+
+                                    </li>
+                                    <li>
+                                        <span class="icon fa fa-user"></span>
+                                        <label>Patient Aider</label>
+                                        {{ $emergency->patient_aider->full_name }}
+                                    </li>
+                                    <li>
+                                        <span class="icon fa fa-user"></span>
+                                        <label>Assistant</label>
+                                        {{ $emergency->assistant->full_name }}
+                                    </li>
+
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <strong><i class="fa fa-h-square panel-ico"></i>Emergency Route</strong>
+                    </div>
+                    <div class="panel-body">
+                        <div class="media">
+                            <div class="media-body">
+                                <ul class="list-unstyled list-info">
+                                    <li>
+                                        <span class="icon fa fa-location-arrow"></span>
+                                        <label>Location</label>
+                                        {{ $emergency->location }}
+                                    </li>
+                                    <li>
+                                        <span class="icon fa fa-hospital-o"></span>
+                                        <label>Destination</label>
+                                        {{ $emergency->destination or 'undefined' }}
+                                    </li>
+                                </ul>
+
+                                <map class="ui-map" zoom="11"
+                                     center="[{{$emergency->location_latitude}}, {{$emergency->location_longitude}}]"
+                                     scrollwheel="false">
+                                    <marker position="[{{$emergency->location_latitude}}, {{$emergency->location_longitude}}]"
+                                            animation="Animation.DROP" icon="http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|E74C3C"></marker>
+
+                                    @if($emergency->destination)
+                                    <marker position="[{{$emergency->destination_latitude}}, {{$emergency->destination_longitude}}]"
+                                            animation="Animation.DROP" icon="http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|27AE60"></marker>
+                                    @endif
+                                </map>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <strong><i class="fa fa-plus-square panel-ico"></i>Casualties</strong>
+                    </div>
+                    <div>
+                        <div class="modal-body">
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <strong><i class="fa fa-list panel-ico"></i>Blood Donors Suggestions</strong>
+                        </div>
+
+                        <div class="panel-body">
+
+
+                        </div>
+
+                    </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+@endsection

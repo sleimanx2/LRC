@@ -50,4 +50,13 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->roles()->lists('id');
     }
 
+    /**
+     * Return the full name attribute
+     * @return mixed
+     */
+    public function getFullNameAttribute()
+    {
+        return $this->first_name.' '.$this->last_name;
+    }
+
 }

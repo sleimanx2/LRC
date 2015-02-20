@@ -100,7 +100,7 @@ Route::group(['middleware' => 'auth'], function ()
     */
     Route::group(['prefix' => 'emergencies', 'namespace' => 'Emergencies'], function ()
     {
-        Route::get('emergencies', ['as' => 'emergencies-list', 'uses' => 'EmergenciesController@index']);
+        Route::get('/', ['as' => 'emergencies-list', 'uses' => 'EmergenciesController@index']);
 
         Route::get('emergencies/create', ['as' => 'emergency-create', 'uses' => 'EmergenciesController@create']);
 
@@ -111,6 +111,8 @@ Route::group(['middleware' => 'auth'], function ()
         Route::post('emergencies/update/{id}', ['as' => 'emergency-update', 'uses' => 'EmergenciesController@update']);
 
         Route::delete('emergencies/destroy/{id}', ['as' => 'emergency-destroy', 'uses' => 'EmergenciesController@destroy']);
+
+        Route::get('emergencies/manage/{id}', ['as' => 'emergency-manage', 'uses' => 'EmergenciesController@manage']);
 
     });
 

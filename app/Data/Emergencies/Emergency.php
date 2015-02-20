@@ -21,4 +21,49 @@ class Emergency extends Model {
      */
 
     protected $guarded = ['id','created_at','updated_at'];
+
+    /**
+     * Get the driver
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function driver()
+    {
+        return $this->belongsTo('LRC\Data\Users\User','driver_id');
+    }
+
+    /**
+     * Get the scout
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function scout()
+    {
+        return $this->belongsTo('LRC\Data\Users\User','scout_id');
+    }
+
+    /**
+     * Get the patient aider
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function patient_aider()
+    {
+        return $this->belongsTo('LRC\Data\Users\User','patient_aider_id');
+    }
+
+    /**
+     * Get the assistant
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function assistant()
+    {
+        return $this->belongsTo('LRC\Data\Users\User','assistant_id');
+    }
+
+    /**
+     * Get the assistant
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function ambulance()
+    {
+        return $this->belongsTo('LRC\Data\Emergencies\Ambulance','ambulance_id');
+    }
 }

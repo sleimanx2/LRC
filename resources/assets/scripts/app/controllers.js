@@ -1000,30 +1000,29 @@ angular.module("app.form.map", [])
                 var location_pinColor = "E74C3C";
                 var location_pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + location_pinColor,
                     new google.maps.Size(21, 34),
-                    new google.maps.Point(0,0),
+                    new google.maps.Point(0, 0),
                     new google.maps.Point(10, 34));
 
                 $scope.location_marker = new google.maps.Marker({
                     position: location_coordinates,
                     map: $scope.formMap,
                     title: $scope.form.location,
-                    icon:location_pinImage
+                    icon: location_pinImage
                 });
-
 
 
                 // Setting up the location marker.
                 var destination_pinColor = "27AE60";
                 var destination_pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + destination_pinColor,
                     new google.maps.Size(21, 34),
-                    new google.maps.Point(0,0),
+                    new google.maps.Point(0, 0),
                     new google.maps.Point(10, 34));
 
                 $scope.destination_marker = new google.maps.Marker({
                     position: destination_coordinates,
                     map: $scope.formMap,
                     title: $scope.form.destination,
-                    icon:destination_pinImage
+                    icon: destination_pinImage
                 });
 
                 // Moving the map to the marker

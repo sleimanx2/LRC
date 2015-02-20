@@ -94,6 +94,13 @@ class EmergenciesController extends Controller {
         return redirect()->intended(route('emergencies-list'))->with('success', 'An emergency was successfully deleted.');
     }
 
+    public function manage($id)
+    {
+        $emergency = $this->emergencyRepository->findOrFail($id);
+
+        return view('emergencies.manage',compact('emergency'));
+    }
+
 
     /**
      * @return mixed
