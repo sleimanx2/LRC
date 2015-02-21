@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateContactCategoriesTable extends Migration {
+class CreateCasualtiesTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,12 +12,14 @@ class CreateContactCategoriesTable extends Migration {
 	 */
 	public function up()
 	{
-        Schema::create('contact_categories', function(Blueprint $table)
+        Schema::create('casualties', function($table)
         {
             $table->increments('id');
-            $table->string('name');
-            $table->boolean('serves_blood');
-            $table->boolean('is_hospital');
+            $table->string('name', 100);
+
+            $table->integer('emergency_id')->unsigned()->index();
+            $table->foreign('emergency_id')->references('id')->on('emergencies')->onDelete('cascade');
+
             $table->timestamps();
         });
 	}
@@ -29,7 +31,7 @@ class CreateContactCategoriesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('contact_categories');
+		Schema::drop('casualties');
 	}
 
 }

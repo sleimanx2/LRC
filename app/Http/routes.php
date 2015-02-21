@@ -25,13 +25,13 @@ Route::group(['middleware' => 'auth'], function ()
 
     Route::get('users', ['as' => 'users-list', 'uses' => 'UsersController@index']);
 
-    Route::get('users/edit/{id}', ['as' => 'user-edit', 'uses' => 'UsersController@edit']);
+    Route::get('users/{id}/edit', ['as' => 'user-edit', 'uses' => 'UsersController@edit']);
 
-    Route::post('users/update/{id}', ['before' => 'csrf', 'as' => 'user-update', 'uses' => 'UsersController@update']);
+    Route::post('users/{id}/update', ['before' => 'csrf', 'as' => 'user-update', 'uses' => 'UsersController@update']);
 
-    Route::delete('users/destroy/{id}', ['before' => 'csrf', 'as' => 'user-destroy', 'uses' => 'UsersController@destroy']);
+    Route::delete('users/{id}/destroy', ['before' => 'csrf', 'as' => 'user-destroy', 'uses' => 'UsersController@destroy']);
 
-    Route::post('password/change/{id}', ['before' => 'csrf', 'as' => 'password-change', 'uses' => 'PasswordController@postChange']);
+    Route::post('password/{id}/change', ['before' => 'csrf', 'as' => 'password-change', 'uses' => 'PasswordController@postChange']);
 
 // Contacts
 
@@ -41,11 +41,11 @@ Route::group(['middleware' => 'auth'], function ()
 
     Route::post('contacts/store', ['as' => 'contact-store', 'uses' => 'ContactsController@store']);
 
-    Route::get('contacts/edit/{id}', ['as' => 'contact-edit', 'uses' => 'ContactsController@edit']);
+    Route::get('contacts/{id}/edit', ['as' => 'contact-edit', 'uses' => 'ContactsController@edit']);
 
-    Route::post('contacts/update/{id}', ['as' => 'contact-update', 'uses' => 'ContactsController@update']);
+    Route::post('contacts/{id}/update', ['as' => 'contact-update', 'uses' => 'ContactsController@update']);
 
-    Route::delete('contacts/destroy/{id}', ['as' => 'contact-destroy', 'uses' => 'ContactsController@destroy']);
+    Route::delete('contacts/{id}/destroy', ['as' => 'contact-destroy', 'uses' => 'ContactsController@destroy']);
 
     /*
      * BLOOD
@@ -60,11 +60,11 @@ Route::group(['middleware' => 'auth'], function ()
 
         Route::post('donors/store', ['as' => 'blood-donor-store', 'uses' => 'BloodDonorsController@store']);
 
-        Route::get('donors/edit/{id}', ['as' => 'blood-donor-edit', 'uses' => 'BloodDonorsController@edit']);
+        Route::get('donors/{id}/edit', ['as' => 'blood-donor-edit', 'uses' => 'BloodDonorsController@edit']);
 
-        Route::post('donors/update/{id}', ['as' => 'blood-donor-update', 'uses' => 'BloodDonorsController@update']);
+        Route::post('donors/{id}/update', ['as' => 'blood-donor-update', 'uses' => 'BloodDonorsController@update']);
 
-        Route::delete('donors/destroy/{id}', ['as' => 'blood-donor-destroy', 'uses' => 'BloodDonorsController@destroy']);
+        Route::delete('donors/{id}/destroy', ['as' => 'blood-donor-destroy', 'uses' => 'BloodDonorsController@destroy']);
 
 
         // Blood Requests
@@ -75,15 +75,15 @@ Route::group(['middleware' => 'auth'], function ()
 
         Route::post('requests/store', ['as' => 'blood-request-store', 'uses' => 'BloodRequestsController@store']);
 
-        Route::get('requests/edit/{id}', ['as' => 'blood-request-edit', 'uses' => 'BloodRequestsController@edit']);
+        Route::get('requests/{id}/edit', ['as' => 'blood-request-edit', 'uses' => 'BloodRequestsController@edit']);
 
-        Route::post('requests/update/{id}', ['as' => 'blood-request-update', 'uses' => 'BloodRequestsController@update']);
+        Route::post('requests/{id}/update', ['as' => 'blood-request-update', 'uses' => 'BloodRequestsController@update']);
 
-        Route::delete('requests/destroy/{id}', ['as' => 'blood-request-destroy', 'uses' => 'BloodRequestsController@destroy']);
+        Route::delete('requests/{id}/destroy', ['as' => 'blood-request-destroy', 'uses' => 'BloodRequestsController@destroy']);
 
-        Route::get('requests/rescue/{id}', ['as' => 'blood-request-rescue', 'uses' => 'BloodRequestsController@rescue']);
+        Route::get('requests/{id}/rescue', ['as' => 'blood-request-rescue', 'uses' => 'BloodRequestsController@rescue']);
 
-        Route::post('requests/complete/{id}', ['as' => 'blood-request-set-completed', 'uses' => 'BloodRequestsController@setComplete']);
+        Route::post('requests/{id}/complete', ['as' => 'blood-request-set-completed', 'uses' => 'BloodRequestsController@setComplete']);
 
 
         // Blood Donations
@@ -102,17 +102,21 @@ Route::group(['middleware' => 'auth'], function ()
     {
         Route::get('/', ['as' => 'emergencies-list', 'uses' => 'EmergenciesController@index']);
 
-        Route::get('emergencies/create', ['as' => 'emergency-create', 'uses' => 'EmergenciesController@create']);
+        Route::get('create', ['as' => 'emergency-create', 'uses' => 'EmergenciesController@create']);
 
-        Route::post('emergencies/store', ['as' => 'emergency-store', 'uses' => 'EmergenciesController@store']);
+        Route::post('store', ['as' => 'emergency-store', 'uses' => 'EmergenciesController@store']);
 
-        Route::get('emergencies/edit/{id}', ['as' => 'emergency-edit', 'uses' => 'EmergenciesController@edit']);
+        Route::get('{id}/edit', ['as' => 'emergency-edit', 'uses' => 'EmergenciesController@edit']);
 
-        Route::post('emergencies/update/{id}', ['as' => 'emergency-update', 'uses' => 'EmergenciesController@update']);
+        Route::post('{id}/update', ['as' => 'emergency-update', 'uses' => 'EmergenciesController@update']);
 
-        Route::delete('emergencies/destroy/{id}', ['as' => 'emergency-destroy', 'uses' => 'EmergenciesController@destroy']);
+        Route::delete('{id}/destroy', ['as' => 'emergency-destroy', 'uses' => 'EmergenciesController@destroy']);
 
-        Route::get('emergencies/manage/{id}', ['as' => 'emergency-manage', 'uses' => 'EmergenciesController@manage']);
+        Route::get('{id}/manage', ['as' => 'emergency-manage', 'uses' => 'EmergenciesController@manage']);
+
+        Route::post('{id}/casualties/store', ['as' => 'emergency-casualty-store', 'uses' => 'CasualtiesController@store']);
+
+        Route::post('casualties/{id}/update', ['as' => 'emergency-casualty-update', 'uses' => 'CasualtiesController@update']);
 
     });
 

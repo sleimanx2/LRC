@@ -9,14 +9,14 @@ class ContactCategoryTableSeeder extends Seeder {
         // Delete Table
         DB::table('contact_categories')->delete();
 
-        ContactCategory::create(['name' => 'Hospitals', 'serves_blood' => true]);
-        ContactCategory::create(['name' => 'Blood Banks', 'serves_blood' => true]);
-        ContactCategory::create(['name' => 'Insurances', 'serves_blood' => false]);
-        ContactCategory::create(['name' => 'Radio Stations', 'serves_blood' => false]);
-        ContactCategory::create(['name' => 'DC', 'serves_blood' => false]);
-        ContactCategory::create(['name' => 'Fire Fighters', 'serves_blood' => false]);
-        ContactCategory::create(['name' => 'Services', 'serves_blood' => false]);
-        ContactCategory::create(['name' => 'Misc', 'serves_blood' => false]);
+        ContactCategory::create(['name' => 'Hospitals', 'serves_blood' => true,'is_hospital'=>true]);
+        ContactCategory::create(['name' => 'Blood Banks', 'serves_blood' => true,'is_hospital'=>false]);
+        ContactCategory::create(['name' => 'Insurances', 'serves_blood' => false,'is_hospital'=>false]);
+        ContactCategory::create(['name' => 'Radio Stations', 'serves_blood' => false,'is_hospital'=>false]);
+        ContactCategory::create(['name' => 'DC', 'serves_blood' => false,'is_hospital'=>false]);
+        ContactCategory::create(['name' => 'Fire Fighters', 'serves_blood' => false,'is_hospital'=>false]);
+        ContactCategory::create(['name' => 'Services', 'serves_blood' => false,'is_hospital'=>false]);
+        ContactCategory::create(['name' => 'Misc', 'serves_blood' => false,'is_hospital'=>false]);
     }
 
 }

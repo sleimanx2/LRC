@@ -1,5 +1,6 @@
 <?php namespace LRC\Http\Controllers\Emergencies;
 
+use LRC\Data\Contacts\ContactRepository;
 use LRC\Data\Emergencies\EmergencyRepository;
 use LRC\Data\Users\UserRepository;
 use LRC\Http\Requests;
@@ -18,15 +19,21 @@ class EmergenciesController extends Controller {
      * @var UserRepository
      */
     private $userRepository;
+    /**
+     * @var ContactRepository
+     */
+    private $contactRepository;
 
     /**
      * @param EmergencyRepository $emergencyRepository
      * @param UserRepository $userRepository
+     * @param ContactRepository $contactRepository
      */
-    function __construct(EmergencyRepository $emergencyRepository, UserRepository $userRepository)
+    function __construct(EmergencyRepository $emergencyRepository, UserRepository $userRepository,ContactRepository $contactRepository)
     {
         $this->emergencyRepository = $emergencyRepository;
         $this->userRepository      = $userRepository;
+        $this->contactRepository = $contactRepository;
     }
 
     public function index()
@@ -98,7 +105,9 @@ class EmergenciesController extends Controller {
     {
         $emergency = $this->emergencyRepository->findOrFail($id);
 
-        return view('emergencies.manage',compact('emergency'));
+        $contacts = $this->contactRepository->findBestMatch(['latitude'=>$emergency->latitude,'longitude'=>$emergency->longitude]);
+
+        return view('emergencies.manage',compact('emergency','contacts'));
     }
 
 

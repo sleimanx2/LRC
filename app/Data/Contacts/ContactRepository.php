@@ -80,6 +80,26 @@ class ContactRepository {
         return $list;
     }
 
+    public function findBestMatch(array $options = ['latitude' => null, 'logitude' => null, 'blood_type_id' => null, 'limit' => 25])
+    {
+
+        $contacts = $this->contact
+            ->select('*', DB::raw('
+            ( 6371 * acos( cos( radians(' . $options['latitude'] . ') ) * cos( radians(latitude) ) * cos( radians(longitude) - radians(' . $options['longitude'] . ')) + sin( radians(' . $options['latitude'] . ') ) * sin( radians(latitude) ) )) AS distance
+            '))
+            ->whereHas('category',function($q){
+
+                $q->where('is_hospital','=',1);
+
+            })
+            ->orderBy('distance')
+            ->limit($options['limit'])
+            ->get();
+
+        return $contacts;
+
+    }
+
 
     /**
      * Search for contact by name and category id / Paginated

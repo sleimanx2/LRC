@@ -5,25 +5,25 @@
         <div class="row">
 
             {{--@if($bloodRequest->completed or $bloodRequest->note)--}}
-                {{--<div class="col-xs-12">--}}
-                    {{--<div class="panel panel-default">--}}
+            {{--<div class="col-xs-12">--}}
+            {{--<div class="panel panel-default">--}}
 
-                        {{--<div class="panel-body">--}}
-                            {{--@if($bloodRequest->completed)--}}
-                                {{--<div class="callout-elem callout-elem-success">--}}
-                                    {{--<h4><i class="fa fa-check"></i> This blood request was successfuly completed.</h4>--}}
-                                {{--</div>--}}
-                            {{--@endif--}}
-                            {{--@if($bloodRequest->note)--}}
-                                {{--<div class="callout-elem callout-elem-info">--}}
-                                    {{--<h4>Request Note</h4>--}}
+            {{--<div class="panel-body">--}}
+            {{--@if($bloodRequest->completed)--}}
+            {{--<div class="callout-elem callout-elem-success">--}}
+            {{--<h4><i class="fa fa-check"></i> This blood request was successfuly completed.</h4>--}}
+            {{--</div>--}}
+            {{--@endif--}}
+            {{--@if($bloodRequest->note)--}}
+            {{--<div class="callout-elem callout-elem-info">--}}
+            {{--<h4>Request Note</h4>--}}
 
-                                    {{--<p>{{$bloodRequest->note}}</p>--}}
-                                {{--</div>--}}
-                            {{--@endif--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
+            {{--<p>{{$bloodRequest->note}}</p>--}}
+            {{--</div>--}}
+            {{--@endif--}}
+            {{--</div>--}}
+            {{--</div>--}}
+            {{--</div>--}}
             {{--@endif--}}
 
             <div class="col-md-6">
@@ -39,7 +39,7 @@
                                     <li>
                                         <span class="icon fa fa-heart-o"></span>
                                         <label>Contact Name</label>
-                                         {{ $emergency->contact_name }}
+                                        {{ $emergency->contact_name }}
                                     </li>
                                     <li>
                                         <span class="icon fa fa-phone"></span>
@@ -117,11 +117,13 @@
                                      center="[{{$emergency->location_latitude}}, {{$emergency->location_longitude}}]"
                                      scrollwheel="false">
                                     <marker position="[{{$emergency->location_latitude}}, {{$emergency->location_longitude}}]"
-                                            animation="Animation.DROP" icon="http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|E74C3C"></marker>
+                                            animation="Animation.DROP"
+                                            icon="http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|E74C3C"></marker>
 
                                     @if($emergency->destination)
-                                    <marker position="[{{$emergency->destination_latitude}}, {{$emergency->destination_longitude}}]"
-                                            animation="Animation.DROP" icon="http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|27AE60"></marker>
+                                        <marker position="[{{$emergency->destination_latitude}}, {{$emergency->destination_longitude}}]"
+                                                animation="Animation.DROP"
+                                                icon="http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|27AE60"></marker>
                                     @endif
                                 </map>
 
@@ -137,24 +139,76 @@
                     </div>
                     <div>
                         <div class="modal-body">
+                            @if (count($errors) > 0)
+                                <div class="alert alert-danger">
+                                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            {!! Form::open(['route' => ['emergency-casualty-store',$emergency->id]]) !!}
+                            @include('forms.casualties')
+                            {!! Form::close() !!}
+                            <hr/>
+                            <accordion close-others="oneAtATime" class="ui-accordion ui-accordion-info">
 
+                                @foreach($emergency->casualties as $casualty )
+                                    <accordion-group>
+                                        <accordion-heading>
 
+                                            <span class="text-small">{{ $casualty->name }}</span>
+
+                                    <span class="pull-right">
+
+                                        <i popover="Edit" popover-trigger="mouseenter" class="fa fa-angle-down"></i>
+
+                                    </span>
+                                        </accordion-heading>
+                                        {!! Form::model($casualty,['route' =>
+                                        ['emergency-casualty-update',$casualty->id]]) !!}
+                                        @include('forms.casualties')
+                                        {!! Form::close() !!}
+                                    </accordion-group>
+                                @endforeach
+                            </accordion>
                         </div>
                     </div>
                 </div>
 
 
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <strong><i class="fa fa-list panel-ico"></i>Blood Donors Suggestions</strong>
-                        </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <strong><i class="fa fa-list panel-ico"></i>Nearest Hospital</strong>
+                    </div>
 
-                        <div class="panel-body">
+                    <div class="panel-body">
+                        <accordion close-others="oneAtATime" class="ui-accordion ui-accordion-info">
 
+                            @foreach($contacts as $contact )
+                                <accordion-group>
+                                    <accordion-heading>
+                                        <span class="text-small">{{ $contact->name }}</span>
+                                    <span class="pull-right">
 
-                        </div>
+                                        {{ $contact->phone_primary }}
+
+                                    </span>
+                                    </accordion-heading>
+                                    {!! Form::model($casualty,['route' => ['emergency-casualty-update',$casualty->id]])
+                                    !!}
+                                    @include('forms.casualties')
+                                    {!! Form::close() !!}
+
+                                </accordion-group>
+                            @endforeach
+                        </accordion>
 
                     </div>
+
+                </div>
 
 
             </div>

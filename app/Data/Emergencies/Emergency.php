@@ -66,4 +66,9 @@ class Emergency extends Model {
     {
         return $this->belongsTo('LRC\Data\Emergencies\Ambulance','ambulance_id');
     }
+
+    public function casualties()
+    {
+        return $this->hasMany('LRC\Data\Emergencies\Casualty');
+    }
 }
