@@ -57,7 +57,7 @@
                             <td>{{$emergency->report_category->name or ""}}</td>
                             <td>{{$emergency->casualties_count or "0"}}
                                 <a href="#">
-                                    <i popover="@foreach($emergency->casualties as $casualty) {{ $casualty->name }} @endforeach" popover-trigger="mouseenter" class="fa fa-group"></i>
+                                    <i popover="@foreach($emergency->casualties as $casualty) {{ $casualty->name }} @endforeach" popover-trigger="mouseenter" class="fa fa-heart-o"></i>
                                 </a>
                             </td>
                             <td class="hidden-xs"> {{$emergency->location}} </td>

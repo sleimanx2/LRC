@@ -52,6 +52,7 @@
 </div>
     <hr/>
     <div class="form-group">
+        <label for="">Roles</label>
         {!! Form::select('roles_ids[]', $roles, old('roles_ids'), array('multiple')) !!}
     </div>
 <hr/>
