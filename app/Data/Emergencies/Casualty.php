@@ -19,5 +19,4 @@ class Casualty extends Model {
 
     protected $guarded = ['id'];
 
-
 }

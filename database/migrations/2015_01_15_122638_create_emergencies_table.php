@@ -43,6 +43,8 @@ class CreateEmergenciesTable extends Migration {
             $table->integer('patient_aider_id');
             $table->integer('assistant_id');
 
+            //Casualties
+            $table->integer('casualties_count');
 
             // Timing
             $table->dateTime('start_time');

@@ -14,24 +14,24 @@
                             </a>
                         </div>
                         <div class="col-sm-7">
-                            <form class="form-inline ng-pristine ng-valid" role="form" method="GET"
-                                  action="{{ route('emergencies-list') }}">
+                            {{--<form class="form-inline ng-pristine ng-valid" role="form" method="GET"--}}
+                                  {{--action="{{ route('emergencies-list') }}">--}}
 
-                                <div class="form-group">
-                                    <input type="text" name="search" value="{{ Request::get('search') }}"
-                                           placeholder="Search emergencies"
-                                           class="form-control ng-pristine ng-valid">
-                                </div>
-                                <div class="form-group">
+                                {{--<div class="form-group">--}}
+                                    {{--<input type="text" name="search" value="{{ Request::get('search') }}"--}}
+                                           {{--placeholder="Search emergencies"--}}
+                                           {{--class="form-control ng-pristine ng-valid">--}}
+                                {{--</div>--}}
+                                {{--<div class="form-group">--}}
                                     {{--{!! Form::select('category', ['All','Categorised'=>$categories] ,--}}
                                     {{--Request::get('category') , ['class' => 'form-control']) !!}--}}
-                                </div>
-                                <div class="form-group">
-                                <span>
-                                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                                </span>
-                                </div>
-                            </form>
+                                {{--</div>--}}
+                                {{--<div class="form-group">--}}
+                                {{--<span>--}}
+                                    {{--<button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>--}}
+                                {{--</span>--}}
+                                {{--</div>--}}
+                            {{--</form>--}}
                         </div>
                     </div>
                 </div>
@@ -43,8 +43,8 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th>Patient Name</th>
-                        <th>Case</th>
+                        <th>Report Category</th>
+                        <th>Casualties </th>
                         <th class="hidden-xs">Location</th>
                         <th>Destination</th>
                         <th>Date</th>
@@ -54,8 +54,12 @@
                     <tbody>
                     @foreach($emergencies as $emergency)
                         <tr>
-                            <td>{{$emergency->patient_name}}</td>
-                            <td>{{$emergency->case_id}}</td>
+                            <td>{{$emergency->report_category->name or ""}}</td>
+                            <td>{{$emergency->casualties_count or "0"}}
+                                <a href="#">
+                                    <i popover="@foreach($emergency->casualties as $casualty) {{ $casualty->name }} @endforeach" popover-trigger="mouseenter" class="fa fa-group"></i>
+                                </a>
+                            </td>
                             <td class="hidden-xs"> {{$emergency->location}} </td>
                             <td class="hidden-xs"> {{$emergency->destination}} </td>
                             <td class="hidden-xs"> {{$emergency->created_at}} </td>

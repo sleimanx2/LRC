@@ -29,17 +29,16 @@ class EmergenciesController extends Controller {
      * @param UserRepository $userRepository
      * @param ContactRepository $contactRepository
      */
-    function __construct(EmergencyRepository $emergencyRepository, UserRepository $userRepository,ContactRepository $contactRepository)
+    function __construct(EmergencyRepository $emergencyRepository, UserRepository $userRepository, ContactRepository $contactRepository)
     {
         $this->emergencyRepository = $emergencyRepository;
         $this->userRepository      = $userRepository;
-        $this->contactRepository = $contactRepository;
+        $this->contactRepository   = $contactRepository;
     }
 
     public function index()
     {
         $emergencies = $this->emergencyRepository->getPaginated(20);
-
 
         return view('emergencies.index', ['emergencies' => $emergencies]);
     }
@@ -72,20 +71,21 @@ class EmergenciesController extends Controller {
     public function edit($id)
     {
         $emergency = $this->emergencyRepository->findOrFail($id);
+
         $data = $this->getFormData();
 
-        return view('emergencies.edit', compact('data','emergency'));
+        return view('emergencies.edit', compact('data', 'emergency'));
     }
 
     /**
      * @param SaveEmergencyRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update($id,SaveEmergencyRequest $request)
+    public function update($id, SaveEmergencyRequest $request)
     {
         $emergency = $this->emergencyRepository->findOrFail($id);
 
-        $this->emergencyRepository->update($request->all(),$emergency);
+        $this->emergencyRepository->update($request->all(), $emergency);
 
         return redirect()->intended(route('emergencies-list'))->with('success', 'A new emergency was added successfully.');
     }
@@ -105,9 +105,9 @@ class EmergenciesController extends Controller {
     {
         $emergency = $this->emergencyRepository->findOrFail($id);
 
-        $contacts = $this->contactRepository->findBestMatch(['latitude'=>$emergency->latitude,'longitude'=>$emergency->longitude]);
+        $contacts = $this->contactRepository->findBestMatch(['latitude' => $emergency->location_latitude, 'longitude' => $emergency->location_longitude, 'limit' => 10]);
 
-        return view('emergencies.manage',compact('emergency','contacts'));
+        return view('emergencies.manage', compact('emergency', 'contacts'));
     }
 
 
@@ -119,12 +119,10 @@ class EmergenciesController extends Controller {
         $data['report_categories'] = $this->emergencyRepository->getReportCategoriesList();
 
         $data['ambulances'] = $this->emergencyRepository->getAmbulanceList();
-
-        $data['drivers'] = $this->userRepository->getDriversList();
-
-        $data['seniors'] = $this->userRepository->getSeniorsList();
-
-        $data['allUsers'] = $this->userRepository->getAllList();
+        
+        $data['drivers']  = ['not_found' => 'Select a first aider'] + $this->userRepository->getDriversList();
+        $data['seniors']  = ['not_found' => 'Select a first aider'] + $this->userRepository->getSeniorsList();
+        $data['allUsers'] = ['not_found' => 'Select a first aider'] + $this->userRepository->getAllList();
 
         return $data;
     }

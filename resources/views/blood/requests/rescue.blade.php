@@ -321,7 +321,7 @@
 
                                     <span class="pull-right">
                                         <span class="badge badge-distance" popover="Distance"
-                                              popover-trigger="mouseenter">~{{ round($bloodDonor->distance) }} KM</span>
+                                              popover-trigger="mouseenter">{{Html::distance($bloodDonor->distance)}}</span>
                                         <span class="badge">{{ Html::age($bloodDonor->birthday) }}
                                             Years </span>
 

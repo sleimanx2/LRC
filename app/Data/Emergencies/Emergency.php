@@ -67,8 +67,31 @@ class Emergency extends Model {
         return $this->belongsTo('LRC\Data\Emergencies\Ambulance','ambulance_id');
     }
 
+    /**
+     * Get the emergency casualties
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function casualties()
     {
         return $this->hasMany('LRC\Data\Emergencies\Casualty');
     }
+
+    /**
+     * Get the casualties count
+     * @return mixed
+     */
+    public function casualties_count()
+    {
+        return $this->hasMany('LRC\Data\Emergencies\Casualty')->count();
+    }
+
+    public function report_category()
+    {
+        return $this->belongsTo('LRC\Data\Emergencies\ReportCategory');
+    }
+
+
+
+
+
 }

@@ -1,6 +1,7 @@
 <?php namespace LRC\Http\Controllers\Emergencies;
 
 use LRC\Data\Emergencies\CasualtiesRepository;
+use LRC\Data\Emergencies\EmergencyRepository;
 use LRC\Http\Requests;
 use LRC\Http\Controllers\Controller;
 
@@ -12,13 +13,19 @@ class CasualtiesController extends Controller {
      * @var CasualtiesRepository
      */
     private $casualtiesRepository;
+    /**
+     * @var EmergencyRepository
+     */
+    private $emergencyRepository;
 
     /**
      * @param CasualtiesRepository $casualtiesRepository
+     * @param EmergencyRepository $emergencyRepository
      */
-    function __construct(CasualtiesRepository $casualtiesRepository)
+    function __construct(CasualtiesRepository $casualtiesRepository,EmergencyRepository $emergencyRepository)
     {
         $this->casualtiesRepository = $casualtiesRepository;
+        $this->emergencyRepository = $emergencyRepository;
     }
 
 
@@ -37,6 +44,8 @@ class CasualtiesController extends Controller {
 
 
         $this->casualtiesRepository->store($request->all());
+
+        $this->emergencyRepository->updateCasualtiesStatistics($request->input('emergency_id'));
 
         return redirect()->back()->with('success','A casualty was successfully added.');
 	}

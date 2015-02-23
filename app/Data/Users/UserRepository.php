@@ -67,7 +67,7 @@ class UserRepository {
      */
     public function rolesList()
     {
-        return $this->role->all()->lists('name','id');
+        return $this->role->all()->lists('name', 'id');
     }
 
     /**
@@ -82,17 +82,25 @@ class UserRepository {
 
     public function getDriversList()
     {
-        return $this->user->select('*', DB::raw('CONCAT(first_name, " ", last_Name) AS full_name'))->where('id','3')->lists('full_name','id');
+        return $this->user->select('*', DB::raw('CONCAT(first_name," ", last_Name) AS user_full_name'))->whereHas('roles', function ($q)
+        {
+            $q->where('id', '=', 3);
+
+        })->lists('user_full_name', 'id');
     }
 
     public function getSeniorsList()
     {
-        return $this->user->select('*', DB::raw('CONCAT(first_name, " ", last_Name) AS full_name'))->where('id','5')->lists('full_name','id');
+        return $this->user->select('*', DB::raw('CONCAT(first_name, " ", last_Name) AS user_full_name'))->whereHas('roles', function ($q)
+        {
+            $q->where('id', '=', 5);
+
+        })->lists('user_full_name', 'id');
     }
 
     public function getAllList()
     {
-        return $this->user->select('*', DB::raw('CONCAT(first_name, " ", last_Name) AS full_name'))->lists('full_name','id');
+        return $this->user->select('*', DB::raw('CONCAT(first_name, " ", last_Name) AS user_full_name'))->lists('user_full_name', 'id');
     }
 
 }

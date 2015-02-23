@@ -44,7 +44,7 @@ class EmergencyRepository {
      */
     public function getPaginated($limit = 25)
     {
-        return $this->emergency->paginate($limit);
+        return $this->emergency->with(['report_category', 'casualties'])->orderBy('created_at', 'desc')->paginate($limit);
     }
 
     /**
@@ -71,21 +71,42 @@ class EmergencyRepository {
      */
     public function store($data)
     {
-        return $this->emergency->create([
-            'contact_name'          => $data['contact_name'],
-            'phone_primary'         => $data['phone_primary'],
-            'phone_secondary'       => $data['phone_secondary'],
-            'location'              => $data['location'],
-            'location_latitude'     => $data['location_latitude'],
-            'location_longitude'    => $data['location_longitude'],
-            'destination'           => $data['destination'],
-            'destination_latitude'  => $data['destination_latitude'],
-            'destination_longitude' => $data['destination_longitude'],
-            'note'                  => $data['note']
-        ]);
+        $attributes = $this->fillAttributes($data);
+
+        return $this->emergency->create($attributes);
     }
 
     public function update($data, Emergency $emergency)
+    {
+        $attributes = $this->fillAttributes($data);
+
+        $emergency->fill($attributes);
+
+        return $emergency->save();
+    }
+
+
+    public function updateCasualtiesStatistics($id)
+    {
+        $emergency = $this->findOrFail($id);
+
+        $casualties_count = $emergency->casualties_count();
+
+        $emergency['casualties_count'] = $casualties_count;
+
+        return $emergency->save();
+    }
+
+    public function destroy($id)
+    {
+        return $this->emergency->destroy($id);
+    }
+
+    /**
+     * @param $data
+     * @return array
+     */
+    private function fillAttributes($data)
     {
         $attributes = [
             'contact_name'          => $data['contact_name'],
@@ -97,18 +118,15 @@ class EmergencyRepository {
             'destination'           => $data['destination'],
             'destination_latitude'  => $data['destination_latitude'],
             'destination_longitude' => $data['destination_longitude'],
-            'note'                  => $data['note']
+            'note'                  => $data['note'],
+            'ambulance_id'          => $data['ambulance_id'],
+            'report_category_id'    => $data['report_category_id'],
+            'driver_id'              => $data['driver_id'],
+            'scout_id'              => $data['scout_id'],
+            'patient_aider_id'      => $data['patient_aider_id'],
+            'assistant_id'          => $data['assistant_id']
         ];
-
-        $emergency->fill($attributes);
-
-        return $emergency->save();
+        return $attributes;
     }
-
-    public function destroy($id)
-    {
-        return $this->emergency->destroy($id);
-    }
-
 
 }

@@ -24,6 +24,7 @@
     <div class="row">
         <div class="col-md-6">
             <label for="">Driver</label>
+
             {!! Form::select('driver_id',$data['drivers'],
             old('driver_id')) !!}
         </div>
@@ -38,7 +39,6 @@
 <div class="form-group">
     <div class="row">
         <div class="col-md-6">
-            <label for="">Driver</label>
             <label for="">Patient Aider</label>
             {!! Form::select('patient_aider_id',$data['seniors'],
             old('patient_aider_id')) !!}

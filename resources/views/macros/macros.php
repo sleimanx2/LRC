@@ -23,3 +23,11 @@ Html::macro('gender', function($gender)
 
 });
 
+
+Html::macro('distance', function($distance)
+{
+
+    return '~'.round($distance).'KM';
+
+});
+

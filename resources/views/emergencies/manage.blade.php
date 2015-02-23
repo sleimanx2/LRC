@@ -131,11 +131,19 @@
                         </div>
                     </div>
                 </div>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <a href="{{ route('emergency-edit',[$emergency->id]) }}" class="btn btn-info">Edit</a>
+                    </div>
+                </div>
             </div>
             <div class="col-md-6">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <strong><i class="fa fa-plus-square panel-ico"></i>Casualties</strong>
+                        <strong>
+                            <span class="badge badge-primary" popover="Casualties Number" popover-trigger="mouseenter"> {{$emergency->casualties_count}}</span>
+                            Casualties
+                        </strong>
                     </div>
                     <div>
                         <div class="modal-body">
@@ -150,7 +158,7 @@
                                 </div>
                             @endif
                             {!! Form::open(['route' => ['emergency-casualty-store',$emergency->id]]) !!}
-                            @include('forms.casualties')
+                                @include('forms.casualties')
                             {!! Form::close() !!}
                             <hr/>
                             <accordion close-others="oneAtATime" class="ui-accordion ui-accordion-info">
@@ -181,7 +189,7 @@
 
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <strong><i class="fa fa-list panel-ico"></i>Nearest Hospital</strong>
+                        <strong><i class="fa fa-hospital-o panel-ico"></i>Nearest Hospitals</strong>
                     </div>
 
                     <div class="panel-body">
@@ -192,15 +200,19 @@
                                     <accordion-heading>
                                         <span class="text-small">{{ $contact->name }}</span>
                                     <span class="pull-right">
-
-                                        {{ $contact->phone_primary }}
-
+                                    <span class="badge badge-distance" popover="Distance"
+                                          popover-trigger="mouseenter">{{Html::distance($contact->distance)}}</span>
                                     </span>
                                     </accordion-heading>
-                                    {!! Form::model($casualty,['route' => ['emergency-casualty-update',$casualty->id]])
-                                    !!}
-                                    @include('forms.casualties')
-                                    {!! Form::close() !!}
+                                    <ul class="list-unstyled list-infolist-unstyled list-info">
+                                        <li>
+                                            <span class="icon fa fa-phone"></span>
+                                            <label>Phone</label>
+                                            {{ $contact->phone_primary  or 'Not defined' }}
+                                            /
+                                            {{ $contact->phone_secondary  or '' }}
+                                        </li>
+                                    </ul>
 
                                 </accordion-group>
                             @endforeach
