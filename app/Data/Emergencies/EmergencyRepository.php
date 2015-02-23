@@ -102,6 +102,15 @@ class EmergencyRepository {
         return $this->emergency->destroy($id);
     }
 
+
+    public function getTodayReport()
+    {
+        $this->emergency->select('report_category_id', DB::raw('count(*) as total'))
+            ->groupBy('report_category_id')
+            ->where('')
+            ->get();
+    }
+
     /**
      * @param $data
      * @return array

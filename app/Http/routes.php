@@ -12,8 +12,6 @@
 
 Route::get('/', 'WelcomeController@index');
 
-Route::get('home', 'HomeController@index');
-
 Route::controllers([
     'auth'     => 'Auth\AuthController',
     'password' => 'Auth\PasswordController',
@@ -21,6 +19,9 @@ Route::controllers([
 
 Route::group(['middleware' => 'auth'], function ()
 {
+
+    Route::get('/home', ['as' => 'home-dashboard', 'uses' => 'HomeController@dashboard']);
+
     // Users
 
     Route::get('users', ['as' => 'users-list', 'uses' => 'UsersController@index']);
@@ -33,7 +34,7 @@ Route::group(['middleware' => 'auth'], function ()
 
     Route::post('password/{id}/change', ['before' => 'csrf', 'as' => 'password-change', 'uses' => 'PasswordController@postChange']);
 
-// Contacts
+    // Contacts
 
     Route::get('contacts', ['as' => 'contacts-list', 'uses' => 'ContactsController@index']);
 

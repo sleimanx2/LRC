@@ -10,6 +10,9 @@
         data-ng-controller="NavCtrl"
         data-slim-scroll
         data-collapse-nav>
+        <li  class="nav-group">
+            <a id='home-dashboard' href="{{route('home-dashboard')}}"> <i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
+        </li>
         <li class="nav-group">
             <a href="users"> <i class="fa fa-users"></i> <span>Users</span></a>
             <ul>

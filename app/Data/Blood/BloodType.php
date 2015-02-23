@@ -13,4 +13,9 @@ class BloodType extends Model {
      */
     protected $table = 'blood_types';
 
+    public function blood_donors_count()
+    {
+        return $this->hasMany('LRC\Data\Blood\BloodDonor')->count();
+    }
+
 }

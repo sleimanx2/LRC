@@ -1,5 +1,8 @@
 <?php namespace LRC\Http\Controllers;
 
+use LRC\Data\Blood\BloodDonorRepository;
+use LRC\Data\Blood\BloodTypeRepository;
+
 class HomeController extends Controller {
 
 	/*
@@ -12,25 +15,37 @@ class HomeController extends Controller {
 	| controller as you wish. It is just here to get your app started!
 	|
 	*/
+    /**
+     * @var BloodTypeRepository
+     */
+    private $bloodTypeRepository;
+    /**
+     * @var BloodDonorRepository
+     */
+    private $bloodDonorRepository;
 
-	/**
-	 * Create a new controller instance.
-	 *
-	 * @return void
-	 */
-	public function __construct()
+    /**
+     * Create a new controller instance.
+     * @param BloodTypeRepository $bloodTypeRepository
+     * @param BloodDonorRepository $bloodDonorRepository
+     */
+
+	public function __construct(BloodTypeRepository $bloodTypeRepository,BloodDonorRepository $bloodDonorRepository)
 	{
-		$this->middleware('auth');
-	}
+        $this->bloodTypeRepository = $bloodTypeRepository;
+        $this->bloodDonorRepository = $bloodDonorRepository;
+    }
 
 	/**
 	 * Show the application dashboard to the user.
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function dashboard()
 	{
-		return view('home');
+        $bloodTypes = $this->bloodTypeRepository->getAll();
+        $totalBloodDonors = $this->bloodDonorRepository->getTotal();
+		return view('home',compact('bloodTypes','totalBloodDonors'));
 	}
 
 }

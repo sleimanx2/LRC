@@ -26,4 +26,10 @@ class BloodTypeRepository {
         return $this->bloodType->all()->lists('name', 'id');
     }
 
+    public function getAll()
+    {
+        return $this->bloodType->all();
+    }
+
+
 }

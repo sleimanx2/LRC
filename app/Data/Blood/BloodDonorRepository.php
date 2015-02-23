@@ -162,4 +162,10 @@ class BloodDonorRepository {
     }
 
 
+    public function getTotal()
+    {
+        return $this->bloodDonor->all()->count();
+    }
+
+
 }

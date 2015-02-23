@@ -59,9 +59,9 @@ class EmergenciesController extends Controller {
      */
     public function store(SaveEmergencyRequest $request)
     {
-        $this->emergencyRepository->store($request->all());
+        $emergency = $this->emergencyRepository->store($request->all());
 
-        return redirect()->intended(route('emergencies-list'))->with('success', 'A new emergency was added successfully.');
+        return redirect()->intended(route('emergency-manage',$emergency->id))->with('success', 'A new emergency was added successfully.');
     }
 
     /**
@@ -87,7 +87,7 @@ class EmergenciesController extends Controller {
 
         $this->emergencyRepository->update($request->all(), $emergency);
 
-        return redirect()->intended(route('emergencies-list'))->with('success', 'A new emergency was added successfully.');
+        return redirect()->intended(route('emergency-manage',$emergency->id))->with('success', 'A new emergency was added successfully.');
     }
 
     /**
