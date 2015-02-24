@@ -28,7 +28,7 @@
                 @yield('content')
             </div>
         </div>
-    
+
         <!--Uncomment for deployment using Grunt-->
         <script type="text/javascript" src="/dist/app.min.js"></script>
 
