@@ -12,6 +12,18 @@ class UserTableSeeder extends Seeder {
 
         $faker = Faker::create();
 
+        User::create(array(
+            'first_name'      => 'Super',
+            'last_name'       => 'User',
+            'email'           => 'admin@lrc.com',
+            'password'        => Hash::make(123456),
+            'phone_primary'   => $faker->phoneNumber,
+            'phone_secondary' => $faker->phoneNumber,
+            'location'        => $faker->address,
+            'latitude'        => $faker->latitude,
+            'longitude'       => $faker->longitude,
+        ));
+
         if ( app()->environment() == 'local' )
         {
             for ($i = 0; $i < 40; $i ++)
