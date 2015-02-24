@@ -68,20 +68,5 @@
         </section>
     </div>
 </div>
-<div class="page-loading-overlay">
-    <div class="loader-2"></div>
-</div>
-
-<div class="load_circle_wrapper">
-
-    <div class="loading_spinner">
-        <div id="wrap_spinner">
-            <div class="loading outer">
-                <div class="loading inner"></div>
-            </div>
-        </div>
-    </div>
-</div>
-
 </body>
 </html>
