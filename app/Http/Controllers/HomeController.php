@@ -1,7 +1,10 @@
 <?php namespace LRC\Http\Controllers;
 
 use LRC\Data\Blood\BloodDonorRepository;
+use LRC\Data\Blood\BloodRequest;
+use LRC\Data\Blood\BloodRequestRepository;
 use LRC\Data\Blood\BloodTypeRepository;
+use LRC\Data\Emergencies\EmergencyRepository;
 
 class HomeController extends Controller {
 
@@ -23,17 +26,29 @@ class HomeController extends Controller {
      * @var BloodDonorRepository
      */
     private $bloodDonorRepository;
+    /**
+     * @var EmergencyRepository
+     */
+    private $emergencyRepository;
+    /**
+     * @var BloodRequestRepository
+     */
+    private $bloodRequestRepository;
 
     /**
      * Create a new controller instance.
      * @param BloodTypeRepository $bloodTypeRepository
      * @param BloodDonorRepository $bloodDonorRepository
+     * @param EmergencyRepository $emergencyRepository
+     * @param BloodRequestRepository $bloodRequestRepository
      */
 
-	public function __construct(BloodTypeRepository $bloodTypeRepository,BloodDonorRepository $bloodDonorRepository)
+	public function __construct(BloodTypeRepository $bloodTypeRepository,BloodDonorRepository $bloodDonorRepository,EmergencyRepository $emergencyRepository,BloodRequestRepository $bloodRequestRepository)
 	{
         $this->bloodTypeRepository = $bloodTypeRepository;
         $this->bloodDonorRepository = $bloodDonorRepository;
+        $this->emergencyRepository = $emergencyRepository;
+        $this->bloodRequestRepository = $bloodRequestRepository;
     }
 
 	/**
@@ -45,7 +60,10 @@ class HomeController extends Controller {
 	{
         $bloodTypes = $this->bloodTypeRepository->getAll();
         $totalBloodDonors = $this->bloodDonorRepository->getTotal();
-		return view('home',compact('bloodTypes','totalBloodDonors'));
+        $emergencyReports = $this->emergencyRepository->getTodayReport();
+        $remainingBloodRequests = $this->bloodRequestRepository->findRemaining();
+
+		return view('home',compact('bloodTypes','totalBloodDonors','emergencyReports','remainingBloodRequests'));
 	}
 
 }

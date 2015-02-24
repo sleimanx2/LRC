@@ -130,6 +130,10 @@ class BloodRequestRepository {
 
     }
 
+    public function findRemaining(){
+        return $this->bloodRequest->where('completed','=',0)->orderBy('due_date')->get();
+    }
+
     public function destroy($id)
     {
         return $this->bloodRequest->destroy($id);

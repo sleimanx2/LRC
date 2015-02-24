@@ -4,6 +4,9 @@
 namespace LRC\Data\Emergencies;
 
 
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+
 class EmergencyRepository {
 
     /**
@@ -105,9 +108,9 @@ class EmergencyRepository {
 
     public function getTodayReport()
     {
-        $this->emergency->select('report_category_id', DB::raw('count(*) as total'))
+        return $this->emergency->select('report_category_id', DB::raw('count(*) as total'))
             ->groupBy('report_category_id')
-            ->where('')
+            ->whereBetween('created_at',[Carbon::today(),Carbon::tomorrow()])
             ->get();
     }
 
