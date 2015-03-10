@@ -80,6 +80,10 @@ class UserRepository {
         return $this->user->findOrFail($id);
     }
 
+    /**
+     * Get all drivers in a list
+     * @return mixed
+     */
     public function getDriversList()
     {
         return $this->user->select('*', DB::raw('CONCAT(first_name," ", last_Name) AS user_full_name'))->whereHas('roles', function ($q)
@@ -89,6 +93,11 @@ class UserRepository {
         })->lists('user_full_name', 'id');
     }
 
+
+    /**
+     * Get all Seniors (Overalls) in a list
+     * @return mixed
+     */
     public function getSeniorsList()
     {
         return $this->user->select('*', DB::raw('CONCAT(first_name, " ", last_Name) AS user_full_name'))->whereHas('roles', function ($q)
@@ -98,6 +107,10 @@ class UserRepository {
         })->lists('user_full_name', 'id');
     }
 
+    /**
+     * Get all users in a list
+     * @return mixed
+     */
     public function getAllList()
     {
         return $this->user->select('*', DB::raw('CONCAT(first_name, " ", last_Name) AS user_full_name'))->lists('user_full_name', 'id');

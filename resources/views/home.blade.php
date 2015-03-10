@@ -51,7 +51,6 @@
                                 </p>
                             </div>
                             <br>
-
                         @endforeach
                     @else
                         <p> You don't have any remaining blood request. Good Job.</p>
