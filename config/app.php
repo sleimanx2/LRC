@@ -1,5 +1,4 @@
 <?php
-
 return [
 
     /*
@@ -78,7 +77,7 @@ return [
     |
     */
 
-    'key'             => env('APP_KEY', 'YourSecretKey!!!'),
+    'key'             => env('APP_KEY', 'CtagUgiQqvW-X9weSm^p5VY6nZJbEf0S'),
 
     'cipher'          => MCRYPT_RIJNDAEL_128,
 

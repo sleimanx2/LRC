@@ -131,7 +131,7 @@ class BloodRequestRepository {
     }
 
     public function findRemaining(){
-        return $this->bloodRequest->where('completed','=',0)->orderBy('due_date')->get();
+        return $this->bloodRequest->with('blood_type')->where('completed','=',0)->orderBy('due_date')->get();
     }
 
     public function destroy($id)

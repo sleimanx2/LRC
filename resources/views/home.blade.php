@@ -17,11 +17,12 @@
                         <div>
                             <p class="text-muted medium">
                                 <span class="badge">{{$bloodDonorsCount}}</span> {{$bloodType->name}}
-                                <span class="pull-right">{{ ($bloodDonorsCount / $totalBloodDonors)*100}}
+
+                                <span class="pull-right">{{ @($bloodDonorsCount / $totalBloodDonors)*100}}
                                     %</span>
                             </p>
                             <progressbar class="progressbar-xs no-margin"
-                                         value="{{ ($bloodDonorsCount / $totalBloodDonors)*100}}"
+                                         value="{{ @($bloodDonorsCount / $totalBloodDonors)*100}}"
                                          type="warning"></progressbar>
                         </div>
                         <br>
