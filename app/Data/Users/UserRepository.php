@@ -88,7 +88,7 @@ class UserRepository {
     {
         return $this->user->select('*', DB::raw('CONCAT(first_name," ", last_Name) AS user_full_name'))->whereHas('roles', function ($q)
         {
-            $q->where('id', '=', 3);
+            $q->where('name', '=', 'Ambulance Driver');
 
         })->lists('user_full_name', 'id');
     }
@@ -102,7 +102,7 @@ class UserRepository {
     {
         return $this->user->select('*', DB::raw('CONCAT(first_name, " ", last_Name) AS user_full_name'))->whereHas('roles', function ($q)
         {
-            $q->where('id', '=', 5);
+            $q->where('name', '=', 'Senior First Aider');
 
         })->lists('user_full_name', 'id');
     }
