@@ -12,7 +12,10 @@ class AddConfirmedToBloodRequests extends Migration {
 	 */
 	public function up()
 	{
-		//
+        Schema::table('blood_requests', function($table)
+        {
+            $table->boolean('confirmed')->default(0);
+        });
 	}
 
 	/**
@@ -22,7 +25,10 @@ class AddConfirmedToBloodRequests extends Migration {
 	 */
 	public function down()
 	{
-		//
+        Schema::table('blood_requests', function($table)
+        {
+            $table->dropColumn('confirmed');
+        });
 	}
 
 }

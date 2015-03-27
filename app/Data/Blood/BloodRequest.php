@@ -77,4 +77,9 @@ class BloodRequest extends Model {
         return $this->hasMany('LRC\Data\Blood\BloodDonation','blood_request_id')->where('blood',1)->count();
     }
 
+    public function unconfirmed_blood_donations_count()
+    {
+        return $this->hasMany('LRC\Data\Blood\BloodDonation','blood_request_id')->where('confirmed','!=',1)->count();
+    }
+
 }

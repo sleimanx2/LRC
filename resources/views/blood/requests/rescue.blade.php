@@ -31,6 +31,7 @@
                     <div class="panel-heading">
                         <strong><i class="fa fa-list panel-ico"></i>Blood Request Info</strong>
                         <span class="badge {{$bloodRequest->due_date == date('Y-m-d',time()) ? 'badge-warning' : ''}} {{$bloodRequest->due_date < date('Y-m-d',time()) ? 'badge-danger' : 'badge-success'}} pull-right">Due: {{ $bloodRequest->due_date }} </span>
+
                     </div>
                     <div class="panel-body">
                         <div class="media">
@@ -81,6 +82,33 @@
                                         <label>Blame: </label>
                                         {{ $bloodRequest->user->first_name or 'Not defined' }}
                                         .{{ $bloodRequest->user->last_name or 'Not defined' }}
+                                    </li>
+                                    <li>
+                                        <label for="">Completed</label>
+                                        @if(  $bloodRequest->completed )
+                                            <span popover="Confirmed" popover-trigger="mouseenter"
+                                                  class="badge badge-success">
+                                                 <i class="fa fa-check"></i>
+                                            </span>
+                                        @else
+                                            <span popover="Not Confirmed" popover-placement="left" popover-trigger="mouseenter"
+                                                  class="badge badge-warning">
+                                                 <i class="fa fa-times"></i>
+                                            </span>
+                                        @endif
+                                         |
+                                        <span>All donors confirmed</span>
+                                        @if(  $bloodRequest->confirmed )
+                                            <span popover="Confirmed" popover-trigger="mouseenter"
+                                                  class="badge badge-success">
+                                                 <i class="fa fa-check"></i>
+                                            </span>
+                                        @else
+                                            <span popover="Not Confirmed" popover-placement="left" popover-trigger="mouseenter"
+                                                  class="badge badge-warning">
+                                                 <i class="fa fa-times"></i>
+                                            </span>
+                                        @endif
                                     </li>
                                 </ul>
 

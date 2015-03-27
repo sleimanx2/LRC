@@ -11,7 +11,7 @@ use LRC\Data\Blood\BloodDonorRepository;
 use LRC\Data\Blood\BloodRequestRepository;
 use LRC\Http\Controllers\Controller;
 
-class BloodDonationsController extends Controller{
+class BloodDonationsController extends Controller {
 
     protected $bloodDonorRepository;
     protected $bloodDonationRepository;
@@ -25,11 +25,11 @@ class BloodDonationsController extends Controller{
      * @param BloodDonorRepository $bloodDonorRepository
      * @param BloodRequestRepository $bloodRequestRepository
      */
-    function __construct(BloodDonationRepository $bloodDonationRepository, BloodDonorRepository $bloodDonorRepository,BloodRequestRepository $bloodRequestRepository )
+    function __construct(BloodDonationRepository $bloodDonationRepository, BloodDonorRepository $bloodDonorRepository, BloodRequestRepository $bloodRequestRepository)
     {
         $this->bloodDonorRepository    = $bloodDonorRepository;
         $this->bloodDonationRepository = $bloodDonationRepository;
-        $this->bloodRequestRepository = $bloodRequestRepository;
+        $this->bloodRequestRepository  = $bloodRequestRepository;
     }
 
 
@@ -88,7 +88,7 @@ class BloodDonationsController extends Controller{
 
         $this->bloodDonorRepository->postponeDuty($data['delay'], $bloodDonor);
 
-        $this->bloodDonationRepository->destroyRelatedDonation($bloodDonor->id , $bloodRequest->id);
+        $this->bloodDonationRepository->destroyRelatedDonation($bloodDonor->id, $bloodRequest->id);
 
         $this->bloodRequestRepository->updateBloodStatistics($bloodRequest);
 
@@ -100,12 +100,15 @@ class BloodDonationsController extends Controller{
     public function confirm($id)
     {
         $bloodDonation = $this->bloodDonationRepository->findOrFail($id);
-
         $this->bloodDonationRepository->confirm($bloodDonation);
+
+        // Updating blood request stats
+        $bloodRequest = $this->bloodRequestRepository->findOrFail($bloodDonation->blood_request_id);
+        $this->bloodRequestRepository->updateBloodStatistics($bloodRequest);
+
 
         return redirect()->back()->with('success', $bloodDonation->donor->first_name . ' ' . $bloodDonation->donor->last_name . ' successfully his donation ');
     }
-
 
 
 }

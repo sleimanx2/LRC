@@ -38,6 +38,11 @@ class BloodRequestRepository {
 
     }
 
+    /**
+     * @param $query
+     * @param int $limit
+     * @return mixed
+     */
     public function searchPaginated($query, $limit = 25)
     {
         $query = str_replace(" ", "%", '%' . $query . '%');
@@ -51,6 +56,10 @@ class BloodRequestRepository {
         return $bloodRequests;
     }
 
+    /**
+     * @param $data
+     * @return static
+     */
     public function store($data)
     {
         $attributes = [
@@ -72,6 +81,10 @@ class BloodRequestRepository {
         return $this->bloodRequest->create($attributes);
     }
 
+    /**
+     * @param $data
+     * @param BloodRequest $bloodRequest
+     */
     public function update($data, BloodRequest $bloodRequest)
     {
         $attributes = [
@@ -97,6 +110,10 @@ class BloodRequestRepository {
 
     }
 
+    /**
+     * @param $data
+     * @param BloodRequest $bloodRequest
+     */
     public function setComplete($data, BloodRequest $bloodRequest)
     {
         $attributes = [
@@ -112,28 +129,55 @@ class BloodRequestRepository {
 
     }
 
+    /**
+     * @param BloodRequest $bloodRequest
+     */
     public function updateBloodStatistics(BloodRequest $bloodRequest)
     {
-        $confirmedBlood     = $bloodRequest->blood_donations_count();
-        $confirmedPlatelets = $bloodRequest->platelets_donations_count();
+        $blood_count     = $bloodRequest->blood_donations_count();
+        $platelets_count = $bloodRequest->platelets_donations_count();
+        $unconfirmedDonation = $bloodRequest->unconfirmed_blood_donations_count();
 
+        $bloodRequest['confirmed']                    = 0;
         $bloodRequest['completed']                    = 0;
-        $bloodRequest['blood_quantity_confirmed']     = $confirmedBlood;
-        $bloodRequest['platelets_quantity_confirmed'] = $confirmedPlatelets;
+        $bloodRequest['blood_quantity_confirmed']     = $blood_count;
+        $bloodRequest['platelets_quantity_confirmed'] = $platelets_count;
 
-        if ( $bloodRequest['blood_quantity'] <= $confirmedBlood and $bloodRequest['platelets_quantity'] <= $confirmedPlatelets )
+        if ( $bloodRequest['blood_quantity'] <= $blood_count and $bloodRequest['platelets_quantity'] <= $platelets_count )
         {
             $bloodRequest['completed'] = 1;
+        }
+
+        if ( ! $unconfirmedDonation )
+        {
+            $bloodRequest['confirmed'] = 1;
         }
 
         $bloodRequest->save();
 
     }
 
-    public function findRemaining(){
-        return $this->bloodRequest->with('blood_type')->where('completed','=',0)->orderBy('due_date')->get();
+    /**
+     * @return mixed
+     */
+    public function findRemaining()
+    {
+        return $this->bloodRequest->with('blood_type')->where('completed', '=', 0)->orderBy('due_date')->get();
     }
 
+    /**
+     * It gets all the blood requests that are completed but not confirmed.
+     * @return mixed
+     */
+    public function findRemainingForConfirmation()
+    {
+        return $this->bloodRequest->with('blood_type')->where('completed', '=', 1)->where('confirmed','!=',1)->orderBy('due_date')->get();
+    }
+
+    /**
+     * @param $id
+     * @return int
+     */
     public function destroy($id)
     {
         return $this->bloodRequest->destroy($id);

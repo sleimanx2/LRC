@@ -56,6 +56,35 @@
                     @else
                         <p> You don't have any remaining blood request. Good Job.</p>
                     @endif
+
+                    <h4>
+                        Remaining Unconfirmed Blood Request
+                    </h4>
+
+                    @if(! $remainingUnconfirmedBloodRequests->isEmpty())
+                        @foreach($remainingUnconfirmedBloodRequests as $remainingBloodRequest)
+                            <div>
+                                <p class="text-muted medium">
+                                    {{$remainingBloodRequest->patient_name}}
+                                    <span class="pull-right">
+                                        <span class="badge">{{$remainingBloodRequest->blood_type->name}}</span>
+                                     <a class="btn btn-bordered-warning btn-xs"
+                                        href="{{ route('blood-request-rescue',[$remainingBloodRequest->id]) }}"
+                                        popover="Rescue"
+                                        popover-trigger="mouseenter">
+
+                                         <i class="fa fa-life-ring"></i>
+
+                                     </a>
+                                    </span>
+                                </p>
+                            </div>
+                            <br>
+                        @endforeach
+                    @else
+                        <p> You don't have any remaining unconfirmed blood request. Good Job.</p>
+                    @endif
+
                 </div>
                 <div class="col-lg-4 col-xsm-6 panel-body">
                     <h4>
