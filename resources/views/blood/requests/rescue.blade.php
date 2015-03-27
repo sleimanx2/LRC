@@ -222,6 +222,18 @@
                                     <input name="will_donate_on" type="radio" value="{{strtotime('+2 day')}}"><span> After tomorrow</span>
                                 </label>
                             </span>
+                            <div>
+                                <div class="panel-body" data-ng-controller="TimepickerCtrl">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div ng-model="mytime" ng-change="changed()" style="display:inline-block;">
+                                                <timepicker class="ui-timepicker" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
+                                            </div>
+                                            <input name="time" type="hidden" data-ng-model="mytime" value="[[mytime | date:'shortTime']]">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                         <h4>Donation Type</h4>
                             <span class="list-unstyled">
@@ -274,7 +286,10 @@
                                                class="fa fa-heart color-danger"></i>
                                         @endif
 
-                                        <span popover="Donation Date" popover-trigger="mouseenter" class="badge">{{ $bloodDonation->will_donate_on}}
+                                        <span popover="Donation Date" popover-trigger="mouseenter" class="badge">
+                                            {{ $bloodDonation->will_donate_on}}
+                                            |
+                                            {{ $bloodDonation->time}}
                                                  </span>
 
                                     </span>

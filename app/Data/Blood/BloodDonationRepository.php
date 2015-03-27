@@ -45,6 +45,7 @@ class BloodDonationRepository {
             'blood'            => $blood,
             'platelets'        => $platelets,
             'will_donate_on'   => date('Y-m-d', $data['will_donate_on']),
+            'time'             => $data['time']
         ];
 
         return $this->bloodDonation->create($data);

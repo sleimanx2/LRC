@@ -47,6 +47,7 @@ class BloodDonationsController extends Controller{
             'donation_type'    => 'required',
         ]);
 
+
         $data = $request->all();
 
         $data['user_id'] = Auth::user()->id;

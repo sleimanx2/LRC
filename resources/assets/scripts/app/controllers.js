@@ -212,7 +212,7 @@ angular.module("app.ui.form.ctrls", [])
                 "starting-day": 1
             }, $scope.formats = ["dd-MMMM-yyyy", "yyyy/MM/dd", "shortDate"], $scope.format = $scope.formats[0];
         }
-    ]).controller("TimepickerDemoCtrl", ["$scope",
+    ]).controller("TimepickerCtrl", ["$scope",
         function ($scope) {
             return $scope.mytime = new Date(), $scope.hstep = 1, $scope.mstep = 15, $scope.options = {
                 hstep: [1, 2, 3],
