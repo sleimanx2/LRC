@@ -166,6 +166,18 @@
                                            value="{{strtotime('+1 day')}}"><span> Tomorrow</span>
                                 </label>
                                 <label class="ui-radio">
+                                    <input name="delay" checked="checked" type="radio"
+                                           value="{{strtotime('+2 weeks')}}"><span> 2 Weeks</span>
+                                </label>
+                                 <label class="ui-radio">
+                                     <input name="delay" checked="checked" type="radio"
+                                            value="{{strtotime('+3 weeks')}}"><span> 3 Weeks</span>
+                                 </label>
+                                  <label class="ui-radio">
+                                      <input name="delay" checked="checked" type="radio"
+                                             value="{{strtotime('+1 month')}}"><span> 1 Month</span>
+                                  </label>
+                                <label class="ui-radio">
                                     <input name="delay" type="radio"
                                            value="{{strtotime('+3 months')}}"><span> 3 Months</span>
                                 </label>
