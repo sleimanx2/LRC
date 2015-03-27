@@ -60,7 +60,6 @@
                     <h4>
                         Remaining Unconfirmed Blood Request
                     </h4>
-
                     @if(! $remainingUnconfirmedBloodRequests->isEmpty())
                         @foreach($remainingUnconfirmedBloodRequests as $remainingBloodRequest)
                             <div>
