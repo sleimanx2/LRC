@@ -97,4 +97,15 @@ class BloodDonationsController extends Controller{
     }
 
 
+    public function confirm($id)
+    {
+        $bloodDonation = $this->bloodDonationRepository->findOrFail($id);
+
+        $this->bloodDonationRepository->confirm($bloodDonation);
+
+        return redirect()->back()->with('success', $bloodDonation->donor->first_name . ' ' . $bloodDonation->donor->last_name . ' successfully his donation ');
+    }
+
+
+
 }

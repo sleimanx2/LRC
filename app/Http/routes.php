@@ -93,6 +93,8 @@ Route::group(['middleware' => 'auth'], function ()
 
         Route::post('donation/wontDonate', ['as' => 'blood-donor-wont-donate', 'uses' => 'BloodDonationsController@wontDonate']);
 
+        Route::post('donation/{id}/confirm', ['as' => 'blood-donation-confirmed', 'uses' => 'BloodDonationsController@confirm']);
+
     });
 
 

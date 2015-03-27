@@ -21,6 +21,15 @@ class BloodDonationRepository {
     }
 
     /**
+     * @param $id
+     * @return mixed
+     */
+    public function findOrFail($id)
+    {
+        return $this->bloodDonation->with('donor')->findOrFail($id);
+    }
+
+    /**
      * Create a new blood donation
      * @param array $data
      * @return static
@@ -50,6 +59,18 @@ class BloodDonationRepository {
 
         return $this->bloodDonation->create($data);
     }
+
+    /**
+     * It confirms a blood donation
+     * @param BloodDonation $bloodDonation
+     * @return bool
+     */
+    public function confirm(BloodDonation $bloodDonation)
+    {
+        $bloodDonation->confirmed = 1;
+        return $bloodDonation->save();
+    }
+
 
     /**
      * It destroy all the donation of a donor for a blood request

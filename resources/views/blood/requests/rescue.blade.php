@@ -222,18 +222,21 @@
                                     <input name="will_donate_on" type="radio" value="{{strtotime('+2 day')}}"><span> After tomorrow</span>
                                 </label>
                             </span>
-                            <div>
-                                <div class="panel-body" data-ng-controller="TimepickerCtrl">
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <div ng-model="mytime" ng-change="changed()" style="display:inline-block;">
-                                                <timepicker class="ui-timepicker" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
-                                            </div>
-                                            <input name="time" type="hidden" data-ng-model="mytime" value="[[mytime | date:'shortTime']]">
+
+                        <div>
+                            <div class="panel-body" data-ng-controller="TimepickerCtrl">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div ng-model="mytime" ng-change="changed()" style="display:inline-block;">
+                                            <timepicker class="ui-timepicker" hour-step="hstep" minute-step="mstep"
+                                                        show-meridian="ismeridian"></timepicker>
                                         </div>
+                                        <input name="time" type="hidden" data-ng-model="mytime"
+                                               value="[[mytime | date:'shortTime']]">
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
                         <h4>Donation Type</h4>
                             <span class="list-unstyled">
@@ -291,6 +294,17 @@
                                             |
                                             {{ $bloodDonation->time}}
                                                  </span>
+                                        @if(  $bloodDonation->confirmed )
+                                            <span popover="Confirmed" popover-trigger="mouseenter"
+                                                  class="badge badge-success">
+                                                 <i class="fa fa-check"></i>
+                                            </span>
+                                            @else
+                                                <span popover="Not Confirmed" popover-trigger="mouseenter"
+                                                      class="badge badge-warning">
+                                                 <i class="fa fa-times"></i>
+                                            </span>
+                                        @endif
 
                                     </span>
                                         </accordion-heading>
@@ -311,10 +325,29 @@
                                                 {{ $bloodDonation->user->last_name or ''}}
                                             </li>
                                             <li>
+                                                @if( ! $bloodDonation->confirmed )
+                                                    {!!Form::open([
+                                                    'route'=>['blood-donation-confirmed',$bloodDonation->id],
+                                                    'style'=>'display:inline',
+                                                    'onsubmit'=>'return confirm("Are you sure you want to confirm
+                                                    '.$bloodDonation->user->first_name.' donation ?");'
+                                                    ]) !!}
+
+                                                    <button type="submit" class="btn btn-success"
+                                                            popover="Confirm"
+                                                            popover-trigger="mouseenter">
+                                                        Confirm
+                                                    </button>
+
+                                                    {!!Form::close()!!}
+                                                @endif
+
                                                 <button ng-click="openWontDonate({{ $bloodDonation->donor->id }})"
                                                         class="btn btn-bordered-danger">
                                                     Can't Donate
                                                 </button>
+
+
                                             </li>
                                         </ul>
                                     </accordion-group>
