@@ -210,6 +210,10 @@
                         <input type="hidden" name="blood_request_id" value="{{$bloodRequest->id}}"/>
 
                             <span class="list-unstyled">
+                                  <label class="ui-radio">
+                                      <input name="will_donate_on" checked="checked" type="radio"
+                                             value="{{strtotime('+0 day')}}"><span> Today</span>
+                                  </label>
                                 <label class="ui-radio">
                                     <input name="will_donate_on" checked="checked" type="radio"
                                            value="{{strtotime('+1 day')}}"><span> Tomorrow</span>
