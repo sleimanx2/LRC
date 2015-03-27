@@ -126,7 +126,8 @@ class BloodDonorRepository {
             'latitude'        => $data['latitude'],
             'longitude'       => $data['longitude'],
             'gender'          => $data['gender'],
-            'birthday'        => $data['birthday']
+            'birthday'        => $data['birthday'],
+            'incapable_till'  => $data['incapable_till'],
         ];
 
         if ( $bloodDonor->email != $data['email'] )
@@ -140,10 +141,10 @@ class BloodDonorRepository {
 
     }
 
-    public function postponeDuty($unixTime , BloodDonor $donor)
+    public function postponeDuty($unixTime, BloodDonor $donor)
     {
         $attributes = [
-            'incapable_till' => date('Y-m-d',$unixTime)
+            'incapable_till' => date('Y-m-d', $unixTime)
         ];
 
         $donor->fill($attributes);

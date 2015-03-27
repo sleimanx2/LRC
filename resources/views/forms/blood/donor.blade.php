@@ -68,6 +68,27 @@
         <div class="ui-map" id="map-canvas"></div>
     </div>
 <hr/>
+<div class="form-group" data-ng-controller="DonateDatepickerCtrl">
+    <label for="">Can't Donate before</label>
+    <small>Make sure you know what you are doing.</small>
+
+    <div class="input-group ui-datepicker">
+        {!! Form::text('incapable_till', old('incapable_till'), [
+        'class' => 'form-control',
+        'id'=>'donordatepicker',
+        'datepicker-popup'=>'yyyy-M-dd',
+        'ng-model'=>'dt',
+        'ng-value'=> old('incapable_till'),
+        'is-open'=>'opened',
+        'datepicker-options'=>'dateOptions',
+        'date-disabled'=>'disabled(date, mode)',
+        'ng-required'=>'true',
+        'close-text'=>'Close',
+        ]) !!}
+
+        <span class="input-group-addon" ng-click="open($event)"><i class="fa fa-calendar"></i></span>
+    </div>
+</div>
 <button type="submit" class="btn btn-success">
     Save
 </button>
