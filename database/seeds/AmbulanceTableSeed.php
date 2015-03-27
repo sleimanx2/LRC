@@ -14,9 +14,15 @@ class AmbulanceTableSeeder extends Seeder {
         {
             DB::table('ambulances')->insert(array(
 
-                array('plate_number' => '224', 'brand' => 'BMW', 'year' => 2001),
-                array('plate_number' => '225', 'brand' => 'Renault', 'year' => 1999),
-                array('plate_number' => '226', 'brand' => 'Nissan', 'year' => 2001),
+                array('plate_number' => '211', 'brand' => 'BMW', 'year' => 2001),
+                array('plate_number' => '224', 'brand' => 'Renault', 'year' => 1999),
+                array('plate_number' => '256', 'brand' => 'Nissan', 'year' => 2001),
+                array('plate_number' => '284', 'brand' => 'BMW', 'year' => 2001),
+                array('plate_number' => '285', 'brand' => 'Renault', 'year' => 1999),
+                array('plate_number' => '286', 'brand' => 'Nissan', 'year' => 2001),
+                array('plate_number' => '287', 'brand' => 'BMW', 'year' => 2001),
+                array('plate_number' => '288', 'brand' => 'Renault', 'year' => 1999),
+
             ));
         }
     }
