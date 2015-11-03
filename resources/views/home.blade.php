@@ -55,6 +55,7 @@
                         @endforeach
                     @else
                         <p> You don't have any remaining blood request. Good Job.</p>
+                        <br>
                     @endif
 
                     <h4>
