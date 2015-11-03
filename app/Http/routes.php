@@ -10,8 +10,6 @@
 |
 */
 
-Route::get('/', 'WelcomeController@index');
-
 Route::controllers([
     'auth'     => 'Auth\AuthController',
     'password' => 'Auth\PasswordController',
@@ -20,7 +18,7 @@ Route::controllers([
 Route::group(['middleware' => 'auth'], function ()
 {
 
-    Route::get('/home', ['as' => 'home-dashboard', 'uses' => 'HomeController@dashboard']);
+    Route::get('/', ['as' => 'home-dashboard', 'uses' => 'HomeController@dashboard']);
 
     // Users
 
