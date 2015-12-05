@@ -24,7 +24,7 @@ class SaveBloodDonorRequest extends Request {
         $rules = [
             'first_name'      => 'required|max:255|min:2',
             'last_name'       => 'required|max:255|min:2',
-            'email'           => 'required|max:255|unique:blood_donors,email',
+            'email'           => 'max:255|unique:blood_donors,email',
             'phone_primary'   => 'required|min:8|max:8',
             'phone_secondary' => 'min:8|max:8',
             'location'        => 'required',

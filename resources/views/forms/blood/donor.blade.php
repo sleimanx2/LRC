@@ -2,12 +2,12 @@
 <div class="form-group">
     <label for="">First Name</label>
     {!! Form::text('first_name', old('first_name'), ['class' =>
-    'form-control','pattern'=>'.{2,}','require'=>'','title'=>'2 characters minimum']) !!}
+    'form-control','pattern'=>'.{2,}','required'=>'true','title'=>'2 characters minimum']) !!}
 </div>
 <div class="form-group">
     <label for="">Last Name </label>
     {!! Form::text('last_name', old('last_name'), ['class' =>
-    'form-control','pattern'=>'.{2,}','require'=>'','title'=>'2 characters minimum']) !!}
+    'form-control','pattern'=>'.{2,}','required'=>'true','title'=>'2 characters minimum']) !!}
 </div>
 <div class="form-group">
     <label for="">Blood Type</label>
@@ -36,7 +36,7 @@
 </div>
 <div class="form-group">
     <label for="">Email</label>
-    {!! Form::email('email', old('email') , ['class' => 'form-control','required'=>'true']) !!}
+    {!! Form::email('email', old('email') , ['class' => 'form-control']) !!}
 
     <span></span>
 </div>
@@ -82,7 +82,7 @@
         'is-open'=>'opened',
         'datepicker-options'=>'dateOptions',
         'date-disabled'=>'disabled(date, mode)',
-        'ng-required'=>'true',
+        'ng-required'=>'false',
         'close-text'=>'Close',
         ]) !!}
 
