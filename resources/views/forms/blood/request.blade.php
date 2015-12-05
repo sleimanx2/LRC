@@ -85,8 +85,10 @@
     </div>
     <div class="form-group">
         <label for="">Case</label>
-        {!! Form::text(
-        'case',old('case'),['class'=>'form-control','required'=>true]) !!}
+        {!! 
+        Form::select('case',['Cancer'=>'Cancer','Anemia'=>'Anemia','Operation'=>'Operation','Other'=>'Other'],
+        old('case'), ['class' => 'form-control']) 
+        !!}
     </div>
 
     <hr/>
