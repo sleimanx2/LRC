@@ -64,6 +64,7 @@ class BloodRequestRepository {
     {
         $attributes = [
             'patient_name'       => $data['patient_name'],
+            'patient_age'        => $data['patient_age'],
             'due_date'           => $data['due_date'],
             'blood_type_id'      => $data['blood_type_id'],
             'blood_bank_id'      => $data['blood_bank_id'],
@@ -89,6 +90,7 @@ class BloodRequestRepository {
     {
         $attributes = [
             'patient_name'       => $data['patient_name'],
+            'patient_age'        => $data['patient_age'],
             'due_date'           => $data['due_date'],
             'blood_type_id'      => $data['blood_type_id'],
             'blood_bank_id'      => $data['blood_bank_id'],

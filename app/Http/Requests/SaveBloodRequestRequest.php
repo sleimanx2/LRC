@@ -23,6 +23,7 @@ class SaveBloodRequestRequest extends Request {
     {
         $rules = [
             'patient_name'       => 'required|max:255|min:2',
+            'patient_age'        => 'integer',
             'due_date'           => 'date|after:' . date('yyyy-M-dd', time()),
             'blood_type_id'      => 'required',
             'blood_bank_id'      => 'required',

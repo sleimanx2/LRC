@@ -5,6 +5,11 @@
         'form-control','pattern'=>'.{2,}','require'=>'','title'=>'2 characters minimum']) !!}
     </div>
     <div class="form-group">
+        <label for="">Patient Age</label>
+        {!! Form::input('number','patient_age', old('patient_age'), 
+        ['class' =>'form-control','min'=>'0','max'=>'150']) !!}
+    </div>
+    <div class="form-group">
         <label for="">Blood Type</label>
         {!! Form::select('blood_type_id',$bloodTypes,
         old('blood_type_id'), ['class' => 'form-control']) !!}

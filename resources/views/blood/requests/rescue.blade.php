@@ -43,6 +43,12 @@
                                         {!!
                                         Html::gender($bloodRequest->patient_gender)!!} {{ $bloodRequest->patient_name }}
                                     </li>
+
+                                    <li>
+                                        <span class="icon fa fa-calendar"></span>
+                                        <label>Patient Age</label>
+                                        {{ $bloodRequest->patient_age or 'Not defined'}}
+                                    </li>
                                     <li>
                                         <i class="icon fa fa-tint"></i>
                                         <label>Blood Type</label>
