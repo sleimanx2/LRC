@@ -1,13 +1,13 @@
 <?php namespace LRC\Http\Controllers\Emergencies;
 
-use LRC\Data\Contacts\ContactRepository;
-use LRC\Data\Emergencies\EmergencyRepository;
-use LRC\Data\Users\UserRepository;
 use LRC\Http\Requests;
-use LRC\Http\Controllers\Controller;
-
 use Illuminate\Http\Request;
+use LRC\Data\Users\UserRepository;
+use LRC\Http\Controllers\Controller;
+use LRC\Data\Contacts\ContactRepository;
 use LRC\Http\Requests\SaveEmergencyRequest;
+use LRC\Data\Emergencies\EmergencyRepository;
+use LRC\Http\Requests\UpdateEmergencyStatusRequest;
 
 class EmergenciesController extends Controller {
 
@@ -35,7 +35,9 @@ class EmergenciesController extends Controller {
         $this->userRepository      = $userRepository;
         $this->contactRepository   = $contactRepository;
     }
-
+    /**
+     * Listing emergencies
+     */
     public function index()
     {
         $emergencies = $this->emergencyRepository->getPaginated(20);
@@ -91,7 +93,7 @@ class EmergenciesController extends Controller {
     }
 
     /**
-     * @param $id
+     * @param $id emergency id
      * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
@@ -101,6 +103,10 @@ class EmergenciesController extends Controller {
         return redirect()->intended(route('emergencies-list'))->with('success', 'An emergency was successfully deleted.');
     }
 
+    /**
+     * Manage an emergency
+     * @param  $id emergency id
+     */
     public function manage($id)
     {
         $emergency = $this->emergencyRepository->findOrFail($id);
@@ -110,8 +116,23 @@ class EmergenciesController extends Controller {
         return view('emergencies.manage', compact('emergency', 'contacts'));
     }
 
+    /**
+     * Update the emergency statues (start , patient reached , patient transfared and end datetime )
+     * 
+     * @param  $id emergency id
+     */
+    public function updateStatus($id,UpdateEmergencyStatusRequest $request)
+    {
+        $emergency = $this->emergencyRepository->findOrFail($id);
+
+        $this->emergencyRepository->updateStatus($request->status,$request->datetime,$emergency);
+
+        return redirect()->intended(route('emergency-manage',$emergency->id))->with('success', 'The emergency status ( '.$request->status.' ) was updated successfully.');
+    }
+
 
     /**
+     * Helper function to get required form data.
      * @return mixed
      */
     private function getFormData()

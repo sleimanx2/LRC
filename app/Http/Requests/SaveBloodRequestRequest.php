@@ -29,7 +29,7 @@ class SaveBloodRequestRequest extends Request {
             'blood_bank_id'      => 'required',
             'blood_quantity'     => 'integer|min:0',
             'platelets_quantity' => 'integer|min:0',
-            'contact_name'       => 'required|max:255|min:2',
+            'contact_name'       => 'max:255|min:2',
             'phone_primary'      => 'required|min:8|max:8',
             'phone_secondary'    => 'min:8|max:8',
         ];

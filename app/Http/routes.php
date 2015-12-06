@@ -113,6 +113,8 @@ Route::group(['middleware' => 'auth'], function ()
 
         Route::delete('{id}/destroy', ['as' => 'emergency-destroy', 'uses' => 'EmergenciesController@destroy']);
 
+        Route::post('{id}/status/update', ['as' => 'emergency-status-update', 'uses' => 'EmergenciesController@updateStatus']);
+
         Route::get('{id}/manage', ['as' => 'emergency-manage', 'uses' => 'EmergenciesController@manage']);
 
         Route::post('{id}/casualties/store', ['as' => 'emergency-casualty-store', 'uses' => 'CasualtiesController@store']);

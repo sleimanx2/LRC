@@ -3,6 +3,54 @@
 @section('content')
     <div class="page ng-scope">
         <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="media">
+                            <div class="media-body">
+                                <div class="col-md-3">
+                                     <button class="btn btn-default" disabled="true"> Start Time </button>
+                                     {{ $emergency->start_time }}
+                                </div>
+                                <div class="col-md-3">
+
+                                    <?php if($emergency->reach_time == 0): ?> 
+                                        {!! Form::open(['route' => ['emergency-status-update',$emergency->id]]) !!}
+                                         <button type='submit' name='status' value="reach_time" class="btn btn-success">Patient Reached</button>
+                                        {!! Form::close() !!}
+                                    <?php else: ?>
+                                        <button  disabled="true" class="btn btn-default"> Reach Time </button>
+                                        {{ $emergency->reach_time }}
+                                    <?php endif; ?>
+                                </div>
+                                <div class="col-md-3">
+                                    <?php if($emergency->transfer_time == 0): ?> 
+                                        {!! Form::open(['route' => ['emergency-status-update',$emergency->id]]) !!}
+                                         <button type='submit' name='status' value="transfer_time" class="btn btn-success">Patient Transfered</button>
+                                        {!! Form::close() !!}
+                                    <?php else: ?>
+                                         <button disabled="true" class="btn btn-default">Transfer Time</button>
+                                        {{ $emergency->transfer_time }}                                        
+                                    <?php endif; ?>
+                                </div>
+                                <div class="col-md-3">
+                                    <?php if($emergency->end_time == 0): ?> 
+                                        {!! Form::open(['route' => ['emergency-status-update',$emergency->id]]) !!}
+                                             <button type='submit' name='status' value="end_time" class="btn btn-success">Ambulance Returned</button>
+                                        {!! Form::close() !!}
+                                    <?php else: ?>
+                                        <button disabled="true" class="btn btn-default">End Time</button>
+                                        {{ $emergency->end_time }}                                        
+                                    <?php endif; ?>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             </div>
+        </div>
+        <div class="row">
 
             {{--@if($bloodRequest->completed or $bloodRequest->note)--}}
             {{--<div class="col-xs-12">--}}
@@ -30,7 +78,6 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <strong><i class="fa fa-list panel-ico"></i>Emergency Info</strong>
-                        <span class="badge pull-right">Started: {{ $emergency->start_time }} </span>
                     </div>
                     <div class="panel-body">
                         <div class="media">

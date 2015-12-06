@@ -78,7 +78,12 @@ class EmergencyRepository {
 
         return $this->emergency->create($attributes);
     }
-
+    /**
+     * update emergency
+     * @param  arrayable $data new data
+     * @param  Emergency $emergency the emergency that we want to update
+     * @return boolean
+     */
     public function update($data, Emergency $emergency)
     {
         $attributes = $this->fillAttributes($data);
@@ -88,7 +93,28 @@ class EmergencyRepository {
         return $emergency->save();
     }
 
+    /**
+     * 
+     * update the emergency statues (start , patient reached , patient transfared and end datetime )
+     * 
+     */
+    public function updateStatus($status,$datetime=null,Emergency $emergency)
+    {
+        // if the the datetime is not assigned fill it with the current time.
+        if(! $datetime)
+        {
+            $datetime  = Carbon::now();
+        }
 
+        $emergency->$status = $datetime;
+        return $emergency->save();
+    }
+
+    /**
+     * function to update casulties count
+     * @param  $id emergency id
+     * @return boolean 
+     */
     public function updateCasualtiesStatistics($id)
     {
         $emergency = $this->findOrFail($id);
@@ -100,12 +126,22 @@ class EmergencyRepository {
         return $emergency->save();
     }
 
+    /**
+     * destroy an emergency
+     * 
+     * @param  $id emergency id
+     * @return boolean  
+     */
     public function destroy($id)
     {
         return $this->emergency->destroy($id);
     }
 
-
+    /**
+     * get todays emergency report
+     * 
+     * @return report
+     */
     public function getTodayReport()
     {
         return $this->emergency->select('report_category_id', DB::raw('count(*) as total'))
