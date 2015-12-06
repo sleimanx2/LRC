@@ -5,6 +5,7 @@ namespace LRC\Data\Emergencies;
 
 
 use Carbon\Carbon;
+use LRC\Data\Contacts\Contact;
 use Illuminate\Support\Facades\DB;
 
 class EmergencyRepository {
@@ -28,11 +29,12 @@ class EmergencyRepository {
      * @param ReportCategory $reportCategory
      * @param Ambulance $ambulance
      */
-    function __construct(Emergency $emergency, ReportCategory $reportCategory, Ambulance $ambulance)
+    function __construct(Emergency $emergency, ReportCategory $reportCategory, Ambulance $ambulance , Contact $contact)
     {
         $this->emergency      = $emergency;
         $this->reportCategory = $reportCategory;
         $this->ambulance      = $ambulance;
+        $this->contact        = $contact;
     }
 
     public function findOrFail($id)
@@ -155,24 +157,36 @@ class EmergencyRepository {
      * @return array
      */
     private function fillAttributes($data)
-    {
+    {   
+        // if the user chose a hospital instead of manualy filling the destination
+        // fill the destination value from the hospital info
+        if($data['destination_hospital_id'] != '')
+        {
+            $contact = $this->contact->find($data['destination_hospital_id']);
+
+            $data['destination'] = $contact->name;
+            $data['destination_latitude']  = $contact->latitude;
+            $data['destination_longitude'] = $contact->longitude;
+        }
+
         $attributes = [
-            'contact_name'          => $data['contact_name'],
-            'phone_primary'         => $data['phone_primary'],
-            'phone_secondary'       => $data['phone_secondary'],
-            'location'              => $data['location'],
-            'location_latitude'     => $data['location_latitude'],
-            'location_longitude'    => $data['location_longitude'],
-            'destination'           => $data['destination'],
-            'destination_latitude'  => $data['destination_latitude'],
-            'destination_longitude' => $data['destination_longitude'],
-            'note'                  => $data['note'],
-            'ambulance_id'          => $data['ambulance_id'],
-            'report_category_id'    => $data['report_category_id'],
-            'driver_id'              => $data['driver_id'],
-            'scout_id'              => $data['scout_id'],
-            'patient_aider_id'      => $data['patient_aider_id'],
-            'assistant_id'          => $data['assistant_id']
+            'contact_name'            => $data['contact_name'],
+            'phone_primary'           => $data['phone_primary'],
+            'phone_secondary'         => $data['phone_secondary'],
+            'location'                => $data['location'],
+            'location_latitude'       => $data['location_latitude'],
+            'location_longitude'      => $data['location_longitude'],
+            'destination'             => $data['destination'],
+            'destination_latitude'    => $data['destination_latitude'],
+            'destination_longitude'   => $data['destination_longitude'],
+            'destination_hospital_id' => $data['destination_hospital_id'],
+            'note'                    => $data['note'],
+            'ambulance_id'            => $data['ambulance_id'],
+            'report_category_id'      => $data['report_category_id'],
+            'driver_id'               => $data['driver_id'],
+            'scout_id'                => $data['scout_id'],
+            'patient_aider_id'        => $data['patient_aider_id'],
+            'assistant_id'            => $data['assistant_id']
         ];
         return $attributes;
     }

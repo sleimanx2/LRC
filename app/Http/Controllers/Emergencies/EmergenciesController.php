@@ -141,6 +141,8 @@ class EmergenciesController extends Controller {
 
         $data['ambulances'] = $this->emergencyRepository->getAmbulanceList();
 
+        $data['hospitals'] = [''=>'None'] + $this->contactRepository->getHospitalsList();
+
         $data['drivers']  = ['not_found' => 'Select a first aider'] + $this->userRepository->getDriversList();
         $data['seniors']  = ['not_found' => 'Select a first aider'] + $this->userRepository->getSeniorsList();
         $data['allUsers'] = ['not_found' => 'Select a first aider'] + $this->userRepository->getAllList();

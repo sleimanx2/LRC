@@ -67,11 +67,17 @@
         </div>
     </div>
     {{--location partial start--}}
-   @include('partials.location',['prefix'=>'location'])
+    @include('partials.location',['prefix'=>'location'])
     {{--location partial end--}}
 
     {{--destination partial start--}}
+    <!-- Google location  -->
     @include('partials.destination',['prefix'=>'destination'])
+    <!--  Local contact locations -->
+    <p>--- Or chose a hospital ---</p> 
+    {!! Form::select('destination_hospital_id',$data['hospitals']+[''],
+                old('destination_hospital_id')) !!}
+    <br><br>
     {{--destination partial end--}}
     <div class="form-group">
         <div class="ui-map" id="map-canvas"></div>

@@ -82,6 +82,27 @@ class ContactRepository {
         return $list;
     }
 
+    /**
+     * get the list of all hospitals
+     * 
+     * @return array
+     */
+    public function getHospitalsList()
+    {
+
+        $list = $this->contact->whereHas('category',function($q){
+
+            $q->where('is_hospital','=',1);
+
+        })->orderBy('name')->lists('name','id');
+
+        return $list;
+    }
+
+    /**
+     * find the nearest hospital based on the original location
+     * 
+     */
     public function findBestMatch(array $options = ['latitude' => null, 'logitude' => null, 'limit' => 25])
     {
         $contacts = $this->contact
