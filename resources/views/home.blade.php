@@ -110,6 +110,33 @@
                             Their is no registered emergency today. Let's hope it stays the same.
                         </p>
                     @endif
+
+                    <br>
+
+                    <h4>
+                        <i class="fa fa-circle" style='color:green'></i> Active Emergencies
+                    </h4>
+                    @if(! $activeEmergencies->isEmpty())
+                        @foreach($activeEmergencies as $activeEmergency)
+                            <div>
+                                <p class="text-muted medium">
+                                    {{$activeEmergency->location}}
+                                    <span class="pull-right">
+                                        <span class="badge">{{$activeEmergency->report_category->name or ""}}</span>
+                                        <a class="btn btn-info btn-xs" href="{{ route('emergency-manage',[$activeEmergency->id]) }}"
+                                   popover="Manage" popover-trigger="mouseenter">
+                                            <i class="fa fa-cog "></i>
+                                        </a>
+                                    </span>
+                                </p>
+                            </div>
+                            <br>
+                        @endforeach
+                    @else
+                        <p>
+                            Their is no active emergencies at the moment.
+                        </p>
+                    @endif
                 </div>
             </div>
         </div>

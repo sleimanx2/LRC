@@ -63,8 +63,9 @@ class HomeController extends Controller {
         $emergencyReports = $this->emergencyRepository->getTodayReport();
         $remainingBloodRequests = $this->bloodRequestRepository->findRemaining();
         $remainingUnconfirmedBloodRequests = $this->bloodRequestRepository->findRemainingForConfirmation();
+        $activeEmergencies = $this->emergencyRepository->getActiveEmergencies();
 
-		return view('home',compact('bloodTypes','totalBloodDonors','emergencyReports','remainingBloodRequests','remainingUnconfirmedBloodRequests'));
+		return view('home',compact('bloodTypes','totalBloodDonors','emergencyReports','remainingBloodRequests','remainingUnconfirmedBloodRequests','activeEmergencies'));
 	}
 
 }

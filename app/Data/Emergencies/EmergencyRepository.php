@@ -153,6 +153,16 @@ class EmergencyRepository {
     }
 
     /**
+     * get active emergencies 
+     * 
+     * @return report
+     */
+    public function getActiveEmergencies()
+    {
+        return $this->emergency->with(['report_category'])->where('end_time',null)->get();
+    }
+
+    /**
      * @param $data
      * @return array
      */
