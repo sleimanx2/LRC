@@ -15,6 +15,7 @@ class AddPatientAgeToBloodRequests extends Migration {
         Schema::table('blood_requests', function($table)
         {
             $table->integer('patient_age')->after('patient_name')->default(0);
+            
         });
 	}
 

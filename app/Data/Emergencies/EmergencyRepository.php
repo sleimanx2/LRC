@@ -186,7 +186,11 @@ class EmergencyRepository {
             'driver_id'               => $data['driver_id'],
             'scout_id'                => $data['scout_id'],
             'patient_aider_id'        => $data['patient_aider_id'],
-            'assistant_id'            => $data['assistant_id']
+            'assistant_id'            => $data['assistant_id'],
+            'start_time'              => $data['start_time'],
+            'reach_time'              => $data['reach_time'],
+            'transfer_time'           => $data['transfer_time'],
+            'end_time'                => $data['end_time']
         ];
         return $attributes;
     }

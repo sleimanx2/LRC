@@ -87,6 +87,43 @@
     {!! Form::textarea(
     'note',old('note'),['class'=>'form-control','']) !!}
     <hr/>
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingTwo">
+          <h4 class="panel-title">
+            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              Set / Edit the emergency status time 
+            </a>
+          </h4>
+        </div>
+        <div class='input-group date' id='datetimepicker1'>
+        </div>
+        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+
+            <label for="">Start Time</label>
+            {!! Form::text('start_time',old('start_time'), ['class' =>'form-control','data-field'=>'datetime']) !!}
+
+            <label for="">Reach Time</label>
+            {!! Form::text('reach_time',old('reach_time'), ['class' =>'form-control','data-field'=>'datetime']) !!}
+            
+            <label for="">Transfer Time</label>
+            {!! Form::text('transfer_time',old('transfer_time'), ['class' =>'form-control','data-field'=>'datetime']) !!}
+            
+            <label for="">End Time</label>
+            {!! Form::text('end_time',old('end_time'), ['class' =>'form-control','data-field'=>'datetime']) !!}
+            
+            <div id="datetime-box"></div>
+            <script type="text/javascript">
+                $(document).ready(function()
+                {
+                    $("#datetime-box").DateTimePicker({dateTimeFormat:'yyyy-MM-dd HH:mm:ss'});
+                });
+            </script>
+          </div>
+        </div>
+      </div>
+    </div>
     <button type="submit" class="btn btn-success">
         Save
     </button>

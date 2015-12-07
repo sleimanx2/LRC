@@ -30,6 +30,7 @@ elixir(function (mix) {
             'vendor/angular-ui-tree.js',
             'vendor/jquery.vmap.min.js',
             'vendor/select2.min.js',
+            'vendor/datetimepicker.js',
             'extras.js',
             'app/*.js'
         ],
@@ -51,7 +52,8 @@ elixir(function (mix) {
             'bootstrap.min.css',
             'bootstrap-theme.min.css',
             'select2.css',
-            'main.css',
+            'datetimepicker.css',
+            'main.css'
         ],
         'resources/assets/styles',
         'public/dist/main.min.css'
