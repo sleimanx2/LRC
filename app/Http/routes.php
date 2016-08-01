@@ -10,10 +10,31 @@
 |
 */
 
-Route::controllers([
-    'auth'     => 'Auth\AuthController',
-    'password' => 'Auth\PasswordController',
-]);
+// Authentication Routes...
+Route::group(['namespace' => 'Auth','prefix'=>'auth'], function ()
+{
+  Route::get('login', 'AuthController@showLoginForm');
+  Route::post('login', 'AuthController@login');
+  Route::get('logout', 'AuthController@logout');
+
+  // Registration Routes...
+  //
+  Route::group(['middleware' => 'auth'], function ()
+  {
+    Route::get('register', 'AuthController@showRegistrationForm');
+    Route::post('register', 'AuthController@register');
+
+  });
+  
+  // Password Change Routes...
+  // Password Reset Routes...
+  Route::get('password/reset/{token?}', 'PasswordController@showResetForm');
+  Route::post('password/email', 'PasswordController@sendResetLinkEmail');
+  Route::post('password/reset', 'PasswordController@reset');
+
+});
+
+
 
 Route::group(['middleware' => 'auth'], function ()
 {
@@ -30,7 +51,7 @@ Route::group(['middleware' => 'auth'], function ()
 
     Route::delete('users/{id}/destroy', ['before' => 'csrf', 'as' => 'user-destroy', 'uses' => 'UsersController@destroy']);
 
-    Route::post('password/{id}/change', ['before' => 'csrf', 'as' => 'password-change', 'uses' => 'PasswordController@postChange']);
+    Route::post('password/{id}/change', ['before' => 'csrf', 'as' => 'password-change', 'uses' => 'Auth\PasswordController@postChange']);
 
     // Contacts
 
@@ -124,7 +145,3 @@ Route::group(['middleware' => 'auth'], function ()
     });
 
 });
-
-
-
-

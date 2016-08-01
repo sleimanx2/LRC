@@ -2,8 +2,11 @@
 namespace LRC\Http\Controllers\Auth;
 
 use LRC\Data\Users\User;
+use LRC\Data\Users\UserRepository;
 use Validator;
+use LRC\Services\Registrar;
 use LRC\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
@@ -20,20 +23,31 @@ class AuthController extends Controller
     |
     */
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
+
     /**
      * Where to redirect users after login / registration.
      *
      * @var string
      */
     protected $redirectTo = '/';
+
+    /**
+    * @var UserRepository
+    */
+    private $userRepository;
+
     /**
      * Create a new authentication controller instance.
      *
      * @return void
      */
-    public function __construct()
+
+    public function __construct(Registrar $registrar, UserRepository $userRepository)
     {
-        $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
+        $this->registrar = $registrar;
+        $this->userRepository = $userRepository;
+
+        $this->middleware($this->guestMiddleware(), ['except' => ['logout','showRegistrationForm','register']]);
     }
     /**
      * Get a validator for an incoming registration request.
@@ -49,18 +63,38 @@ class AuthController extends Controller
             'password' => 'required|min:6|confirmed',
         ]);
     }
+
     /**
-     * Create a new user instance after a valid registration.
+     * Show the application registration form.
      *
-     * @param  array  $data
-     * @return User
+     * @return \Illuminate\Http\Response
      */
-    protected function create(array $data)
+    public function showRegistrationForm()
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+      $roles = $this->userRepository->rolesList();
+
+      return view('auth.register',['roles'=>$roles]);
+    }
+
+    /**
+     * Handle a registration request for the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function register(Request $request)
+    {
+       $validator = $this->registrar->validator($request->all());
+
+       if ($validator->fails())
+       {
+           $this->throwValidationException(
+               $request, $validator
+           );
+       }
+
+       $this->registrar->create($request->all());
+
+       return redirect(route('users-list'))->with('success', 'First Aider Registered Successfully.');
     }
 }

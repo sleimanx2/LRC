@@ -70,4 +70,3 @@
 <button class="btn btn-default" type="reset">Revert Changes
 </button>
 </span>
-
