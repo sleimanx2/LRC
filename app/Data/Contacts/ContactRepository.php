@@ -84,7 +84,7 @@ class ContactRepository {
 
     /**
      * get the list of all hospitals
-     * 
+     *
      * @return array
      */
     public function getHospitalsList()
@@ -101,7 +101,7 @@ class ContactRepository {
 
     /**
      * find the nearest hospital based on the original location
-     * 
+     *
      */
     public function findBestMatch(array $options = ['latitude' => null, 'logitude' => null, 'limit' => 25])
     {

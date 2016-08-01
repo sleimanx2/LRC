@@ -1,14 +1,14 @@
-<?php namespace LRC\Http\Controllers\Auth;
+<?php
+namespace LRC\Http\Controllers\Auth;
 
-use LRC\Data\Users\UserRepository;
+use LRC\Data\Users\User;
+use Validator;
 use LRC\Http\Controllers\Controller;
-use Illuminate\Auth\Guard;
-use LRC\Services\Registrar;
+use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
-use Illuminate\Http\Request;
 
-class AuthController extends Controller {
-
+class AuthController extends Controller
+{
     /*
     |--------------------------------------------------------------------------
     | Registration & Login Controller
@@ -19,65 +19,48 @@ class AuthController extends Controller {
     | a simple trait to add these behaviors. Why don't you explore it?
     |
     */
-
-    use AuthenticatesAndRegistersUsers;
+    use AuthenticatesAndRegistersUsers, ThrottlesLogins;
     /**
-     * @var UserRepository
+     * Where to redirect users after login / registration.
+     *
+     * @var string
      */
-    private $userRepository;
-
-
+    protected $redirectTo = '/';
     /**
      * Create a new authentication controller instance.
      *
-     * @param \Illuminate\Contracts\Auth\Guard|Guard $auth
-     * @param \Illuminate\Contracts\Auth\Registrar|Registrar $registrar
-     * @param UserRepository $userRepository
+     * @return void
      */
-    public function __construct(Guard $auth, Registrar $registrar,UserRepository $userRepository)
+    public function __construct()
     {
-        $this->auth      = $auth;
-        $this->registrar = $registrar;
-        $this->userRepository = $userRepository;
-
-        $this->middleware('auth', ['only' => ['postRegister','getRegister','getLogout']]);
-
+        $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
     }
-
     /**
-     * Show the application registration form.
+     * Get a validator for an incoming registration request.
      *
-     * @return \Illuminate\Http\Response
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
      */
-    public function getRegister()
+    protected function validator(array $data)
     {
-        $roles = $this->userRepository->rolesList();
-
-        return view('auth.register',['roles'=>$roles]);
+        return Validator::make($data, [
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255|unique:users',
+            'password' => 'required|min:6|confirmed',
+        ]);
     }
-
     /**
-     * Handle a registration request for the application.
+     * Create a new user instance after a valid registration.
      *
-     * @param \Illuminate\Foundation\Http\FormRequest|Request $request
-     * @return \Illuminate\Http\Response
+     * @param  array  $data
+     * @return User
      */
-    public function postRegister(Request $request)
+    protected function create(array $data)
     {
-
-        $validator = $this->registrar->validator($request->all());
-
-        if ($validator->fails())
-        {
-            $this->throwValidationException(
-                $request, $validator
-            );
-        }
-
-        $this->registrar->create($request->all());
-
-        return redirect(route('users-list'))->with('success', 'First Aider Registered Successfully.');
+        return User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
+        ]);
     }
-
-
 }

@@ -1,6 +1,6 @@
 <?php namespace LRC\Providers;
 
-use Illuminate\Html\HtmlServiceProvider;
+use Collective\Html\HtmlServiceProvider;
 
 class ExtendedHtmlServiceProvider extends HtmlServiceProvider {
 

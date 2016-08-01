@@ -22,7 +22,7 @@
     <!-- Theme's own CSS file -->
     <link rel="stylesheet" href="/dist/main.min.css">
 
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places&key=AIzaSyBTy4pD1NAVrkJFVNry7GVRfec10Q9cw5Q"></script>
 
     <script type="text/javascript" src="/dist/app.min.js"></script>
 

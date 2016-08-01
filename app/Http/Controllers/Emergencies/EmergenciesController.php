@@ -118,7 +118,7 @@ class EmergenciesController extends Controller {
 
     /**
      * Update the emergency statues (start , patient reached , patient transfared and end datetime )
-     * 
+     *
      * @param  $id emergency id
      */
     public function updateStatus($id,UpdateEmergencyStatusRequest $request)
@@ -137,15 +137,15 @@ class EmergenciesController extends Controller {
      */
     private function getFormData()
     {
-        $data['report_categories'] = $this->emergencyRepository->getReportCategoriesList();
+        $data['report_categories'] = $this->emergencyRepository->getReportCategoriesList()->toArray();
 
-        $data['ambulances'] = $this->emergencyRepository->getAmbulanceList();
+        $data['ambulances'] = $this->emergencyRepository->getAmbulanceList()->toArray();
 
-        $data['hospitals'] = [''=>'None'] + $this->contactRepository->getHospitalsList();
+        $data['hospitals'] = [''=>'None'] + $this->contactRepository->getHospitalsList()->toArray();
 
-        $data['drivers']  = ['not_found' => 'Select a first aider'] + $this->userRepository->getDriversList();
-        $data['seniors']  = ['not_found' => 'Select a first aider'] + $this->userRepository->getSeniorsList();
-        $data['allUsers'] = ['not_found' => 'Select a first aider'] + $this->userRepository->getAllList();
+        $data['drivers']  = ['not_found' => 'Select a first aider'] + $this->userRepository->getDriversList()->toArray();
+        $data['seniors']  = ['not_found' => 'Select a first aider'] + $this->userRepository->getSeniorsList()->toArray();
+        $data['allUsers'] = ['not_found' => 'Select a first aider'] + $this->userRepository->getAllList()->toArray();
 
         return $data;
     }
