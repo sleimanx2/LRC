@@ -23,6 +23,7 @@
                         {!! Form::open(['route'=>'contact-store','name'=>'contact_add_form']); !!}
                         @include('forms.contact')
                         {!! Form::close(); !!}
+                        
                     </div>
                 </div>
             </div>
