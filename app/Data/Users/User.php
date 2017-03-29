@@ -1,14 +1,11 @@
 <?php namespace LRC\Data\Users;
 
-use Illuminate\Auth\Authenticatable;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Auth\Passwords\CanResetPassword;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
+class User extends Authenticatable {
 
-    use Authenticatable, CanResetPassword;
+    use Notifiable;
 
     /**
      * The database table used by the model.
@@ -47,7 +44,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function getRolesIdsAttribute()
     {
-        return $this->roles()->lists('id')->toArray();
+        return $this->roles()->pluck('id')->toArray();
     }
 
     /**

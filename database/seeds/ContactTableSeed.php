@@ -16,12 +16,12 @@ class ContactTableSeeder extends Seeder {
         if ( app()->environment() == 'local' )
         {
             // List contacts categories
-            $categories = ContactCategory::lists('id');
+            $categories = ContactCategory::pluck('id');
 
 
             for ($i = 0; $i < 50; $i ++)
             {
-                $randKey = array_rand($categories, 1);
+                $randKey = array_rand($categories->toArray(), 1);
 
                 Contact::create(array(
                     'name'            => $faker->company . rand(0, 100),

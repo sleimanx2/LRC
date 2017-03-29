@@ -67,7 +67,7 @@ class UserRepository {
      */
     public function rolesList()
     {
-        return $this->role->all()->lists('name', 'id');
+        return $this->role->all()->pluck('name', 'id');
     }
 
     /**
@@ -90,7 +90,7 @@ class UserRepository {
         {
             $q->where('name', '=', 'Ambulance Driver');
 
-        })->lists('user_full_name', 'id');
+        })->pluck('user_full_name', 'id');
     }
 
 
@@ -104,7 +104,7 @@ class UserRepository {
         {
             $q->where('name', '=', 'Senior First Aider');
 
-        })->lists('user_full_name', 'id');
+        })->pluck('user_full_name', 'id');
     }
 
     /**
@@ -113,7 +113,7 @@ class UserRepository {
      */
     public function getAllList()
     {
-        return $this->user->select('*', DB::raw('CONCAT(first_name, " ", last_Name) AS user_full_name'))->lists('user_full_name', 'id');
+        return $this->user->select('*', DB::raw('CONCAT(first_name, " ", last_Name) AS user_full_name'))->pluck('user_full_name', 'id');
     }
 
 }

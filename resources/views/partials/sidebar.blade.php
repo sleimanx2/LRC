@@ -17,7 +17,7 @@
             <a href="users"> <i class="fa fa-users"></i> <span>Users</span></a>
             <ul>
                 <li><a id='users-list' href="{{route('users-list')}}"><i class="fa fa-angle-right"></i><span> List </span></a></li>
-                <li><a href="/auth/register"><i class="fa fa-angle-right"></i><span> Register</span></a></li>
+                <li><a href="/register"><i class="fa fa-angle-right"></i><span> Register</span></a></li>
             </ul>
         </li>
         <li  class="nav-group">

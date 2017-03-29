@@ -47,7 +47,7 @@ class AuthController extends Controller
         $this->registrar = $registrar;
         $this->userRepository = $userRepository;
 
-        $this->middleware($this->guestMiddleware(), ['except' => ['logout','showRegistrationForm','register']]);
+        $this->middleware('guest', ['except' => ['logout','showRegistrationForm','register']]);
     }
     /**
      * Get a validator for an incoming registration request.

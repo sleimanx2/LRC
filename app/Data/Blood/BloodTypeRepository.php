@@ -23,7 +23,7 @@ class BloodTypeRepository {
 
     public function getList()
     {
-        return $this->bloodType->all()->lists('name', 'id');
+        return $this->bloodType->all()->pluck('name', 'id');
     }
 
     public function getAll()

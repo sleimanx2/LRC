@@ -18,16 +18,16 @@ class EmergencyTableSeeder extends Seeder {
 
         if ( app()->environment() == 'local' )
         {
-            $report_categories = ReportCategory::lists('id');
-            $users             = User::lists('id');
-            $ambulances        = Ambulance::lists('id');
+            $report_categories = ReportCategory::pluck('id');
+            $users             = User::pluck('id');
+            $ambulances        = Ambulance::pluck('id');
 
 
             for ($i = 0; $i < 40; $i ++)
             {
-                $randomReportCategoryId = array_rand($report_categories, 1);
-                $randomAmbulanceId      = array_rand($ambulances, 1);
-                $randomUserIds          = array_rand($users, 4);
+                $randomReportCategoryId = array_rand($report_categories->toArray(), 1);
+                $randomAmbulanceId      = array_rand($ambulances->toArray(), 1);
+                $randomUserIds          = array_rand($users->toArray(), 4);
 
                 Emergency::create(array(
                     'contact_name'          => $faker->name,

@@ -21,16 +21,16 @@ class BloodDonationRequestTableSeeder extends Seeder {
 
         if ( app()->environment() == 'local' )
         {
-            $users         = User::lists('id');
-            $bloodRequests = BloodRequest::lists('id');
-            $donors        = BloodDonor::lists('id');
+            $users         = User::pluck('id');
+            $bloodRequests = BloodRequest::pluck('id');
+            $donors        = BloodDonor::pluck('id');
 
 
             for ($i = 0; $i < 200; $i ++)
             {
-                $randomUserId         = array_rand($users, 1);
-                $randomBloodRequestId = array_rand($bloodRequests, 1);
-                $randomDonorsId       = array_rand($donors, 1);
+                $randomUserId         = array_rand($users->toArray(), 1);
+                $randomBloodRequestId = array_rand($bloodRequests->toArray(), 1);
+                $randomDonorsId       = array_rand($donors->toArray(), 1);
 
 
                 BloodDonation::create(array(

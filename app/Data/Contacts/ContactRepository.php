@@ -64,7 +64,7 @@ class ContactRepository {
      */
     public function getCategoriesList()
     {
-        return $this->contactCategory->all()->lists('name','id');
+        return $this->contactCategory->all()->pluck('name','id');
     }
 
     /**
@@ -77,7 +77,7 @@ class ContactRepository {
 
             $q->where('serves_blood','=',1);
 
-        })->orderBy('name')->lists('name','id');
+        })->orderBy('name')->pluck('name','id');
 
         return $list;
     }
@@ -94,7 +94,7 @@ class ContactRepository {
 
             $q->where('is_hospital','=',1);
 
-        })->orderBy('name')->lists('name','id');
+        })->orderBy('name')->pluck('name','id');
 
         return $list;
     }

@@ -20,7 +20,7 @@
                                 </ul>
                             </div>
                         @endif
-                        {!! Form::open(['url'=>'/auth/register','name'=>'user_register_form']); !!}
+                        {!! Form::open(['url'=>'/register','name'=>'user_register_form']); !!}
                         @include('forms.user')
                         {!! Form::close(); !!}
                     </div>

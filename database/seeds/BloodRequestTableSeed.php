@@ -12,6 +12,7 @@ class BloodRequestTableSeeder extends Seeder {
 
     public function run()
     {
+
         // Delete Table
         DB::table('blood_requests')->delete();
 
@@ -20,22 +21,21 @@ class BloodRequestTableSeeder extends Seeder {
         if ( app()->environment() == 'local' )
         {
 
-
-            $contactCategories = ContactCategory::lists('id', 'name');
+            $contactCategories = ContactCategory::pluck('id', 'name');
 
             $hospitalId = $contactCategories['Hospitals'];
 
-            $contacts   = Contact::where('category_id', '=', $hospitalId)->lists('id');
-            $users      = User::lists('id');
-            $bloodTypes = BloodType::lists('id');
+            $contacts   = Contact::where('category_id', '=', $hospitalId)->pluck('id');
+            $users      = User::pluck('id');
+            $bloodTypes = BloodType::pluck('id');
 
             $genders = ['male', 'female'];
 
             for ($i = 0; $i < 40; $i ++)
             {
-                $randomBloodBankId = array_rand($contacts, 1);
-                $randomUserId      = array_rand($users, 1);
-                $randomBloodTypeId = array_rand($bloodTypes, 1);
+                $randomBloodBankId = array_rand($contacts->toArray(), 1);
+                $randomUserId      = array_rand($users->toArray(), 1);
+                $randomBloodTypeId = array_rand($bloodTypes->toArray(), 1);
 
                 $platelets_quantity  = $faker->numberBetween(0, 5);
                 $platelets_confirmed = rand(0, $platelets_quantity);

@@ -32,7 +32,7 @@ class PasswordController extends Controller
 	 {
 			 $this->registrar = $registrar;
 			 $this->userRepository = $userRepository;
-			 $this->middleware($this->guestMiddleware(),['except'=>'postChange']);
+			 $this->middleware('guest',['except'=>'postChange']);
 	 }
 
 

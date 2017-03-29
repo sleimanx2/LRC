@@ -1,7 +1,6 @@
 <?php namespace LRC\Http\Controllers;
 
 use LRC\Data\Blood\BloodDonorRepository;
-use LRC\Data\Blood\BloodRequest;
 use LRC\Data\Blood\BloodRequestRepository;
 use LRC\Data\Blood\BloodTypeRepository;
 use LRC\Data\Emergencies\EmergencyRepository;

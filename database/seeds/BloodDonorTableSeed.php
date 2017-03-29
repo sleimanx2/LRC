@@ -16,13 +16,13 @@ class BloodDonorTableSeeder extends Seeder {
 
         if ( app()->environment() == 'local' )
         {
-            $bloodTypes = BloodType::lists('id');
+            $bloodTypes = BloodType::pluck('id');
 
             $genders = ['male', 'female'];
 
             for ($i = 0; $i < 200; $i ++)
             {
-                $bloodTypeId = array_rand($bloodTypes, 1);
+                $bloodTypeId = array_rand($bloodTypes->toArray(), 1);
 
                 $genderKey   = array_rand($genders);
                 $genderValue = $genders[$genderKey];

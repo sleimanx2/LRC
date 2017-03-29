@@ -25,10 +25,15 @@
 
                     <ul class="list-group">
                         <li class="list-group-item">
-                            <a href="/auth/logout">
-                                <i class="fa fa-sign-out color-danger"></i>
-                                <span>Log out</span>
+                            <a href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <i class="fa fa-btn fa-sign-out"></i> Logouts
                             </a>
+                            <form id="logout-form"
+                                  action="{{ url('/logout') }}"
+                                  method="POST"
+                                  style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
                         </li>
                     </ul>
                 </div>

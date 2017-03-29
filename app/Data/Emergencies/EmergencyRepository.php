@@ -58,7 +58,7 @@ class EmergencyRepository {
      */
     public function getReportCategoriesList()
     {
-        return $this->reportCategory->all()->lists('name', 'id');
+        return $this->reportCategory->all()->pluck('name', 'id');
     }
 
     /**
@@ -67,7 +67,7 @@ class EmergencyRepository {
      */
     public function getAmbulanceList()
     {
-        return $this->ambulance->all()->lists('plate_number', 'id');
+        return $this->ambulance->all()->pluck('plate_number', 'id');
     }
 
     /**

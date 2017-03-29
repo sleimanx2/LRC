@@ -3,6 +3,30 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Application Name
+    |--------------------------------------------------------------------------
+    |
+    | This value is the name of your application. This value is used when the
+    | framework needs to place the application's name in a notification or
+    | any other location as required by the application or its packages.
+    */
+
+    'name' => 'LRC Beit Mery',
+
+    /*
+   |--------------------------------------------------------------------------
+   | Application Environment
+   |--------------------------------------------------------------------------
+   |
+   | This value determines the "environment" your application is currently
+   | running in. This may determine how you prefer to configure various
+   | services your application utilizes. Set this in your ".env" file.
+   |
+   */
+    'env' => env('APP_ENV', 'production'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Debug Mode
     |--------------------------------------------------------------------------
     |
@@ -77,9 +101,9 @@ return [
     |
     */
 
-    'key'             => env('APP_KEY', 'CtagUgiQqvW-X9weSm^p5VY6nZJbEf0S'),
+    'key'             => env('APP_KEY'),
 
-    'cipher'          => MCRYPT_RIJNDAEL_128,
+    'cipher'          => 'AES-256-CBC',
 
     /*
     |--------------------------------------------------------------------------
@@ -109,9 +133,6 @@ return [
 
     'providers'       => [
 
-        /*
-         * Laravel Framework Service Providers...
-         */
          /*
           * Laravel Framework Service Providers...
           */
@@ -136,6 +157,7 @@ return [
          Illuminate\Translation\TranslationServiceProvider::class,
          Illuminate\Validation\ValidationServiceProvider::class,
          Illuminate\View\ViewServiceProvider::class,
+         Illuminate\Notifications\NotificationServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -143,9 +165,8 @@ return [
          LRC\Providers\AuthServiceProvider::class,
          LRC\Providers\EventServiceProvider::class,
          LRC\Providers\RouteServiceProvider::class,
-
+        //  LRC\Providers\BroadcastServiceProvider::class,
          LRC\Providers\ExtendedHtmlServiceProvider::class,
-         Barryvdh\Debugbar\ServiceProvider::class,
     ],
 
     /*
@@ -193,7 +214,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
-
+        'Notification' => Illuminate\Support\Facades\Notification::class
     ],
 
 ];
