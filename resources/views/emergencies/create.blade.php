@@ -3,7 +3,7 @@
 @section('content')
     <div class="page page-form ng-scope">
         <div class="row">
-            <div class="col-md-6 col-md-offset-3 ng-scope">
+            <div class="col-md-12 ng-scope">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <strong><i class="fa fa-pencil panel-ico"></i>Add an emergency</strong>

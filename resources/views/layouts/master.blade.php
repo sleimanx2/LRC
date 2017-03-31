@@ -30,11 +30,11 @@
 <body data-ng-app="app" id="app" data-custom-background="" data-off-canvas-nav="" data-ng-controller="AdminAppCtrl">
 
 <div>
-    <div data-ng-cloak="" class="no-print">
+    <!-- <div data-ng-cloak="" class="no-print">
         <aside id="nav-container">
-            @include('partials.sidebar')
+            
         </aside>
-    </div>
+    </div> -->
 
     <div class="view-container">
 

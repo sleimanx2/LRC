@@ -4818,7 +4818,7 @@ fieldset[disabled] .btn-danger.active {
 
 @media (min-width: 768px) {
   .top-header {
-    height: 80px; } }
+    height: 60px; } }
 .top-header a:hover {
   text-decoration: none; }
 
@@ -4877,6 +4877,37 @@ fieldset[disabled] .btn-danger.active {
   vertical-align: middle;
   color: #ffffff;
   text-transform: uppercase; }
+
+.top-header .app-logo {
+    display: inline-block;
+    padding: 0 20px;
+    margin: 0;
+    height: 60px;
+    line-height: 60px;
+    background: #cd2026;
+    color: white;
+    margin-right: 30px;
+}
+.top-header .app-logo span {
+    margin-left: 5px;
+}
+
+.top-header .app-nav {
+    display: inline-block;
+    padding: 0 15px;
+    margin: 0;
+    height: 60px;
+    line-height: 60px;
+}
+.top-header .app-nav a {
+    color: #333!important;
+    padding: 0!important;
+    height: 60px!important;
+    font-size: 18px!important;
+}
+.top-header .app-nav:hover, .top-header .app-nav.active {
+    border-bottom: 2px solid #cd2026;
+}
 
 @media (min-width: 768px) {
   .top-header .logo > a {
@@ -4952,7 +4983,7 @@ fieldset[disabled] .btn-danger.active {
 
 @media (min-width: 768px) {
   .top-header .top-nav {
-    padding: 0 0 0 270px; }
+    padding: 0px!important; }
 
   .nav-min .top-header .top-nav {
     padding: 0 0 0 60px; } }
@@ -4961,7 +4992,7 @@ fieldset[disabled] .btn-danger.active {
   font-size: 18px;
   line-height: 22px;
   margin-right: 40px;
-  margin-top: 15px; }
+  margin-top: 0px; }
 
 .top-header .top-nav .nav-right-button {
   font-size: 18px;
@@ -4973,7 +5004,10 @@ fieldset[disabled] .btn-danger.active {
   float: left; }
 
 .top-header .top-nav .nav-left > li.nav-profile > a, .top-header .top-nav .nav-right > li.nav-profile > a {
-  padding: 10px 15px; }
+	height: 60px;
+    padding: 0 15px;
+    line-height: 50px;
+}
 
 .top-header .top-nav .nav-left > li.nav-profile .hidden-xs, .top-header .top-nav .nav-right > li.nav-profile .hidden-xs {
   padding-right: 8px; }
@@ -7663,7 +7697,7 @@ label {
   #content {
     top: 80px;
     width: auto;
-    left: 270px; } }
+    left: 0px!important; } }
 .body-special #content {
   z-index: 2;
   top: 0;
