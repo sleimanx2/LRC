@@ -32,10 +32,8 @@ function moveMap() {
         icon: location_pinImage
     });
 
-    console.log(destination_latitude);
-    console.log(destination_longitude);
 
-    if(destination_latitude && destination_longitude) {
+    if(typeof destination_latitude !== 'undefined') {
 
         var destination_coordinates = new google.maps.LatLng(destination_latitude.val(), destination_longitude.val());
 
