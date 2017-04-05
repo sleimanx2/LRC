@@ -112,14 +112,6 @@
             
             <label for="">End Time</label>
             {!! Form::text('end_time',old('end_time'), ['class' =>'form-control','data-field'=>'datetime']) !!}
-            
-            <div id="datetime-box"></div>
-            <script type="text/javascript">
-                $(document).ready(function()
-                {
-                    $("#datetime-box").DateTimePicker({dateTimeFormat:'yyyy-MM-dd HH:mm:ss'});
-                });
-            </script>
           </div>
         </div>
       </div>

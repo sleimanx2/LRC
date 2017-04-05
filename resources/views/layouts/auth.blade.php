@@ -12,17 +12,11 @@
 
         <!-- Include Fonts from the theme fonts directory -->
         <link rel="stylesheet" href="/fonts/font-awesome/css/font-awesome.min.css">
-        <link rel="stylesheet" href="/fonts/weather-icons/css/weather-icons.min.css">
-
-        <!-- Include App-Header in the vendor folder -->
-        <script type="text/javascript" src="/dist/app-header.min.js"></script>
 
         <!-- Theme's own CSS file -->
-        <link rel="stylesheet" href="/dist/main.min.css">
-
+        <link rel="stylesheet" href="/dist/app.min.css">
     </head>
-    <body data-ng-app="app" id="app" data-custom-background="" data-off-canvas-nav="" data-ng-controller="AdminAppCtrl">
-
+    <body>
         <div>
             <div>
                 @yield('content')
@@ -31,8 +25,5 @@
 
         <!--Uncomment for deployment using Grunt-->
         <script type="text/javascript" src="/dist/app.min.js"></script>
-
-
-
     </body>
 </html>

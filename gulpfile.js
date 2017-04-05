@@ -16,47 +16,25 @@ elixir(function (mix) {
 
     mix.scripts(
         [
-            'vendor/angular.min.js',
-            'vendor/angular-animate.min.js',
-            'vendor/angular-route.min.js',
-            'vendor/underscore-min.js',
-            'vendor/rocha.js',
-            'vendor/raphael.min.js',
-            'vendor/morris.min.js',
-            'vendor/flot_compiled.js',
-            'vendor/Chart.min.js',
-            'vendor/other_charts.js',
-            'vendor/angular-wizard.js',
-            'vendor/angular-ui-tree.js',
-            'vendor/jquery.vmap.min.js',
-            'vendor/select2.min.js',
-            'vendor/datetimepicker.js',
-            'extras.js',
-            'app/*.js'
+            'vendor/jquery/jquery-2.1.1.min.js',
+            'vendor/bootstrap/bootstrap.min.js',
+            'vendor/select2/select2.min.js',
+            'vendor/datetimepicker/datetimepicker.js',
+            'main.js'
         ],
-        'resources/assets/scripts',
+        'resources/assets',
         'public/dist/app.min.js'
-    );
-
-    mix.scripts(
-        [
-            'vendor/jquery-2.1.1.min.js',
-            'vendor/bootstrap.min.js'
-        ],
-        'resources/assets/scripts',
-        'public/dist/app-header.min.js'
     );
 
     mix.styles(
         [
-            'bootstrap.min.css',
-            'bootstrap-theme.min.css',
-            'select2.css',
-            'datetimepicker.css',
+            'vendor/bootstrap/bootstrap.min.css',
+            'vendor/select2/select2.css',
+            'vendor/datetimepicker/datetimepicker.css',
             'main.css'
         ],
-        'resources/assets/styles',
-        'public/dist/main.min.css'
+        'resources/assets',
+        'public/dist/app.min.css'
     );
 });
 

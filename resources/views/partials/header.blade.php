@@ -19,10 +19,10 @@
             <li class="app-logo">
                 <i class="fa fa-plus"></i><span>LRC204</span>
             </li>
-            <li class="app-nav {{ Request::is('/') ? 'active' : '' }}"><a href="{{route('home-dashboard')}}">Dashboard</a></li>
-            <li class="app-nav {{ Request::is('emergencies*') ? 'active' : '' }}"><a href="{{route('emergencies-list')}}">Emergencies</a></li>
+            <li class="app-nav {{ Request::is('/') ? 'active' : '' }}"><a href="{{ route('home-dashboard') }}">Dashboard</a></li>
+            <li class="app-nav {{ Request::is('emergencies*') ? 'active' : '' }}"><a href="{{ route('emergencies-list') }}">Emergencies</a></li>
             <li class="app-nav {{ Request::is('missions*') ? 'active' : '' }}"><a href="">Missions</a></li>
-            <li class="app-nav {{ Request::is('blood*') ? 'active' : '' }}"><a href="">Blood</a></li>
+            <li class="app-nav {{ Request::is('blood*') ? 'active' : '' }}"><a href="{{ route('blood-requests-list') }}">Blood</a></li>
             <li class="app-nav {{ Request::is('borrowings*') ? 'active' : '' }}"><a href="">Borrowings</a></li>
             <li class="app-nav {{ Request::is('sad*') ? 'active' : '' }}"><a href="">SAD</a></li>
 
