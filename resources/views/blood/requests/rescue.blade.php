@@ -97,12 +97,13 @@
                                                  <i class="fa fa-check"></i>
                                             </span>
                                         @else
-                                            <span popover="Not Confirmed" popover-placement="left" popover-trigger="mouseenter"
+                                            <span popover="Not Confirmed" popover-placement="left"
+                                                  popover-trigger="mouseenter"
                                                   class="badge badge-warning">
                                                  <i class="fa fa-times"></i>
                                             </span>
                                         @endif
-                                         |
+                                        |
                                         <span>All donors confirmed</span>
                                         @if(  $bloodRequest->confirmed )
                                             <span popover="Confirmed" popover-trigger="mouseenter"
@@ -110,7 +111,8 @@
                                                  <i class="fa fa-check"></i>
                                             </span>
                                         @else
-                                            <span popover="Not Confirmed" popover-placement="left" popover-trigger="mouseenter"
+                                            <span popover="Not Confirmed" popover-placement="left"
+                                                  popover-trigger="mouseenter"
                                                   class="badge badge-warning">
                                                  <i class="fa fa-times"></i>
                                             </span>
@@ -181,19 +183,20 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6" data-ng-controller="BloodDonationModalCtrl">
+            <div class="col-md-6">
                 {{--Start Modal Scripts--}}
+                <div class="modal fade" id="wontDonate" tabindex="-1" role="dialog"
+                     aria-labelledby="favoritesModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3>This donor can't donate before </h3>
+                            </div>
+                            {!! Form::open(['route' => 'blood-donor-wont-donate', 'method' => 'post']) !!}
 
-                <script type="text/ng-template" id="wontDonate.html">
-                    <div class="modal-header">
-                        <h3>This donor can't donate before </h3>
-                    </div>
-                    {!! Form::open(['route' => 'blood-donor-wont-donate', 'method' => 'post']) !!}
-
-                    <div class="modal-body">
-                        <input type="hidden" name="bloodDonorId" data-ng-model="user.id"
-                               data-ng-value="user.id"/>
-                        <input type="hidden" name="bloodRequestId" value="{{$bloodRequest->id}}"/>
+                            <div class="modal-body">
+                                <input type="hidden" name="bloodDonorId" id="bloodDonorId"/>
+                                <input type="hidden" name="bloodRequestId" value="{{$bloodRequest->id}}"/>
                             <span class="list-unstyled">
                                 <label class="ui-radio">
                                     <input name="delay" checked="checked" type="radio"
@@ -224,24 +227,28 @@
                                            value="{{strtotime('+1 year')}}"><span> 1 Year</span>
                                 </label>
                             </span>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" type="submit">Save</button>
+                                <button class="btn btn-warning" type="reset" ng-click="cancel()">Cancel</button>
+                            </div>
+                            {!! Form::close() !!}
+                        </div>
                     </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-primary" type="submit">Save</button>
-                        <button class="btn btn-warning" type="reset" ng-click="cancel()">Cancel</button>
-                    </div>
-                    {!! Form::close() !!}
-                </script>
+                </div>
 
-                <script type="text/ng-template" id="willDonate.html">
-                    <div class="modal-header">
-                        <h3>This donor will donate </h3>
-                    </div>
-                    {!! Form::open(['route' => 'blood-donor-will-donate', 'method' => 'post']) !!}
-                    <div class="modal-body">
+                <div class="modal fade" id="willDonate" tabindex="-1" role="dialog"
+                     aria-labelledby="favoritesModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3>This donor will donate </h3>
+                            </div>
+                            {!! Form::open(['route' => 'blood-donor-will-donate', 'method' => 'post']) !!}
+                            <div class="modal-body">
 
-                        <input type="hidden" name="donor_id" data-ng-model="user.id"
-                               data-ng-value="user.id"/>
-                        <input type="hidden" name="blood_request_id" value="{{$bloodRequest->id}}"/>
+                                <input type="hidden" name="donor_id" id="donorId"/>
+                                <input type="hidden" name="blood_request_id" value="{{$bloodRequest->id}}"/>
 
                             <span class="list-unstyled">
                                   <label class="ui-radio">
@@ -257,44 +264,48 @@
                                 </label>
                             </span>
 
-                        <div>
-                            <div class="panel-body" data-ng-controller="TimepickerCtrl">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <div ng-model="mytime" ng-change="changed()" style="display:inline-block;">
-                                            <timepicker class="ui-timepicker" hour-step="hstep" minute-step="mstep"
-                                                        show-meridian="ismeridian"></timepicker>
+                                <div>
+                                    <div class="panel-body" data-ng-controller="TimepickerCtrl">
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <div ng-model="mytime" ng-change="changed()"
+                                                     style="display:inline-block;">
+                                                    <timepicker class="ui-timepicker" hour-step="hstep"
+                                                                minute-step="mstep"
+                                                                show-meridian="ismeridian"></timepicker>
+                                                </div>
+                                                <input name="time" type="hidden" data-ng-model="mytime"
+                                                       value="[[mytime | date:'shortTime']]">
+                                            </div>
                                         </div>
-                                        <input name="time" type="hidden" data-ng-model="mytime"
-                                               value="[[mytime | date:'shortTime']]">
                                     </div>
                                 </div>
+
+                                <h4>Donation Type</h4>
+                                <span class="list-unstyled">
+
+                                    @if($bloodRequest->blood_quantity !== $bloodRequest->blood_quantity_confirmed)
+                                        <label class="ui-radio">
+                                            <input name="donation_type" checked="checked" type="radio"
+                                                   value="blood"><span> Blood</span>
+                                        </label>
+                                    @endif
+                                    @if($bloodRequest->platelets_quantity !== $bloodRequest->platelets_quantity_confirmed)
+                                        <label class="ui-radio">
+                                            <input name="donation_type" type="radio"
+                                                   value="platelets"><span> Platelets</span>
+                                        </label>
+                                    @endif
+                                </span>
                             </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" type="submit">Save</button>
+                                <button class="btn btn-warning" type="reset" ng-click="cancel()">Cancel</button>
+                            </div>
+                            {!! Form::close() !!}
                         </div>
-
-                        <h4>Donation Type</h4>
-                            <span class="list-unstyled">
-
-                                @if($bloodRequest->blood_quantity !== $bloodRequest->blood_quantity_confirmed)
-                                    <label class="ui-radio">
-                                        <input name="donation_type" checked="checked" type="radio"
-                                               value="blood"><span> Blood</span>
-                                    </label>
-                                @endif
-                                @if($bloodRequest->platelets_quantity !== $bloodRequest->platelets_quantity_confirmed)
-                                    <label class="ui-radio">
-                                        <input name="donation_type" type="radio"
-                                               value="platelets"><span> Platelets</span>
-                                    </label>
-                                @endif
-                            </span>
                     </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-primary" type="submit">Save</button>
-                        <button class="btn btn-warning" type="reset" ng-click="cancel()">Cancel</button>
-                    </div>
-                    {!! Form::close() !!}
-                </script>
+                </div>
 
                 {{--End Modal Scripts --}}
 
@@ -303,90 +314,97 @@
                         <strong><i class="fa fa-check panel-ico"></i>Successful Blood Donation</strong>
                     </div>
                     <div>
-                        <div class="modal-body">
-                            <accordion close-others="oneAtATime" class="ui-accordion ui-accordion-info">
+                        <div>
+                            <div class="panel-group" id="accordion-success-donations">
+                                <div class="panel panel-default">
+                                    @foreach($bloodDonations as $bloodDonation)
+
+                                        <div class="panel-heading">
+                                            <div data-toggle="collapse" style="cursor: pointer;" data-parent="#accordion-success-donations"
+                                                 href="#{{ 'collapse-success-'.$bloodDonation->id  }}">
+                                                {!! Html::gender($bloodDonation->donor->gender) !!}
+                                                <span class="text-small">{{ $bloodDonation->donor->first_name }} {{$bloodDonation->donor->last_name}}</span>
+
+                                                <span class="pull-right">
+                                                    @if($bloodDonation->platelets)
+                                                        <i popover="Platelets" popover-trigger="mouseenter"
+                                                           class="fa fa-heart color-warning"></i>
+                                                    @else
+                                                        <i popover="Blood" popover-trigger="mouseenter"
+                                                           class="fa fa-heart color-danger"></i>
+                                                    @endif
+
+                                                    <span popover="Donation Date" popover-trigger="mouseenter"
+                                                          class="badge">
+                                                        {{ $bloodDonation->will_donate_on}}
+                                                        |
+                                                        {{ $bloodDonation->time}}
+                                                             </span>
+                                                    @if(  $bloodDonation->confirmed )
+                                                        <span popover="Confirmed" popover-trigger="mouseenter"
+                                                              class="badge badge-success">
+                                                             <i class="fa fa-check"></i>
+                                                        </span>
+                                                    @else
+                                                        <span popover="Not Confirmed" popover-trigger="mouseenter"
+                                                              class="badge badge-warning">
+                                                             <i class="fa fa-times"></i>
+                                                        </span>
+                                                    @endif
+
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div id="{{ 'collapse-success-'.$bloodDonation->id  }}"
+                                             class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                                <ul class="list-unstyled list-infolist-unstyled list-info">
+                                                    <li>
+                                                        <span class="icon fa fa-phone"></span>
+                                                        <label>Phone</label>
+
+                                                        {{ $bloodDonation->donor->phone_primary or 'Not defined'}}
+                                                        /
+                                                        {{ $bloodDonation->donor->phone_secondary or ''}}
+                                                    </li>
+                                                    <li>
+                                                        <span class="icon fa fa-question"></span>
+                                                        <label>Contacted By</label>
+
+                                                        {{ $bloodDonation->user->first_name or 'Not defined'}}
+                                                        {{ $bloodDonation->user->last_name or ''}}
+                                                    </li>
+                                                    <li>
+                                                        @if( ! $bloodDonation->confirmed )
+                                                            {!!Form::open([
+                                                            'route'=>['blood-donation-confirmed',$bloodDonation->id],
+                                                            'style'=>'display:inline',
+                                                            'onsubmit'=>'return confirm("Are you sure you want to confirm
+                                                            '.$bloodDonation->user->first_name.' donation ?");'
+                                                            ]) !!}
+
+                                                            <button type="submit" class="btn btn-success"
+                                                                    popover="Confirm"
+                                                                    popover-trigger="mouseenter">
+                                                                Confirm
+                                                            </button>
+
+                                                            {!!Form::close()!!}
+                                                        @endif
+
+                                                        <button onclick="openWontDonate({{ $bloodDonation->donor->id }})"
+                                                                class="btn btn-bordered-danger">
+                                                            Can't Donate
+                                                        </button>
 
 
-                                @foreach($bloodDonations as $bloodDonation)
-
-                                    <accordion-group>
-                                        <accordion-heading>
-                                            {!! Html::gender($bloodDonation->donor->gender) !!}
-                                            <span class="text-small">{{ $bloodDonation->donor->first_name }} {{$bloodDonation->donor->last_name}}</span>
-
-                                    <span class="pull-right">
-                                        @if($bloodDonation->platelets)
-                                            <i popover="Platelets" popover-trigger="mouseenter"
-                                               class="fa fa-heart color-warning"></i>
-                                        @else
-                                            <i popover="Blood" popover-trigger="mouseenter"
-                                               class="fa fa-heart color-danger"></i>
-                                        @endif
-
-                                        <span popover="Donation Date" popover-trigger="mouseenter" class="badge">
-                                            {{ $bloodDonation->will_donate_on}}
-                                            |
-                                            {{ $bloodDonation->time}}
-                                                 </span>
-                                        @if(  $bloodDonation->confirmed )
-                                            <span popover="Confirmed" popover-trigger="mouseenter"
-                                                  class="badge badge-success">
-                                                 <i class="fa fa-check"></i>
-                                            </span>
-                                            @else
-                                                <span popover="Not Confirmed" popover-trigger="mouseenter"
-                                                      class="badge badge-warning">
-                                                 <i class="fa fa-times"></i>
-                                            </span>
-                                        @endif
-
-                                    </span>
-                                        </accordion-heading>
-                                        <ul class="list-unstyled list-infolist-unstyled list-info">
-                                            <li>
-                                                <span class="icon fa fa-phone"></span>
-                                                <label>Phone</label>
-
-                                                {{ $bloodDonation->donor->phone_primary or 'Not defined'}}
-                                                /
-                                                {{ $bloodDonation->donor->phone_secondary or ''}}
-                                            </li>
-                                            <li>
-                                                <span class="icon fa fa-question"></span>
-                                                <label>Contacted By</label>
-
-                                                {{ $bloodDonation->user->first_name or 'Not defined'}}
-                                                {{ $bloodDonation->user->last_name or ''}}
-                                            </li>
-                                            <li>
-                                                @if( ! $bloodDonation->confirmed )
-                                                    {!!Form::open([
-                                                    'route'=>['blood-donation-confirmed',$bloodDonation->id],
-                                                    'style'=>'display:inline',
-                                                    'onsubmit'=>'return confirm("Are you sure you want to confirm
-                                                    '.$bloodDonation->user->first_name.' donation ?");'
-                                                    ]) !!}
-
-                                                    <button type="submit" class="btn btn-success"
-                                                            popover="Confirm"
-                                                            popover-trigger="mouseenter">
-                                                        Confirm
-                                                    </button>
-
-                                                    {!!Form::close()!!}
-                                                @endif
-
-                                                <button ng-click="openWontDonate({{ $bloodDonation->donor->id }})"
-                                                        class="btn btn-bordered-danger">
-                                                    Can't Donate
-                                                </button>
-
-
-                                            </li>
-                                        </ul>
-                                    </accordion-group>
-                                @endforeach
-                            </accordion>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -399,71 +417,82 @@
                             <strong><i class="fa fa-list panel-ico"></i>Blood Donors Suggestions</strong>
                         </div>
 
-                        <div class="panel-body">
+                        <div>
+                            <div class="panel-group" id="accordion-potential-donations">
+                                <div class="panel panel-default">
+                                    @foreach($bloodDonors as $bloodDonor)
+                                        <div class="panel-heading">
+                                            <div data-toggle="collapse" style="cursor: pointer;" data-parent="#accordion-potential-donations"
+                                                 href="#{{ 'collapse-potential-'.$bloodDonor->id  }}">
+                                                {!! Html::gender($bloodDonor->gender) !!}
 
-                            <accordion close-others="oneAtATime" class="ui-accordion ui-accordion-info">
+                                                @if($bloodDonor->golden_donor)
+                                                    <span popover="Golden Donor" popover-trigger="mouseenter"
+                                                          class="badge badge-warning">GD</span>
+                                                @endif
 
+                                                <span class="text-small">{{ $bloodDonor->first_name }} {{$bloodDonor->last_name}}</span>
 
-                                @foreach($bloodDonors as $bloodDonor)
+                                                <span class="pull-right">
+                                                    <span class="badge badge-distance" popover="Distance"
+                                                          popover-trigger="mouseenter">{{Html::distance($bloodDonor->distance)}}</span>
+                                                    <span class="badge">{{ Html::age($bloodDonor->birthday) }}
+                                                        Years </span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div id="{{ 'collapse-potential-'.$bloodDonor->id  }}"
+                                             class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                                <ul class="list-unstyled list-infolist-unstyled list-info">
+                                                    <li>
+                                                        <span class="icon fa fa-phone"></span>
+                                                        <label>Phone</label>
 
-                                    <accordion-group>
-                                        <accordion-heading>
-                                            {!! Html::gender($bloodDonor->gender) !!}
+                                                        {{ $bloodDonor->phone_primary or 'Not defined'}}
+                                                        /
+                                                        {{ $bloodDonor->phone_secondary or ''}}
+                                                    </li>
+                                                    <li>
+                                                        <span class="icon fa fa-envelope"></span>
+                                                        <label>Email</label>
 
-                                            @if($bloodDonor->golden_donor)
-                                                <span popover="Golden Donor" popover-trigger="mouseenter"
-                                                      class="badge badge-warning">GD</span>
-                                            @endif
+                                                        {{ $bloodDonor->email or 'Not defined'}}
 
-                                            <span class="text-small">{{ $bloodDonor->first_name }} {{$bloodDonor->last_name}}</span>
-
-                                    <span class="pull-right">
-                                        <span class="badge badge-distance" popover="Distance"
-                                              popover-trigger="mouseenter">{{Html::distance($bloodDonor->distance)}}</span>
-                                        <span class="badge">{{ Html::age($bloodDonor->birthday) }}
-                                            Years </span>
-
-                                    </span>
-
-                                        </accordion-heading>
-                                        <ul class="list-unstyled list-infolist-unstyled list-info">
-                                            <li>
-                                                <span class="icon fa fa-phone"></span>
-                                                <label>Phone</label>
-
-                                                {{ $bloodDonor->phone_primary or 'Not defined'}}
-                                                /
-                                                {{ $bloodDonor->phone_secondary or ''}}
-                                            </li>
-                                            <li>
-                                                <span class="icon fa fa-envelope"></span>
-                                                <label>Email</label>
-
-                                                {{ $bloodDonor->email or 'Not defined'}}
-
-                                            </li>
-                                            <li>
-                                                <button ng-click="openWillDonate({{ $bloodDonor->id }})"
-                                                        class="btn btn-bordered-success">
-                                                    Will Donate
-                                                </button>
-                                                <button ng-click="openWontDonate({{ $bloodDonor->id }})"
-                                                        class="btn btn-bordered-danger">
-                                                    Can't Donate
-                                                </button>
-                                            </li>
-                                        </ul>
-                                    </accordion-group>
-                                @endforeach
-                            </accordion>
+                                                    </li>
+                                                    <li>
+                                                        <button onclick="openWillDonate({{ $bloodDonor->id }})"
+                                                                class="btn btn-bordered-success">
+                                                            Will Donate
+                                                        </button>
+                                                        <button onclick="openWontDonate({{ $bloodDonor->id }})"
+                                                                class="btn btn-bordered-danger">
+                                                            Can't Donate
+                                                        </button>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                            @endif
                         </div>
-
                     </div>
-                @endif
-
             </div>
+            @endsection
 
-        </div>
+            @section('script')
+                <script>
+                    function openWillDonate(id) {
+                        $('#donorId').val(id);
+                        $('#willDonate').modal('show');
+                    }
 
-    </div>
+                    function openWontDonate(id) {
+                        $('#bloodDonorId').val(id);
+                        $('#wontDonate').modal('show');
+                    }
+
+                </script>
 @endsection

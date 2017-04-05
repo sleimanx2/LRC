@@ -59,5 +59,4 @@ function moveMap() {
     // Moving the map to the marker
     map.panTo(location_coordinates);
     map.setZoom(12);
-
 }
