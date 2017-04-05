@@ -30,7 +30,14 @@ elixir(function (mix) {
         [
             'vendor/bootstrap/bootstrap.min.css',
             'vendor/select2/select2.css',
-            'vendor/datetimepicker/datetimepicker.css',
+            'vendor/datetimepicker/datetimepicker.css'
+        ],
+        'resources/assets',
+        'public/dist/vendor.min.css'
+    );
+
+    mix.styles(
+        [
             'main.css'
         ],
         'resources/assets',
