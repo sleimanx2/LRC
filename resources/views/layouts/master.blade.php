@@ -17,6 +17,12 @@
 
     <!-- Theme's own CSS file -->
     <link rel="stylesheet" href="/dist/app.min.css">
+
+    <!-- Scripts -->
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places&key=AIzaSyC2OagaYbI14yXJ9D_i-4401gYT0FZN9LY"></script>
+
+    <script type="text/javascript" src="/dist/app.min.js"></script>
+
 </head>
 <body>
     <div>
@@ -49,12 +55,5 @@
             </section>
         </div>
     </div>
-
-    <!-- Scripts -->
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places&key=AIzaSyBTy4pD1NAVrkJFVNry7GVRfec10Q9cw5Q"></script>
-
-    <script type="text/javascript" src="/dist/app.min.js"></script>
-
-    @yield('scripts')
 </body>
 </html>
