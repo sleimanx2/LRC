@@ -1,5 +1,19 @@
 @extends('layouts.master')
 
+@section('sub-header')
+<header class="clearfix">
+    <div class="top-nav">
+        <ul class="nav-left list-unstyled">
+            <li>test</li>
+        </ul>
+
+        <ul class="nav-right pull-right list-unstyled">
+            
+        </ul>
+    </div>
+</header>
+@endsection
+
 @section('content')
     <div class="page">
         <div class="page page-general">
