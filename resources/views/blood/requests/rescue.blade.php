@@ -267,15 +267,13 @@
                                 <div>
                                     <div class="panel-body" data-ng-controller="TimepickerCtrl">
                                         <div class="row">
-                                            <div class="col-sm-4">
-                                                <div ng-model="mytime" ng-change="changed()"
-                                                     style="display:inline-block;">
-                                                    <timepicker class="ui-timepicker" hour-step="hstep"
-                                                                minute-step="mstep"
-                                                                show-meridian="ismeridian"></timepicker>
+                                            <div>
+                                                <div class="form-group" data-ng-controller="DonateDatepickerCtrl">
+                                                    <label for=""> <i class="fa fa-clock-o"></i> Will donate at </label>
+                                                    <div class="input-group ui-datepicker">
+                                                        <input name="time" required class="form-control timepicker">
+                                                    </div>
                                                 </div>
-                                                <input name="time" type="hidden" data-ng-model="mytime"
-                                                       value="[[mytime | date:'shortTime']]">
                                             </div>
                                         </div>
                                     </div>
@@ -320,7 +318,8 @@
                                     @foreach($bloodDonations as $bloodDonation)
 
                                         <div class="panel-heading">
-                                            <div data-toggle="collapse" style="cursor: pointer;" data-parent="#accordion-success-donations"
+                                            <div data-toggle="collapse" style="cursor: pointer;"
+                                                 data-parent="#accordion-success-donations"
                                                  href="#{{ 'collapse-success-'.$bloodDonation->id  }}">
                                                 {!! Html::gender($bloodDonation->donor->gender) !!}
                                                 <span class="text-small">{{ $bloodDonation->donor->first_name }} {{$bloodDonation->donor->last_name}}</span>
@@ -422,7 +421,8 @@
                                 <div class="panel panel-default">
                                     @foreach($bloodDonors as $bloodDonor)
                                         <div class="panel-heading">
-                                            <div data-toggle="collapse" style="cursor: pointer;" data-parent="#accordion-potential-donations"
+                                            <div data-toggle="collapse" style="cursor: pointer;"
+                                                 data-parent="#accordion-potential-donations"
                                                  href="#{{ 'collapse-potential-'.$bloodDonor->id  }}">
                                                 {!! Html::gender($bloodDonor->gender) !!}
 

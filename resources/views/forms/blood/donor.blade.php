@@ -12,26 +12,16 @@
 <div class="form-group">
     <label for="">Blood Type</label>
     {!! Form::select('blood_type_id',$bloodTypes,
-    old('blood_type_id'), ['class' => 'form-control']) !!}
+    old('blood_type_id')) !!}
 </div>
-<div class="form-group" data-ng-controller="DatepickerCtrl">
-    <label for="">Birth Date</label>
-
+<div class="form-group" data-ng-controller="DonateDatepickerCtrl">
+    <label for="">Birthday</label>
     <div class="input-group ui-datepicker">
-        {!! Form::text('birthday', old('birthday'), [
-        'class' => 'form-control',
-        'id'=>'datepicker',
-        'datepicker-popup'=>'yyyy-M-dd',
-        'ng-model'=>'dt',
-        'ng-value'=> old('birthday'),
-        'is-open'=>'opened',
-        'datepicker-options'=>'dateOptions',
-        'date-disabled'=>'disabled(date, mode)',
-        'ng-required'=>'true',
-        'close-text'=>'Close',
-        ]) !!}
+            {!! Form::text('birthday', old('birthday'), [
+            'class' => 'form-control datepicker',
+            ]) !!}
 
-        <span class="input-group-addon" ng-click="open($event)"><i class="fa fa-calendar"></i></span>
+    <span class="input-group-addon" ng-click="open($event)"><i class="fa fa-calendar"></i></span>
     </div>
 </div>
 <div class="form-group">
@@ -55,10 +45,10 @@
 </div>
 <div class="form-group">
     <label for="">Male</label>
-    {!! Form::radio('gender', 'male', true); !!}
+    {!! Form::radio('gender', 'male', true) !!}
     &nbsp;&nbsp;
     <label for="">Female</label>
-    {!! Form::radio('gender', 'female', false); !!}
+    {!! Form::radio('gender', 'female', false) !!}
 </div>
 <hr/>
     {{--Location Field--}}
@@ -74,16 +64,7 @@
 
     <div class="input-group ui-datepicker">
         {!! Form::text('incapable_till', old('incapable_till'), [
-        'class' => 'form-control',
-        'id'=>'donordatepicker',
-        'datepicker-popup'=>'yyyy-M-dd',
-        'ng-model'=>'dt',
-        'ng-value'=> old('incapable_till'),
-        'is-open'=>'opened',
-        'datepicker-options'=>'dateOptions',
-        'date-disabled'=>'disabled(date, mode)',
-        'ng-required'=>'false',
-        'close-text'=>'Close',
+        'class' => 'form-control datepicker',
         ]) !!}
 
         <span class="input-group-addon" ng-click="open($event)"><i class="fa fa-calendar"></i></span>

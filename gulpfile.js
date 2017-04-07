@@ -19,6 +19,7 @@ elixir(function (mix) {
             'vendor/jquery/jquery-2.1.1.min.js',
             'vendor/bootstrap/bootstrap.min.js',
             'vendor/select2/select2.min.js',
+            'vendor/moment/moment.min.js',
             'vendor/datetimepicker/datetimepicker.js',
             'main.js'
         ],
