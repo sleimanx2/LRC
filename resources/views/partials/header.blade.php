@@ -20,13 +20,13 @@
                 <i class="fa fa-plus"></i><span>LRC204</span>
             </li>
             <li class="app-nav {{ Request::is('/') ? 'active' : '' }}"><a href="{{ route('home-dashboard') }}">Dashboard</a></li>
-            <li class="app-nav {{ Request::is('emergencies*') ? 'active' : '' }}"><a href="{{ route('emergencies-list') }}">Emergencies</a></li>
-            <li class="app-nav {{ Request::is('missions*') ? 'active' : '' }}"><a href="">Missions</a></li>
+            <!-- <li class="app-nav {{ Request::is('emergencies*') ? 'active' : '' }}"><a href="{{ route('emergencies-list') }}">Emergencies</a></li> -->
+            <!-- <li class="app-nav {{ Request::is('missions*') ? 'active' : '' }}"><a href="">Missions</a></li> -->
             <li class="app-nav {{ Request::is('blood*') ? 'active' : '' }}"><a href="{{ route('blood-requests-list') }}">Blood</a></li>
-            <li class="app-nav {{ Request::is('borrowings*') ? 'active' : '' }}"><a href="">Borrowings</a></li>
-            <li class="app-nav {{ Request::is('sad*') ? 'active' : '' }}"><a href="">SAD</a></li>
+            <!-- <li class="app-nav {{ Request::is('borrowings*') ? 'active' : '' }}"><a href="">Borrowings</a></li> -->
+            <!-- <li class="app-nav {{ Request::is('sad*') ? 'active' : '' }}"><a href="">SAD</a></li> -->
 
-            <li class="dropdown text-normal nav-profile">
+            <!-- <li class="dropdown text-normal nav-profile">
                 <a href="javascript:;" class="dropdown-toggle">
                     <span class="text-small">{{Auth::user()->first_name}} {{Auth::user()->last_name}}</span>
                 </a>
@@ -46,23 +46,13 @@
                         </li>
                     </ul>
                 </div>
-            </li>
+            </li> -->
         </ul>
 
-
-        <ul class="nav-right-button pull-right list-unstyled">
-
-            <li>
-                <a href="{{route('emergency-create')}}" class="btn btn-primary">
-                    Emergency &nbsp;&nbsp;<i class="fa fa-plus-circle"></i>
-                </a>
-                <a href="{{ route('blood-request-create') }}" class="btn btn-warning">
-                    Blood &nbsp;&nbsp;<i class="fa fa-plus-circle"></i>
-                </a>
-            </li>
-
+        <ul class="nav-right pull-right list-unstyled">
+            <li><a href="{{route('emergency-create')}}" class="btn btn-header red"><i class="fa fa-ambulance"></i></a></li>
+            <li><a href="{{ route('blood-request-create') }}" class="btn btn-header red"><i class="fa fa-tint"></i></a></li>
+            <li><a href="{{ route('blood-request-create') }}" class="btn btn-header light"><i class="fa fa-phone"></i></a></li>
         </ul>
     </div>
 </header>
-
-
