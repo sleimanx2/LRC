@@ -2399,12 +2399,12 @@ input.input-dark:focus {
 
 .btn-header {
   border: 0; 
-  height: 54px!important;
-  line-height: 54px;
-  width: 54px;
+  height: 44px!important;
+  line-height: 44px;
+  width: 44px;
   margin-top: 3px;
   margin-right: 3px;
-  padding: 0 15px!important;
+  padding: 0 10px!important;
   box-shadow: none;
   border-radius: 0;
   font-size: 18px;
@@ -4105,20 +4105,15 @@ fieldset[disabled] .btn-danger.active {
     top: 0;
     left: 0;
     right: 0;
-    height: 60px;
-    background-color: #ffffff;
-    -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-    -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-    -ms-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-    -o-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); }
+    height: 50px;
+    background-color: #ffffff;}
 
   .top-header .app-logo {
      display: inline-block;
-     padding: 0 35px;
+     padding: 0px 35px 0 20px;
      margin: 0;
-     height: 60px;
-     line-height: 60px;
+     height: 50px;
+     line-height: 50px;
      color: #cd2026;
   }
  .top-header .app-logo span {
@@ -4129,8 +4124,8 @@ fieldset[disabled] .btn-danger.active {
      display: inline-block;
      padding: 0 15px;
      margin: 0;
-     height: 60px;
-     line-height: 60px;
+     height: 50px;
+     line-height: 50px;
  }
  .top-header .app-nav a {
      color: #333!important;
@@ -4145,20 +4140,33 @@ fieldset[disabled] .btn-danger.active {
  .sub-header {
   z-index: 10;
   position: absolute;
-  top: 60px;
+  top: 50px;
   left: 0;
   right: 0;
-  height: 30px;
-  background-color: #ffffff;
+  max-height: 40px;
+  padding: 0 20px;
+  background-color: #f8f8f8;
   -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   -ms-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   -o-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); }
 
+ .sub-header .page-title {
+    font-size: 16px;
+    line-height: 40px;
+    margin: 0;
+    display: inline-block;
+ }
+
+ .sub-header .buttons {
+    margin: 0;
+    padding: 3px 0;
+ }
+
 @media (min-width: 768px) {
   .top-header {
-    height: 60px; } }
+    height: 50px; } }
 .top-header a:hover {
   text-decoration: none; }
 
@@ -4300,8 +4308,8 @@ fieldset[disabled] .btn-danger.active {
 .top-header .top-nav .nav-right {
   font-size: 18px;
   line-height: 22px;
-  margin-right: 40px;
-  margin-top: 0px; }
+  margin: 0;
+  margin-right: 40px; }
 
 .top-header .top-nav .nav-right-button {
   font-size: 18px;
@@ -6447,6 +6455,9 @@ button.toast-close-button {
 .page {
   padding: 15px; }
 
+.page-general {
+  padding: 15px 30px; }
+
 .page-form-ele h3 {
   margin: 0; }
 
@@ -7001,7 +7012,7 @@ label {
 
 @media (min-width: 768px) {
   #content {
-    top: 60px;
+    top: 90px;
     width: auto;
     left: 0px!important; } }
 .body-special #content {
