@@ -1,5 +1,14 @@
 @extends('layouts.master')
 
+@section('sub-header')
+<div class="clearfix">
+    <h5 class="page-title">Blood Requests</h5>
+    <ul class="list-unstyled buttons pull-right">
+        <li><a href="" class="btn btn-sm btn-success"><i class="fa fa-plus"></i>&nbsp;&nbsp;Blood Request</a></li>
+    </ul>
+</div>
+@endsection
+
 @section('content')
     <div class="page">
         <section class="panel panel-default table-dynamic">

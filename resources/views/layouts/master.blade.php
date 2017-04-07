@@ -27,6 +27,9 @@
                 <section id="header" class="top-header">
                     @include('partials.header')
                 </section>
+                <section id="sub-header" class="sub-header">
+                    @yield('sub-header')
+                </section>
             </div>
 
             <section id="content" class="animate-fade-up">
