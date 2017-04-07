@@ -73,12 +73,21 @@ function initSelect2(){
         $("select").select2();
 }
 
+function initDateTimePicker(){
+
+    $('.datetimepicker').datetimepicker();
+    $('.datepicker').datetimepicker({ format:'YYYY-MM-DD'});
+    $('.timepicker').datetimepicker({ format: 'LT'});
+
+}
+
 /*
 * Boot function that is called on each page request
 */
 function boot(){
     $(document).ready(function() {
         initSelect2();
+        initDateTimePicker();
     });
 }
 
