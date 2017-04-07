@@ -1,4 +1,7 @@
 
+/*
+ * Init a blank google map
+ */
 function initMap()
 {
     var mapOptions = {
@@ -8,7 +11,9 @@ function initMap()
     window.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 }
 
-
+/*
+* Helper method called when the location is changed in the location/destination fields
+*/
 function moveMap() {
     // Getting coordinates
     var location_coordinates = new google.maps.LatLng(location_latitude.val(), location_longitude.val());
@@ -60,3 +65,21 @@ function moveMap() {
     map.panTo(location_coordinates);
     map.setZoom(12);
 }
+
+/*
+* Convert all select input to select2 instances
+*/
+function initSelect2(){
+        $("select").select2();
+}
+
+/*
+* Boot function that is called on each page request
+*/
+function boot(){
+    $(document).ready(function() {
+        initSelect2();
+    });
+}
+
+boot();
