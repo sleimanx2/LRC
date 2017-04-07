@@ -21,7 +21,14 @@
             <li class="app-nav {{ Request::is('/') ? 'active' : '' }}"><a href="{{ route('home-dashboard') }}">Dashboard</a></li>
             <!-- <li class="app-nav {{ Request::is('emergencies*') ? 'active' : '' }}"><a href="{{ route('emergencies-list') }}">Emergencies</a></li> -->
             <!-- <li class="app-nav {{ Request::is('missions*') ? 'active' : '' }}"><a href="">Missions</a></li> -->
-            <li class="app-nav {{ Request::is('blood*') ? 'active' : '' }}"><a href="{{ route('blood-requests-list') }}">Blood</a></li>
+            <li class="dropdown app-nav {{ Request::is('blood*') ? 'active' : '' }}">
+                <a class="dropdown-toggle" href="javascript:void(0);" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Blood</a>
+
+                <ul class="dropdown-menu">
+                    <li><a href="{{ route('blood-requests-list') }}">Blood Requests</a></li>
+                    <li><a href="{{ route('blood-donors-list') }}">Blood Donors</a></li>
+                </ul>
+            </li>
             <!-- <li class="app-nav {{ Request::is('borrowings*') ? 'active' : '' }}"><a href="">Borrowings</a></li> -->
             <!-- <li class="app-nav {{ Request::is('sad*') ? 'active' : '' }}"><a href="">SAD</a></li> -->
 
