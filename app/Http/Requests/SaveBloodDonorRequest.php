@@ -37,7 +37,7 @@ class SaveBloodDonorRequest extends Request {
 
         if ( $this->route()->getName() == 'blood-donor-update' )
         {
-            $rules['email'] = $rules['email'] . ',' . $this->route()->getParameter('id');
+            $rules['email'] = $rules['email'] . ',' . $this->route('id');
         }
 
         return $rules;
