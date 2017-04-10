@@ -28,4 +28,18 @@ class Contact extends Model {
         return $this->belongsTo('LRC\Data\Contacts\ContactCategory');
     }
 
+    /**
+     * Returns all contacts category
+     */
+    public function getBloodBanksList()
+    {
+        $list = $this->whereHas('category',function($q){
+
+            $q->where('serves_blood','=',1);
+
+        })->orderBy('name')->pluck('name','id');
+
+        return $list;
+    }
+
 }

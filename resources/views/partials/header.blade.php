@@ -16,7 +16,7 @@
                         ><i class="fa fa-bars"></i></a>
             </li> -->
             <li class="app-logo">
-                <i class="fa fa-plus"></i><span>LRC204</span>
+                <i class="fa fa-plus"></i><span>LRC<b>204</b></span>
             </li>
             <li class="app-nav {{ Request::is('/') ? 'active' : '' }}"><a href="{{ route('home-dashboard') }}">Dashboard</a></li>
             <!-- <li class="app-nav {{ Request::is('emergencies*') ? 'active' : '' }}"><a href="{{ route('emergencies-list') }}">Emergencies</a></li> -->
@@ -56,9 +56,9 @@
         </ul>
 
         <ul class="nav-right pull-right list-unstyled">
-            <li><a href="{{route('emergency-create')}}" class="btn btn-header red"><i class="fa fa-ambulance"></i></a></li>
-            <li><a href="{{ route('blood-request-create') }}" class="btn btn-header red"><i class="fa fa-tint"></i></a></li>
-            <li><a href="{{ route('blood-request-create') }}" class="btn btn-header light"><i class="fa fa-phone"></i></a></li>
+            <!-- <li><a href="javascript:void(0)" class="btn btn-header red" data-toggle="modal" data-target="#modalAddEmergency"><i class="fa fa-ambulance"></i></a></li> -->
+            <li><button class="btn btn-header red" data-toggle="modal" data-target="#modalAddBloodRequest"><i class="fa fa-tint"></i></button></li>
+            <li><button class="btn btn-header light" onclick="showPhonebookSidebar()"><i class="fa fa-phone"></i></button></li>
         </ul>
     </div>
 </header>

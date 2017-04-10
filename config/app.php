@@ -164,6 +164,7 @@ return [
          LRC\Providers\AppServiceProvider::class,
          LRC\Providers\AuthServiceProvider::class,
          LRC\Providers\EventServiceProvider::class,
+         LRC\Providers\FormServiceProvider::class,
          LRC\Providers\RouteServiceProvider::class,
         //  LRC\Providers\BroadcastServiceProvider::class,
          LRC\Providers\ExtendedHtmlServiceProvider::class,

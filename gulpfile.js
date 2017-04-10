@@ -21,6 +21,7 @@ elixir(function (mix) {
             'vendor/select2/select2.min.js',
             'vendor/moment/moment.min.js',
             'vendor/datetimepicker/datetimepicker.js',
+            'vendor/datatables/js/jquery.datatables.min.js',
             'main.js'
         ],
         'resources/assets',
@@ -31,7 +32,8 @@ elixir(function (mix) {
         [
             'vendor/bootstrap/bootstrap.min.css',
             'vendor/select2/select2.css',
-            'vendor/datetimepicker/datetimepicker.css'
+            'vendor/datetimepicker/datetimepicker.css',
+            'vendor/datatables/css/jquery.datatables.min.css',
         ],
         'resources/assets',
         'public/dist/vendor.min.css'

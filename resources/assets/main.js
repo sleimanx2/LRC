@@ -1,3 +1,29 @@
+/*
+ * Phonebook Functions
+ */
+$(document).ready(function() {
+    $('#phonebookTable').DataTable({
+        "paging": false,
+        "info": false,
+        "ordering": true,
+        "scrollY": ($(window).height() - 125) + "px",
+        "scrollCollapse": false,
+        "order": [ [1,'desc'], [5,'asc'], [2,'asc'] ],
+        "oLanguage": {
+            "sEmptyTable": function() { return "No Records Found"; },
+            "sZeroRecords": function() { return "No Records Found" }
+        }
+    });
+});
+
+function showPhonebookSidebar() {
+    $(".phonebook-sidebar").addClass("open");
+}
+
+function hidePhonebookSidebar() {
+    $(".phonebook-sidebar").removeClass("open");
+}
+
 
 /*
  * Init a blank google map

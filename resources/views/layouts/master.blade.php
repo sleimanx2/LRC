@@ -22,6 +22,10 @@
 </head>
 <body>
     <div>
+        <div class="phonebook-container">
+            @include('partials.phonebook')
+        </div>
+
         <div class="view-container">
             <div class="no-print">
                 <section id="header" class="top-header">
@@ -54,6 +58,8 @@
             </section>
         </div>
     </div>
+
+    @include('partials.common')
 
 @yield('script')
 </body>

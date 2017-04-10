@@ -24,7 +24,7 @@
 @section('content')
     <div class="page">
         <section class="panel panel-default table-dynamic">
-            <div class="panel panel-default">
+            <!-- <div class="panel panel-default">
                 <div class="panel-heading"><strong><i class="fa fa-list panel-ico"></i>List of blood requests</strong>
                 </div>
                 <div class="table-filters">
@@ -53,7 +53,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             @if(!$bloodRequests->count())
                 <div class="alert alert-warning">No result found !</div>
