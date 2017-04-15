@@ -22,7 +22,8 @@
 </head>
 <body>
     <div>
-        <div class="phonebook-container">
+        <div class="phonebook-container open">
+            <div class="overlay" onclick="hidePhonebookSidebar()"></div>
             @include('partials.phonebook')
         </div>
 
