@@ -24,37 +24,6 @@
 @section('content')
     <div class="page">
         <section class="panel panel-default table-dynamic">
-            <!-- <div class="panel panel-default">
-                <div class="panel-heading"><strong><i class="fa fa-list panel-ico"></i>List of blood requests</strong>
-                </div>
-                <div class="table-filters">
-                    <div class="row">
-                        <div class="col-sm-5 hidden-xs pull-right">
-                            <a href="{{ route('blood-request-create') }}"
-                               class="btn btn-warning btn-width-long pull-right">
-                                Add a blood request <i class="fa fa-plus-circle"></i>
-                            </a>
-                        </div>
-                        <div class="col-sm-7">
-                            <form class="form-inline ng-pristine ng-valid" role="form" method="GET"
-                                  action="{{ route('blood-requests-list') }}">
-
-                                <div class="form-group">
-                                    <input type="text" name="search" value="{{ Request::get('search') }}"
-                                           placeholder="Search patient name"
-                                           class="form-control ng-pristine ng-valid">
-                                </div>
-                                <div class="form-group">
-                                <span>
-                                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                                </span>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-
             @if(!$bloodRequests->count())
                 <div class="alert alert-warning">No result found !</div>
             @else
@@ -108,17 +77,32 @@
                                 'method'=>'delete',
                                 'route'=>['blood-request-destroy',$bloodRequest->id],
                                 'style'=>'display:inline',
-                                'onsubmit'=>'return confirm("Are you sure you want to delete
-                                '.$bloodRequest->patient_name.'\'s request?");'
+                                'id'=>'delete-request-'.$bloodRequest->id.'-form'
                                 ]) !!}
 
-                                <button type="submit" class="btn btn-danger btn-sm hidden-xs" popover="Delete"
+                                <button id = 'delete-request-{{$bloodRequest->id}}' type="submit" class="btn btn-danger btn-sm hidden-xs" popover="Delete"
                                         popover-trigger="mouseenter"><i
                                             class="fa fa-remove"></i>
                                 </button>
 
                                 {!!Form::close()!!}
-
+                                <script type="text/javascript">
+                                  $("#delete-request-{{ $bloodRequest->id }}").click(function(e){
+                                    swal({
+                                      title: "Are you sure?",
+                                      type: "warning",
+                                      showCancelButton: true,
+                                      confirmButtonColor: "#DD6B55",
+                                      confirmButtonText: "Yes, delete it!",
+                                      closeOnConfirm: false
+                                    },
+                                    function(){
+                                      $('#delete-request-{{$bloodRequest->id}}-form').submit();
+                                    });
+                                    e.preventDefault();
+                                    return false;
+                                  });
+                                </script>
                             </td>
                         </tr>
                     @endforeach
