@@ -4,7 +4,7 @@
 <div class="clearfix">
     <h5 class="page-title">Blood Requests</h5>
     <ul class="list-unstyled toolbar pull-right">
-        <li><a href="" class="btn btn-action btn-success"><i class="fa fa-plus"></i>&nbsp;&nbsp;Blood Request</a></li>
+        <li><a href="" class="btn btn-action btn-success" data-toggle="modal" data-target="#modalAddBloodRequest"><i class="fa fa-plus"></i>&nbsp;&nbsp;Blood Request</a></li>
         <li>
             <form class="form-inline ng-pristine ng-valid" role="form" method="GET" action="{{ route('blood-requests-list') }}">
                 <div class="form-group">

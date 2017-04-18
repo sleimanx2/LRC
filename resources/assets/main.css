@@ -4184,6 +4184,7 @@ fieldset[disabled] .btn-danger.active {
 
  .sub-header .page-title {
     font-size: 16px;
+    font-weight: bold;
     line-height: 50px;
     margin: 0;
     display: inline-block;
@@ -7336,4 +7337,24 @@ label {
 
 #modalDial .dial-buttons .btn {
   margin-right: 10px;
+}
+
+.blood-type-select .select2-choice {
+  height: 180px;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
+  background: none;
+  border: 1px solid #ccc;
+  color: #555;
+}
+.blood-type-select .select2-arrow {
+  display: none;
+}
+
+.ui-spinner .btn {
+  box-shadow: none!important;
+  outline: 0!important;
+  border: 1px solid #cbd5dd!important;
 }

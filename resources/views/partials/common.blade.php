@@ -21,7 +21,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Add Blood Request</h4>
+				<h4 class="modal-title" id="myModalLabel"><b>CREATE BLOOD REQUEST</b></h4>
 			</div>
 			<div class="modal-body">
 				{!! Form::open(['route'=>'blood-request-store','name'=>'blood_request_add_form']); !!}
