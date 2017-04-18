@@ -23,7 +23,7 @@
                         <p class="text-muted medium">
                             <span class="badge">{{$bloodDonorsCount}}</span> {{$bloodType->name}}
 
-                            <span class="pull-right">{{ @($bloodDonorsCount / $totalBloodDonors)*100}}
+                            <span class="pull-right">{{ round(@($bloodDonorsCount / $totalBloodDonors)*100)}}
                                 %</span>
                         </p>
 
