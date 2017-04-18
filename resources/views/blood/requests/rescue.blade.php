@@ -1,31 +1,8 @@
 @extends('layouts.master')
 
 @section('content')
-    <div class="page ng-scope">
+    <div class="page">
         <div class="row">
-
-            @if($bloodRequest->completed or $bloodRequest->note)
-                <div class="col-xs-12">
-                    <div class="panel panel-default">
-
-                        <div class="panel-body">
-                            @if($bloodRequest->completed)
-                                <div class="callout-elem callout-elem-success">
-                                    <h4><i class="fa fa-check"></i> This blood request was successfuly completed.</h4>
-                                </div>
-                            @endif
-                            @if($bloodRequest->note)
-                                <div class="callout-elem callout-elem-info">
-                                    <h4>Request Note</h4>
-
-                                    <p>{{$bloodRequest->note}}</p>
-                                </div>
-                            @endif
-                        </div>
-                    </div>
-                </div>
-            @endif
-
             <div class="col-md-6">
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -89,7 +66,13 @@
                                         {{ $bloodRequest->user->first_name or 'Not defined' }}
                                         .{{ $bloodRequest->user->last_name or 'Not defined' }}
                                     </li>
+
+                                    @if($bloodRequest->completed)
+                                    <li class=".bg-success">
+                                    @else
                                     <li>
+                                    @endif
+
                                         <label for="">Completed</label>
                                         @if(  $bloodRequest->completed )
                                             <span popover="Confirmed" popover-trigger="mouseenter"
@@ -117,6 +100,16 @@
                                                  <i class="fa fa-times"></i>
                                             </span>
                                         @endif
+                                    </li>
+                                    <li>
+                                      @if($bloodRequest->note)
+                                            <span>
+                                              <strong>
+                                                Request Note:
+                                              </strong>
+                                            </span>
+                                            <p>{{$bloodRequest->note}}</p>
+                                      @endif
                                     </li>
                                 </ul>
 
