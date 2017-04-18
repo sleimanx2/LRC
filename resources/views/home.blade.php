@@ -26,7 +26,7 @@
                             <span class="pull-right">{{ @($bloodDonorsCount / $totalBloodDonors)*100}}
                                 %</span>
                         </p>
-                    
+
 
                       <div class="progress">
                         <div class="progress-bar" role="progressbar" aria-valuenow="{{ @($bloodDonorsCount / $totalBloodDonors)*100}}"
@@ -46,7 +46,7 @@
                 @if(! $remainingBloodRequests->isEmpty())
                     @foreach($remainingBloodRequests as $remainingBloodRequest)
                         <div>
-                            <p class="text-muted medium">
+                            <p class="medium">
                                 {{$remainingBloodRequest->patient_name}}
                                 <span class="pull-right">
                                     <span class="badge">{{$remainingBloodRequest->blood_type->name}}</span>

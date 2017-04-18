@@ -28,7 +28,6 @@
         initMap();
 
         var autocomplete = new google.maps.places.Autocomplete($("#google_places_location")[0], {
-            types: ['(cities)'],
             componentRestrictions: {country: "lb"}
         });
 
