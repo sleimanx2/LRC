@@ -11,8 +11,8 @@
               <li><a href="#tab-bloodBanks" role="tab" data-toggle="tab">Blood Banks</a></li>
               <li><a href="#tab-organizations" role="tab" data-toggle="tab">Organizations</a></li>
               <li class="seperator"></li>
-              <li><a class="dial-item-btn" data-dial='["05458204"]'><i class="fa fa-phone"></i>&nbsp;&nbsp;<b>O.R.</b></a></li>
-              <li><a class="dial-item-btn" data-dial='["140"]'><i class="fa fa-phone"></i>&nbsp;&nbsp;<b>206</b></a></li>
+              <li><a class="dial-item-btn" data-dial='["05458204"]' data-dial-name="O.R."><i class="fa fa-phone"></i>&nbsp;&nbsp;<b>O.R.</b></a></li>
+              <li><a class="dial-item-btn" data-dial='["140"]' data-dial-name="206 (Jal el Dib)"><i class="fa fa-phone"></i>&nbsp;&nbsp;<b>206</b></a></li>
             </ul>
         </div>
         <button class="btn btn-header btn-close light no-border" onclick="hidePhonebookSidebar()"><i class="fa fa-times"></i></button>
@@ -38,7 +38,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="phonebook-row dial-item-btn" data-dial='["03032033", "04972665"]'>
+                        <tr class="phonebook-row dial-item-btn" data-dial='["03032033", "04972665"]' data-dial-name="Mansour Wakim">
                             <td class="hidden">0</td>
                             <td class="hidden">1</td>
                             <td><b>Wakim</b></td>
@@ -77,7 +77,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="phonebook-row dial-item-btn" data-dial='["03032033", "04972665"]'>
+                        <tr class="phonebook-row dial-item-btn" data-dial='["03032033", "04972665"]' data-dial-name="MEH">
                             <td class="hidden">200</td>
                             <td><b>204</b></td>
                             <td><b>MEH</b></td>
@@ -97,7 +97,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="phonebook-row dial-item-btn" data-dial='["03032033", "04972665"]'>
+                        <tr class="phonebook-row dial-item-btn" data-dial='["03032033", "04972665"]' data-dial-name="204 (Beit Mery)">
                             <td><b>204</b></td>
                             <td><b>Beit Mery</b></td>
                             <td>284, 285, 286, 287, 288</td>
@@ -115,9 +115,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="phonebook-row dial-item-btn" data-dial='["03032033", "04972665"]'>
-                            <td><b>204</b></td>
-                            <td><b>Beit Mery</b></td>
+                        <tr class="phonebook-row dial-item-btn" data-dial='["03032033", "04972665"]' data-dial-name="Rabieh Blood Bank">
+                            <td><b>203</b></td>
+                            <td><b>Rabieh</b></td>
                         </tr>
                     </tbody>
                 </table>
@@ -132,19 +132,19 @@
                         <ul class="dropdown-menu">
                             <li class="combo">
                               <a class="first" data-filter="100">Civil Defense</a>
-                              <a class="second dial-item-btn" data-dial='["125"]'><i class="fa fa-phone"></i>&nbsp;125</a>
+                              <a class="second dial-item-btn" data-dial='["125"]' data-dial-name="Civil Defense Hotline"><i class="fa fa-phone"></i>&nbsp;125</a>
                             </li>
                             <li class="combo">
                               <a class="first" data-filter="100">Fire Department</a>
-                              <a class="second dial-item-btn" data-dial='["175"]'><i class="fa fa-phone"></i>&nbsp;175</a>
+                              <a class="second dial-item-btn" data-dial='["175"]' data-dial-name="Fire Department Hotline"><i class="fa fa-phone"></i>&nbsp;175</a>
                             </li>
                             <li class="combo">
                               <a class="first" data-filter="100">ISF Police</a>
-                              <a class="second dial-item-btn" data-dial='["112"]'><i class="fa fa-phone"></i>&nbsp;112</a>
+                              <a class="second dial-item-btn" data-dial='["112"]' data-dial-name="ISF Police Hotline"><i class="fa fa-phone"></i>&nbsp;112</a>
                             </li>
                             <li class="combo">
                               <a class="first" data-filter="100">Airport</a>
-                              <a class="second dial-item-btn" data-dial='["150"]'><i class="fa fa-phone"></i>&nbsp;150</a>
+                              <a class="second dial-item-btn" data-dial='["150"]' data-dial-name="Airport Hotline"><i class="fa fa-phone"></i>&nbsp;150</a>
                             </li>
                             <li><a data-filter="500">Ports</a></li>
                         </ul>

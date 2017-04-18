@@ -7322,6 +7322,18 @@ label {
   margin-right: 15px;
 }
 
-.btn-ip-phone img {
+#modalDial .modal-body {
+  padding: 10px 20px;
+}
+
+#modalDial .btn-ip-phone img {
   width: 100%;
+}
+
+#modalDial .dial-buttons {
+  margin-bottom: 20px;
+}
+
+#modalDial .dial-buttons .btn {
+  margin-right: 10px;
 }
