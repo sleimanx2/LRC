@@ -37,9 +37,7 @@ Auth::routes();
 // });
 
 
-
-Route::group(['middleware' => 'auth'], function ()
-{
+Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/', ['as' => 'home-dashboard', 'uses' => 'HomeController@dashboard']);
     Route::get('/home', ['uses' => 'HomeController@dashboard']);
@@ -56,7 +54,6 @@ Route::group(['middleware' => 'auth'], function ()
     Route::post('password/{id}/change', ['before' => 'csrf', 'as' => 'password-change', 'uses' => 'Auth\PasswordController@postChange']);
 
     // Contacts
-
     Route::get('contacts', ['as' => 'contacts-list', 'uses' => 'ContactsController@index']);
 
     Route::get('contacts/create', ['as' => 'contact-create', 'uses' => 'ContactsController@create']);
@@ -72,8 +69,7 @@ Route::group(['middleware' => 'auth'], function ()
     /*
      * BLOOD
     */
-    Route::group(['prefix' => 'blood', 'namespace' => 'Blood'], function ()
-    {
+    Route::group(['prefix' => 'blood', 'namespace' => 'Blood'], function () {
         // Donors
 
         Route::get('donors', ['as' => 'blood-donors-list', 'uses' => 'BloodDonorsController@index']);
@@ -122,8 +118,7 @@ Route::group(['middleware' => 'auth'], function ()
     /*
      * EMERGENCIES
     */
-    Route::group(['prefix' => 'emergencies', 'namespace' => 'Emergencies'], function ()
-    {
+    Route::group(['prefix' => 'emergencies', 'namespace' => 'Emergencies'], function () {
         Route::get('/', ['as' => 'emergencies-list', 'uses' => 'EmergenciesController@index']);
 
         Route::get('create', ['as' => 'emergency-create', 'uses' => 'EmergenciesController@create']);

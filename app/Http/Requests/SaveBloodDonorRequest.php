@@ -1,8 +1,7 @@
 <?php namespace LRC\Http\Requests;
 
-use LRC\Http\Requests\Request;
-
-class SaveBloodDonorRequest extends Request {
+class SaveBloodDonorRequest extends Request
+{
 
     /**
      * Determine if the user is authorized to make this request.
@@ -32,11 +31,10 @@ class SaveBloodDonorRequest extends Request {
             'longitude'       => 'required',
             'blood_type_id'   => 'required',
             'gender'          => 'required',
-            'birthday'        => 'date|before:' .(date('Y')-18)."-".date('m')."-".date('d'),
+            'birthday'        => 'date|before:' . (date('Y') - 18) . "-" . date('m') . "-" . date('d'),
         ];
 
-        if ( $this->route()->getName() == 'blood-donor-update' )
-        {
+        if ($this->route()->getName() == 'blood-donor-update') {
             $rules['email'] = $rules['email'] . ',' . $this->route('id');
         }
 
@@ -50,7 +48,6 @@ class SaveBloodDonorRequest extends Request {
             'location.required'      => 'Location not found',
             'latitude.required'      => 'We cant find latitude or longitude',
             'longitude.required'     => 'Make sure you select a valid suggested location',
-            'longitude.required'     => 'Make sure you select a valid suggested location'
         ];
     }
 }

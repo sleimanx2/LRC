@@ -26,9 +26,14 @@
                             <span class="pull-right">{{ @($bloodDonorsCount / $totalBloodDonors)*100}}
                                 %</span>
                         </p>
-                        <progressbar class="progressbar-xs no-margin"
-                                     value="{{ @($bloodDonorsCount / $totalBloodDonors)*100}}"
-                                     type="warning"></progressbar>
+                    
+
+                      <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="{{ @($bloodDonorsCount / $totalBloodDonors)*100}}"
+                        aria-valuemin="0" aria-valuemax="100" style="width:{{ @($bloodDonorsCount / $totalBloodDonors)*100}}%">
+                          <span class="sr-only">{{ @($bloodDonorsCount / $totalBloodDonors)*100}}% Complete</span>
+                        </div>
+                      </div>
                     </div>
                     <br>
                 @endforeach
@@ -63,6 +68,10 @@
                     <br>
                 @endif
 
+
+
+            </div>
+            <div class="col-lg-4 col-xsm-6 panel-body">
                 <h4>
                     Remaining Unconfirmed Blood Request
                 </h4>
@@ -88,59 +97,6 @@
                     @endforeach
                 @else
                     <p> You don't have any remaining unconfirmed blood request. Good Job.</p>
-                @endif
-
-            </div>
-            <div class="col-lg-4 col-xsm-6 panel-body">
-                <h4>
-                    Today's Report
-                </h4>
-                @if(! $emergencyReports->isEmpty())
-                    @foreach($emergencyReports as $emergencyReport)
-                        <div>
-                            <p class="text-muted medium">
-                                {{$emergencyReport->report_category->name}}
-                                <span class="pull-right">
-                                    <span class="badge">{{$emergencyReport->total}}</span>
-                                </span>
-                            </p>
-                        </div>
-                        <br>
-                    @endforeach
-                    <p>
-                        - Only categories with attached emergency are listed.
-                    </p>
-                @else
-                    <p>
-                        Their is no registered emergency today. Let's hope it stays the same.
-                    </p>
-                @endif
-
-                <br>
-
-                <h4>
-                    <i class="fa fa-circle" style='color:green'></i> Active Emergencies
-                </h4>
-                @if(! $activeEmergencies->isEmpty())
-                    @foreach($activeEmergencies as $activeEmergency)
-                        <div>
-                            <p class="text-muted medium">
-                                {{$activeEmergency->location}}
-                                <span class="pull-right">
-                                    <span class="badge">{{$activeEmergency->report_category->name or ""}}</span>
-                                    <a class="btn btn-info btn-xs" href="{{ route('emergency-manage',[$activeEmergency->id]) }}"
-                               popover="Manage" popover-trigger="mouseenter">
-                                        <i class="fa fa-cog "></i>
-                                    </a>
-                                </span>
-                            </p>
-                        </div>
-                        <br>
-                    @endforeach
-                @else
-                    <p>
-                        Their is no active emergencies at the moment.
-                    </p>
                 @endif
             </div>
         </div>
