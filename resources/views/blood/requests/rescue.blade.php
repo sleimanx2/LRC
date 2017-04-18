@@ -68,12 +68,12 @@
                                     </li>
 
                                     @if($bloodRequest->completed)
-                                    <li class=".bg-success">
+                                    <li class="bg-info">
                                     @else
                                     <li>
                                     @endif
 
-                                        <label for="">Completed</label>
+                                        <span for="">Completed</span>
                                         @if(  $bloodRequest->completed )
                                             <span popover="Confirmed" popover-trigger="mouseenter"
                                                   class="badge badge-success">
