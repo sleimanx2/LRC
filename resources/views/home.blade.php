@@ -69,9 +69,6 @@
                     <p> You don't have any remaining blood request. Good Job.</p>
                     <br>
                 @endif
-
-
-
             </div>
             <div class="col-lg-4 col-xsm-6 panel-body">
                 <h4>
@@ -88,9 +85,7 @@
                               href="{{ route('blood-request-rescue',[$remainingBloodRequest->id]) }}"
                               popover="Rescue"
                               popover-trigger="mouseenter">
-
                                <i class="fa fa-life-ring"></i>
-
                            </a>
                           </span>
                         </li>
