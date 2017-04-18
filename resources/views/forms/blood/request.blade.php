@@ -66,9 +66,15 @@
                 <span class="input-group-addon" ng-click="open($event)"><i class="fa fa-calendar"></i></span>
             </div>
         </div>
-        <div class="form-group">
-            <label for="">Received From</label>
-            {!! Form::text('received_from', old('received_from'), ['class' =>'form-control']) !!}
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label for="">Received From</label>
+                {!! Form::text('received_from', old('received_from'), ['class' =>'form-control']) !!}
+            </div>
+            <div class="form-group col-md-6">
+                <label for="">Received By</label>
+                {!! Form::text('received_from', old('received_from'), ['class' =>'form-control']) !!}
+            </div>
         </div>
     </div>
 </div>
@@ -148,9 +154,9 @@
 <hr/>
 
 <div class="form-group">
-    <label for="">Note</label>
+    <label for="">Notes</label>
     {!! Form::textarea(
-    'note',old('note'),['class'=>'form-control']) !!}
+    'note',old('note'),['class'=>'form-control', 'rows'=>'2']) !!}
 </div>
 
 <!-- <button type="submit" class="btn btn-success">
