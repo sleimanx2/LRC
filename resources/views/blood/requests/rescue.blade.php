@@ -147,14 +147,23 @@
                                     </li>
                                 </ul>
 
-                                <map class="ui-map" zoom="11"
-                                     center="[{{$bloodRequest->blood_bank->latitude}}, {{$bloodRequest->blood_bank->longitude}}]"
-                                     scrollwheel="false">
-                                    <marker position="[{{$bloodRequest->blood_bank->latitude}}, {{$bloodRequest->blood_bank->longitude}}]"
-                                            title="{{$bloodRequest->blood_bank->name}}"
-                                            animation="Animation.DROP"></marker>
+                                  <div class="form-group">
+                                      <div class="ui-map" id="map-canvas"></div>
+                                  </div>
+                                <script type="text/javascript">
+                                      var location_name =  "{{ $bloodRequest->blood_bank->name }}";
+                                      var location_latitude = {{$bloodRequest->blood_bank->latitude}};
+                                      var location_longitude = {{$bloodRequest->blood_bank->longitude}};
+                                      var location_marker = null;
 
-                                </map>
+                                      $( document ).ready(function() {
+
+                                          initMap();
+                                          moveMap();
+
+                                        });
+                                </script>
+
 
                             </div>
                         </div>

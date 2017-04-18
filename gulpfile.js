@@ -22,6 +22,7 @@ elixir(function (mix) {
             'vendor/moment/moment.min.js',
             'vendor/datetimepicker/datetimepicker.js',
             'vendor/datatables/jquery.datatables.min.js',
+            'vendor/sweetalert/sweetalert.min.js',
             'main.js'
         ],
         'resources/assets',
@@ -34,6 +35,7 @@ elixir(function (mix) {
             'vendor/select2/select2.css',
             'vendor/datetimepicker/datetimepicker.css',
             'vendor/datatables/jquery.datatables.min.css',
+            'vendor/sweetalert/sweetalert.min.css',
         ],
         'resources/assets',
         'public/dist/vendor.min.css'
@@ -47,4 +49,3 @@ elixir(function (mix) {
         'public/dist/app.min.css'
     );
 });
-
