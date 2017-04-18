@@ -83,15 +83,33 @@
                                 'method'=>'delete',
                                 'route'=>['blood-donor-destroy',$bloodDonor->id],
                                 'style'=>'display:inline',
-                                'onsubmit'=>'return confirm("Are you sure you want to delete '.$bloodDonor->first_name.' ?");'
+                                'id'=>'delete-donnor-'.$bloodDonor->id.'-form'
                                 ]) !!}
 
-                                <button type="submit" class="btn btn-danger btn-sm hidden-xs" popover="Delete"
+                                <button id = 'delete-donnor-{{$bloodDonor->id}}' type="submit" class="btn btn-danger btn-sm hidden-xs" popover="Delete"
                                         popover-trigger="mouseenter"><i
                                             class="fa fa-remove"></i>
                                 </button>
 
                                 {!!Form::close()!!}
+
+                                <script type="text/javascript">
+                                  $("#delete-donnor-{{ $bloodDonor->id }}").click(function(e){
+                                    swal({
+                                      title: "Are you sure?",
+                                      type: "warning",
+                                      showCancelButton: true,
+                                      confirmButtonColor: "#DD6B55",
+                                      confirmButtonText: "Yes, delete it!",
+                                      closeOnConfirm: false
+                                    },
+                                    function(){
+                                      $('#delete-donnor-{{$bloodDonor->id}}-form').submit();
+                                    });
+                                    e.preventDefault();
+                                    return false;
+                                  });
+                                </script>
 
                             </td>
                         </tr>
