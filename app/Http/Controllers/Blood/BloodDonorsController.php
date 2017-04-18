@@ -43,10 +43,10 @@ class BloodDonorsController extends Controller {
 
         if ( !$searchQuery )
         {
-            $bloodDonors = $this->bloodDonorRepository->getPaginated(10);
+            $bloodDonors = $this->bloodDonorRepository->getPaginated(15);
         } else
         {
-            $bloodDonors = $this->bloodDonorRepository->searchPaginated($searchQuery, 10);
+            $bloodDonors = $this->bloodDonorRepository->searchPaginated($searchQuery, 15);
         }
 
         return view('blood.donors.index', ['bloodDonors' => $bloodDonors]);

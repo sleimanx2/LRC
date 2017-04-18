@@ -76,7 +76,7 @@
                             <td>{{$bloodDonor->phone_primary}}</td>
                             <td>{{$bloodDonor->blood_type->name}}</td>
                             <td>
-                                <a class="btn btn-info btn-xs" href="{{ route('blood-donor-edit',[$bloodDonor->id]) }}"
+                                <a class="btn btn-info btn-sm" href="{{ route('blood-donor-edit',[$bloodDonor->id]) }}"
                                    popover="Edit" popover-trigger="mouseenter"><i
                                             class="fa fa-edit "></i></a>
                                 {!! Form::open([
@@ -86,7 +86,7 @@
                                 'onsubmit'=>'return confirm("Are you sure you want to delete '.$bloodDonor->first_name.' ?");'
                                 ]) !!}
 
-                                <button type="submit" class="btn btn-danger btn-xs hidden-xs" popover="Delete"
+                                <button type="submit" class="btn btn-danger btn-sm hidden-xs" popover="Delete"
                                         popover-trigger="mouseenter"><i
                                             class="fa fa-remove"></i>
                                 </button>
