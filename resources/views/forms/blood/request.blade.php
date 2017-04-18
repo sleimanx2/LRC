@@ -10,13 +10,13 @@
             <label for="">Blood Units</label>
             <div class="input-group ui-spinner" data-ui-spinner="">
                 <span class="input-group-btn">
-                    <button type="button" class="btn btn-default" data-spin="up">
+                    <button type="button" class="btn btn-default btn-number" data-spin="up" data-type="plus" data-field="blood_quantity">
                         <i class="fa fa-plus">{{----}}</i>
                     </button>
                 </span>
-                {!! Form::text('blood_quantity',old('blood_quantity'),['class'=>'spinner-input form-control', 'required'=>true]) !!}
+                {!! Form::text('blood_quantity',old('blood_quantity'),['class'=>'input-number form-control', 'min'=>'0' ,'max'=>'100' , 'required'=>true]) !!}
                 <span class="input-group-btn">
-                    <button type="button" class="btn btn-default" data-spin="down">
+                    <button type="button" class="btn btn-default btn-number" data-spin="down" data-type="minus" data-field="blood_quantity">
                         <i class="fa fa-minus"></i>
                     </button>
                 </span>
@@ -26,13 +26,13 @@
             <label for="">Platelets</label>
             <div class="input-group ui-spinner" data-ui-spinner="">
                 <span class="input-group-btn">
-                    <button type="button" class="btn btn-default" data-spin="up">
-                        <i class="fa fa-plus"></i>
+                    <button type="button" class="btn btn-default btn-number" data-spin="up" data-type="plus" data-field="platelets_quantity">
+                        <i class="fa fa-plus">{{----}}</i>
                     </button>
                 </span>
-                {!! Form::text('platelets_quantity',old('platelets_quantity'),['class'=>'spinner-input form-control','required'=>true]) !!}
+                {!! Form::text('platelets_quantity',old('platelets_quantity'),['class'=>'input-number form-control', 'min'=>'0' ,'max'=>'100' , 'required'=>true]) !!}
                 <span class="input-group-btn">
-                    <button type="button" class="btn btn-default" data-spin="down">
+                    <button type="button" class="btn btn-default btn-number" data-spin="down" data-type="minus" data-field="platelets_quantity">
                         <i class="fa fa-minus"></i>
                     </button>
                 </span>
@@ -85,7 +85,7 @@
     <div class="col-md-6">
         <div class="form-group">
             <label for="">Patient Name</label>
-            
+
             <div class="input-group">
                 {!! Form::text('patient_name', old('patient_name'), ['class' => 'form-control','pattern'=>'.{2,}','require'=>'','title'=>'2 characters minimum']) !!}
                 <div class="input-group-btn">
