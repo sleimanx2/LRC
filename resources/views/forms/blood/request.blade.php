@@ -38,7 +38,7 @@
                 </span>
             </div>
         </div>
-        <div class="form-group">
+        <!-- <div class="form-group">
             <label for="">Plasma</label>
             <div class="input-group ui-spinner" data-ui-spinner="">
                 <span class="input-group-btn">
@@ -53,7 +53,7 @@
                     </button>
                 </span>
             </div>
-        </div>
+        </div> -->
     </div>
     <div class="col-md-6">
         <div class="form-group" data-ng-controller="DonateDatepickerCtrl">

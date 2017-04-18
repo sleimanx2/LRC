@@ -7339,8 +7339,36 @@ label {
   margin-right: 10px;
 }
 
+.ui-spinner {
+  max-width: initial;
+}
+
+.ui-spinner .btn {
+  box-shadow: none!important;
+  outline: 0!important;
+  border: 1px solid #cbd5dd!important;
+}
+
+.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
+  line-height: 28px;
+}
+
+.select2-choice {
+  background: none!important;
+  border-radius: 0!important;
+  border-color: #ccc!important;
+  height: 34px!important;
+  line-height: 32px!important;
+}
+
+.select2-arrow {
+  background: none!important;
+  border: 0!important;
+  top: 2px!important;
+}
+
 .blood-type-select .select2-choice {
-  height: 180px;
+  height: 108px!important;
   text-align: center;
   margin: 0;
   padding: 0;
@@ -7349,12 +7377,12 @@ label {
   border: 1px solid #ccc;
   color: #555;
 }
-.blood-type-select .select2-arrow {
-  display: none;
-}
 
-.ui-spinner .btn {
-  box-shadow: none!important;
-  outline: 0!important;
-  border: 1px solid #cbd5dd!important;
+.blood-type-select .select2-arrow {
+  display: none!important;
+}
+.blood-type-select .select2-chosen {
+  line-height: 100px!important;
+  font-size: 64px!important;
+  margin-right: 0!important;
 }

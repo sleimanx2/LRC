@@ -1,5 +1,26 @@
 @extends('layouts.master')
 
+@section('sub-header')
+<div class="clearfix">
+    <h5 class="page-title">Blood Rescue</h5>
+    <!-- <ul class="list-unstyled toolbar pull-right">
+        <li><a href="" class="btn btn-action btn-success"><i class="fa fa-plus"></i>&nbsp;&nbsp;Blood Donor</a></li>
+        <li>
+            <form class="form-inline ng-pristine ng-valid" role="form" method="GET" action="{{ route('blood-donors-list') }}">
+                <div class="form-group">
+                    <input type="text" name="search" value="{{ Request::get('search') }}" placeholder="Search..." class="form-control ng-pristine ng-valid">
+                </div>
+                <div class="form-group">
+                <span>
+                    <button type="submit" class="btn btn-light"><i class="fa fa-search"></i></button>
+                </span>
+                </div>
+            </form>
+        </li>
+    </ul> -->
+</div>
+@endsection
+
 @section('content')
     <div class="page">
         <div class="row">

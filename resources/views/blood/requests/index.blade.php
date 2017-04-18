@@ -92,14 +92,14 @@
                                 </span>
                             </td>
                             <td>
-                                <a class="btn btn-bordered-warning btn-xs"
+                                <a class="btn btn-bordered-warning btn-sm"
                                    href="{{ route('blood-request-rescue',[$bloodRequest->id]) }}" popover="Rescue"
                                    popover-trigger="mouseenter">
 
                                     <i class="fa fa-life-ring"></i>
 
                                 </a>
-                                <a class="btn btn-info btn-xs"
+                                <a class="btn btn-info btn-sm"
                                    href="{{ route('blood-request-edit',[$bloodRequest->id]) }}" popover="Edit"
                                    popover-trigger="mouseenter">
                                     <i class="fa fa-edit "></i>
@@ -112,7 +112,7 @@
                                 '.$bloodRequest->patient_name.'\'s request?");'
                                 ]) !!}
 
-                                <button type="submit" class="btn btn-danger btn-xs hidden-xs" popover="Delete"
+                                <button type="submit" class="btn btn-danger btn-sm hidden-xs" popover="Delete"
                                         popover-trigger="mouseenter"><i
                                             class="fa fa-remove"></i>
                                 </button>

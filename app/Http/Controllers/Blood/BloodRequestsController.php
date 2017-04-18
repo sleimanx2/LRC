@@ -61,10 +61,10 @@ class BloodRequestsController extends Controller {
 
         if ( !$searchQuery )
         {
-            $bloodRequests = $this->bloodRequestRepository->getPaginated(20);
+            $bloodRequests = $this->bloodRequestRepository->getPaginated(15);
         } else
         {
-            $bloodRequests = $this->bloodRequestRepository->searchPaginated($searchQuery, 20);
+            $bloodRequests = $this->bloodRequestRepository->searchPaginated($searchQuery, 15);
         }
 
         $bloodTypes = $this->bloodTypeRepository->getList();
