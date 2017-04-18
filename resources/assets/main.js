@@ -73,14 +73,34 @@ $(document).ready(function() {
     $(document).on('click', '.dial-item-btn', function () {
         var $modal = $("#modalDial");
 
+        $modal.find(".modal-title b").text($(this).data("dial-name").toUpperCase());
         $modal.find(".dial-buttons").html("");
 
         $.each($(this).data("dial"), function(i, item) {
-            $modal.find(".dial-buttons").append("<a class='btn btn-success'>Success</button>")
+            $modal.find(".dial-buttons").append("<a class='btn btn-default btn-phone-number' data-phone-number='" + item + "'>" + formatPhone(item) + "</button>")
             //console.log(item);
         });
 
+        $modal.data("phone-number", $modal.find(".dial-buttons .btn-phone-number:first-child").data("phone-number"));
+        $modal.find(".dial-buttons .btn-phone-number:first-child").removeClass("btn-default").addClass("btn-success");
+
         $modal.modal("show");
+    });
+
+    $(document).on('click', '.btn-phone-number', function () {
+        $(this).closest(".dial-buttons").find(".btn-phone-number").removeClass("btn-success");
+        $(this).addClass("btn-success");
+        $("#modalDial").data("phone-number", $(this).data("phone-number"));
+    });
+
+    $(document).on('click', '.btn-ip-phone', function () {
+        var $modal = $(this).closest(".modal");
+        var $phone_number = $modal.data("phone-number");
+        var $ip_address = $(this).data("ip-address");
+
+        $modal.modal("hide");
+
+        alert("Dialing " + $phone_number + "...");
     });
 
     // $(document).on('click', '.dial-item-btn', function() {
@@ -128,6 +148,13 @@ $(document).ready(function() {
     //         });
     // });
 });
+
+function formatPhone(phoneNumber) {
+    if(phoneNumber.length == 8)
+        return phoneNumber.substring(0, 2) + " " + phoneNumber.substring(2, 5) + " " + phoneNumber.substring(5, 8);
+
+    return phoneNumber;
+}
 
 function showPhonebookSidebar() {
     $(".phonebook-container").addClass("open");
