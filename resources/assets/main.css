@@ -7344,6 +7344,7 @@ label {
 }
 
 .ui-spinner .btn {
+  border-radius: 0!important;
   box-shadow: none!important;
   outline: 0!important;
   border: 1px solid #cbd5dd!important;
@@ -7385,4 +7386,12 @@ label {
   line-height: 100px!important;
   font-size: 64px!important;
   margin-right: 0!important;
+}
+
+.btn-toggle-gender {
+  box-shadow: none;
+  border-left: 0;
+  border-color: #ccc;
+  border-radius: 0;
+  min-width: 40px;
 }
