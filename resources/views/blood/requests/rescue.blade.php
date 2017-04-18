@@ -252,8 +252,8 @@
                             </span>
                             </div>
                             <div class="modal-footer">
-                                <button class="btn btn-primary" type="submit">Save</button>
-                                <button class="btn btn-warning" type="reset" ng-click="cancel()">Cancel</button>
+                                <button class="btn btn-default" data-dismiss="modal" type="reset">CANCEL</button>
+                                <button class="btn btn-success" type="submit">SAVE</button>
                             </div>
                             {!! Form::close() !!}
                         </div>
@@ -320,8 +320,8 @@
                                 </span>
                             </div>
                             <div class="modal-footer">
-                                <button class="btn btn-primary" type="submit">Save</button>
-                                <button class="btn btn-warning" type="reset" ng-click="cancel()">Cancel</button>
+                                <button class="btn btn-default" data-dismiss="modal" type="reset">CANCEL</button>
+                                <button class="btn btn-success" type="submit">SAVE</button>
                             </div>
                             {!! Form::close() !!}
                         </div>

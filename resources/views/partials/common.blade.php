@@ -28,10 +28,10 @@
                 @include('forms.blood.request')
                 {!! Form::close(); !!}
 			</div>
-			<div class="modal-footer">
+			<!-- <div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">CANCEL</button>
 				<button type="button" class="btn btn-success">SAVE</button>
-			</div>
+			</div> -->
 		</div>
 	</div>
 </div>

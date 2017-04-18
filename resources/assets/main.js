@@ -164,6 +164,22 @@ function hidePhonebookSidebar() {
     $(".phonebook-container").removeClass("open");
 }
 
+/*
+ * Blood Request Form Functions
+ */
+$(document).on('click', ".btn-toggle-gender", function() {
+    var gender = $("input[name='patient_gender']").val();
+
+    if(gender == 'male') {
+        $(this).find("i").removeClass("fa-male").addClass("fa-female");
+        $("input[name='patient_gender']").val("female");
+    }
+    else {
+        $(this).find("i").removeClass("fa-female").addClass("fa-male");
+        $("input[name='patient_gender']").val("male");
+    }
+});
+
 
 /*
  * Init a blank google map
