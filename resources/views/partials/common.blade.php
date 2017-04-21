@@ -25,7 +25,7 @@
 			</div>
 			<div class="modal-body">
 				{!! Form::open(['route'=>'blood-request-store','name'=>'blood_request_add_form']); !!}
-                @include('forms.blood.request')
+                	@include('forms.blood.request', ['form_action' => 'create'])
                 {!! Form::close(); !!}
 			</div>
 			<!-- <div class="modal-footer">

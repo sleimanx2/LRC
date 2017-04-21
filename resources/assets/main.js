@@ -1,7 +1,12 @@
 /*
+ * Common Functions
+ */
+
+
+/*
  * Phonebook Functions
  */
-$(document).ready(function() {
+ function initPhonebook() {
     $('#table-FirstAiders').DataTable({
         "paging": false,
         "info": false,
@@ -148,91 +153,7 @@ $(document).ready(function() {
     //         });
     // });
     //
-
-});
-
-
-function initNumberInput(){
-
-$('.btn-number').click(function(e){
-    e.preventDefault();
-
-    fieldName = $(this).attr('data-field');
-    type      = $(this).attr('data-type');
-    var input = $("input[name='"+fieldName+"']");
-    var currentVal = parseInt(input.val());
-
-    if (!isNaN(currentVal)) {
-          if(type == 'minus') {
-
-              if(currentVal > input.attr('min')) {
-                  input.val(currentVal - 1).change();
-              }
-              if(parseInt(input.val()) == input.attr('min')) {
-                  $(this).attr('disabled', true);
-              }
-
-          } else if(type == 'plus') {
-
-              if(currentVal < input.attr('max')) {
-                  input.val(currentVal + 1).change();
-              }
-              if(parseInt(input.val()) == input.attr('max')) {
-                  $(this).attr('disabled', true);
-              }
-
-          }
-      } else {
-          input.val(0);
-      }
-  });
-
-  $('.input-number').focusin(function(){
-     $(this).data('oldValue', $(this).val());
-  });
-
-  $('.input-number').change(function() {
-
-      minValue =  parseInt($(this).attr('min'));
-      maxValue =  parseInt($(this).attr('max'));
-      valueCurrent = parseInt($(this).val());
-
-      name = $(this).attr('name');
-      if(valueCurrent >= minValue) {
-          $(".btn-number[data-type='minus'][data-field='"+name+"']").removeAttr('disabled')
-      } else {
-          alert('Sorry, the minimum value was reached');
-          $(this).val($(this).data('oldValue'));
-      }
-      if(valueCurrent <= maxValue) {
-          $(".btn-number[data-type='plus'][data-field='"+name+"']").removeAttr('disabled')
-      } else {
-          alert('Sorry, the maximum value was reached');
-          $(this).val($(this).data('oldValue'));
-      }
-
-
-  });
-
-  $(".input-number").keydown(function (e) {
-        // Allow: backspace, delete, tab, escape, enter and .
-        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
-             // Allow: Ctrl+A
-            (e.keyCode == 65 && e.ctrlKey === true) ||
-             // Allow: home, end, left, right
-            (e.keyCode >= 35 && e.keyCode <= 39)) {
-                 // let it happen, don't do anything
-                 return;
-        }
-        // Ensure that it is a number and stop the keypress
-        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-            e.preventDefault();
-        }
-    });
-
 }
-
-
 
 function formatPhone(phoneNumber) {
     if(phoneNumber.length == 8)
@@ -269,8 +190,7 @@ $(document).on('click', ".btn-toggle-gender", function() {
 /*
  * Init a blank google map
  */
-function initMap()
-{
+function initMap() {
     var mapOptions = {
         center: {lat: 33.891995, lng: 35.501337},
         zoom: 9
@@ -282,13 +202,12 @@ function initMap()
 * Helper method called when the location is changed in the location/destination fields
 */
 function moveMap() {
-
     if( isNaN(location_latitude) && isNaN(location_longitude) )
     {
       location_latitude = location_latitude.val();
       location_longitude = location_longitude.val();
       location_name = location_name.val();
-    }
+  }
 
     // Getting coordinates
     var location_coordinates = new google.maps.LatLng(location_latitude, location_longitude);
@@ -342,18 +261,92 @@ function moveMap() {
 }
 
 /*
-* Convert all select input to select2 instances
-*/
+ * Element Initialization Functions
+ */
+function initNumberInput() {
+    $('.btn-number').click(function(e){
+        e.preventDefault();
+
+        fieldName = $(this).attr('data-field');
+        type      = $(this).attr('data-type');
+        var input = $("input[name='"+fieldName+"']");
+        var currentVal = parseInt(input.val());
+
+        if (!isNaN(currentVal)) {
+            if(type == 'minus') {
+
+                if(currentVal > input.attr('min')) {
+                    input.val(currentVal - 1).change();
+                }
+                if(parseInt(input.val()) == input.attr('min')) {
+                    $(this).attr('disabled', true);
+                }
+
+            } else if(type == 'plus') {
+
+                if(currentVal < input.attr('max')) {
+                    input.val(currentVal + 1).change();
+                }
+                if(parseInt(input.val()) == input.attr('max')) {
+                    $(this).attr('disabled', true);
+                }
+
+            }
+        } else {
+            input.val(0);
+        }
+    });
+
+    $('.input-number').focusin(function(){
+        $(this).data('oldValue', $(this).val());
+    });
+
+    $('.input-number').change(function() {
+
+        minValue =  parseInt($(this).attr('min'));
+        maxValue =  parseInt($(this).attr('max'));
+        valueCurrent = parseInt($(this).val());
+
+        name = $(this).attr('name');
+        if(valueCurrent >= minValue) {
+            $(".btn-number[data-type='minus'][data-field='"+name+"']").removeAttr('disabled')
+        } else {
+            alert('Sorry, the minimum value was reached');
+            $(this).val($(this).data('oldValue'));
+        }
+        if(valueCurrent <= maxValue) {
+            $(".btn-number[data-type='plus'][data-field='"+name+"']").removeAttr('disabled')
+        } else {
+            alert('Sorry, the maximum value was reached');
+            $(this).val($(this).data('oldValue'));
+        }
+    });
+
+    $(".input-number").keydown(function (e) {
+        // Allow: backspace, delete, tab, escape, enter and .
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+             // Allow: Ctrl+A
+             (e.keyCode == 65 && e.ctrlKey === true) ||
+             // Allow: home, end, left, right
+             (e.keyCode >= 35 && e.keyCode <= 39)) {
+                 // let it happen, don't do anything
+             return;
+         }
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
+    });
+}
+
 function initSelect2(){
     $("select").select2();
 }
 
 function initDateTimePicker(){
-
     $('.datetimepicker').datetimepicker();
     $('.datepicker').datetimepicker({ format:'YYYY-MM-DD'});
     $('.timepicker').datetimepicker({ format: 'LT'});
-
 }
 
 /*
@@ -361,6 +354,7 @@ function initDateTimePicker(){
 */
 function boot(){
     $(document).ready(function() {
+        initPhonebook();
         initSelect2();
         initDateTimePicker();
         initNumberInput();

@@ -14,7 +14,7 @@
                         <i class="fa fa-plus"></i>
                     </button>
                 </span>
-                {!! Form::text('blood_quantity',old('blood_quantity'),['class'=>'input-number form-control', 'min'=>'0' ,'max'=>'100' , 'required'=>true]) !!}
+                {!! Form::text('blood_quantity', $form_action == 'create' ? 0 : old('blood_quantity'),['class'=>'input-number form-control', 'min'=>'0' ,'max'=>'100' , 'required'=>true]) !!}
                 <span class="input-group-btn">
                     <button type="button" class="btn btn-default btn-number" data-spin="down" data-type="minus" data-field="blood_quantity">
                         <i class="fa fa-minus"></i>
@@ -30,7 +30,7 @@
                         <i class="fa fa-plus"></i>
                     </button>
                 </span>
-                {!! Form::text('platelets_quantity',old('platelets_quantity'),['class'=>'input-number form-control', 'min'=>'0' ,'max'=>'100' , 'required'=>true]) !!}
+                {!! Form::text('platelets_quantity', $form_action == 'create' ? 0 : old('platelets_quantity'),['class'=>'input-number form-control', 'min'=>'0' ,'max'=>'100' , 'required'=>true]) !!}
                 <span class="input-group-btn">
                     <button type="button" class="btn btn-default btn-number" data-spin="down" data-type="minus" data-field="platelets_quantity">
                         <i class="fa fa-minus"></i>
