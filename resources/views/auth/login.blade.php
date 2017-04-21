@@ -33,10 +33,10 @@
                             <div class="form-group">
                                 <div class="input-group input-group-lg">
                                 <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-envelope"></span>
+                                    <span class="glyphicon glyphicon-user"></span>
                                 </span>
-                                    <input type="email" placeholder="Email" class="form-control" name="email"
-                                           value="{{ old('email') }}">
+                                <input type="username" placeholder="Username" class="form-control" name="username"
+                                       value="{{ old('username') }}">
                                 </div>
                             </div>
                             <div class="form-group">

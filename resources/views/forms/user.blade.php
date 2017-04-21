@@ -49,6 +49,8 @@
     {!! Form::text(
     'phone_secondary',old('phone_secondary'),['class'=>'form-control','pattern'=>'.{8,8}','title'=>'The number
     should contain 8 digits']) !!}
+
+    {!! Form::select('phone_numbers[]', [], old('phone_numbers'), array('multiple','class'=>'select-tags')) !!}
 </div>
     <hr/>
     <div class="form-group">

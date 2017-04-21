@@ -3,7 +3,8 @@
 use LRC\Data\Users\User;
 use Validator;
 
-class Registrar {
+class Registrar
+{
 
     /**
      * @var array
@@ -18,15 +19,16 @@ class Registrar {
      * @var array
      */
     private $rules = [
-        'first_name'      => 'required|max:255|min:2',
-        'last_name'       => 'required|max:255|min:2',
-        'email'           => 'required|max:255|unique:users,email',
-        'password'        => 'required|confirmed|min:6',
-        'phone_primary'   => 'required|min:8|max:8',
-        'phone_secondary' => 'min:8|max:8',
-        'location'        => 'required',
-        'latitude'        => 'required',
-        'longitude'       => 'required'
+        'first_name'    => 'required|max:255|min:2',
+        'last_name'     => 'required|max:255|min:2',
+        'username'      => 'required|max:255|unique:users,email',
+        'email'         => 'max:255|unique:users,email',
+        'promo'         => 'integer|min:1900',
+        'phone_numbers' => 'required',
+        'password'      => 'required|confirmed|min:6',
+        'location'      => 'required',
+        'latitude'      => 'required',
+        'longitude'     => 'required'
     ];
 
     /**
@@ -38,13 +40,11 @@ class Registrar {
      */
     public function validator(array $data, array $options = ['withoutPassword' => false, 'userId' => false])
     {
-        if ( $options['withoutPassword'] )
-        {
+        if ($options['withoutPassword']) {
             unset($this->rules['password']);
         }
 
-        if ( $options['userId'] )
-        {
+        if ($options['userId']) {
             $this->rules['email'] = $this->rules['email'] . ',' . $options['userId'];
         }
 
@@ -72,18 +72,25 @@ class Registrar {
     public function create(array $data)
     {
         $attributes = [
-            'first_name'      => $data['first_name'],
-            'last_name'       => $data['last_name'],
-            'email'           => $data['email'],
-            'password'        => bcrypt($data['password']),
-            'phone_primary'   => $data['phone_primary'],
-            'phone_secondary' => $data['phone_secondary'],
-            'location'        => $data['location'],
-            'latitude'        => $data['latitude'],
-            'longitude'       => $data['longitude']
+            'first_name'    => $data['first_name'],
+            'last_name'     => $data['last_name'],
+            'username'      => $data['username'],
+            'password'      => bcrypt($data['password']),
+            'phone_numbers' => $data['phone_numbers'],
+            'location'      => $data['location'],
+            'latitude'      => $data['latitude'],
+            'longitude'     => $data['longitude']
         ];
 
-        $user =  User::create($attributes);
+        if (isset($data['promo'])) {
+            $attributes['promo'] = $data['promo'];
+        }
+
+        if (isset($data['email'])) {
+            $attributes['email'] = $data['email'];
+        }
+
+        $user = User::create($attributes);
 
         return $this->syncRoles($data, $user);
     }
@@ -97,17 +104,20 @@ class Registrar {
     {
 
         $attributes = [
-            'first_name'      => $data['first_name'],
-            'last_name'       => $data['last_name'],
-            'phone_primary'   => $data['phone_primary'],
-            'phone_secondary' => $data['phone_secondary'],
-            'location'        => $data['location'],
-            'latitude'        => $data['latitude'],
-            'longitude'       => $data['longitude']
+            'first_name'    => $data['first_name'],
+            'last_name'     => $data['last_name'],
+            'username'      => $data['username'],
+            'phone_numbers' => $data['phone_numbers'],
+            'location'      => $data['location'],
+            'latitude'      => $data['latitude'],
+            'longitude'     => $data['longitude']
         ];
 
-        if ( $user->email != $data['email'] )
-        {
+        if (isset($data['promo'])) {
+            $attributes['promo'] = $data['promo'];
+        }
+
+        if (isset($data['email'])) {
             $attributes['email'] = $data['email'];
         }
 
@@ -153,7 +163,9 @@ class Registrar {
      */
     public function syncRoles(array $data, User $user)
     {
-        if( ! isset($data['roles_ids'])){ $data['roles_ids']=[]; }
+        if (!isset($data['roles_ids'])) {
+            $data['roles_ids'] = [];
+        }
 
         $user->roles()->sync($data['roles_ids']);
     }

@@ -1,11 +1,13 @@
 <?php namespace LRC\Data\Users;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable {
+class User extends Authenticatable
+{
 
-    use Notifiable;
+    use Notifiable, SoftDeletes;
 
     /**
      * The database table used by the model.
@@ -23,12 +25,25 @@ class User extends Authenticatable {
     protected $guarded = ['id', 'remember_token', 'created_at', 'updated_at'];
 
     /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
+
+    /**
      * The attributes excluded from the model's JSON form.
      *
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
 
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = ['phone_numbers' => 'array'];
 
     /**
      * The relation between users and roles
@@ -53,7 +68,7 @@ class User extends Authenticatable {
      */
     public function getFullNameAttribute()
     {
-        return $this->first_name.' '.$this->last_name;
+        return $this->first_name . ' ' . $this->last_name;
     }
 
 }

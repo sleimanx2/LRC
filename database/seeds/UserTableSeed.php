@@ -3,7 +3,8 @@ use Illuminate\Database\Seeder;
 use LRC\Data\Users\User;
 use Faker\Factory as Faker;
 
-class UserTableSeeder extends Seeder {
+class UserTableSeeder extends Seeder
+{
 
     public function run()
     {
@@ -12,33 +13,35 @@ class UserTableSeeder extends Seeder {
 
         $faker = Faker::create();
 
-        User::create(array(
-            'first_name'      => 'Super',
-            'last_name'       => 'User',
-            'email'           => 'admin@lrc.com',
-            'password'        => Hash::make(123456),
-            'phone_primary'   => $faker->phoneNumber,
-            'phone_secondary' => $faker->phoneNumber,
-            'location'        => $faker->address,
-            'latitude'        => $faker->latitude,
-            'longitude'       => $faker->longitude,
-        ));
+        User::create([
+            'first_name'    => 'Super',
+            'last_name'     => 'User',
+            'email'         => 'admin@lrc.com',
+            'nickname'      => 'super',
+            'username'      => 'super.user',
+            'promo'         => '2009',
+            'password'      => Hash::make(123456),
+            'phone_numbers' => [$faker->phoneNumber, $faker->phoneNumber],
+            'location'      => $faker->address,
+            'latitude'      => $faker->latitude,
+            'longitude'     => $faker->longitude,
+        ]);
 
-        if ( app()->environment() == 'local' )
-        {
-            for ($i = 0; $i < 40; $i ++)
-            {
-                User::create(array(
-                    'first_name'      => $faker->firstName,
-                    'last_name'       => $faker->lastName,
-                    'email'           => $faker->email,
-                    'password'        => Hash::make(123456),
-                    'phone_primary'   => $faker->phoneNumber,
-                    'phone_secondary' => $faker->phoneNumber,
-                    'location'        => $faker->address,
-                    'latitude'        => $faker->latitude,
-                    'longitude'       => $faker->longitude,
-                ));
+        if (app()->environment() == 'local') {
+            for ($i = 0; $i < 40; $i++) {
+                User::create([
+                    'first_name'    => $faker->firstName,
+                    'last_name'     => $faker->lastName,
+                    'email'         => $faker->email,
+                    'nickname'      => $faker->firstName,
+                    'username'      => $faker->firstName . "." . $faker->lastName,
+                    'promo'         => $faker->year,
+                    'password'      => Hash::make(123456),
+                    'phone_numbers' => [$faker->phoneNumber, $faker->phoneNumber],
+                    'location'      => $faker->address,
+                    'latitude'      => $faker->latitude,
+                    'longitude'     => $faker->longitude,
+                ]);
             }
         }
 

@@ -11,31 +11,11 @@
 */
 
 Auth::routes();
-//
-// // Authentication Routes...
-// Route::group(['namespace' => 'Auth','prefix'=>'auth'], function ()
-// {
-//   Route::get('login', 'AuthController@showLoginForm');
-//   Route::post('login', 'AuthController@login');
-//   Route::get('logout', 'AuthController@logout');
-//
-//   // Registration Routes...
-//   //
-//   Route::group(['middleware' => 'auth'], function ()
-//   {
-//     Route::get('register', 'AuthController@showRegistrationForm');
-//     Route::post('register', 'AuthController@register');
-//
-//   });
-//
-//   // Password Change Routes...
-//   // Password Reset Routes...
-//   Route::get('password/reset/{token?}', 'PasswordController@showResetForm');
-//   Route::post('password/email', 'PasswordController@sendResetLinkEmail');
-//   Route::post('password/reset', 'PasswordController@reset');
-//
-// });
 
+//Route::get('/logout', function(){
+//
+//    Auth::logout();
+//});
 
 Route::group(['middleware' => 'auth'], function () {
 
