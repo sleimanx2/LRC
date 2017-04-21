@@ -1,21 +1,22 @@
 /*
+ * Common Functions
+ */
+
+
+/*
  * Phonebook Functions
  */
-$(document).ready(function () {
+ function initPhonebook() {
     $('#table-FirstAiders').DataTable({
         "paging": false,
         "info": false,
         "ordering": true,
         "scrollY": ($(window).height() - 160) + "px",
         "scrollCollapse": false,
-        "order": [[1, 'desc'], [5, 'asc'], [2, 'asc']],
+        "order": [ [1,'desc'], [5,'asc'], [2,'asc'] ],
         "oLanguage": {
-            "sEmptyTable": function () {
-                return "No First Aiders Found";
-            },
-            "sZeroRecords": function () {
-                return "No First Aiders Found"
-            }
+            "sEmptyTable": function() { return "No First Aiders Found"; },
+            "sZeroRecords": function() { return "No First Aiders Found" }
         }
     });
 
@@ -23,16 +24,12 @@ $(document).ready(function () {
         "paging": false,
         "info": false,
         "ordering": false,
-        "order": [[1, "desc"]],
+        "order": [[ 1, "desc" ]],
         "scrollY": ($(window).height() - 160) + "px",
         "scrollCollapse": false,
         "oLanguage": {
-            "sEmptyTable": function () {
-                return "No Hospitals Found";
-            },
-            "sZeroRecords": function () {
-                return "No Hospitals Found"
-            }
+            "sEmptyTable": function() { return "No Hospitals Found"; },
+            "sZeroRecords": function() { return "No Hospitals Found" }
         }
     });
 
@@ -44,12 +41,8 @@ $(document).ready(function () {
         "scrollY": ($(window).height() - 101) + "px",
         "scrollCollapse": false,
         "oLanguage": {
-            "sEmptyTable": function () {
-                return "No LRC Centers Found";
-            },
-            "sZeroRecords": function () {
-                return "No LRC centers Found"
-            }
+            "sEmptyTable": function() { return "No LRC Centers Found"; },
+            "sZeroRecords": function() { return "No LRC centers Found" }
         }
     });
 
@@ -61,12 +54,8 @@ $(document).ready(function () {
         "scrollY": ($(window).height() - 101) + "px",
         "scrollCollapse": false,
         "oLanguage": {
-            "sEmptyTable": function () {
-                return "No Blood Banks Found";
-            },
-            "sZeroRecords": function () {
-                return "No Blood Banks Found"
-            }
+            "sEmptyTable": function() { return "No Blood Banks Found"; },
+            "sZeroRecords": function() { return "No Blood Banks Found" }
         }
     });
 
@@ -77,19 +66,13 @@ $(document).ready(function () {
         "scrollY": ($(window).height() - 160) + "px",
         "scrollCollapse": false,
         "oLanguage": {
-            "sEmptyTable": function () {
-                return "Nothing Found";
-            },
-            "sZeroRecords": function () {
-                return "Nothing Found"
-            }
+            "sEmptyTable": function() { return "Nothing Found"; },
+            "sZeroRecords": function() { return "Nothing Found" }
         }
     });
 
     $(document).on('click', '.phonebook-nav li > a', function () {
-        setTimeout(function () {
-            $(window).trigger('resize')
-        }, 200);
+        setTimeout(function() { $(window).trigger('resize') }, 200);
     });
 
     $(document).on('click', '.dial-item-btn', function () {
@@ -98,7 +81,7 @@ $(document).ready(function () {
         $modal.find(".modal-title b").text($(this).data("dial-name").toUpperCase());
         $modal.find(".dial-buttons").html("");
 
-        $.each($(this).data("dial"), function (i, item) {
+        $.each($(this).data("dial"), function(i, item) {
             $modal.find(".dial-buttons").append("<a class='btn btn-default btn-phone-number' data-phone-number='" + item + "'>" + formatPhone(item) + "</button>")
             //console.log(item);
         });
@@ -170,93 +153,10 @@ $(document).ready(function () {
     //         });
     // });
     //
-
-});
-
-
-function initNumberInput() {
-
-    $('.btn-number').click(function (e) {
-        e.preventDefault();
-
-        fieldName = $(this).attr('data-field');
-        type = $(this).attr('data-type');
-        var input = $("input[name='" + fieldName + "']");
-        var currentVal = parseInt(input.val());
-
-        if (!isNaN(currentVal)) {
-            if (type == 'minus') {
-
-                if (currentVal > input.attr('min')) {
-                    input.val(currentVal - 1).change();
-                }
-                if (parseInt(input.val()) == input.attr('min')) {
-                    $(this).attr('disabled', true);
-                }
-
-            } else if (type == 'plus') {
-
-                if (currentVal < input.attr('max')) {
-                    input.val(currentVal + 1).change();
-                }
-                if (parseInt(input.val()) == input.attr('max')) {
-                    $(this).attr('disabled', true);
-                }
-
-            }
-        } else {
-            input.val(0);
-        }
-    });
-
-    $('.input-number').focusin(function () {
-        $(this).data('oldValue', $(this).val());
-    });
-
-    $('.input-number').change(function () {
-
-        minValue = parseInt($(this).attr('min'));
-        maxValue = parseInt($(this).attr('max'));
-        valueCurrent = parseInt($(this).val());
-
-        name = $(this).attr('name');
-        if (valueCurrent >= minValue) {
-            $(".btn-number[data-type='minus'][data-field='" + name + "']").removeAttr('disabled')
-        } else {
-            alert('Sorry, the minimum value was reached');
-            $(this).val($(this).data('oldValue'));
-        }
-        if (valueCurrent <= maxValue) {
-            $(".btn-number[data-type='plus'][data-field='" + name + "']").removeAttr('disabled')
-        } else {
-            alert('Sorry, the maximum value was reached');
-            $(this).val($(this).data('oldValue'));
-        }
-
-
-    });
-
-    $(".input-number").keydown(function (e) {
-        // Allow: backspace, delete, tab, escape, enter and .
-        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
-                // Allow: Ctrl+A
-            (e.keyCode == 65 && e.ctrlKey === true) ||
-                // Allow: home, end, left, right
-            (e.keyCode >= 35 && e.keyCode <= 39)) {
-            // let it happen, don't do anything
-            return;
-        }
-        // Ensure that it is a number and stop the keypress
-        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-            e.preventDefault();
-        }
-    });
-
 }
 
-
 function formatPhone(phoneNumber) {
-    if (phoneNumber.length == 8)
+    if(phoneNumber.length == 8)
         return phoneNumber.substring(0, 2) + " " + phoneNumber.substring(2, 5) + " " + phoneNumber.substring(5, 8);
 
     return phoneNumber;
@@ -273,10 +173,10 @@ function hidePhonebookSidebar() {
 /*
  * Blood Request Form Functions
  */
-$(document).on('click', ".btn-toggle-gender", function () {
+$(document).on('click', ".btn-toggle-gender", function() {
     var gender = $("input[name='patient_gender']").val();
 
-    if (gender == 'male') {
+    if(gender == 'male') {
         $(this).find("i").removeClass("fa-male").addClass("fa-female");
         $("input[name='patient_gender']").val("female");
     }
@@ -299,15 +199,15 @@ function initMap() {
 }
 
 /*
- * Helper method called when the location is changed in the location/destination fields
- */
+* Helper method called when the location is changed in the location/destination fields
+*/
 function moveMap() {
-
-    if (isNaN(location_latitude) && isNaN(location_longitude)) {
-        location_latitude = location_latitude.val();
-        location_longitude = location_longitude.val();
-        location_name = location_name.val();
-    }
+    if( isNaN(location_latitude) && isNaN(location_longitude) )
+    {
+      location_latitude = location_latitude.val();
+      location_longitude = location_longitude.val();
+      location_name = location_name.val();
+  }
 
     // Getting coordinates
     var location_coordinates = new google.maps.LatLng(location_latitude, location_longitude);
@@ -332,7 +232,7 @@ function moveMap() {
     });
 
 
-    if (typeof destination_latitude !== 'undefined') {
+    if(typeof destination_latitude !== 'undefined') {
 
         var destination_coordinates = new google.maps.LatLng(destination_latitude.val(), destination_longitude.val());
 
@@ -361,27 +261,100 @@ function moveMap() {
 }
 
 /*
- * Convert all select input to select2 instances
+ * Element Initialization Functions
  */
-function initSelect2() {
-    $("select").select2();
+function initNumberInput() {
+    $('.btn-number').click(function(e){
+        e.preventDefault();
 
-    $(".select-tags").select2({tags: true});
+        fieldName = $(this).attr('data-field');
+        type      = $(this).attr('data-type');
+        var input = $("input[name='"+fieldName+"']");
+        var currentVal = parseInt(input.val());
+
+        if (!isNaN(currentVal)) {
+            if(type == 'minus') {
+
+                if(currentVal > input.attr('min')) {
+                    input.val(currentVal - 1).change();
+                }
+                if(parseInt(input.val()) == input.attr('min')) {
+                    $(this).attr('disabled', true);
+                }
+
+            } else if(type == 'plus') {
+
+                if(currentVal < input.attr('max')) {
+                    input.val(currentVal + 1).change();
+                }
+                if(parseInt(input.val()) == input.attr('max')) {
+                    $(this).attr('disabled', true);
+                }
+
+            }
+        } else {
+            input.val(0);
+        }
+    });
+
+    $('.input-number').focusin(function(){
+        $(this).data('oldValue', $(this).val());
+    });
+
+    $('.input-number').change(function() {
+
+        minValue =  parseInt($(this).attr('min'));
+        maxValue =  parseInt($(this).attr('max'));
+        valueCurrent = parseInt($(this).val());
+
+        name = $(this).attr('name');
+        if(valueCurrent >= minValue) {
+            $(".btn-number[data-type='minus'][data-field='"+name+"']").removeAttr('disabled')
+        } else {
+            alert('Sorry, the minimum value was reached');
+            $(this).val($(this).data('oldValue'));
+        }
+        if(valueCurrent <= maxValue) {
+            $(".btn-number[data-type='plus'][data-field='"+name+"']").removeAttr('disabled')
+        } else {
+            alert('Sorry, the maximum value was reached');
+            $(this).val($(this).data('oldValue'));
+        }
+    });
+
+    $(".input-number").keydown(function (e) {
+        // Allow: backspace, delete, tab, escape, enter and .
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+             // Allow: Ctrl+A
+             (e.keyCode == 65 && e.ctrlKey === true) ||
+             // Allow: home, end, left, right
+             (e.keyCode >= 35 && e.keyCode <= 39)) {
+                 // let it happen, don't do anything
+             return;
+         }
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
+    });
 }
 
-function initDateTimePicker() {
+function initSelect2(){
+    $("select").select2();
+}
 
+function initDateTimePicker(){
     $('.datetimepicker').datetimepicker();
-    $('.datepicker').datetimepicker({format: 'YYYY-MM-DD'});
-    $('.timepicker').datetimepicker({format: 'LT'});
-
+    $('.datepicker').datetimepicker({ format:'YYYY-MM-DD'});
+    $('.timepicker').datetimepicker({ format: 'LT'});
 }
 
 /*
- * Boot function that is called on each page request
- */
-function boot() {
-    $(document).ready(function () {
+* Boot function that is called on each page request
+*/
+function boot(){
+    $(document).ready(function() {
+        initPhonebook();
         initSelect2();
         initDateTimePicker();
         initNumberInput();

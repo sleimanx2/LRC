@@ -24,7 +24,7 @@
                         @endif
 
                         {!! Form::model($bloodRequest,['route'=>['blood-request-update',$bloodRequest->id],'name'=>'blood_request_edit_form']) !!}
-                            @include('forms.blood.request')
+                            @include('forms.blood.request', ['form_action' => 'edit'])
                         {!! Form::close() !!}
 
                         <hr/>

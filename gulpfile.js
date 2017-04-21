@@ -23,6 +23,7 @@ elixir(function (mix) {
             'vendor/datetimepicker/datetimepicker.js',
             'vendor/datatables/jquery.datatables.min.js',
             'vendor/sweetalert/sweetalert.min.js',
+            'vendor/autogrow/jquery.autogrow.min.js',
             'main.js'
         ],
         'resources/assets',
