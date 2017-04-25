@@ -32,15 +32,33 @@
                         'method'=>'delete',
                         'route'=>['blood-donor-destroy',$bloodDonor->id],
                         'style'=>'display:inline',
-                        'onsubmit'=>'return confirm("Are you sure you want to delete '.$bloodDonor->first_name.' ?");'
+                        'id'=>'delete-donor-'.$bloodDonor->id.'-form'
                         ]) !!}
 
-                        <button type="submit" class="btn btn-danger btn-block" popover="Delete"
+                        <button id = 'delete-donor-{{$bloodDonor->id}}' type="submit" class="btn btn-danger btn-block" popover="Delete"
                                 popover-trigger="mouseenter"><i
                                     class="fa fa-remove"></i> Delete {{ $bloodDonor->first_name.' '.$bloodDonor->last_name }}
                         </button>
 
                         {!!Form::close()!!}
+
+                        <script type="text/javascript">
+                            $("#delete-donor-{{ $bloodDonor->id }}").click(function(e){
+                                swal({
+                                            title: "Are you sure?",
+                                            type: "warning",
+                                            showCancelButton: true,
+                                            confirmButtonColor: "#DD6B55",
+                                            confirmButtonText: "Yes, delete it!",
+                                            closeOnConfirm: false
+                                        },
+                                        function(){
+                                            $('#delete-donor-{{$bloodDonor->id}}-form').submit();
+                                        });
+                                e.preventDefault();
+                                return false;
+                            });
+                        </script>
                     </div>
                 </div>
             </div>

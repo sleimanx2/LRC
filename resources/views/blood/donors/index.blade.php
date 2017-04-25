@@ -52,10 +52,10 @@
                                 'method'=>'delete',
                                 'route'=>['blood-donor-destroy',$bloodDonor->id],
                                 'style'=>'display:inline',
-                                'id'=>'delete-donnor-'.$bloodDonor->id.'-form'
+                                'id'=>'delete-donor-'.$bloodDonor->id.'-form'
                                 ]) !!}
 
-                                <button id = 'delete-donnor-{{$bloodDonor->id}}' type="submit" class="btn btn-danger btn-sm hidden-xs" popover="Delete"
+                                <button id = 'delete-donor-{{$bloodDonor->id}}' type="submit" class="btn btn-danger btn-sm hidden-xs" popover="Delete"
                                         popover-trigger="mouseenter"><i
                                             class="fa fa-remove"></i>
                                 </button>
@@ -63,7 +63,7 @@
                                 {!!Form::close()!!}
 
                                 <script type="text/javascript">
-                                  $("#delete-donnor-{{ $bloodDonor->id }}").click(function(e){
+                                  $("#delete-donor-{{ $bloodDonor->id }}").click(function(e){
                                     swal({
                                       title: "Are you sure?",
                                       type: "warning",
@@ -73,7 +73,7 @@
                                       closeOnConfirm: false
                                     },
                                     function(){
-                                      $('#delete-donnor-{{$bloodDonor->id}}-form').submit();
+                                      $('#delete-donor-{{$bloodDonor->id}}-form').submit();
                                     });
                                     e.preventDefault();
                                     return false;

@@ -38,12 +38,29 @@
                                 'method'=>'delete',
                                 'route'=>['blood-request-destroy',$bloodRequest->id],
                                 'style'=>'display:inline',
-                                'onsubmit'=>'return confirm("Are you sure you want to delete '. $bloodRequest->patient_name.'\'s request?");'
+                                'id'=>'delete-request-'.$bloodRequest->id.'-form'
                             ]) !!}
 
-                            <button type="submit" class="btn btn-danger btn-block" popover="Delete" popover-trigger="mouseenter"><i class="fa fa-remove"></i> Delete this Request</button>
+                            <button type="submit" id = 'delete-request-{{$bloodRequest->id}}' class="btn btn-danger btn-block" popover="Delete" popover-trigger="mouseenter"><i class="fa fa-remove"></i> Delete this Request</button>
 
                             {!! Form::close() !!}
+                            <script type="text/javascript">
+                                $("#delete-request-{{ $bloodRequest->id }}").click(function(e){
+                                    swal({
+                                                title: "Are you sure?",
+                                                type: "warning",
+                                                showCancelButton: true,
+                                                confirmButtonColor: "#DD6B55",
+                                                confirmButtonText: "Yes, delete it!",
+                                                closeOnConfirm: false
+                                            },
+                                            function(){
+                                                $('#delete-request-{{$bloodRequest->id}}-form').submit();
+                                            });
+                                    e.preventDefault();
+                                    return false;
+                                });
+                            </script>
                         </div>
                     </div>
                 </div>
