@@ -17,9 +17,14 @@ class FormServiceProvider extends ServiceProvider
     public function boot()
     {
         // Global shared variables across all view
-        view()->share('allBloodTypes', $this->getBloodTypes());
-        view()->share('allBloodBanks', $this->getBloodBanksList());
-        view()->share('users', $this->getAllUsers());
+
+        \View::composer('*', function ($view) {
+            $view->with('allBloodTypes', $this->getBloodTypes());
+            $view->with('allBloodBanks', $this->getBloodBanksList());
+            $view->with('users', $this->getAllUsers());
+        });
+
+
     }
 
     /**

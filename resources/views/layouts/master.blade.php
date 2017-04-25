@@ -1,5 +1,4 @@
 <!doctype html>
-{{ dd($users) }}
 
         <!--[if gt IE 8]><!-->
 <html class="no-js"> <!--<![endif]-->
