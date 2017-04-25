@@ -11,9 +11,9 @@
         "paging": false,
         "info": false,
         "ordering": true,
-        "scrollY": ($(window).height() - 160) + "px",
+        "scrollY": ($(window).height() - 170) + "px",
         "scrollCollapse": false,
-        "order": [ [1,'desc'], [5,'asc'], [2,'asc'] ],
+        "order": [ [1,'desc'], [2,'desc'], [6,'asc'], [3,'asc'] ],
         "oLanguage": {
             "sEmptyTable": function() { return "No First Aiders Found"; },
             "sZeroRecords": function() { return "No First Aiders Found" }
@@ -26,7 +26,7 @@
         "info": false,
         "ordering": false,
         "order": [[ 1, "desc" ]],
-        "scrollY": ($(window).height() - 160) + "px",
+        "scrollY": ($(window).height() - 170) + "px",
         "scrollCollapse": false,
         "oLanguage": {
             "sEmptyTable": function() { return "No Medical Centers Found"; },
@@ -40,7 +40,7 @@
         "info": false,
         "ordering": false,
         "filter": false,
-        "scrollY": ($(window).height() - 101) + "px",
+        "scrollY": ($(window).height() - 111) + "px",
         "scrollCollapse": false,
         "oLanguage": {
             "sEmptyTable": function() { return "No LRC Centers Found"; },
@@ -52,7 +52,7 @@
         "paging": false,
         "info": false,
         "ordering": false,
-        "scrollY": ($(window).height() - 160) + "px",
+        "scrollY": ($(window).height() - 170) + "px",
         "scrollCollapse": false,
         "oLanguage": {
             "sEmptyTable": function() { return "Nothing Found"; },

@@ -27,6 +27,7 @@
                     <thead>
                         <tr>
                             <th class="hidden">Ex Member</th>
+                            <th class="hidden">Regional Manager</th>
                             <th class="hidden">Ambulance Driver</th>
                             <th>Last Name</th>
                             <th>First Name</th>
@@ -37,19 +38,29 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="phonebook-row dial-item-btn" data-dial='["03032033", "04972665"]' data-dial-name="Mansour Wakim">
-                            <td class="hidden">0</td>
-                            <td class="hidden">1</td>
-                            <td><b>Wakim</b></td>
-                            <td><b>Mansour</b></td>
-                            <td>Rondpoint</td>
-                            <td>2010</td>
-                            <td>204</td>
+                        @foreach($users as $firstAider)
+                        <tr class="phonebook-row dial-item-btn" data-dial='{{ json_encode($firstAider->phone_numbers) }}' data-dial-name="{{ $firstAider->full_name }}">
+                            <td class="hidden">{{ $firstAider->is_ex }}</td>
+                            <td class="hidden">{{ $firstAider->is_rm }}</td>
+                            <td class="hidden">{{ $firstAider->is_amb }}</td>
+                            <td><b>{{ $firstAider->last_name }}</b></td>
+                            <td><b>{{ $firstAider->first_name }}</b></td>
+                            <td>{{ $firstAider->nickname }}</td>
+                            <td>{{ $firstAider->promo }}</td>
+                            <td>{{ $firstAider->location }}</td>
                             <td>
-                                <span class="label label-primary">RM</span>
-                                <span class="label label-success"><i class="fa fa-car"></i></span>
+                                @if($firstAider->is_rm)
+                                <span class="label label-primary" title="Regional Manager">RM</span>
+                                @endif
+                                @if($firstAider->is_amb)
+                                <span class="label label-success" title="Ambulance Driver"><i class="fa fa-car"></i></span>
+                                @endif
+                                @if($firstAider->is_ami)
+                                <span class="label label-default" title="Ami du Centre"><i class="fa fa-users"></i></span>
+                                @endif
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
