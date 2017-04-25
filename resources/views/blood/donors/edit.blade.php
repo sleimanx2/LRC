@@ -1,14 +1,16 @@
 @extends('layouts.master')
 
-@section('content')
-    <div class="page page-form ng-scope">
-        <div class="row">
-            <div class="col-md-6 col-md-offset-3 ng-scope">
-                <div class="panel panel-default">
-                    <div class="panel-heading"><strong><i class="fa fa-pencil panel-ico"></i>Edit a blood donor
-                        </strong>
-                    </div>
+@section('sub-header')
+<div class="clearfix">
+    <h5 class="page-title">Edit Blood Donor</h5>
+</div>
+@endsection
 
+@section('content')
+    <div class="page page-form">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
                     <div class="panel-body">
                         @if (count($errors) > 0)
                             <div class="alert alert-danger">

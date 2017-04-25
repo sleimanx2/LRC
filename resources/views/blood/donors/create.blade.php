@@ -1,14 +1,16 @@
 @extends('layouts.master')
 
+@section('sub-header')
+<div class="clearfix">
+    <h5 class="page-title">Create Blood Donor</h5>
+</div>
+@endsection
+
 @section('content')
     <div class="page page-form ng-scope">
         <div class="row">
-            <div class="col-md-6 col-md-offset-3 ng-scope">
+            <div class="col-md-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><strong><i class="fa fa-pencil panel-ico"></i>Add a blood donor
-                            </strong>
-                    </div>
-
                     <div class="panel-body">
                         @if (count($errors) > 0)
                             <div class="alert alert-danger">
@@ -21,7 +23,7 @@
                             </div>
                         @endif
                         {!! Form::open(['route'=>'blood-donor-store','name'=>'blood_donor_add_form']); !!}
-                        @include('forms.blood.donor')
+                            @include('forms.blood.donor')
                         {!! Form::close(); !!}
                     </div>
                 </div>

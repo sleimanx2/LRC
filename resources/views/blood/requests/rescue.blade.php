@@ -26,7 +26,7 @@
             '.$bloodRequest->patient_name.'\'s request as complete ?");'
             ]) !!}
 
-            <button class="btn btn-success"><i class="fa fa-check"></i>&nbsp;&nbsp;Set as Complete</button>
+            <button class="btn btn-success btn-action"><i class="fa fa-check"></i>&nbsp;&nbsp;Set as Complete</button>
 
             {!!Form::close()!!}
         </li>
@@ -85,13 +85,15 @@
                                     <ul class="list-unstyled list-info">
                                         <li>
                                             <span class="icon fa fa-user"></span>
-                                            <label>Contact Name</label>
+                                            <label>Contact Person</label>
                                             <div class="pull-right">{{ $bloodRequest->contact_name }}</div>
                                         </li>
                                         <li>
                                             <span class="icon fa fa-phone"></span>
                                             <label>Contact Phone</label>
-                                            <div class="pull-right">{{ $bloodRequest->phone_primary  }} / {{$bloodRequest->phone_secondary }}</div>
+                                            <div class="pull-right">
+                                                <button class="btn btn-primary dial-item-btn" data-dial='["{{ $bloodRequest->phone_primary }}", "{{ $bloodRequest->phone_secondary }}"]' data-dial-name="{{ $bloodRequest->contact_name }}"><i class="fa fa-phone"></i>&nbsp;&nbsp;DIAL</button>
+                                            </div>
                                         </li>
                                         <li>
                                             <span class="icon fa fa-bullhorn"></span>
@@ -128,7 +130,7 @@
                                 <li>
                                     <i class="icon fa fa-phone"></i>
                                     <label>Phone</label>
-                                    {{ $bloodRequest->blood_bank->phone_primary or 'Not defined'}} / {{ $bloodRequest->blood_bank->phone_secondary or ''}}
+                                    <button class="btn btn-primary dial-item-btn" data-dial='["{{ $bloodRequest->blood_bank->phone_primary }}", "{{ $bloodRequest->blood_bank->phone_secondary }}"]' data-dial-name="{{ $bloodRequest->blood_bank->name }}"><i class="fa fa-phone"></i>&nbsp;&nbsp;DIAL</button>
                                 </li>
                             </ul>
 
@@ -187,36 +189,35 @@
                             </div>
                             <div id="{{ 'collapse-success-'.$bloodDonation->id  }}" class="panel-collapse collapse">
                                 <div class="panel-body">
-                                    <ul class="list-unstyled list-infolist-unstyled list-info">
+                                    <ul class="list-unstyled list-infolist-unstyled list-info m-b-0">
                                         <li>
-                                            <span class="icon fa fa-phone"></span>
-                                            <label>Phone</label>
-                                            {{ $bloodDonation->donor->phone_primary or 'Not defined'}} / {{ $bloodDonation->donor->phone_secondary or ''}}
-                                        </li>
-                                        <li>
-                                            <span class="icon fa fa-question"></span>
+                                            <span class="icon fa fa-bullhorn"></span>
                                             <label>Contacted By</label>
-                                            {{ $bloodDonation->user->first_name or 'Not defined'}} {{ $bloodDonation->user->last_name or ''}}
+                                            <b>{{ $bloodDonation->user->first_name or 'Not defined'}} {{ $bloodDonation->user->last_name or ''}}</b>
                                         </li>
                                         <li>
-                                            @if( ! $bloodDonation->confirmed )
-                                                {!!Form::open([
-                                                'route'=>['blood-donation-confirmed',$bloodDonation->id],
-                                                'style'=>'display:inline',
-                                                'onsubmit'=>'return confirm("Are you sure you want to confirm
-                                                '.$bloodDonation->user->first_name.' donation ?");'
-                                                ]) !!}
+                                            <button class="btn btn-primary dial-item-btn m-r-sm" data-dial='["{{ $bloodDonation->donor->phone_primary }}", "{{ $bloodDonation->donor->phone_secondary }}"]' data-dial-name="{{ $bloodDonation->donor->first_name }} {{$bloodDonation->donor->last_name }}"><i class="fa fa-phone"></i>&nbsp;&nbsp;DIAL</button>
 
-                                                <button type="submit" class="btn btn-success"
-                                                        popover="Confirm"
-                                                        popover-trigger="mouseenter">
-                                                    Confirm
-                                                </button>
+                                            <div class="pull-right">
+                                                @if( ! $bloodDonation->confirmed )
+                                                    {!!Form::open([
+                                                    'route'=>['blood-donation-confirmed',$bloodDonation->id],
+                                                    'style'=>'display:inline',
+                                                    'onsubmit'=>'return confirm("Are you sure you want to confirm
+                                                    '.$bloodDonation->user->first_name.' donation ?");'
+                                                    ]) !!}
 
-                                                {!!Form::close()!!}
-                                            @endif
+                                                    <button type="submit" class="btn btn-success"
+                                                            popover="Confirm"
+                                                            popover-trigger="mouseenter">
+                                                        Confirm
+                                                    </button>
 
-                                            <button onclick="openWontDonate({{ $bloodDonation->donor->id }})" class="btn btn-bordered-danger">Can't Donate</button>
+                                                    {!!Form::close()!!}
+                                                @endif
+
+                                                <button onclick="openWontDonate({{ $bloodDonation->donor->id }})" class="btn btn-bordered-danger">Can't Donate</button>
+                                            </div> 
                                         </li>
                                     </ul>
                                 </div>
@@ -253,15 +254,14 @@
                             </div>
                             <div id="{{ 'collapse-potential-'.$bloodDonor->id  }}" class="panel-collapse collapse">
                                 <div class="panel-body">
-                                    <ul class="list-unstyled list-infolist-unstyled list-info">
+                                    <ul class="list-unstyled list-infolist-unstyled list-info m-b-0">
                                         <li>
-                                            <span class="icon fa fa-phone"></span>
-                                            <label>Phone</label>
-                                            {{ $bloodDonor->phone_primary or 'Not defined'}} / {{ $bloodDonor->phone_secondary or ''}}
-                                        </li>
-                                        <li>
-                                            <button onclick="openWillDonate({{ $bloodDonor->id }})" class="btn btn-bordered-success">Will Donate</button>
-                                            <button onclick="openWontDonate({{ $bloodDonor->id }})" class="btn btn-bordered-danger">Can't Donate</button>
+                                            <button class="btn btn-primary dial-item-btn m-r-sm" data-dial='["{{ $bloodDonor->phone_primary }}", "{{ $bloodDonor->phone_secondary }}"]' data-dial-name="{{ $bloodDonor->first_name }} {{$bloodDonor->last_name }}"><i class="fa fa-phone"></i>&nbsp;&nbsp;DIAL</button>
+
+                                            <div class="pull-right">
+                                                <button onclick="openWillDonate({{ $bloodDonor->id }})" class="btn btn-bordered-success">Will Donate</button>
+                                                <button onclick="openWontDonate({{ $bloodDonor->id }})" class="btn btn-bordered-danger">Can't Donate</button>
+                                            </div>
                                         </li>
                                     </ul>
                                 </div>

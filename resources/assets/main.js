@@ -19,8 +19,9 @@
             "sZeroRecords": function() { return "No First Aiders Found" }
         }
     });
+    $('#table-FirstAiders').DataTable().column(0).search("0").draw();
 
-    $('#table-Hospitals').DataTable({
+    $('#table-MedicalCenters').DataTable({
         "paging": false,
         "info": false,
         "ordering": false,
@@ -28,10 +29,11 @@
         "scrollY": ($(window).height() - 160) + "px",
         "scrollCollapse": false,
         "oLanguage": {
-            "sEmptyTable": function() { return "No Hospitals Found"; },
-            "sZeroRecords": function() { return "No Hospitals Found" }
+            "sEmptyTable": function() { return "No Medical Centers Found"; },
+            "sZeroRecords": function() { return "No Medical Centers Found" }
         }
     });
+    $('#table-MedicalCenters').DataTable().column(0).search("favorite").draw();
 
     $('#table-LrcCenters').DataTable({
         "paging": false,
@@ -46,19 +48,6 @@
         }
     });
 
-    $('#table-BloodBanks').DataTable({
-        "paging": false,
-        "info": false,
-        "ordering": false,
-        "filter": false,
-        "scrollY": ($(window).height() - 101) + "px",
-        "scrollCollapse": false,
-        "oLanguage": {
-            "sEmptyTable": function() { return "No Blood Banks Found"; },
-            "sZeroRecords": function() { return "No Blood Banks Found" }
-        }
-    });
-
     $('#table-Organizations').DataTable({
         "paging": false,
         "info": false,
@@ -69,6 +58,23 @@
             "sEmptyTable": function() { return "Nothing Found"; },
             "sZeroRecords": function() { return "Nothing Found" }
         }
+    });
+    $('#table-Organizations').DataTable().column(0).search("favorite").draw();
+
+    $(document).on('click', '.table-filter-btn', function() {
+        $(this).closest(".phonebook-filter-pills").find("li").removeClass("active");
+
+        if($(this).hasClass("sub"))
+            $(this).closest(".btn-group").addClass("active");
+        else if(!$(this).hasClass("dropdown-toggle"))
+            $(this).closest("li").addClass("active");
+
+        if($(this).hasClass("fav-title"))
+            $(this).closest(".phonebook-filter-pills").find(".nav-pills-title .sub-title").text("Favorites");
+        else
+            $(this).closest(".phonebook-filter-pills").find(".nav-pills-title .sub-title").text($(this).text());
+
+        $(this).closest(".tab-pane").find(".phonebook-table").DataTable().column($(this).data('filter-column')).search($(this).data('filter')).draw();
     });
 
     $(document).on('click', '.phonebook-nav li > a', function () {
@@ -339,11 +345,22 @@ function initNumberInput() {
     });
 }
 
-function initSelect2(){
+function initGenderToggle() {
+    $('.btn-toggle-gender').each(function() {
+        if($(this).closest('.input-group').find('.patient-gender-hidden-input').val() == "female")
+            $(this).find("i.fa").removeClass("fa-male").addClass("fa-female");
+    });
+}
+
+function initAutoGrow() {
+    $("textarea").autoGrow();
+}
+
+function initSelect2() {
     $("select").select2();
 }
 
-function initDateTimePicker(){
+function initDateTimePicker() {
     $('.datetimepicker').datetimepicker();
     $('.datepicker').datetimepicker({ format:'YYYY-MM-DD'});
     $('.timepicker').datetimepicker({ format: 'LT'});
@@ -358,6 +375,8 @@ function boot(){
         initSelect2();
         initDateTimePicker();
         initNumberInput();
+        initAutoGrow();
+        initGenderToggle();
     });
 }
 
