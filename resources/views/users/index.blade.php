@@ -31,7 +31,7 @@
                     </div>
                 </div>
 
-                @if(!$users->count())
+                @if(!$sysUsers->count())
                     <div class="alert alert-warning">No result found !</div>
                 @else
 
@@ -45,7 +45,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($users as $user)
+                        @foreach($sysUsers as $user)
                             <tr>
                                 <td>{{$user->first_name}} {{$user->last_name}}</td>
                                 <td>{{$user->phone_primary}}</td>
@@ -77,7 +77,7 @@
                 @endif
                 <div class="col-md-12  ">
                 <span class="pull-right">
-                    <?php echo $users->appends(Request::except('page'))->render() ?>
+                    <?php echo $sysUsers->appends(Request::except('page'))->render() ?>
                 </span>
                 </div>
         </section>

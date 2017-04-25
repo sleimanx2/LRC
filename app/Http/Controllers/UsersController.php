@@ -41,7 +41,7 @@ class UsersController extends Controller {
             $users = $this->userRepository->searchPaginated($searchQuery, 10);
         }
 
-        return view('users.index', ['users' => $users]);
+        return view('users.index', ['sysUsers' => $users]);
     }
 
 
