@@ -33,6 +33,15 @@ class BloodRequest extends Model {
     }
 
     /**
+     * Belong to relation with user
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function taken_by()
+    {
+        return $this->belongsTo('LRC\Data\Users\User','taken_by');
+    }
+
+    /**
      * Belong to relation with blood type
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

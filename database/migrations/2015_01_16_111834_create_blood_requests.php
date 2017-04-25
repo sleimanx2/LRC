@@ -43,6 +43,9 @@ class CreateBloodRequests extends Migration {
             // Who created the request
             $table->integer('user_id');
 
+            $table->integer('taken_by');
+            $table->string('received_from');
+
             $table->timestamps();
 
         });
