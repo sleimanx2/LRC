@@ -72,7 +72,7 @@
                 <div class="input-group-btn">
                     <button type="button" class="btn btn-default btn-toggle-gender" ><i class="fa fa-male"></i></button>
                 </div>
-                {!! Form::hidden('patient_gender', 'male') !!}
+                {!! Form::hidden('patient_gender', $form_action == 'create' ? 'male' : old('patient_gender'), ['class' => 'patient-gender-hidden-input']) !!}
             </div>
         </div>
         <div class="form-group">

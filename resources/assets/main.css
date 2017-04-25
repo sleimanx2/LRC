@@ -75,10 +75,20 @@ span.block {
 .no-border {
   border: 0!important; }
 
-.m-t-sm { margin-top: 10px; }
-.m-b-sm { margin-bottom: 10px; }
-.m-l-sm { margin-left: 10px; }
-.m-r-sm { margin-right: 10px; }
+.m-t-0 { margin-top: 0!important;; }
+.m-b-0 { margin-bottom: 0!important;; }
+.m-l-0 { margin-left: 0!important;; }
+.m-r-0 { margin-right: 0!important;; }
+
+.m-t-sm { margin-top: 10px!important;; }
+.m-b-sm { margin-bottom: 10px!important;; }
+.m-l-sm { margin-left: 10px!important;; }
+.m-r-sm { margin-right: 10px!important;; }
+
+textarea {
+  min-height: 54px!important;
+  resize: none;
+}
 
 a {
   color: #333;
@@ -839,6 +849,11 @@ input[type="date"].input-sm, .form-horizontal .form-group-sm input[type="date"].
 
 input[type="date"].input-lg, .form-horizontal .form-group-lg input[type="date"].form-control, .input-group-lg > input[type="date"].form-control, .input-group-lg > input[type="date"].input-group-addon, .input-group-lg > .input-group-btn > input[type="date"].btn, input[type="time"].input-lg, .form-horizontal .form-group-lg input[type="time"].form-control, .input-group-lg > input[type="time"].form-control, .input-group-lg > input[type="time"].input-group-addon, .input-group-lg > .input-group-btn > input[type="time"].btn, input[type="datetime-local"].input-lg, .form-horizontal .form-group-lg input[type="datetime-local"].form-control, .input-group-lg > input[type="datetime-local"].form-control, .input-group-lg > input[type="datetime-local"].input-group-addon, .input-group-lg > .input-group-btn > input[type="datetime-local"].btn, input[type="month"].input-lg, .form-horizontal .form-group-lg input[type="month"].form-control, .input-group-lg > input[type="month"].form-control, .input-group-lg > input[type="month"].input-group-addon, .input-group-lg > .input-group-btn > input[type="month"].btn {
   line-height: 46px; }
+
+.form-radio-group-label {
+  display: block;
+  margin-bottom: 10px;
+}
 
 .radio label, .checkbox label {
   padding-left: 20px;
@@ -4827,7 +4842,7 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:hover, a.list-g
   border: 1px solid #f3f3f3; }
 
 .list-info li {
-  padding: 10px;
+  padding: 14px 10px;
   border-bottom: 1px solid #eee; }
 
 .list-info li:last-child {
@@ -4839,7 +4854,11 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:hover, a.list-g
   width: 12px; }
 
 .list-info li label {
-  width: 120px; }
+  width: 120px;
+  margin: 0; }
+
+.list-info li .btn {
+  margin-top: -7px; }
 
 .progress {
   -webkit-box-shadow: none;
@@ -5109,6 +5128,10 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:hover, a.list-g
   -ms-border-radius: 0px;
   -o-border-radius: 0px;
   border-radius: 0px; }
+
+.modal-lg {
+  width: 901px;
+}
 
 .modal-xl {
   width: 1200px;
@@ -7369,6 +7392,7 @@ label {
 
 #modalDial .dial-buttons .btn {
   margin-right: 10px;
+  margin-bottom: 10px;
 }
 
 .ui-spinner {

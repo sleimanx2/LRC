@@ -6,9 +6,8 @@
         <div class="sidebar-nav">
             <ul class="nav nav-pills phonebook-nav">
               <li class="active"><a href="#tab-firstAiders" role="tab" data-toggle="tab">First Aiders</a></li>
-              <li><a href="#tab-hospitals" role="tab" data-toggle="tab">Hospitals</a></li>
+              <li><a href="#tab-medicalCenters" role="tab" data-toggle="tab">Medical Centers</a></li>
               <li><a href="#tab-lrcCenters" role="tab" data-toggle="tab">LRC Centers</a></li>
-              <li><a href="#tab-bloodBanks" role="tab" data-toggle="tab">Blood Banks</a></li>
               <li><a href="#tab-organizations" role="tab" data-toggle="tab">Organizations</a></li>
               <li class="seperator"></li>
               <li><a class="dial-item-btn" data-dial='["05458204"]' data-dial-name="O.R."><i class="fa fa-phone"></i>&nbsp;&nbsp;<b>O.R.</b></a></li>
@@ -21,8 +20,8 @@
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane fade in active" id="tab-firstAiders">
                 <ul class="nav nav-pills phonebook-filter-pills m-t-sm m-b-sm">
-                    <li role="presentation" class="active"><a data-filter="favorite">Current Members</a></li>
-                    <li role="presentation" class=""><a data-filter="favorite">Ex Members</a></li>
+                    <li role="presentation" class="active"><a data-filter="0" data-filter-column="0" class="table-filter-btn">Current Members</a></li>
+                    <li role="presentation" class=""><a data-filter="1" data-filter-column="0" class="table-filter-btn">Ex Members</a></li>
                 </ul>
                 <table id="table-FirstAiders" class="display table phonebook-table" cellspacing="0" width="100%">
                     <thead>
@@ -54,23 +53,17 @@
                     </tbody>
                 </table>
             </div>
-            <div role="tabpanel" class="tab-pane fade" id="tab-hospitals">
+            <div role="tabpanel" class="tab-pane fade" id="tab-medicalCenters">
                 <ul class="nav nav-pills phonebook-filter-pills m-t-sm m-b-sm">
-                    <li role="presentation" class="active"><a data-filter="favorite"><i class="fa fa-star"></i></a></li>
-                    <li role="presentation"><a data-filter="100">100</a></li>
-                    <li role="presentation"><a data-filter="200">200</a></li>
-                    <li role="presentation"><a data-filter="300">300</a></li>
-                    <li role="presentation"><a data-filter="400">400</a></li>
-                    <li role="presentation"><a data-filter="500">500</a></li>
-                    <li role="presentation"><a data-filter="600">600</a></li>
-                    <li role="presentation"><a data-filter="700">700</a></li>
-                    <li role="presentation"><a data-filter="nursing">Nursing Homes</a></li>
-                    <li role="presentation"><a data-filter="other">Other</a></li>
+                    <li role="presentation" class="active"><a data-filter="favorite" data-filter-column="0" class="table-filter-btn"><i class="fa fa-star"></i></a></li>
+                    <li role="presentation"><a data-filter="hospital" data-filter-column="0" class="table-filter-btn">Hospitals</a></li>
+                    <li role="presentation"><a data-filter="nursing-home" data-filter-column="0" class="table-filter-btn">Nursing Homes</a></li>
+                    <li role="presentation"><a data-filter="blood-bank" data-filter-column="0" class="table-filter-btn">Blood Banks</a></li>
                 </ul>
-                <table id="table-Hospitals" class="display table phonebook-table" cellspacing="0" width="100%">
+                <table id="table-MedicalCenters" class="display table phonebook-table" cellspacing="0" width="100%">
                     <thead>
                         <tr>
-                            <th class="hidden">District</th>
+                            <th class="hidden">Category</th>
                             <th width="100">Sector</th>
                             <th>Code</th>
                             <th>Hospital Name</th>
@@ -78,8 +71,26 @@
                     </thead>
                     <tbody>
                         <tr class="phonebook-row dial-item-btn" data-dial='["03032033", "04972665"]' data-dial-name="MEH">
-                            <td class="hidden">200</td>
-                            <td><b>204</b></td>
+                            <td class="hidden">hospital</td>
+                            <td><b>204h</b></td>
+                            <td><b>MEH</b></td>
+                            <td>Middle East Institute of Health</td>
+                        </tr>
+                        <tr class="phonebook-row dial-item-btn" data-dial='["03032033", "04972665"]' data-dial-name="MEH">
+                            <td class="hidden">nursing-home</td>
+                            <td><b>204nh</b></td>
+                            <td><b>MEH</b></td>
+                            <td>Middle East Institute of Health</td>
+                        </tr>
+                        <tr class="phonebook-row dial-item-btn" data-dial='["03032033", "04972665"]' data-dial-name="MEH">
+                            <td class="hidden">blood-bank</td>
+                            <td><b>204bb</b></td>
+                            <td><b>MEH</b></td>
+                            <td>Middle East Institute of Health</td>
+                        </tr>
+                        <tr class="phonebook-row dial-item-btn" data-dial='["03032033", "04972665"]' data-dial-name="MEH">
+                            <td class="hidden">favorite</td>
+                            <td><b>204fav</b></td>
                             <td><b>MEH</b></td>
                             <td>Middle East Institute of Health</td>
                         </tr>
@@ -105,68 +116,58 @@
                     </tbody>
                 </table>
             </div>
-            <div role="tabpanel" class="tab-pane fade" id="tab-bloodBanks">
-                <div class="m-t-md"></div>
-                <table id="table-BloodBanks" class="display table phonebook-table" cellspacing="0" width="100%">
-                    <thead>
-                        <tr>
-                            <th width="150">Sector</th>
-                            <th>Name</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="phonebook-row dial-item-btn" data-dial='["03032033", "04972665"]' data-dial-name="Rabieh Blood Bank">
-                            <td><b>203</b></td>
-                            <td><b>Rabieh</b></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
             <div role="tabpanel" class="tab-pane fade" id="tab-organizations">
                 <ul class="nav nav-pills phonebook-filter-pills m-t-sm m-b-sm">
-                    <li><h4 class="sub-title">Favorites</h4></li>
+                    <li class="nav-pills-title"><h4 class="sub-title">Favorites</h4></li>
 
-                    <li role="presentation" class="active"><a data-filter="favorite"><i class="fa fa-star"></i></a></li>
+                    <li role="presentation" class="active"><a data-filter="favorite" data-filter-column="0" class="fav-title table-filter-btn"><i class="fa fa-star"></i></a></li>
                     <li role="presentation" class="btn-group">
-                        <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Emergency Contacts <span class="caret"></span></a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Emergency <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li class="combo">
-                              <a class="first" data-filter="100">Civil Defense</a>
+                              <a data-filter="civil-defense" data-filter-column="0" class="sub first table-filter-btn">Civil Defense</a>
                               <a class="second dial-item-btn" data-dial='["125"]' data-dial-name="Civil Defense Hotline"><i class="fa fa-phone"></i>&nbsp;125</a>
                             </li>
                             <li class="combo">
-                              <a class="first" data-filter="100">Fire Department</a>
+                              <a data-filter="fire-department" data-filter-column="0" class="sub first table-filter-btn">Fire Department</a>
                               <a class="second dial-item-btn" data-dial='["175"]' data-dial-name="Fire Department Hotline"><i class="fa fa-phone"></i>&nbsp;175</a>
                             </li>
                             <li class="combo">
-                              <a class="first" data-filter="100">ISF Police</a>
+                              <a data-filter="isf-police" data-filter-column="0" class="sub first table-filter-btn">ISF Police</a>
                               <a class="second dial-item-btn" data-dial='["112"]' data-dial-name="ISF Police Hotline"><i class="fa fa-phone"></i>&nbsp;112</a>
                             </li>
                             <li class="combo">
-                              <a class="first" data-filter="100">Airport</a>
+                              <a data-filter="airport" data-filter-column="0" class="sub first table-filter-btn">Airport</a>
                               <a class="second dial-item-btn" data-dial='["150"]' data-dial-name="Airport Hotline"><i class="fa fa-phone"></i>&nbsp;150</a>
                             </li>
-                            <li><a data-filter="500">Ports</a></li>
+                            <li><a data-filter="ports" data-filter-column="0" class="sub table-filter-btn">Ports</a></li>
                         </ul>
                     </li>
 
                     <li role="presentation" class="btn-group">
-                        <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Media Contacts <span class="caret"></span></a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Media <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a data-filter="500">Radio &amp; Television</a></li>
-                            <li><a data-filter="500">Journals</a></li>
+                            <li><a data-filter="radio-tv" data-filter-column="0" class="sub table-filter-btn">Radio &amp; Television</a></li>
+                            <li><a data-filter="journals" data-filter-column="0" class="sub table-filter-btn">Journals</a></li>
                         </ul>
                     </li>
 
                     <li role="presentation" class="btn-group">
-                        <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Medical Contacts <span class="caret"></span></a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Medical <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a data-filter="500">Medical Centers</a></li>
-                            <li><a data-filter="500">Insurance Companies</a></li>
+                            <li><a data-filter="204-doctors" data-filter-column="0" class="sub table-filter-btn">204 Doctors</a></li>
+                            <li><a data-filter="medical-centers" data-filter-column="0" class="sub table-filter-btn">Medical Centers</a></li>
+                            <li><a data-filter="insurance-companies" data-filter-column="0" class="sub table-filter-btn">Insurance Companies</a></li>
                         </ul>
                     </li>
 
-                    <li role="presentation"><a data-filter="other">Other Contacts</a></li>
+                    <li role="presentation" class="btn-group">
+                        <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Miscellaneous <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a data-filter="restaurants" data-filter-column="0" class="sub table-filter-btn">Restaurants</a></li>
+                            <li><a data-filter="other-contacts" data-filter-column="0" class="sub table-filter-btn">Other Contacts</a></li>
+                        </ul>
+                    </li>
                 </ul>
                 <table id="table-Organizations" class="display table phonebook-table" cellspacing="0" width="100%">
                     <thead>
@@ -177,8 +178,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="phonebook-row dial-item-btn" data-dial='["03032033", "04972665"]'>
-                            <td class="hidden">restaurant</td>
+                        <tr class="phonebook-row dial-item-btn" data-dial='["03032033", "04972665", "03032033", "04972665", "03032033", "04972665", "03032033", "04972665", "03032033", "04972665", "03032033", "04972665", "03032033", "04972665"]' data-dial-name="Crepaway (Broumana)">
+                            <td class="hidden">restaurants</td>
                             <td><b>Crepaway</b></td>
                             <td>Broumana</td>
                         </tr>
