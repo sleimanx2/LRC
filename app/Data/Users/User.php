@@ -74,6 +74,16 @@ class User extends Authenticatable
     }
 
     /**
+     * Check if the user is ambulance driver
+     *
+     * @return mixed
+     */
+    public function getIsAmbAttribute()
+    {
+        return $this->roles->contains('id', 3) ? 1 : 0;
+    }
+
+    /**
      * Check if the user is an ex member
      *
      * @return mixed
@@ -84,7 +94,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Check if the user is an ex member
+     * Check if the user is an ami du centre
      *
      * @return mixed
      */
