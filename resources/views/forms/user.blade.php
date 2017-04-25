@@ -11,12 +11,21 @@
     {!! Form::text('last_name', old('last_name'), ['class' =>
     'form-control','pattern'=>'.{2,}','require'=>'','title'=>'2 characters minimum']) !!}
 </div>
+    <div class="form-group">
+        <label for="">Username </label>
+        {!! Form::text('username', old('username'), ['class' =>
+        'form-control','pattern'=>'.{2,}','require'=>'','title'=>'2 characters minimum']) !!}
+    </div>
 <div class="form-group">
     <label for="">Email</label>
-    {!! Form::email('email', old('email') , ['class' => 'form-control','required'=>'true']) !!}
-
+    {!! Form::email('email', old('email') , ['class' => 'form-control']) !!}
     <span></span>
 </div>
+    <div class="form-group">
+        <label for="">Promo</label>
+        {!! Form::text('promo', old('promo') , ['class' => 'form-control']) !!}
+        <span></span>
+    </div>
     @if($password == 'true')
         <div class="form-group">
             <div class="row">
@@ -37,21 +46,11 @@
             </div>
         </div>
     @endif
-    <div class="form-group">
-        <label for="">Phone Primary</label>
-        {!! Form::text(
-        'phone_primary',old('phone_number'),['class'=>'form-control','pattern'=>'.{8,8}','required'=>true,'title'=>'The
-        number should contain 8 digits']) !!}
-        <span></span>
-    </div>
-<div class="form-group">
-    <label for="">Phone Secondary</label>
-    {!! Form::text(
-    'phone_secondary',old('phone_secondary'),['class'=>'form-control','pattern'=>'.{8,8}','title'=>'The number
-    should contain 8 digits']) !!}
 
-    {!! Form::select('phone_numbers[]', [], old('phone_numbers'), array('multiple','class'=>'select-tags')) !!}
-</div>
+    <div class="form-group">
+        <label for="">Phone Numbers</label>
+        {!! Form::select('phone_numbers[]', [], old('phone_numbers'), array('multiple','class'=>'select-tags','style'=>'width:100%')) !!}
+    </div>
     <hr/>
     <div class="form-group">
         <label for="">Roles</label>
@@ -62,9 +61,9 @@
     @include('partials.location')
     {{--End Location Field--}}
 
-<div class="form-group">
-    <div class="ui-map" id="map-canvas"></div>
-</div>
+    <div class="form-group">
+        <div class="ui-map" id="map-canvas"></div>
+    </div>
 <hr/>
 <button type="submit" class="btn btn-success">
     Save

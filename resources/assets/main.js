@@ -340,7 +340,8 @@ function initNumberInput() {
 }
 
 function initSelect2(){
-    $("select").select2();
+    $("select").select2({width: '100%'});
+    $(".select-tags").select2({tags:true,width: '100%'});
 }
 
 function initDateTimePicker(){

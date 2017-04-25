@@ -1,5 +1,7 @@
 <!doctype html>
-<!--[if gt IE 8]><!-->
+{{ dd($users) }}
+
+        <!--[if gt IE 8]><!-->
 <html class="no-js"> <!--<![endif]-->
 <head>
     <meta charset="utf-8">

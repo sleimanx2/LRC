@@ -86,6 +86,10 @@ class Registrar
             $attributes['promo'] = $data['promo'];
         }
 
+        if (isset($data['note'])) {
+            $attributes['note'] = $data['note'];
+        }
+
         if (isset($data['email'])) {
             $attributes['email'] = $data['email'];
         }
@@ -115,6 +119,10 @@ class Registrar
 
         if (isset($data['promo'])) {
             $attributes['promo'] = $data['promo'];
+        }
+
+        if (isset($data['note'])) {
+            $attributes['note'] = $data['note'];
         }
 
         if (isset($data['email'])) {

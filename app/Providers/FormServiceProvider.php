@@ -5,6 +5,7 @@ namespace LRC\Providers;
 use LRC\Data\Blood\BloodType;
 use LRC\Data\Contacts\Contact;
 use Illuminate\Support\ServiceProvider;
+use LRC\Data\Users\User;
 
 class FormServiceProvider extends ServiceProvider
 {
@@ -18,6 +19,7 @@ class FormServiceProvider extends ServiceProvider
         // Global shared variables across all view
         view()->share('allBloodTypes', $this->getBloodTypes());
         view()->share('allBloodBanks', $this->getBloodBanksList());
+        view()->share('users', $this->getAllUsers());
     }
 
     /**
@@ -34,17 +36,24 @@ class FormServiceProvider extends ServiceProvider
     /**
      * Helper Functions
      */
-    private function getBloodTypes() {
+    private function getBloodTypes()
+    {
         return BloodType::all()->pluck('name', 'id');
     }
 
-    private function getBloodBanksList() {
-        $list = Contact::whereHas('category',function($q) {
+    private function getBloodBanksList()
+    {
+        $list = Contact::whereHas('category', function ($q) {
 
             $q->where('serves_blood', '=', 1);
 
-        })->orderBy('name')->pluck('name','id');
+        })->orderBy('name')->pluck('name', 'id');
 
         return $list;
+    }
+
+    private function getAllUsers()
+    {
+        return User::with('roles')->get();
     }
 }

@@ -55,11 +55,42 @@ class User extends Authenticatable
 
     /**
      * Return the roles list that belongs to a certain user
+     *
      * @return mixed
      */
     public function getRolesIdsAttribute()
     {
         return $this->roles()->pluck('id')->toArray();
+    }
+
+    /**
+     * Check if the user is regional manager
+     *
+     * @return mixed
+     */
+    public function getIsRmAttribute()
+    {
+        return $this->roles->contains('id', 1) ? 1 : 0;
+    }
+
+    /**
+     * Check if the user is an ex member
+     *
+     * @return mixed
+     */
+    public function getIsExAttribute()
+    {
+        return $this->roles->contains('id', 7) ? 1 : 0;
+    }
+
+    /**
+     * Check if the user is an ex member
+     *
+     * @return mixed
+     */
+    public function getIsAmiAttribute()
+    {
+        return $this->roles->contains('id', 8) ? 1 : 0;
     }
 
     /**
