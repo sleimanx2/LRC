@@ -23,6 +23,14 @@ class Contact extends Model {
 
     protected $guarded = ['id','created_at','updated_at'];
 
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = ['phone_numbers' => 'array'];
+
     public function category()
     {
         return $this->belongsTo('LRC\Data\Contacts\ContactCategory');

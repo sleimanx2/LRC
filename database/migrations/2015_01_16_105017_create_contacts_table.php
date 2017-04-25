@@ -16,8 +16,11 @@ class CreateContactsTable extends Migration {
         {
             $table->increments('id');
             $table->string('name')->unique();
-            $table->string('phone_primary');
-            $table->string('phone_secondary');
+            $table->string('nickname')->nullable();
+            $table->json('phone_numbers');
+            $table->json('ambulances')->nullable();
+            $table->string('sector')->nullable();
+            $table->boolean('favorite')->default(0)->nullable();
             $table->string('location');
             $table->decimal('latitude', 18, 14);
             $table->decimal('longitude', 18, 14);

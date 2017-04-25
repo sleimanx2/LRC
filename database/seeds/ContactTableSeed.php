@@ -26,8 +26,7 @@ class ContactTableSeeder extends Seeder {
 
                 Contact::create(array(
                     'name'            => $faker->company . rand(0, 100),
-                    'phone_primary'   => $faker->phoneNumber,
-                    'phone_secondary' => $faker->phoneNumber,
+                    'phone_numbers' => [$faker->phoneNumber, $faker->phoneNumber],
                     'location'        => $faker->address,
                     'latitude'        => $faker->latitude,
                     'longitude'       => $faker->longitude,
