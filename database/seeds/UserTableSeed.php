@@ -25,6 +25,7 @@ class UserTableSeeder extends Seeder
             'location'      => $faker->address,
             'latitude'      => $faker->latitude,
             'longitude'     => $faker->longitude,
+            'is_active'     => 1
         ]);
 
         if (app()->environment() == 'local') {
@@ -41,6 +42,7 @@ class UserTableSeeder extends Seeder
                     'location'      => $faker->address,
                     'latitude'      => $faker->latitude,
                     'longitude'     => $faker->longitude,
+                    'is_active'     => 1
                 ]);
             }
         }

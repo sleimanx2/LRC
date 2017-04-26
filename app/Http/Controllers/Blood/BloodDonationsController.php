@@ -106,8 +106,7 @@ class BloodDonationsController extends Controller {
         $bloodRequest = $this->bloodRequestRepository->findOrFail($bloodDonation->blood_request_id);
         $this->bloodRequestRepository->updateBloodStatistics($bloodRequest);
 
-
-        return redirect()->back()->with('success', $bloodDonation->donor->first_name . ' ' . $bloodDonation->donor->last_name . ' successfully his donation ');
+        return redirect()->back()->with('success', $bloodDonation->donor->first_name . ' ' . $bloodDonation->donor->last_name . ' successfully completed ' . ($bloodDonation->donor->gender == 'male' ? 'his' : 'her') . ' donation ');
     }
 
 

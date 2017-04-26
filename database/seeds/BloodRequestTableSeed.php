@@ -23,7 +23,7 @@ class BloodRequestTableSeeder extends Seeder {
 
             $contactCategories = ContactCategory::pluck('id', 'name');
 
-            $hospitalId = $contactCategories['Hospitals'];
+            $hospitalId = $contactCategories['Hospital'];
 
             $contacts   = Contact::where('category_id', '=', $hospitalId)->pluck('id');
             $users      = User::pluck('id');

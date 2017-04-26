@@ -24,7 +24,9 @@ elixir(function (mix) {
             'vendor/datatables/jquery.datatables.min.js',
             'vendor/sweetalert/sweetalert.min.js',
             'vendor/autogrow/jquery.autogrow.min.js',
-            'main.js'
+            'vendor/toastr/toastr.min.js',
+            'vendor/tagsinput/tagsinput.js',
+            'main.js',
         ],
         'resources/assets',
         'public/dist/app.min.js'
@@ -37,6 +39,8 @@ elixir(function (mix) {
             'vendor/datetimepicker/datetimepicker.css',
             'vendor/datatables/jquery.datatables.min.css',
             'vendor/sweetalert/sweetalert.min.css',
+            'vendor/toastr/toastr.min.css',
+            'vendor/tagsinput/tagsinput.css',
         ],
         'resources/assets',
         'public/dist/vendor.min.css'
@@ -44,7 +48,7 @@ elixir(function (mix) {
 
     mix.styles(
         [
-            'main.css'
+            'main.css',
         ],
         'resources/assets',
         'public/dist/app.min.css'

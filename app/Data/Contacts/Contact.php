@@ -50,4 +50,16 @@ class Contact extends Model {
         return $list;
     }
 
+    /**
+     * Gets the contact filter term (combines category slug and favorite flag if true)
+     *
+     * @return mixed
+     */
+    public function getFilterTermAttribute()
+    {
+        if($this->favorite)
+            return "favorite-" . $this->category->slug;
+        
+        return $this->category->slug;
+    }
 }

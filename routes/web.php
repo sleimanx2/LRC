@@ -12,6 +12,13 @@
 
 Auth::routes();
 
+// Phonebook API Routes
+Route::get('/phonebook/get-first-aiders-json', 'PhonebookController@getFirstAidersJSON');
+Route::get('/phonebook/get-medical-centers-json', 'PhonebookController@getMedicalCentersJSON');
+Route::get('/phonebook/get-lrc-centers-json', 'PhonebookController@getLrcCentersJSON');
+Route::get('/phonebook/get-organizations-json', 'PhonebookController@getOrganizationsJSON');
+Route::post('/phonebook/dial-number-api', 'PhonebookController@dialNumberAPI');
+
 Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/', ['as' => 'home-dashboard', 'uses' => 'HomeController@dashboard']);

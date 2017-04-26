@@ -80,6 +80,11 @@ span.block {
 .m-l-0 { margin-left: 0!important;; }
 .m-r-0 { margin-right: 0!important;; }
 
+.m-t-xs { margin-top: 5px!important;; }
+.m-b-xs { margin-bottom: 5px!important;; }
+.m-l-xs { margin-left: 5px!important;; }
+.m-r-xs { margin-right: 5px!important;; }
+
 .m-t-sm { margin-top: 10px!important;; }
 .m-b-sm { margin-bottom: 10px!important;; }
 .m-l-sm { margin-left: 10px!important;; }
@@ -7412,6 +7417,7 @@ label {
 
 .select2-container {
   display: block;
+  width: 100%!important;
 }
 
 .select2-selection {
@@ -7517,4 +7523,15 @@ label {
   border: 1px solid #dddddd;
   background: none;
   color: #333;
+}
+
+.toast {
+  width: 400px!important;
+}
+.toast-title {
+  font-weight: normal!important;
+}
+.toast-top-center { 
+  top: 60px;
+  right: 20px;
 }

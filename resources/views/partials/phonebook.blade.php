@@ -26,9 +26,9 @@
                 <table id="table-FirstAiders" class="display table phonebook-table" cellspacing="0" width="100%">
                     <thead>
                         <tr>
-                            <th class="hidden">Ex Member</th>
-                            <th class="hidden">Regional Manager</th>
-                            <th class="hidden">Ambulance Driver</th>
+                            <th>Ex Member</th>
+                            <th>Regional Manager</th>
+                            <th>Ambulance Driver</th>
                             <th>Last Name</th>
                             <th>First Name</th>
                             <th data-orderable="false">Nickname</th>
@@ -37,31 +37,7 @@
                             <th data-orderable="false">More Info</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        @foreach($users as $firstAider)
-                        <tr class="phonebook-row dial-item-btn" data-dial='{{ json_encode($firstAider->phone_numbers) }}' data-dial-name="{{ $firstAider->full_name }}">
-                            <td class="hidden">{{ $firstAider->is_ex }}</td>
-                            <td class="hidden">{{ $firstAider->is_rm }}</td>
-                            <td class="hidden">{{ $firstAider->is_amb }}</td>
-                            <td><b>{{ $firstAider->last_name }}</b></td>
-                            <td><b>{{ $firstAider->first_name }}</b></td>
-                            <td>{{ $firstAider->nickname }}</td>
-                            <td>{{ $firstAider->promo }}</td>
-                            <td>{{ $firstAider->location }}</td>
-                            <td>
-                                @if($firstAider->is_rm)
-                                <span class="label label-primary" title="Regional Manager">RM</span>
-                                @endif
-                                @if($firstAider->is_amb)
-                                <span class="label label-success" title="Ambulance Driver"><i class="fa fa-car"></i></span>
-                                @endif
-                                @if($firstAider->is_ami)
-                                <span class="label label-default" title="Ami du Centre"><i class="fa fa-users"></i></span>
-                                @endif
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
+                    <tbody></tbody>
                 </table>
             </div>
             <div role="tabpanel" class="tab-pane fade" id="tab-medicalCenters">
@@ -74,38 +50,13 @@
                 <table id="table-MedicalCenters" class="display table phonebook-table" cellspacing="0" width="100%">
                     <thead>
                         <tr>
-                            <th class="hidden">Category</th>
+                            <th>Filter</th>
                             <th width="100">Sector</th>
                             <th>Code</th>
                             <th>Hospital Name</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr class="phonebook-row dial-item-btn" data-dial='["03032033", "04972665"]' data-dial-name="MEH">
-                            <td class="hidden">hospital</td>
-                            <td><b>204h</b></td>
-                            <td><b>MEH</b></td>
-                            <td>Middle East Institute of Health</td>
-                        </tr>
-                        <tr class="phonebook-row dial-item-btn" data-dial='["03032033", "04972665"]' data-dial-name="MEH">
-                            <td class="hidden">nursing-home</td>
-                            <td><b>204nh</b></td>
-                            <td><b>MEH</b></td>
-                            <td>Middle East Institute of Health</td>
-                        </tr>
-                        <tr class="phonebook-row dial-item-btn" data-dial='["03032033", "04972665"]' data-dial-name="MEH">
-                            <td class="hidden">blood-bank</td>
-                            <td><b>204bb</b></td>
-                            <td><b>MEH</b></td>
-                            <td>Middle East Institute of Health</td>
-                        </tr>
-                        <tr class="phonebook-row dial-item-btn" data-dial='["03032033", "04972665"]' data-dial-name="MEH">
-                            <td class="hidden">favorite</td>
-                            <td><b>204fav</b></td>
-                            <td><b>MEH</b></td>
-                            <td>Middle East Institute of Health</td>
-                        </tr>
-                    </tbody>
+                    <tbody></tbody>
                 </table>
             </div>
             <div role="tabpanel" class="tab-pane fade" id="tab-lrcCenters">
@@ -113,18 +64,12 @@
                 <table id="table-LrcCenters" class="display table phonebook-table" cellspacing="0" width="100%">
                     <thead>
                         <tr>
-                            <th width="150">Code</th>
+                            <th width="150">Sector</th>
                             <th>District</th>
                             <th>Ambulances</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr class="phonebook-row dial-item-btn" data-dial='["03032033", "04972665"]' data-dial-name="204 (Beit Mery)">
-                            <td><b>204</b></td>
-                            <td><b>Beit Mery</b></td>
-                            <td>284, 285, 286, 287, 288</td>
-                        </tr>
-                    </tbody>
+                    <tbody></tbody>
                 </table>
             </div>
             <div role="tabpanel" class="tab-pane fade" id="tab-organizations">
@@ -158,7 +103,7 @@
                     <li role="presentation" class="btn-group">
                         <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Media <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a data-filter="radio-tv" data-filter-column="0" class="sub table-filter-btn">Radio &amp; Television</a></li>
+                            <li><a data-filter="radio-television" data-filter-column="0" class="sub table-filter-btn">Radio &amp; Television</a></li>
                             <li><a data-filter="journals" data-filter-column="0" class="sub table-filter-btn">Journals</a></li>
                         </ul>
                     </li>
@@ -183,18 +128,12 @@
                 <table id="table-Organizations" class="display table phonebook-table" cellspacing="0" width="100%">
                     <thead>
                         <tr>
-                            <th class="hidden">Category</th>
+                            <th>Filter</th>
                             <th>Name</th>
                             <th>City</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr class="phonebook-row dial-item-btn" data-dial='["03032033", "04972665", "03032033", "04972665", "03032033", "04972665", "03032033", "04972665", "03032033", "04972665", "03032033", "04972665", "03032033", "04972665"]' data-dial-name="Crepaway (Broumana)">
-                            <td class="hidden">restaurants</td>
-                            <td><b>Crepaway</b></td>
-                            <td>Broumana</td>
-                        </tr>
-                    </tbody>
+                    <tbody></tbody>
                 </table>
             </div>
         </div>
@@ -214,16 +153,16 @@
                 </div>
                 <div class="row">
                     <div class="col-md-3">
-                        <button class="btn btn-default btn-ip-phone" data-ip-address="">OR1<br><img src="{{ asset('/images/ip-phone.png') }}" /></button>
+                        <button class="btn btn-default btn-ip-phone" data-ip-address="192.168.10.100">OR1<br><img src="{{ asset('/images/ip-phone.png') }}" /></button>
                     </div>
                     <div class="col-md-3">
-                        <button class="btn btn-default btn-ip-phone" data-ip-address="">OR2<br><img src="{{ asset('/images/ip-phone.png') }}" /></button>
+                        <button class="btn btn-default btn-ip-phone" data-ip-address="192.168.10.101">OR2<br><img src="{{ asset('/images/ip-phone.png') }}" /></button>
                     </div>
                     <div class="col-md-3">
-                        <button class="btn btn-default btn-ip-phone" data-ip-address="">OR3<br><img src="{{ asset('/images/ip-phone.png') }}" /></button>
+                        <button class="btn btn-default btn-ip-phone" data-ip-address="192.168.10.102">OR3<br><img src="{{ asset('/images/ip-phone.png') }}" /></button>
                     </div>
                     <div class="col-md-3">
-                        <button class="btn btn-default btn-ip-phone" data-ip-address="">OR4<br><img src="{{ asset('/images/ip-phone.png') }}" /></button>
+                        <button class="btn btn-default btn-ip-phone" data-ip-address="192.168.10.103">OR4<br><img src="{{ asset('/images/ip-phone.png') }}" /></button>
                     </div>
                 </div>
             </div>

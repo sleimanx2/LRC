@@ -1,7 +1,19 @@
 /*
- * Common Functions
+ * Formatting Functions
  */
+$(document).on('input', '.format-title-case', function(event) {
+    $(this).val($(this).val().replace(/[^a-zA-Z\-\s]/g,'').toLowerCase().replace( /\b\w/g, function (m) {
+        return m.toUpperCase();
+    }));
+});
 
+$(document).on('input', '.format-number', function(event) {
+    $(this).val($(this).val().replace(/[^0-9]/g,''));
+});
+
+$(document).on('input', '.format-phone', function(event) {
+    //$(this).val($(this).val().replace(/^[^+]?[^0-9]/g,''));
+});
 
 /*
  * Phonebook Functions
@@ -14,10 +26,14 @@
         "scrollY": ($(window).height() - 170) + "px",
         "scrollCollapse": false,
         "order": [ [1,'desc'], [2,'desc'], [6,'asc'], [3,'asc'] ],
+        "columnDefs": [
+            { "visible": false, "targets": [0, 1, 2] }
+        ],
         "oLanguage": {
             "sEmptyTable": function() { return "No First Aiders Found"; },
             "sZeroRecords": function() { return "No First Aiders Found" }
-        }
+        },
+        "ajax": "/phonebook/get-first-aiders-json"
     });
     $('#table-FirstAiders').DataTable().column(0).search("0").draw();
 
@@ -28,10 +44,14 @@
         "order": [[ 1, "desc" ]],
         "scrollY": ($(window).height() - 170) + "px",
         "scrollCollapse": false,
+        "columnDefs": [
+            { "visible": false, "targets": [0] }
+        ],
         "oLanguage": {
             "sEmptyTable": function() { return "No Medical Centers Found"; },
             "sZeroRecords": function() { return "No Medical Centers Found" }
-        }
+        },
+        "ajax": "/phonebook/get-medical-centers-json"
     });
     $('#table-MedicalCenters').DataTable().column(0).search("favorite").draw();
 
@@ -45,7 +65,8 @@
         "oLanguage": {
             "sEmptyTable": function() { return "No LRC Centers Found"; },
             "sZeroRecords": function() { return "No LRC centers Found" }
-        }
+        },
+        "ajax": "/phonebook/get-lrc-centers-json"
     });
 
     $('#table-Organizations').DataTable({
@@ -54,10 +75,14 @@
         "ordering": false,
         "scrollY": ($(window).height() - 170) + "px",
         "scrollCollapse": false,
+        "columnDefs": [
+            { "visible": false, "targets": [0] }
+        ],
         "oLanguage": {
             "sEmptyTable": function() { return "Nothing Found"; },
             "sZeroRecords": function() { return "Nothing Found" }
-        }
+        },
+        "ajax": "/phonebook/get-organizations-json"
     });
     $('#table-Organizations').DataTable().column(0).search("favorite").draw();
 
@@ -87,9 +112,8 @@
         $modal.find(".modal-title b").text($(this).data("dial-name").toUpperCase());
         $modal.find(".dial-buttons").html("");
 
-        $.each($(this).data("dial"), function(i, item) {
+        $.each(JSON.parse($(this).data("dial")), function(i, item) {
             $modal.find(".dial-buttons").append("<a class='btn btn-default btn-phone-number' data-phone-number='" + item + "'>" + formatPhone(item) + "</button>")
-            //console.log(item);
         });
 
         $modal.data("phone-number", $modal.find(".dial-buttons .btn-phone-number:first-child").data("phone-number"));
@@ -109,56 +133,20 @@
         var $phone_number = $modal.data("phone-number");
         var $ip_address = $(this).data("ip-address");
 
+        // $.post("/phonebook/dial-number-api", { phone_number: $phone_number, ip_address: $ip_address }, 'json')
+        //     .success(function(result) {
+        //         toastr.success("", "Dialing " + $phone_number + "...", { timeOut: 3000, positionClass: "toast-top-center" });
+        //     })
+        //     .fail(function(result) {
+        //         toastr.error("Please try again later", "Error dialing number!", { timeOut: 3000, positionClass: "toast-top-center" });
+        //     })
+        //     .always(function() {
+        //         $modal.modal("hide");
+        //     });
+
+        toastr.success("", "Dialing " + $phone_number + "...", { timeOut: 3000, positionClass: "toast-top-center" });
         $modal.modal("hide");
-
-        alert("Dialing " + $phone_number + "...");
     });
-
-    // $(document).on('click', '.dial-item-btn', function() {
-    //     var $modal = $("#modalDial");
-    //     var $dial_number = $(this).data("dial");
-
-    //     $modal.find(".modal-title b").text($dial_number);
-    //     $modal.find(".btn-ip-phone").data("dial", $dial_number);
-
-    //     $modal.find(".btn-ip-phone").each(function() {
-    //         var $thisButton = $(this);
-    //         $thisButton.removeAttr("disabled");
-
-    //         $.post(getBaseURL() + "/getLineStatusAPI", { ip_address: $thisButton.data("ip-address") }, 'json')
-    //             .success(function(result) {
-    //                 result = JSON.parse(result);
-    //                 if(result.response == "success" && result.body[0].state == "idle")
-    //                     $thisButton.removeAttr("disabled");
-    //                 else
-    //                     $thisButton.attr("disabled", true);
-    //             })
-    //             .fail(function(result) {
-    //                 $thisButton.attr("disabled", true);
-    //             })
-    //             .always(function() {
-    //                 $modal.modal("show");
-    //             });
-    //     });
-    // });
-
-    // $(document).on('click', '.btn-ip-phone', function() {
-    //     var $modal = $(this).closest(".modal");
-    //     var $phone_number = $(this).data("dial");
-    //     var $ip_address = $(this).data("ip-address");
-
-    //     $.post(getBaseURL() + "/dialNumberAPI", { phone_number: $phone_number, ip_address: $ip_address }, 'json')
-    //         .success(function(result) {
-    //             toastr.success("", "Dialing " + $phone_number + "...", { timeOut: 3000, positionClass: "toast-top-center" });
-    //         })
-    //         .fail(function(result) {
-    //             toastr.error("Please try again later", "Error dialing number!", { timeOut: 3000, positionClass: "toast-top-center" });
-    //         })
-    //         .always(function() {
-    //             $modal.modal("hide");
-    //         });
-    // });
-    //
 }
 
 function formatPhone(phoneNumber) {
@@ -175,23 +163,6 @@ function showPhonebookSidebar() {
 function hidePhonebookSidebar() {
     $(".phonebook-container").removeClass("open");
 }
-
-/*
- * Blood Request Form Functions
- */
-$(document).on('click', ".btn-toggle-gender", function() {
-    var gender = $("input[name='patient_gender']").val();
-
-    if(gender == 'male') {
-        $(this).find("i").removeClass("fa-male").addClass("fa-female");
-        $("input[name='patient_gender']").val("female");
-    }
-    else {
-        $(this).find("i").removeClass("fa-female").addClass("fa-male");
-        $("input[name='patient_gender']").val("male");
-    }
-});
-
 
 /*
  * Init a blank google map
@@ -350,6 +321,19 @@ function initGenderToggle() {
         if($(this).closest('.input-group').find('.patient-gender-hidden-input').val() == "female")
             $(this).find("i.fa").removeClass("fa-male").addClass("fa-female");
     });
+
+    $(document).on('click', ".btn-toggle-gender", function() {
+        var gender = $("input[name='patient_gender']").val();
+
+        if(gender == 'male') {
+            $(this).find("i").removeClass("fa-male").addClass("fa-female");
+            $("input[name='patient_gender']").val("female");
+        }
+        else {
+            $(this).find("i").removeClass("fa-female").addClass("fa-male");
+            $("input[name='patient_gender']").val("male");
+        }
+    });
 }
 
 function initAutoGrow() {
@@ -357,13 +341,47 @@ function initAutoGrow() {
 }
 
 function initSelect2() {
-    $("select").select2();
+    $("select:not(.blood-type-select)").select2({
+        placeholder: "Select One"
+    });
+
+    $("select.blood-type-select").select2();
 }
 
 function initDateTimePicker() {
     $('.datetimepicker').datetimepicker();
     $('.datepicker').datetimepicker({ format:'YYYY-MM-DD'});
     $('.timepicker').datetimepicker({ format: 'LT'});
+}
+
+function initTagsInput() {
+    $('.tagsinput').tagsinput({
+        tagClass: 'tagsinput-tag',
+        trimValue: false,
+        confirmKeys: [13, 32]
+    });
+
+    $(document).on('beforeItemAdd', '.format-phone.tagsinput', function(event) {
+        var tag = event.item.trim();
+                
+        if (!event.options || !event.options.checkFormat) {
+            event.cancel = true;
+
+            if(tag.match(/^[+]?[0-9]+$/))
+                $(this).tagsinput('add', tag, { checkFormat: true });
+        }
+    });
+
+    $(document).on('beforeItemAdd', '.format-number.tagsinput', function(event) {
+        var tag = event.item.trim();
+                
+        if (!event.options || !event.options.checkFormat) {
+            event.cancel = true;
+
+            if(tag.match(/^[1-9]+$/))
+                $(this).tagsinput('add', tag, { checkFormat: true });
+        }
+    });
 }
 
 /*
@@ -377,6 +395,7 @@ function boot(){
         initNumberInput();
         initAutoGrow();
         initGenderToggle();
+        initTagsInput();
     });
 }
 

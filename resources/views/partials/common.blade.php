@@ -1,4 +1,4 @@
-<div class="modal fade" id="modalAddEmergency" tabindex="-1" role="dialog">
+<div class="modal fade" id="modalAddEmergency" role="dialog">
 	<div class="modal-dialog modal-xl" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -16,7 +16,7 @@
 	</div>
 </div>
 
-<div class="modal fade" id="modalAddBloodRequest" tabindex="-1" role="dialog">
+<div class="modal fade" id="modalAddBloodRequest" role="dialog">
 	<div class="modal-dialog modal-xl" role="document">
 		<div class="modal-content">
 			<div class="modal-header">

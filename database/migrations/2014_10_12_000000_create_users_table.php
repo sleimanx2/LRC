@@ -27,6 +27,7 @@ class CreateUsersTable extends Migration {
             $table->decimal('latitude', 18, 14);
             $table->decimal('longitude', 18, 14);
 			$table->text('note');
+			$table->boolean('is_active');
 			$table->rememberToken();
 			$table->timestamps();
 			$table->softDeletes();

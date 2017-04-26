@@ -34,6 +34,16 @@ class LoginController extends Controller
     }
 
     /**
+     * Modify user credentials to check if user is active or not.
+     *
+     * @return Response
+     */
+    protected function credentials(Request $request)
+    {
+        return array_merge($request->only($this->username(), 'password'), ['is_active' => 1]);
+    }
+
+    /**
      * Get the login username to be used by the controller.
      *
      * @return string

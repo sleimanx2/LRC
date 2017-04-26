@@ -16,6 +16,8 @@ class CreateContactCategoriesTable extends Migration {
         {
             $table->increments('id');
             $table->string('name');
+            $table->string('slug');
+            $table->string('parent_category');
             $table->boolean('serves_blood');
             $table->boolean('is_hospital');
             $table->timestamps();

@@ -53,17 +53,17 @@
                                         <li>
                                             <span class="icon fa fa-heart-o"></span>
                                             <label>Patient Name</label>
-                                            <div class="pull-right">{!! Html::gender($bloodRequest->patient_gender) !!}<span class="sub-panel-title">{{ $bloodRequest->patient_name }}</span></div>
+                                            <div class="pull-right">{!! Html::gender($bloodRequest->patient_gender) !!}<span class="sub-panel-title"><b>{{ $bloodRequest->patient_name }}</b></span></div>
                                         </li>
                                         <li>
                                             <span class="icon fa fa-calendar"></span>
                                             <label>Patient Age</label>
-                                            <div class="pull-right">{{ $bloodRequest->patient_age or 'Not defined'}}</div>
+                                            <div class="pull-right"><b>{{ $bloodRequest->patient_age or 'Not defined'}}</b></div>
                                         </li>
                                         <li>
                                             <i class="icon fa fa-user-md"></i>
                                             <label>Case</label>
-                                            <div class="pull-right">{{ $bloodRequest->case }}</div>
+                                            <div class="pull-right"><b>{{ $bloodRequest->case }}</b></div>
                                         </li>
                                     </ul>
                                 </div>
@@ -86,7 +86,7 @@
                                         <li>
                                             <span class="icon fa fa-user"></span>
                                             <label>Contact Person</label>
-                                            <div class="pull-right">{{ $bloodRequest->contact_name }}</div>
+                                            <div class="pull-right"><b>{{ $bloodRequest->contact_name }}</b></div>
                                         </li>
                                         <li>
                                             <span class="icon fa fa-phone"></span>
@@ -98,7 +98,7 @@
                                         <li>
                                             <span class="icon fa fa-bullhorn"></span>
                                             <label>Who to Blame</label>
-                                            <div class="pull-right">{{ $bloodRequest->user->first_name or 'Not defined' }} {{ $bloodRequest->user->last_name or 'Not defined' }}</div>
+                                            <div class="pull-right"><b>{{ $bloodRequest->user->first_name or 'Not defined' }} {{ $bloodRequest->user->last_name or 'Not defined' }}</b></div>
                                         </li>
                                         @if($bloodRequest->note)
                                         <li class="blood-request-notes">
@@ -124,13 +124,8 @@
                             <ul class="list-unstyled list-info">
                                 <li>
                                     <span class="icon fa fa-hospital-o"></span>
-                                    <label>Name</label>
-                                    {{ $bloodRequest->blood_bank->name }}
-                                </li>
-                                <li>
-                                    <i class="icon fa fa-phone"></i>
-                                    <label>Phone</label>
-                                    <button class="btn btn-primary dial-item-btn" data-dial='["{{ $bloodRequest->blood_bank->phone_primary }}", "{{ $bloodRequest->blood_bank->phone_secondary }}"]' data-dial-name="{{ $bloodRequest->blood_bank->name }}"><i class="fa fa-phone"></i>&nbsp;&nbsp;DIAL</button>
+                                    <b>{{ $bloodRequest->blood_bank->name }}</b>
+                                    <button class="btn btn-primary dial-item-btn pull-right" data-dial='["{{ $bloodRequest->blood_bank->phone_primary }}", "{{ $bloodRequest->blood_bank->phone_secondary }}"]' data-dial-name="{{ $bloodRequest->blood_bank->name }}"><i class="fa fa-phone"></i>&nbsp;&nbsp;DIAL</button>
                                 </li>
                             </ul>
 
@@ -230,7 +225,7 @@
             @if( !$bloodRequest->completed )
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <strong><i class="fa fa-list panel-ico"></i>Suggested Blood Donors</strong>
+                    <strong><i class="fa fa-tint panel-ico"></i>Suggested Blood Donors</strong>
                 </div>
 
                 <div class="panel-group" id="accordion-potential-donations">
