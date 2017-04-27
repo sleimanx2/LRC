@@ -19,6 +19,13 @@ Route::get('/phonebook/get-lrc-centers-json', 'PhonebookController@getLrcCenters
 Route::get('/phonebook/get-organizations-json', 'PhonebookController@getOrganizationsJSON');
 Route::post('/phonebook/dial-number-api', 'PhonebookController@dialNumberAPI');
 
+// OR Dashboard Routes
+Route::group(['middleware' => 'guest'], function () {
+    Route::get('/dashboard', 'DashboardController@index');
+    Route::get('/dashboard/or', 'DashboardController@showORDashboard');
+    Route::get('/dashboard/phonebook', 'DashboardController@showPhonebookDashboard');
+});
+
 Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/', ['as' => 'home-dashboard', 'uses' => 'HomeController@dashboard']);

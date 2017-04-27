@@ -125,7 +125,7 @@
                                 <li>
                                     <span class="icon fa fa-hospital-o"></span>
                                     <b>{{ $bloodRequest->blood_bank->name }}</b>
-                                    <button class="btn btn-primary dial-item-btn pull-right" data-dial='["{{ $bloodRequest->blood_bank->phone_primary }}", "{{ $bloodRequest->blood_bank->phone_secondary }}"]' data-dial-name="{{ $bloodRequest->blood_bank->name }}"><i class="fa fa-phone"></i>&nbsp;&nbsp;DIAL</button>
+                                    <button class="btn btn-primary dial-item-btn pull-right" data-dial='{{ json_encode($bloodRequest->blood_bank->phone_numbers) }}' data-dial-name="{{ $bloodRequest->blood_bank->name }}"><i class="fa fa-phone"></i>&nbsp;&nbsp;DIAL</button>
                                 </li>
                             </ul>
 

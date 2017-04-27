@@ -10,10 +10,11 @@
               <li><a href="#tab-lrcCenters" role="tab" data-toggle="tab">LRC Centers</a></li>
               <li><a href="#tab-organizations" role="tab" data-toggle="tab">Organizations</a></li>
               <li class="seperator"></li>
-              <li><a class="dial-item-btn" data-dial='["05458204"]' data-dial-name="O.R."><i class="fa fa-phone"></i>&nbsp;&nbsp;<b>O.R.</b></a></li>
-              <li><a class="dial-item-btn" data-dial='["140"]' data-dial-name="206 (Jal el Dib)"><i class="fa fa-phone"></i>&nbsp;&nbsp;<b>206</b></a></li>
+              <li><a class="dial-item-btn quickdial-OR" data-dial-name="O.R."><i class="fa fa-phone"></i>&nbsp;&nbsp;<b>O.R.</b></a></li>
+              <li><a class="dial-item-btn quickdial-206" data-dial-name="206 (Jal el Dib)"><i class="fa fa-phone"></i>&nbsp;&nbsp;<b>206</b></a></li>
             </ul>
         </div>
+        <button class="btn btn-header btn-refresh light no-border" onclick="refreshPhonebook()"><i class="fa fa-refresh"></i></button>
         <button class="btn btn-header btn-close light no-border" onclick="hidePhonebookSidebar()"><i class="fa fa-times"></i></button>
     </div>
     <div class="sidebar-body container-fluid">

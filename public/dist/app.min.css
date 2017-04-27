@@ -2434,6 +2434,12 @@ input.input-dark:focus {
   font-size: 18px;
   font-weight: normal;
   text-align: center; }
+.dashboard-header .btn-header {
+  height: 54px!important;
+  line-height: 54px;
+  width: 54px;
+  margin-left: 5px; }
+
 .btn-header.red {
   color: white!important;
   background-color: #cd2026!important;
@@ -4150,6 +4156,9 @@ fieldset[disabled] .btn-danger.active {
     height: 50px;
     background-color: #ffffff;}
 
+  .top-header.dashboard-header {
+    height: 60px; }
+
   .top-header .app-logo {
      display: inline-block;
      padding: 0px 35px 0 15px;
@@ -4157,6 +4166,10 @@ fieldset[disabled] .btn-danger.active {
      height: 50px;
      line-height: 50px;
      color: #cd2026;
+  }
+  .top-header.dashboard-header .app-logo {
+     height: 60px;
+     line-height: 60px;
   }
  .top-header .app-logo span {
      margin-left: 5px;
@@ -4298,12 +4311,17 @@ fieldset[disabled] .btn-danger.active {
     right: 0;
  }
 
- .phonebook-container > .phonebook-sidebar .btn-close {
+ .phonebook-container > .phonebook-sidebar .btn-close,
+ .phonebook-container > .phonebook-sidebar .btn-refresh {
     position: absolute;
     right: 15px;
     top: 3px;
     margin: 0;
     line-height: 40px;
+ }
+
+ .phonebook-container > .phonebook-sidebar .btn-refresh {
+    right: 60px;
  }
 
  .phonebook-container > .phonebook-sidebar .sidebar-header {
@@ -4479,6 +4497,15 @@ fieldset[disabled] .btn-danger.active {
   line-height: 22px;
   margin: 0;
   margin-right: 40px; }
+
+.top-header .top-nav .nav-middle {
+  position: absolute;
+  text-align: center;
+  width: 200px;
+  left: 50%;
+  margin-left: -100px;
+  padding: 0;
+  font-size: 18px; }
 
 .top-header .top-nav .nav-right-button {
   font-size: 18px;
@@ -5185,7 +5212,6 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:hover, a.list-g
 .modal-title {
   font-size: 16px;
   text-transform: uppercase;
-  font-weight: bold;
 }
 
 .modal-content {
@@ -7237,7 +7263,14 @@ label {
   #content {
     top: 100px;
     width: auto;
-    left: 0px!important; } }
+    left: 0px!important; }
+
+  #content.dashboard-content {
+    top: 60px; } 
+
+  #content.dashboard-content .page-general {
+    padding: 15px 15px; } 
+}
 .body-special #content {
   z-index: 2;
   top: 0;
@@ -7452,6 +7485,10 @@ label {
   width: 100%!important;
 }
 
+.select2-container--default .select2-results>.select2-results__options {
+  max-height: 260px;
+}
+
 .select2-selection {
   background: none!important;
   border-radius: 0!important;
@@ -7566,4 +7603,22 @@ label {
 .toast-top-center { 
   top: 60px;
   right: 20px;
+}
+
+.dashboard-content {
+  top: 0!important;
+}
+
+.dashboard-content .phonebook-container .overlay,
+.dashboard-content .phonebook-container .btn-close {
+  display: none;
+}
+
+.dashboard-content .phonebook-container .btn-refresh {
+  right: 15px;
+}
+
+.dashboard-content .phonebook-container .phonebook-sidebar {
+  right: 0;
+  width: 100%;
 }

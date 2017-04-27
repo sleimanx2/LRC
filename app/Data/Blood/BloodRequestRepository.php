@@ -74,9 +74,12 @@ class BloodRequestRepository {
             'phone_primary'      => $data['phone_primary'],
             'phone_secondary'    => $data['phone_secondary'],
             'case'               => $data['case'],
+            'note'               => $data['note'],
             'user_id'            => $data['user_id'],
             'completed'          => 0,
             'patient_gender'     => $data['patient_gender'],
+            'taken_by'           => $data['taken_by'],
+            'received_from'      => $data['received_from'],
         ];
 
         return $this->bloodRequest->create($attributes);
@@ -100,8 +103,11 @@ class BloodRequestRepository {
             'phone_primary'      => $data['phone_primary'],
             'phone_secondary'    => $data['phone_secondary'],
             'case'               => $data['case'],
+            'note'               => $data['note'],
             'user_id'            => $data['user_id'],
             'patient_gender'     => $data['patient_gender'],
+            'taken_by'           => $data['taken_by'],
+            'received_from'      => $data['received_from'],
         ];
 
         $bloodRequest->fill($attributes);

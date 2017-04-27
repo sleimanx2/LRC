@@ -54,7 +54,7 @@
             </div>
             <div class="form-group col-md-6">
                 <label for="">Received From</label>
-                {!! Form::text('received_from', old('received_from'), ['class' =>'form-control format-title-case', 'required']) !!}
+                {!! Form::text('received_from', old('received_from'), ['class' =>'form-control', 'required']) !!}
             </div>
         </div>
     </div>
