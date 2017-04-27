@@ -2,6 +2,7 @@
 namespace LRC\Http\Controllers\Auth;
 
 use LRC\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller

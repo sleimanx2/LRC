@@ -32,6 +32,13 @@
             <!-- <li class="app-nav {{ Request::is('borrowings*') ? 'active' : '' }}"><a href="">Borrowings</a></li> -->
             <!-- <li class="app-nav {{ Request::is('sad*') ? 'active' : '' }}"><a href="">SAD</a></li> -->
 
+            <!-- <li class="app-nav">
+                <a href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                    {{ csrf_field() }}
+                </form>
+            </li> -->
+
             <!-- <li class="dropdown text-normal nav-profile">
                 <a href="javascript:;" class="dropdown-toggle">
                     <span class="text-small">{{Auth::user()->first_name}} {{Auth::user()->last_name}}</span>
@@ -59,6 +66,20 @@
             <!-- <li><a href="javascript:void(0)" class="btn btn-header red" data-toggle="modal" data-target="#modalAddEmergency"><i class="fa fa-ambulance"></i></a></li> -->
             <li><button class="btn btn-header red" data-toggle="modal" data-target="#modalAddBloodRequest"><i class="fa fa-tint"></i></button></li>
             <li><button class="btn btn-header light" onclick="showPhonebookSidebar()"><i class="fa fa-phone"></i></button></li>
+            <li class="dropdown">
+                <button class="dropdown-toggle btn btn-header light" data-toggle="dropdown"><i class="fa fa-user"></i></button>
+                
+                <ul class="dropdown-menu flipped">
+                    <li class="text"><i>Logged in as <b>{{ Auth::user()->full_name }}</b></i></li>
+                    <li class="seperator"></li>
+                    <li>
+                        <a href="javascript:void(0)" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                        <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
+                    </li>
+                </ul>
+            </li>
         </ul>
     </div>
 </header>
