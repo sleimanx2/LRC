@@ -96,11 +96,17 @@ class BloodRequestsController extends Controller {
     {
         $data = $bloodRequestRequest->all();
 
-        $data['user_id'] = Auth::user()->id;
+        if(Auth::check())
+            $data['user_id'] = Auth::user()->id;
+        else
+            $data['user_id'] = $data['taken_by'];
 
         $this->bloodRequestRepository->store($data);
 
-        return redirect()->intended(route('blood-requests-list'))->with('success', 'A new blood request was added successfully.');
+        if(Auth::check())
+            return redirect()->intended(route('blood-requests-list'))->with('success', 'Blood request added successfully!');
+        else
+            return redirect()->route('dashboard-phonebook')->with('success', 'Blood request added successfully!');
     }
 
     /**
@@ -122,10 +128,13 @@ class BloodRequestsController extends Controller {
 
         $bloodDonations = $bloodRequest->blood_donations;
 
+        $callLogs = $bloodRequest->call_logs;
+
         return view('blood.requests.rescue', [
             'bloodRequest'   => $bloodRequest,
             'bloodDonors'    => $bloodDonors,
-            'bloodDonations' => $bloodDonations
+            'bloodDonations' => $bloodDonations,
+            'callLogs'       => $callLogs,
         ]);
     }
 
@@ -184,6 +193,23 @@ class BloodRequestsController extends Controller {
 
         return redirect()->back()->with('success', $bloodRequest->patient_name . "'s blood request was updated successfully.");
     }
+
+    /**
+     * Append new call log
+     *
+     * @param  int $id
+     * @return Response
+     */
+    public function appendCallLog(Request $request)
+    {
+        $data['user_id'] = Auth::user()->id;
+        $data['blood_request_id'] = $request->blood_request_id;
+        $data['donor_id'] = $request->donor_id;
+        $data['call_type'] = $request->call_type;
+
+        $this->bloodRequestRepository->appendCallLog($data);
+    }
+
     /**
      * Remove the specified resource from storage.
      *

@@ -38,7 +38,11 @@ class UserRepository {
      */
     public function getPaginated($limit = 25)
     {
-        $users = $this->user->paginate($limit);
+        $users = $this->user
+            ->orderby("is_active", "desc")
+            ->orderby("promo")
+            ->orderby("last_name")
+            ->paginate($limit);
 
         return $users;
     }
@@ -56,7 +60,7 @@ class UserRepository {
 
         $users = $this->user
             ->select('*')
-            ->where(DB::raw('concat_ws(" ",first_Name,last_Name)'), 'like', $query)
+            ->where(DB::raw('concat_ws(" ", first_name, last_name, nickname)'), 'like', $query)
             ->paginate($limit);
 
         return $users;

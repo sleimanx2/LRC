@@ -23,7 +23,7 @@ class CreateDonorsTable extends Migration {
 
             $table->string('phone_primary');
             $table->string('phone_secondary');
-            $table->string('email')->unique();
+            $table->string('email');
 
             $table->string('location');
             $table->decimal('latitude', 18, 14);
@@ -32,6 +32,7 @@ class CreateDonorsTable extends Migration {
             $table->date('birthday');
             $table->string('gender',40);
 
+            $table->text('note');
 
             $table->integer('donation_requested');
             $table->integer('donation_completed');

@@ -29,10 +29,15 @@
 
                         <hr/>
                         
+                        @if(Auth::user()->can_delete_blood_request)
                         <div class="col-md-6">
+                        @else
+                        <div class="col-md-12">
+                        @endif
                             <a href="{{ route('blood-request-rescue',[$bloodRequest->id]) }}" class="btn btn-success btn-block"><i class="fa fa-life-ring"></i> Rescue this Request</a>
                         </div>
                         
+                        @if(Auth::user()->can_delete_blood_request)
                         <div class="col-md-6">
                             {!! Form::open([
                                 'method'=>'delete',
@@ -62,6 +67,7 @@
                                 });
                             </script>
                         </div>
+                        @endif
                     </div>
                 </div>
             </div>

@@ -5,17 +5,20 @@
         </div>
         <div class="sidebar-nav">
             <ul class="nav nav-pills phonebook-nav">
-              <li class="active"><a href="#tab-firstAiders" role="tab" data-toggle="tab">First Aiders</a></li>
-              <li><a href="#tab-medicalCenters" role="tab" data-toggle="tab">Medical Centers</a></li>
-              <li><a href="#tab-lrcCenters" role="tab" data-toggle="tab">LRC Centers</a></li>
-              <li><a href="#tab-organizations" role="tab" data-toggle="tab">Organizations</a></li>
+              <li class="active"><a href="#tab-firstAiders" role="tab" data-toggle="tab" tabindex="-1">First Aiders</a></li>
+              <li><a href="#tab-medicalCenters" role="tab" data-toggle="tab" tabindex="-1">Medical Centers</a></li>
+              <li><a href="#tab-lrcCenters" role="tab" data-toggle="tab" tabindex="-1">LRC Centers</a></li>
+              <li><a href="#tab-organizations" role="tab" data-toggle="tab" tabindex="-1">Organizations</a></li>
               <li class="seperator"></li>
-              <li><a class="dial-item-btn quickdial-OR" data-dial-name="O.R."><i class="fa fa-phone"></i>&nbsp;&nbsp;<b>O.R.</b></a></li>
-              <li><a class="dial-item-btn quickdial-206" data-dial-name="206 (Jal el Dib)"><i class="fa fa-phone"></i>&nbsp;&nbsp;<b>206</b></a></li>
+              <li><a class="dial-item-btn quickdial-OR" data-dial-name="O.R." tabindex="-1"><i class="fa fa-phone"></i>&nbsp;&nbsp;<b>O.R.</b></a></li>
+              <li><a class="dial-item-btn quickdial-206" data-dial-name="206 (Jal el Dib)" tabindex="-1"><i class="fa fa-phone"></i>&nbsp;&nbsp;<b>206</b></a></li>
             </ul>
         </div>
-        <button class="btn btn-header btn-refresh light no-border" onclick="refreshPhonebook()"><i class="fa fa-refresh"></i></button>
-        <button class="btn btn-header btn-close light no-border" onclick="hidePhonebookSidebar()"><i class="fa fa-times"></i></button>
+        <button class="btn btn-header btn-refresh light no-border" onclick="refreshPhonebook()" tabindex="-1"><i class="fa fa-refresh"></i></button>
+        <button class="btn btn-header btn-close light no-border" onclick="hidePhonebookSidebar()" tabindex="-1"><i class="fa fa-times"></i></button>
+        @if(Request::is('dashboard/phonebook'))
+        <button class="btn btn-header btn-blood-request red" data-toggle="modal" data-target="#modalAddBloodRequest"><i class="fa fa-tint"></i></button>
+        @endif
     </div>
     <div class="sidebar-body container-fluid">
         <div class="tab-content">
@@ -54,7 +57,7 @@
                             <th>Filter</th>
                             <th width="100">Sector</th>
                             <th>Code</th>
-                            <th>Hospital Name</th>
+                            <th>Name</th>
                         </tr>
                     </thead>
                     <tbody></tbody>

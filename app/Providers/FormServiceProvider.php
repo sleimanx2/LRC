@@ -43,18 +43,18 @@ class FormServiceProvider extends ServiceProvider
      */
     private function getBloodTypes()
     {
-        return array_merge(["" => ""], BloodType::all()->pluck('name', 'id')->toArray());
+        return BloodType::all()->pluck('name', 'id')->prepend("", "");
     }
 
     private function getBloodBanksList()
     {
         $hospitals = Contact::whereHas('category', function ($q) {
             $q->where('slug', 'hospital');
-        })->orderBy('name')->pluck('name', 'id')->toArray();
+        })->orderBy('sector')->orderBy('name')->select(DB::raw("CONCAT(sector, ' - ', name) AS name"), 'id')->pluck('name', 'id')->toArray();
 
         $blood_banks = Contact::whereHas('category', function ($q) {
             $q->where('slug', 'blood-bank');
-        })->orderBy('name')->pluck('name', 'id')->toArray();
+        })->orderBy('sector')->select(DB::raw("CONCAT(sector, ' - ', name) AS name"), 'id')->pluck('name', 'id')->toArray();
 
         return array_merge(["" => ""], ["Hospitals" => $hospitals, "Blood Banks" => $blood_banks]);
     }
@@ -66,6 +66,6 @@ class FormServiceProvider extends ServiceProvider
 
     private function getUsersList()
     {
-        return User::with('roles')->where('is_active', 1)->select(DB::raw("CONCAT(first_name, ' ', last_name) AS name"), 'id')->pluck('name', 'id')->prepend("", "");
+        return User::with('roles')->where('is_active', 1)->where('id', '!=', 1)->select(DB::raw("CONCAT(first_name, ' ', last_name) AS name"), 'id')->pluck('name', 'id')->prepend("", "");
     }
 }

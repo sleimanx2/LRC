@@ -15,7 +15,7 @@ class PhonebookController extends Controller
      */
     public function getFirstAidersJSON(Request $request)
     {
-        $first_aiders = User::with('roles')->get();
+        $first_aiders = User::with('roles')->where('id', '!=', 1)->get();
 
         $arr["data"] = array();
 
@@ -32,9 +32,9 @@ class PhonebookController extends Controller
 	            $first_aider->is_amb,
 	            "<b>" . $first_aider->last_name . "</b>",
 	            "<b>" . $first_aider->first_name . "</b>",
-	            $first_aider->nickname,
-	            $first_aider->promo,
-	            $first_aider->location,
+	            $first_aider->nickname ? "<span class='label label-info'>".$first_aider->nickname."</span>" : "<span class='label label-none'>None</span>",
+	            $first_aider->promo ?: "<span class='label label-none'>Not Set</span>",
+	            $first_aider->location ?: "<span class='label label-none'>Not Set</span>",
 	            ($first_aider->is_rm ? '<span class="label label-primary m-r-xs" title="Regional Manager">RM</span>' : '') . 
 	            ($first_aider->is_amb ? '<span class="label label-success m-r-xs" title="Ambulance Driver"><i class="fa fa-car"></i></span>' : '') . 
 	            ($first_aider->is_ami ? '<span class="label label-default" title="Ami du Centre"><i class="fa fa-users"></i></span>' : '')
@@ -89,6 +89,10 @@ class PhonebookController extends Controller
         $arr["data"] = array();
 
         foreach($lrc_centers as $lrc_center) {
+            $ambulances = "";
+            foreach(json_decode($lrc_center->ambulances) as $ambulance)
+                $ambulances .= "<span class='label label-default'>" . $ambulance . "</span> ";
+            
          	array_push($arr["data"], array(
         		"DT_RowClass" => "phonebook-row dial-item-btn",
         		"DT_RowData" => [
@@ -98,7 +102,7 @@ class PhonebookController extends Controller
 
 	            "<b>" . $lrc_center->sector . "</b>",
 	            "<b>" . $lrc_center->name . "</b>",
-	            $lrc_center->ambulances
+	            $ambulances
         	));
         }
 

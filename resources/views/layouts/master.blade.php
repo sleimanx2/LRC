@@ -8,6 +8,7 @@
     <title>LRC Intranet</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,700,600,400' rel='stylesheet' type='text/css'>
 
@@ -39,12 +40,19 @@
             </div>
 
             <section id="content" class="animate-fade-up">
-                <?php $success = Session::get('success') ?>
+                <?php $success = Session::get('success'); $failure = Session::get('failure'); $failure_msg = Session::get('failure_msg'); ?>
                 @if($success)
                 <script type="text/javascript">
                     $(document).ready(function() {
                         toastr.success("", "{{ $success }}", { timeOut: 5000, positionClass: "toast-top-center" });
-                        //swal("", "{{ $success }}", "success");
+                    });
+                </script>
+                @endif
+
+                @if($failure)
+                <script type="text/javascript">
+                    $(document).ready(function() {
+                        toastr.error("{{ $failure_msg }}", "{{ $failure }}", { timeOut: 5000, positionClass: "toast-top-center" });
                     });
                 </script>
                 @endif

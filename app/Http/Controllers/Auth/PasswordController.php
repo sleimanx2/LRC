@@ -45,14 +45,12 @@ class PasswordController extends Controller
 
         if ( $validator->fails() )
         {
-            $this->throwValidationException(
-                $request, $validator
-            );
+            return redirect()->back()->with('failure', 'Password update failed')->with('failure_msg', "Passwords do not match");
         }
 
         $this->registrar->updatePassword($request->all(),$user);
 
-        return redirect(route('users-list'))->with('success', 'First Aider password '.$user->first_name.' '.$user->last_name.' updated Successfully.');
+        return redirect()->back()->with('success', 'Password updated Successfully.');
 
     }
 }

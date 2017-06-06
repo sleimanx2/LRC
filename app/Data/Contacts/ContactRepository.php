@@ -160,12 +160,15 @@ class ContactRepository {
     {
         return $this->contact->create([
             'name'            => $data['name'],
-            'category_id'     => $data['category_id'],
-            'phone_primary'   => $data['phone_primary'],
-            'phone_secondary' => $data['phone_secondary'],
+            'nickname'        => $data['nickname'],
+            'phone_numbers'   => $data['phone_numbers'],
+            'ambulances'      => $data['ambulances'],
+            'sector'          => $data['sector'],
+            'favorite'        => isset($data['favorite']) ? $data['favorite'] : 0,
             'location'        => $data['location'],
             'latitude'        => $data['latitude'],
-            'longitude'       => $data['longitude']
+            'longitude'       => $data['longitude'],
+            'category_id'     => $data['category_id']
         ]);
     }
 
@@ -173,12 +176,15 @@ class ContactRepository {
     {
         $attributes = [
             'name'            => $data['name'],
-            'category_id'     => $data['category_id'],
-            'phone_primary'   => $data['phone_primary'],
-            'phone_secondary' => $data['phone_secondary'],
+            'nickname'        => $data['nickname'],
+            'phone_numbers'   => $data['phone_numbers'],
+            'ambulances'      => $data['ambulances'],
+            'sector'          => $data['sector'],
+            'favorite'        => isset($data['favorite']) ? $data['favorite'] : 0,
             'location'        => $data['location'],
             'latitude'        => $data['latitude'],
-            'longitude'       => $data['longitude']
+            'longitude'       => $data['longitude'],
+            'category_id'     => $data['category_id']
         ];
 
         $contact->fill($attributes);

@@ -20,114 +20,84 @@ Route::get('/phonebook/get-organizations-json', 'PhonebookController@getOrganiza
 Route::post('/phonebook/dial-number-api', 'PhonebookController@dialNumberAPI');
 
 // OR Dashboard Routes
-Route::group(['middleware' => 'guest'], function () {
-    Route::get('/dashboard', 'DashboardController@index');
-    Route::get('/dashboard/or', 'DashboardController@showORDashboard');
-    Route::get('/dashboard/phonebook', 'DashboardController@showPhonebookDashboard');
-});
+//Route::group(['middleware' => 'guest'], function () {
+Route::get('/dashboard', 'DashboardController@index');
+Route::get('/dashboard/or', 'DashboardController@showORDashboard');
+Route::get('/dashboard/phonebook', 'DashboardController@showPhonebookDashboard')->name('dashboard-phonebook');
+Route::post('/blood/requests/store', 'Blood\BloodRequestsController@store')->name('blood-request-store');
+//});
 
+// Authenticated User Routes
 Route::group(['middleware' => 'auth'], function () {
 
-    Route::get('/', ['as' => 'home-dashboard', 'uses' => 'HomeController@dashboard']);
-    Route::get('/home', ['uses' => 'HomeController@dashboard']);
-
-    // Users
-    Route::get('users', ['as' => 'users-list', 'uses' => 'UsersController@index']);
-
-    Route::get('users/{id}/edit', ['as' => 'user-edit', 'uses' => 'UsersController@edit']);
-
-    Route::post('users/{id}/update', ['before' => 'csrf', 'as' => 'user-update', 'uses' => 'UsersController@update']);
-
-    Route::delete('users/{id}/destroy', ['before' => 'csrf', 'as' => 'user-destroy', 'uses' => 'UsersController@destroy']);
-
-    Route::post('password/{id}/change', ['before' => 'csrf', 'as' => 'password-change', 'uses' => 'Auth\PasswordController@postChange']);
-
-    // Contacts
-    Route::get('contacts', ['as' => 'contacts-list', 'uses' => 'ContactsController@index']);
-
-    Route::get('contacts/create', ['as' => 'contact-create', 'uses' => 'ContactsController@create']);
-
-    Route::post('contacts/store', ['as' => 'contact-store', 'uses' => 'ContactsController@store']);
-
-    Route::get('contacts/{id}/edit', ['as' => 'contact-edit', 'uses' => 'ContactsController@edit']);
-
-    Route::post('contacts/{id}/update', ['as' => 'contact-update', 'uses' => 'ContactsController@update']);
-
-    Route::delete('contacts/{id}/destroy', ['as' => 'contact-destroy', 'uses' => 'ContactsController@destroy']);
+    /*
+     * DASHBOARD ROUTES
+     */
+    Route::get('/', 'HomeController@dashboard')->name('home-dashboard');
 
     /*
-     * BLOOD
-    */
+     * ADMIN ROUTES
+     */
+    Route::group(['prefix' => 'admin'], function () {
+        // Users
+        Route::get('users', 'UsersController@index')->name('users-list');
+        Route::get('users/{id}/edit', 'UsersController@edit')->name('user-edit');
+        Route::post('users/{id}/update', 'UsersController@update')->name('user-update');//->before('csrf');
+        Route::delete('users/{id}/destroy', 'UsersController@destroy')->name('user-destroy');//->before('csrf');
+        Route::post('password/{id}/change', 'Auth\PasswordController@postChange')->name('password-change');//->before('csrf');
+
+        // Contacts
+        Route::get('contacts', 'ContactsController@index')->name('contacts-list');
+        Route::get('contacts/create', 'ContactsController@create')->name('contact-create');
+        Route::post('contacts/store', 'ContactsController@store')->name('contact-store');
+        Route::get('contacts/{id}/edit', 'ContactsController@edit')->name('contact-edit');
+        Route::post('contacts/{id}/update', 'ContactsController@update')->name('contact-update');
+        Route::delete('contacts/{id}/destroy', 'ContactsController@destroy')->name('contact-destroy');
+    });
+
+    /*
+     * BLOOD ROUTES
+     */
     Route::group(['prefix' => 'blood', 'namespace' => 'Blood'], function () {
         // Donors
+        Route::get('donors', 'BloodDonorsController@index')->name('blood-donors-list');
+        Route::get('donors/create', 'BloodDonorsController@create')->name('blood-donor-create');
+        Route::post('donors/store', 'BloodDonorsController@store')->name('blood-donor-store');
+        Route::get('donors/{id}/edit', 'BloodDonorsController@edit')->name('blood-donor-edit');
+        Route::post('donors/{id}/update', 'BloodDonorsController@update')->name('blood-donor-update');
+        Route::delete('donors/{id}/destroy', 'BloodDonorsController@destroy')->name('blood-donor-destroy');
 
-        Route::get('donors', ['as' => 'blood-donors-list', 'uses' => 'BloodDonorsController@index']);
+        // Requests
+        Route::get('requests', 'BloodRequestsController@index')->name('blood-requests-list');
+        Route::get('requests/create', 'BloodRequestsController@create')->name('blood-request-create');
+        //Route::post('requests/store', 'BloodRequestsController@store')->name('blood-request-store');
+        Route::get('requests/{id}/edit', 'BloodRequestsController@edit')->name('blood-request-edit');
+        Route::post('requests/{id}/update', 'BloodRequestsController@update')->name('blood-request-update');
+        Route::delete('requests/{id}/destroy', 'BloodRequestsController@destroy')->name('blood-request-destroy');
+        Route::get('requests/{id}/rescue', 'BloodRequestsController@rescue')->name('blood-request-rescue');
+        Route::post('requests/{id}/complete', 'BloodRequestsController@setComplete')->name('blood-request-set-completed');
+        Route::post('requests/append-call-log', 'BloodRequestsController@appendCallLog')->name('blood-request-append-call-log');
 
-        Route::get('donors/create', ['as' => 'blood-donor-create', 'uses' => 'BloodDonorsController@create']);
-
-        Route::post('donors/store', ['as' => 'blood-donor-store', 'uses' => 'BloodDonorsController@store']);
-
-        Route::get('donors/{id}/edit', ['as' => 'blood-donor-edit', 'uses' => 'BloodDonorsController@edit']);
-
-        Route::post('donors/{id}/update', ['as' => 'blood-donor-update', 'uses' => 'BloodDonorsController@update']);
-
-        Route::delete('donors/{id}/destroy', ['as' => 'blood-donor-destroy', 'uses' => 'BloodDonorsController@destroy']);
-
-
-        // Blood Requests
-
-        Route::get('requests', ['as' => 'blood-requests-list', 'uses' => 'BloodRequestsController@index']);
-
-        Route::get('requests/create', ['as' => 'blood-request-create', 'uses' => 'BloodRequestsController@create']);
-
-        Route::post('requests/store', ['as' => 'blood-request-store', 'uses' => 'BloodRequestsController@store']);
-
-        Route::get('requests/{id}/edit', ['as' => 'blood-request-edit', 'uses' => 'BloodRequestsController@edit']);
-
-        Route::post('requests/{id}/update', ['as' => 'blood-request-update', 'uses' => 'BloodRequestsController@update']);
-
-        Route::delete('requests/{id}/destroy', ['as' => 'blood-request-destroy', 'uses' => 'BloodRequestsController@destroy']);
-
-        Route::get('requests/{id}/rescue', ['as' => 'blood-request-rescue', 'uses' => 'BloodRequestsController@rescue']);
-
-        Route::post('requests/{id}/complete', ['as' => 'blood-request-set-completed', 'uses' => 'BloodRequestsController@setComplete']);
-
-
-        // Blood Donations
-
-        Route::post('donation/willDonate', ['as' => 'blood-donor-will-donate', 'uses' => 'BloodDonationsController@willDonate']);
-
-        Route::post('donation/wontDonate', ['as' => 'blood-donor-wont-donate', 'uses' => 'BloodDonationsController@wontDonate']);
-
-        Route::post('donation/{id}/confirm', ['as' => 'blood-donation-confirmed', 'uses' => 'BloodDonationsController@confirm']);
-
+        // Donations
+        Route::post('donation/willDonate', 'BloodDonationsController@willDonate')->name('blood-donor-will-donate');
+        Route::post('donation/wontDonate', 'BloodDonationsController@wontDonate')->name('blood-donor-wont-donate');
+        Route::post('donation/{id}/confirm', 'BloodDonationsController@confirm')->name('blood-donation-confirmed');
     });
 
 
     /*
-     * EMERGENCIES
+     * EMERGENCIES ROUTES
     */
     Route::group(['prefix' => 'emergencies', 'namespace' => 'Emergencies'], function () {
-        Route::get('/', ['as' => 'emergencies-list', 'uses' => 'EmergenciesController@index']);
-
-        Route::get('create', ['as' => 'emergency-create', 'uses' => 'EmergenciesController@create']);
-
-        Route::post('store', ['as' => 'emergency-store', 'uses' => 'EmergenciesController@store']);
-
-        Route::get('{id}/edit', ['as' => 'emergency-edit', 'uses' => 'EmergenciesController@edit']);
-
-        Route::post('{id}/update', ['as' => 'emergency-update', 'uses' => 'EmergenciesController@update']);
-
-        Route::delete('{id}/destroy', ['as' => 'emergency-destroy', 'uses' => 'EmergenciesController@destroy']);
-
-        Route::post('{id}/status/update', ['as' => 'emergency-status-update', 'uses' => 'EmergenciesController@updateStatus']);
-
-        Route::get('{id}/manage', ['as' => 'emergency-manage', 'uses' => 'EmergenciesController@manage']);
-
-        Route::post('{id}/casualties/store', ['as' => 'emergency-casualty-store', 'uses' => 'CasualtiesController@store']);
-
-        Route::post('casualties/{id}/update', ['as' => 'emergency-casualty-update', 'uses' => 'CasualtiesController@update']);
-
+        Route::get('/', 'EmergenciesController@index')->name('emergencies-list');
+        Route::get('create', 'EmergenciesController@create')->name('emergency-create');
+        Route::post('store', 'EmergenciesController@store')->name('emergency-store');
+        Route::get('{id}/edit', 'EmergenciesController@edit')->name('emergency-edit');
+        Route::post('{id}/update', 'EmergenciesController@update')->name('emergency-update');
+        Route::delete('{id}/destroy', 'EmergenciesController@destroy')->name('emergency-destroy');
+        Route::post('{id}/status/update', 'EmergenciesController@updateStatus')->name('emergency-status-update');
+        Route::get('{id}/manage', 'EmergenciesController@manage')->name('emergency-manage');
+        Route::post('{id}/casualties/store', 'CasualtiesController@store')->name('emergency-casualty-store');
+        Route::post('casualties/{id}/update', 'CasualtiesController@update')->name('emergency-casualty-update');
     });
-
 });

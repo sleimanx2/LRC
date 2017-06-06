@@ -22,13 +22,29 @@
         <li><a href="{{ route('blood-request-edit',[$bloodRequest->id]) }}" class="btn btn-info btn-action"><i class="fa fa-pencil"></i>&nbsp;&nbsp;Edit Request</a></li>
         @if(!$bloodRequest->completed)
         <li>
-            {!! Form::open(['method'=>'post', 'route'=>['blood-request-set-completed',$bloodRequest->id], 'style'=>'display:inline', 'onsubmit'=>'return confirm("Are you sure you want mark
-            '.$bloodRequest->patient_name.'\'s request as complete ?");'
-            ]) !!}
+            {!! Form::open(['method'=>'post', 'route'=>['blood-request-set-completed', $bloodRequest->id], 'style'=>'display:inline', 'id'=>'btn-set-complete-form-'.$bloodRequest->id]) !!}
 
-            <button class="btn btn-success btn-action"><i class="fa fa-check"></i>&nbsp;&nbsp;Set as Complete</button>
+            <button id="btn-set-complete-{{ $bloodRequest->id }}" class="btn btn-success btn-action"><i class="fa fa-check"></i>&nbsp;&nbsp;Set as Complete</button>
 
             {!!Form::close()!!}
+
+            <script type="text/javascript">
+                $("#btn-set-complete-{{ $bloodRequest->id }}").click(function(e){
+                    swal({
+                        title: "Are you sure?",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "Yes!",
+                        closeOnConfirm: false
+                    },
+                    function(){
+                        $('#btn-set-complete-form-{{ $bloodRequest->id }}').submit();
+                    });
+                    e.preventDefault();
+                    return false;
+                });
+            </script>
         </li>
         @endif
     </ul>
@@ -92,13 +108,18 @@
                                             <span class="icon fa fa-phone"></span>
                                             <label>Contact Phone</label>
                                             <div class="pull-right">
-                                                <button class="btn btn-primary dial-item-btn" data-dial='["{{ $bloodRequest->phone_primary }}", "{{ $bloodRequest->phone_secondary }}"]' data-dial-name="{{ $bloodRequest->contact_name }}"><i class="fa fa-phone"></i>&nbsp;&nbsp;DIAL</button>
+                                                <button class="btn btn-primary dial-item-btn" data-dial='["{{ $bloodRequest->phone_primary }}", "{{ $bloodRequest->phone_secondary }}"]' data-dial-name="{{ $bloodRequest->contact_name }}" data-log-request-id="{{ $bloodRequest->id }}" data-log-call-type="contact"><i class="fa fa-phone"></i>&nbsp;&nbsp;DIAL</button>
                                             </div>
                                         </li>
                                         <li>
                                             <span class="icon fa fa-bullhorn"></span>
                                             <label>Who to Blame</label>
-                                            <div class="pull-right"><b>{{ $bloodRequest->user->first_name or 'Not defined' }} {{ $bloodRequest->user->last_name or 'Not defined' }}</b></div>
+                                            <div class="pull-right"><b>{{ $bloodRequest->user->full_name or 'Not defined' }}</b></div>
+                                        </li>
+                                        <li>
+                                            <span class="icon fa fa-pencil"></span>
+                                            <label>Last Updated</label>
+                                            <div class="pull-right"><b>{{ Carbon\Carbon::parse($bloodRequest->updated_at)->diffForHumans() }}</b></div>
                                         </li>
                                         @if($bloodRequest->note)
                                         <li class="blood-request-notes">
@@ -117,6 +138,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <strong><i class="fa fa-h-square panel-ico"></i>Blood Bank Info</strong>
+                    <button class="btn btn-primary dial-item-btn pull-right" data-dial='{{ json_encode($bloodRequest->blood_bank->phone_numbers) }}' data-dial-name="{{ $bloodRequest->blood_bank->name }}" data-log-request-id="{{ $bloodRequest->id }}" data-log-call-type="hospital"><i class="fa fa-phone"></i>&nbsp;&nbsp;DIAL</button>
                 </div>
                 <div class="panel-body">
                     <div class="media">
@@ -124,8 +146,13 @@
                             <ul class="list-unstyled list-info">
                                 <li>
                                     <span class="icon fa fa-hospital-o"></span>
-                                    <b>{{ $bloodRequest->blood_bank->name }}</b>
-                                    <button class="btn btn-primary dial-item-btn pull-right" data-dial='{{ json_encode($bloodRequest->blood_bank->phone_numbers) }}' data-dial-name="{{ $bloodRequest->blood_bank->name }}"><i class="fa fa-phone"></i>&nbsp;&nbsp;DIAL</button>
+                                    <span>Name</span>
+                                    <b class="pull-right">{{ $bloodRequest->blood_bank->name_fmt }}</b>
+                                </li>
+                                <li>
+                                    <span class="icon fa fa-map-marker"></span>
+                                    <span>Location</span>
+                                    <b class="pull-right">{{ $bloodRequest->blood_bank->location }}</b>
                                 </li>
                             </ul>
 
@@ -133,10 +160,14 @@
                                 <div class="ui-map" id="map-canvas"></div>
                             </div>
 
+                            <input type="hidden" id="hidden_location_name" value="{{ $bloodRequest->blood_bank->name }}"/>
+                            <input type="hidden" id="hidden_location_latitude" value="{{ $bloodRequest->blood_bank->latitude }}"/>
+                            <input type="hidden" id="hidden_location_longitude" value="{{ $bloodRequest->blood_bank->longitude }}"/>
+
                             <script type="text/javascript">
-                                var location_name =  "{{ $bloodRequest->blood_bank->name }}";
-                                var location_latitude = {{ $bloodRequest->blood_bank->latitude }};
-                                var location_longitude = {{ $bloodRequest->blood_bank->longitude }};
+                                var location_name = $("#hidden_location_name");
+                                var location_latitude = $("#hidden_location_latitude");
+                                var location_longitude = $("#hidden_location_longitude");
                                 var location_marker = null;
 
                                 $(document).ready(function() {
@@ -146,6 +177,35 @@
                             </script>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <strong><i class="fa fa-address-book panel-ico"></i>Call Logs</strong>
+                </div>
+                <div class="panel-body">
+                    <table class="table">
+                        <thead>
+                            <th>Call Type</th>
+                            <th>User</th>
+                            <th>Donor Info</th>
+                            <th>Called On</th>
+                        </thead>
+                        <tbody>
+                            @foreach($callLogs as $callLog)
+                            <tr>
+                                <th><span class="label label-log-{{ $callLog->call_type }}">{{ ucWords($callLog->call_type) }}</span></th>
+                                <td>{{ $callLog->user->full_name }}</td>
+                                @if($callLog->call_type == "donor")
+                                <td><a class="label label-success" href="/blood/donors/{{ $callLog->donor->id }}/edit" target="blank">{{ strtoupper($callLog->donor->first_name) }} {{ strtoupper($callLog->donor->last_name) }}</a></td>
+                                @else
+                                <td></td>
+                                @endif
+                                <td class="text-small">{{ Carbon\Carbon::parse($callLog->created_at)->format('F j, Y \a\t h:i A') }} ({{ Carbon\Carbon::parse($callLog->created_at)->diffForHumans() }})</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -187,11 +247,11 @@
                                     <ul class="list-unstyled list-infolist-unstyled list-info m-b-0">
                                         <li>
                                             <span class="icon fa fa-bullhorn"></span>
-                                            <label>Contacted By</label>
+                                            <label>Last Contacted By</label>
                                             <b>{{ $bloodDonation->user->first_name or 'Not defined'}} {{ $bloodDonation->user->last_name or ''}}</b>
                                         </li>
                                         <li>
-                                            <button class="btn btn-primary dial-item-btn m-r-sm" data-dial='["{{ $bloodDonation->donor->phone_primary }}", "{{ $bloodDonation->donor->phone_secondary }}"]' data-dial-name="{{ $bloodDonation->donor->first_name }} {{$bloodDonation->donor->last_name }}"><i class="fa fa-phone"></i>&nbsp;&nbsp;DIAL</button>
+                                            <button class="btn btn-primary dial-item-btn m-r-sm" data-dial='["{{ $bloodDonation->donor->phone_primary }}", "{{ $bloodDonation->donor->phone_secondary }}"]' data-dial-name="{{ $bloodDonation->donor->first_name }} {{$bloodDonation->donor->last_name }}" data-log-request-id="{{ $bloodRequest->id }}" data-log-call-type="donor" data-log-donor-id="{{ $bloodDonation->donor->id }}"><i class="fa fa-phone"></i>&nbsp;&nbsp;DIAL</button>
 
                                             <div class="pull-right">
                                                 @if( ! $bloodDonation->confirmed )
@@ -250,12 +310,22 @@
                             <div id="{{ 'collapse-potential-'.$bloodDonor->id  }}" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <ul class="list-unstyled list-infolist-unstyled list-info m-b-0">
+                                        @if($bloodDonor->note)
                                         <li>
-                                            <button class="btn btn-primary dial-item-btn m-r-sm" data-dial='["{{ $bloodDonor->phone_primary }}", "{{ $bloodDonor->phone_secondary }}"]' data-dial-name="{{ $bloodDonor->first_name }} {{$bloodDonor->last_name }}"><i class="fa fa-phone"></i>&nbsp;&nbsp;DIAL</button>
+                                            <h5 class="no-margin m-b-sm"><b>Notes</b></h5>
+                                            <p id="donor_notes_{{ $bloodDonor->id }}">{!! nl2br($bloodDonor->note) !!}</p>
+                                        </li>
+                                        @endif
+                                        <li>
+                                            @if($bloodDonor->note)
+                                            <br>
+                                            @endif
+                                            <button class="btn btn-primary dial-item-btn m-r-sm" data-dial='["{{ $bloodDonor->phone_primary }}", "{{ $bloodDonor->phone_secondary }}"]' data-dial-name="{{ $bloodDonor->first_name }} {{$bloodDonor->last_name }}" data-log-request-id="{{ $bloodRequest->id }}" data-log-call-type="donor" data-log-donor-id="{{ $bloodDonor->id }}"><i class="fa fa-phone"></i>&nbsp;&nbsp;DIAL</button>
 
                                             <div class="pull-right">
                                                 <button onclick="openWillDonate({{ $bloodDonor->id }})" class="btn btn-bordered-success">Will Donate</button>
                                                 <button onclick="openWontDonate({{ $bloodDonor->id }})" class="btn btn-bordered-danger">Can't Donate</button>
+                                                <a class="btn btn-info" target="blank" href="{{ route('blood-donor-edit',[$bloodDonor->id]) }}"><i class="fa fa-edit m-r-sm"></i> Edit Donor</a>
                                             </div>
                                         </li>
                                     </ul>
@@ -306,6 +376,11 @@
                         <input name="delay" type="radio" value="{{strtotime('+1 year')}}"><span> 1 Year</span>
                     </label>
                 </span>
+
+                <hr/>
+                
+                <h5>Donor Notes</h5>
+                <textarea name="note" class="donor-notes form-control autogrow"></textarea>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-default" data-dismiss="modal" type="reset">CANCEL</button>
@@ -382,7 +457,12 @@
 
         function openWontDonate(id) {
             $('#bloodDonorId').val(id);
+            $('#wontDonate').find(".donor-notes").val($("#donor_notes_" + id).text());
             $('#wontDonate').modal('show');
+            
+            setTimeout(function() {
+                $('#wontDonate').find(".donor-notes").autoGrow();
+            }, 200);
         }
 
     </script>

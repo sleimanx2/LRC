@@ -69,6 +69,15 @@ class BloodRequest extends Model {
     }
 
     /**
+     * Has many relation with call logs
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function call_logs()
+    {
+        return $this->hasMany('LRC\Data\Blood\BloodRequestCallLog','blood_request_id')->orderBy('created_at', 'desc');
+    }
+
+    /**
      * Get the number of platelets donation
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

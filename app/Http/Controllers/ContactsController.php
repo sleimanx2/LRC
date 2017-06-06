@@ -1,5 +1,6 @@
 <?php namespace LRC\Http\Controllers;
 
+use Auth;
 use Illuminate\Support\Facades\Input;
 use LRC\Data\Contacts\ContactRepository;
 use LRC\Http\Requests;
@@ -32,15 +33,18 @@ class ContactsController extends Controller {
      */
     public function index()
     {
+        if(!Auth::user()->can_access_admin)
+            return redirect()->route('home-dashboard');
+
         $searchQuery   = Input::get('search');
         $categoryQuery = Input::get('category');
 
         if ( !$searchQuery and !$categoryQuery )
         {
-            $contacts = $this->contactRepository->getPaginated(10);
+            $contacts = $this->contactRepository->getPaginated(15);
         } else
         {
-            $contacts = $this->contactRepository->searchPaginated(['search' => $searchQuery, 'category' => $categoryQuery], 10);
+            $contacts = $this->contactRepository->searchPaginated(['search' => $searchQuery, 'category' => $categoryQuery], 15);
         }
 
         $categories = $this->contactRepository->getCategoriesList();
@@ -58,6 +62,9 @@ class ContactsController extends Controller {
      */
     public function create()
     {
+        if(!Auth::user()->can_access_admin)
+            return redirect()->route('home-dashboard');
+
         $categories = $this->contactRepository->getCategoriesList();
 
         return view('contacts.create', ['categories' => $categories]);
@@ -71,6 +78,9 @@ class ContactsController extends Controller {
      */
     public function store(SaveContactRequest $request)
     {
+        if(!Auth::user()->can_access_admin)
+            return redirect()->route('home-dashboard');
+
         $this->contactRepository->store($request->all());
 
         return redirect()->intended(route('contacts-list'))->with('success', 'A new contact was added successfully.');
@@ -84,6 +94,9 @@ class ContactsController extends Controller {
      */
     public function edit($id)
     {
+        if(!Auth::user()->can_access_admin)
+            return redirect()->route('home-dashboard');
+
         $contact = $this->contactRepository->findOrFail($id);
 
         $categories = $this->contactRepository->getCategoriesList();
@@ -100,13 +113,16 @@ class ContactsController extends Controller {
      */
     public function update($id, SaveContactRequest $request)
     {
+        if(!Auth::user()->can_access_admin)
+            return redirect()->route('home-dashboard');
+
         $contact = $this->contactRepository->findOrFail($id);
 
         $data = $request->all();
 
         $this->contactRepository->update($data, $contact);
 
-        return redirect()->intended(route('contacts-list'))->with('success', 'Then contact ' . $data['name'] . ' was successfully updated.');
+        return redirect()->intended(route('contacts-list'))->with('success', 'Contact was successfully updated.');
     }
 
     /**
@@ -117,11 +133,14 @@ class ContactsController extends Controller {
      */
     public function destroy($id)
     {
+        if(!Auth::user()->can_access_admin)
+            return redirect()->route('home-dashboard');
+        
         $contact = $this->contactRepository->findOrFail($id);
 
         $this->contactRepository->destroy($id);
 
-        return redirect()->intended(route('contacts-list'))->with('success', 'Then contact ' . $contact->name . ' has been deleted.');
+        return redirect()->intended(route('contacts-list'))->with('success', 'Contact has been deleted.');
 
 
     }

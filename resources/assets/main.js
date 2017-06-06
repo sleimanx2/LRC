@@ -1,3 +1,10 @@
+// CSRF protection
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
 /*
  * Formatting Functions
  */
@@ -22,6 +29,7 @@ $(document).on('input', '.format-phone', function(event) {
 
  function initPhonebook() {
     table_FirstAiders = $('#table-FirstAiders').DataTable({
+        "tabIndex": -1,
         "paging": false,
         "info": false,
         "ordering": true,
@@ -40,6 +48,7 @@ $(document).on('input', '.format-phone', function(event) {
     $('#table-FirstAiders').DataTable().column(0).search("0").draw();
 
     table_MedicalCenters = $('#table-MedicalCenters').DataTable({
+        "tabIndex": -1,
         "paging": false,
         "info": false,
         "ordering": false,
@@ -58,6 +67,7 @@ $(document).on('input', '.format-phone', function(event) {
     $('#table-MedicalCenters').DataTable().column(0).search("favorite").draw();
 
     table_LrcCenters = $('#table-LrcCenters').DataTable({
+        "tabIndex": -1,
         "paging": false,
         "info": false,
         "ordering": false,
@@ -72,6 +82,7 @@ $(document).on('input', '.format-phone', function(event) {
     });
 
     table_Organizations = $('#table-Organizations').DataTable({
+        "tabIndex": -1,
         "paging": false,
         "info": false,
         "ordering": false,
@@ -124,6 +135,15 @@ $(document).on('input', '.format-phone', function(event) {
         $.each($returnData, function(i, item) {
             if(item) $modal.find(".dial-buttons").append("<a class='btn btn-default btn-phone-number' data-phone-number='" + item + "'>" + formatPhone(item) + "</button>")
         });
+ 
+        if($(this).data("log-request-id") && $(this).data("log-call-type")) {
+            $modal.data("log-request-id", $(this).data("log-request-id"));
+            $modal.data("log-call-type", $(this).data("log-call-type"));
+            if($(this).data("log-donor-id"))
+                $modal.data("log-donor-id", $(this).data("log-donor-id"));
+            else
+                $modal.data("log-donor-id", 0);
+        }
 
         $modal.data("phone-number", $modal.find(".dial-buttons .btn-phone-number:first-child").data("phone-number"));
         $modal.find(".dial-buttons .btn-phone-number:first-child").removeClass("btn-default").addClass("btn-success");
@@ -142,21 +162,23 @@ $(document).on('input', '.format-phone', function(event) {
         var $phone_number = $modal.data("phone-number");
         var $ip_address = $(this).data("ip-address");
 
-        // $.post("/phonebook/dial-number-api", { phone_number: $phone_number, ip_address: $ip_address }, 'json')
-        //     .success(function(result) {
-        //         toastr.success("", "Dialing " + $phone_number + "...", { timeOut: 3000, positionClass: "toast-top-center" });
-        //     })
-        //     .fail(function(result) {
-        //         toastr.error("Please try again later", "Error dialing number!", { timeOut: 3000, positionClass: "toast-top-center" });
-        //     })
-        //     .always(function() {
-        //         $modal.modal("hide");
-        //     });
+        if($modal.data("log-request-id"))
+            $.post("/blood/requests/append-call-log", { blood_request_id: $modal.data("log-request-id"), donor_id: $modal.data("log-donor-id"), call_type: $modal.data("log-call-type") });
 
-        toastr.success("", "Dialing " + formatPhone($phone_number) + "...", { timeOut: 3000, positionClass: "toast-top-center" });
-        $modal.modal("hide");
-        hidePhonebookSidebar();
+        $.post("/phonebook/dial-number-api", { phone_number: $phone_number, ip_address: $ip_address }, 'json')
+            .success(function(result) {
+                toastr.success("", "Dialing " + formatPhone($phone_number) + "...", { timeOut: 3000, positionClass: "toast-top-center" });
+            })
+            .fail(function(result) {
+                toastr.error("Please try again later", "Error dialing number!", { timeOut: 3000, positionClass: "toast-top-center" });
+            })
+            .always(function() {
+                $modal.modal("hide");
+                hidePhonebookSidebar();
+            });
     });
+
+    $(".dataTables_filter").find("input").attr("tabindex", "-1");
 
     $(".quickdial-OR").data("dial", '["05458204"]');
     $(".quickdial-206").data("dial", '["140"]');
@@ -199,15 +221,12 @@ function initMap() {
 * Helper method called when the location is changed in the location/destination fields
 */
 function moveMap() {
-    if( isNaN(location_latitude) && isNaN(location_longitude) )
-    {
-      location_latitude = location_latitude.val();
-      location_longitude = location_longitude.val();
-      location_name = location_name.val();
-  }
+    location_latitude_value = location_latitude.val();
+    location_longitude_value = location_longitude.val();
+    location_name_value = location_name.val();
 
     // Getting coordinates
-    var location_coordinates = new google.maps.LatLng(location_latitude, location_longitude);
+    var location_coordinates = new google.maps.LatLng(location_latitude_value, location_longitude_value);
 
     //Removing location marker if available
     if (location_marker !== null) {
@@ -224,10 +243,9 @@ function moveMap() {
     location_marker = new google.maps.Marker({
         position: location_coordinates,
         map: map,
-        title: location_name,
+        title: location_name_value,
         icon: location_pinImage
     });
-
 
     if(typeof destination_latitude !== 'undefined') {
 
@@ -254,7 +272,7 @@ function moveMap() {
 
     // Moving the map to the marker
     map.panTo(location_coordinates);
-    map.setZoom(12);
+    map.setZoom(17);
 }
 
 /*
@@ -361,7 +379,7 @@ function initAutoGrow() {
 }
 
 function initSelect2() {
-    $("select:not(.blood-type-select)").select2({
+    $("select:not(.blood-type-select):not(.tagsinput)").select2({
         placeholder: "Select One"
     });
 
@@ -380,8 +398,9 @@ function initDateTimePicker() {
 function initTagsInput() {
     $('.tagsinput').tagsinput({
         tagClass: 'tagsinput-tag',
-        trimValue: false,
-        confirmKeys: [13, 32]
+        trimValue: true,
+        allowDuplicates: false,
+        confirmKeys: [32]
     });
 
     $(document).on('beforeItemAdd', '.format-phone.tagsinput', function(event) {
@@ -407,6 +426,22 @@ function initTagsInput() {
     });
 }
 
+function initCheckbox() {
+    $(document).on('click', '.ui-checkbox', function(event) {
+        var checkbox = $(this).find("input");
+        if(checkbox.prop("checked"))
+            checkbox.removeProp("checked").removeAttr("checked");
+        else
+            checkbox.prop("checked", true).attr("checked", true);
+    });
+}
+
+function initAutoSearch() {
+    $(document).on('change', '.auto-search', function(event) {
+        $(this).closest("form").submit();
+    });
+}
+
 /*
 * Helper Functions
 */
@@ -424,13 +459,15 @@ function isJSONString(str) {
 */
 function boot(){
     $(document).ready(function() {
-        setTimeout(initPhonebook, 1000);
+        initPhonebook();
         initSelect2();
         initDateTimePicker();
         initNumberInput();
         initAutoGrow();
         initGenderToggle();
         initTagsInput();
+        initCheckbox();
+        initAutoSearch();
     });
 }
 

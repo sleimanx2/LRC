@@ -36,6 +36,16 @@
             </div> -->
 
             <section id="content" class="animate-fade-up dashboard-content">
+                <?php $success = Session::get('success') ?>
+                @if($success)
+                <script type="text/javascript">
+                    $(document).ready(function() {
+                        toastr.success("", "{{ $success }}", { timeOut: 5000, positionClass: "toast-top-center" });
+                        //swal("", "{{ $success }}", "success");
+                    });
+                </script>
+                @endif
+                
                 @yield('content')
             </section>
         </div>

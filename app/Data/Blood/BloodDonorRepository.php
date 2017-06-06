@@ -102,7 +102,8 @@ class BloodDonorRepository {
             'latitude'        => $data['latitude'],
             'longitude'       => $data['longitude'],
             'gender'          => $data['gender'],
-            'birthday'        => $data['birthday']
+            'birthday'        => $data['birthday'],
+            'note'            => $data['note']
         ];
 
         return $this->bloodDonor->create($data);
@@ -127,6 +128,7 @@ class BloodDonorRepository {
             'longitude'       => $data['longitude'],
             'gender'          => $data['gender'],
             'birthday'        => $data['birthday'],
+            'note'            => $data['note'],
             'incapable_till'  => $data['incapable_till'],
         ];
 
@@ -145,6 +147,17 @@ class BloodDonorRepository {
     {
         $attributes = [
             'incapable_till' => date('Y-m-d', $unixTime)
+        ];
+
+        $donor->fill($attributes);
+
+        return $donor->save();
+    }
+
+    public function updateNotes($notes, BloodDonor $donor)
+    {
+        $attributes = [
+            'note' => $notes
         ];
 
         $donor->fill($attributes);

@@ -25,7 +25,7 @@ class Registrar
         'email'         => 'max:255|unique:users,email',
         'promo'         => 'integer|min:1900',
         'phone_numbers' => 'required',
-        'password'      => 'required|confirmed|min:6',
+        'password'      => 'required|confirmed|min:4',
         'location'      => 'required',
         'latitude'      => 'required',
         'longitude'     => 'required'
@@ -82,17 +82,19 @@ class Registrar
             'longitude'     => $data['longitude']
         ];
 
-        if (isset($data['promo'])) {
+        if (isset($data['promo']))
             $attributes['promo'] = $data['promo'];
-        }
 
-        if (isset($data['note'])) {
+        if (isset($data['note']))
             $attributes['note'] = $data['note'];
-        }
 
-        if (isset($data['email'])) {
+        if (isset($data['email']))
             $attributes['email'] = $data['email'];
-        }
+
+        if (isset($data['is_active']))
+            $attributes['is_active'] = 1;
+        else
+            $attributes['is_active'] = 0;
 
         $user = User::create($attributes);
 
@@ -117,17 +119,19 @@ class Registrar
             'longitude'     => $data['longitude']
         ];
 
-        if (isset($data['promo'])) {
+        if (isset($data['promo']))
             $attributes['promo'] = $data['promo'];
-        }
 
-        if (isset($data['note'])) {
+        if (isset($data['note']))
             $attributes['note'] = $data['note'];
-        }
 
-        if (isset($data['email'])) {
+        if (isset($data['email']))
             $attributes['email'] = $data['email'];
-        }
+
+        if (isset($data['is_active']))
+            $attributes['is_active'] = 1;
+        else
+            $attributes['is_active'] = 0;
 
         $user->fill($attributes);
 

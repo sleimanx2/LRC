@@ -17,7 +17,7 @@ class BloodDonationRequestTableSeeder extends Seeder {
         // Delete Table
         DB::table('blood_donations')->delete();
 
-        $faker = Faker::create();
+        /*$faker = Faker::create();
 
         if ( app()->environment() == 'local' )
         {
@@ -45,7 +45,7 @@ class BloodDonationRequestTableSeeder extends Seeder {
 
                 ));
             }
-        }
+        }*/
 
     }
 

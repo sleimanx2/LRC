@@ -86,6 +86,7 @@
                 </div>
             </div>
         </div>
+        <hr/>
     </div>
     <div class="col-md-6">
         <div class="row">
@@ -100,7 +101,19 @@
             </div>
         </div>
     </div>
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12">
+                <h4>Notes</h4>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    {!! Form::textarea('note', old('note'), ['class' => 'form-control autogrow']) !!}
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <button type="submit" class="btn btn-success m-r-sm">SAVE</button>
-<button class="btn btn-default" type="reset">REVERT CHANGES</button>
+<a href="{{ route('blood-donors-list') }}" class="btn btn-default">CANCEL</a>

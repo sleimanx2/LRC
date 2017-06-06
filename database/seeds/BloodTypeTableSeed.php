@@ -8,9 +8,7 @@ class BloodTypeTableSeeder extends Seeder {
         // Delete Table
         DB::table('blood_types')->delete();
 
-        // Insert some dummy records
         DB::table('blood_types')->insert(array(
-
             array('name' => 'A+'),
             array('name' => 'A-'),
             array('name' => 'B+'),
@@ -19,10 +17,6 @@ class BloodTypeTableSeeder extends Seeder {
             array('name' => 'O-'),
             array('name' => 'AB+'),
             array('name' => 'AB-'),
-
         ));
     }
-
-
-
 }

@@ -1134,6 +1134,10 @@ textarea.input-lg, .form-horizontal .form-group-lg textarea.form-control, .input
   opacity: .65;
   cursor: no-drop; }
 
+.ui-checkbox.ui-block {
+  display: block;
+}
+
 .ui-editor .btn-toolbar {
   margin-bottom: 10px; }
 
@@ -2911,6 +2915,24 @@ fieldset[disabled] .btn-danger.active {
   color: #fff;
   background-color: #272b2f; }
 
+.btn-no-bg {
+  background: none!important;
+  border: none!important;
+  box-shadow: none!important;
+  color: #333!important;
+  padding: 0!important;
+  font-size: 24px;
+}
+
+.btn-no-bg:hover, .btn-no-bg:focus, .btn-no-bg:active, .btn-no-bg.active {
+  color: #888!important;
+}
+
+.btn-no-bg.btn-sm {
+  font-size: 24px!important;
+  line-height: 24px!important;
+}
+
 .btn-direction {
   position: relative;
   border: 0;
@@ -4201,7 +4223,7 @@ fieldset[disabled] .btn-danger.active {
  }
 
  .top-header .dropdown-menu.flipped {
-    left: -254px;
+    left: -175px;
     box-shadow: 3px 3px 3px -1px #eee;
  }
 
@@ -4312,7 +4334,8 @@ fieldset[disabled] .btn-danger.active {
  }
 
  .phonebook-container > .phonebook-sidebar .btn-close,
- .phonebook-container > .phonebook-sidebar .btn-refresh {
+ .phonebook-container > .phonebook-sidebar .btn-refresh,
+ .phonebook-container > .phonebook-sidebar .btn-blood-request {
     position: absolute;
     right: 15px;
     top: 3px;
@@ -4657,11 +4680,26 @@ fieldset[disabled] .btn-danger.active {
 .label-danger[href]:hover, .label-danger[href]:focus {
   background-color: #e24f25; }
 
+.label-none {
+  background-color: #d1d1d1; }
+
 .label {
   padding: .5em .8em; }
 
 .label-info-alt {
   background: #8170ca; }
+
+.label-no-bg {
+  background: none; }
+
+.label-log-contact {
+  background: #8170ca; }
+
+.label-log-hospital {
+  background: #ca707c; }
+
+.label-log-donor {
+  background: #5cb393; }
 
 a.list-group-item.active > .badge, .nav-pills > .active > a > .badge {
   color: #333;
@@ -7485,12 +7523,16 @@ label {
   width: 100%!important;
 }
 
+.select2-fixed-width + .select2-container {
+  width: 190px!important;
+}
+
 .select2-container--default .select2-results>.select2-results__options {
   max-height: 260px;
 }
 
 .select2-selection {
-  background: none!important;
+  background: white!important;
   border-radius: 0!important;
   border-color: #cbd5dd!important;
   height: 34px!important;
@@ -7499,6 +7541,36 @@ label {
   -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
   -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
   transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+.select2-selection.select2-selection--multiple {
+    min-height: 34px;
+    height: initial!important;
+    line-height: initial!important;
+}
+
+.select2-selection.select2-selection--multiple .select2-selection__choice {
+    padding: 2px 8px;
+    background-color: #555;
+    border: none;
+    border-radius: 3px;
+    color: white;
+    font-size: 13px;
+}
+
+.select2-selection.select2-selection--multiple .select2-selection__choice__remove {
+    color: white;
+    margin-right: 7px;
+}
+.select2-selection.select2-selection--multiple .select2-selection__choice__remove:hover {
+    color: #aaa;
+}
+
+.select2-selection.select2-selection--multiple .select2-search.select2-search--inline {
+    line-height: 24px;
+}
+.select2-selection.select2-selection--multiple .select2-search.select2-search--inline .select2-search__field {
+    padding-left: 5px;
 }
 
 .select2-container--focus .select2-selection,
@@ -7615,10 +7687,46 @@ label {
 }
 
 .dashboard-content .phonebook-container .btn-refresh {
+  right: 65px;
+}
+
+.dashboard-content .phonebook-container .btn-blood-request {
   right: 15px;
 }
 
 .dashboard-content .phonebook-container .phonebook-sidebar {
   right: 0;
   width: 100%;
+}
+
+.bootstrap-tagsinput {
+  border-radius: 0;
+  padding-bottom: 0;
+  padding-top: 5px;
+  border: 1px solid #dce1e4;
+  display: block;
+  box-shadow: none!important;
+  min-height: 34px;
+}
+
+.bootstrap-tagsinput .tagsinput-tag {
+  background: #555;
+  padding: 0px 8px;
+  font-size: 13px;
+  border-radius: 3px;
+  margin-bottom: 5px;
+  display: inline-block!important;
+}
+
+.bootstrap-tagsinput .tagsinput-tag [data-role="remove"] {
+  margin-left: 0;
+  margin-right: 7px;
+  vertical-align: initial;
+  line-height: 22px;
+  float: left;
+}
+
+.bootstrap-tagsinput .tagsinput-tag [data-role="remove"]:after {
+  content: "\00d7";
+  padding: 0px 
 }

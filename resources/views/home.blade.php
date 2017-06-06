@@ -16,32 +16,53 @@
                     <span class="pull-right badge badge-primary">Total : {{$totalBloodDonors}}</span>
                 </h4>
 
+                <canvas id="bloodDonorStatsChart" height="180" style="margin-left: -18px"></canvas>
 
-                @foreach($bloodTypes as $bloodType)
-                    <?php $bloodDonorsCount = $bloodType->blood_donors_count(); ?>
-                    <div>
-                        <p class="text-muted medium">
-                            <span class="badge">{{$bloodDonorsCount}}</span> {{$bloodType->name}}
+                <ul class="list-unstyled list-inline text-center m-t-sm">
+                  @foreach($bloodTypes as $index => $bloodType)
+                  <li>
+                    <span class="label" style="display: inline-block;  background-color: rgba(205, 32, 38, {{ 1 - ($index * 0.05) }});">{{ $bloodType->name }}
+                      <p style="margin: 0; margin-top: 5px; font-size: 14px">{{ $bloodType->blood_donors_count() }}</p>
+                    </span>
+                  </li>
+                  @endforeach
+                </ul>
 
-                            <span class="pull-right">{{ round(@($bloodDonorsCount / $totalBloodDonors)*100)}}
-                                %</span>
-                        </p>
+                <script>
+                  var chart = document.getElementById("bloodDonorStatsChart").getContext("2d");
+                  var chartData = [
+                      @foreach($bloodTypes as $index => $bloodType)
+                      {
+                          value: {{ $bloodType->blood_donors_count() }},
+                          color: "rgba(205, 32, 38, {{ 1 - ($index * 0.05) }})",
+                          highlight: "#8c1014",
+                          label: "{{ $bloodType->name }}"
+                      },
+                      @endforeach
+                  ];
 
-
-                      <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="{{ @($bloodDonorsCount / $totalBloodDonors)*100}}"
-                        aria-valuemin="0" aria-valuemax="100" style="width:{{ @($bloodDonorsCount / $totalBloodDonors)*100}}%">
-                          <span class="sr-only">{{ @($bloodDonorsCount / $totalBloodDonors)*100}}% Complete</span>
-                        </div>
-                      </div>
-                    </div>
-                    <br>
-                @endforeach
-
+                  var bloodDonorStatsChart = new Chart(chart).Doughnut(chartData,{
+                      segmentShowStroke : true,
+                      segmentStrokeColor : "#fff",
+                      segmentStrokeWidth : 1,
+                      animationSteps : 100,
+                      animationEasing : "easeOutBounce",
+                      animateRotate : true,
+                      animateScale : false,
+                      responsive: true,
+                      showTooltips: true,
+                      tooltipTemplate: "<%= label %>",
+                      onAnimationComplete: function() {
+                          this.showTooltip(this.segments, true); 
+                      },
+                      tooltipEvents: [],
+                      tooltipFontSize: 10,
+                  });
+                </script>
             </div>
             <div class="col-lg-4 col-xsm-6 panel-body">
                 <h4>
-                    Remaining Blood Request
+                    Remaining Blood Requests
                 </h4>
                 @if(! $remainingBloodRequests->isEmpty())
                     <ul class="list-group">
@@ -55,7 +76,7 @@
                          <a class="btn btn-bordered-warning btn-xs"
                             href="{{ route('blood-request-rescue',[$remainingBloodRequest->id]) }}"
                             popover="Rescue"
-                            popover-trigger="mouseenter">
+                            popover-trigger="mouseenter" title="Rescue">
 
                              <i class="fa fa-life-ring"></i>
 
@@ -72,7 +93,7 @@
             </div>
             <div class="col-lg-4 col-xsm-6 panel-body">
                 <h4>
-                    Remaining Unconfirmed Blood Request
+                    Unconfirmed Blood Requests
                 </h4>
                 @if(! $remainingUnconfirmedBloodRequests->isEmpty())
                     <ul class="list-group">
@@ -84,7 +105,7 @@
                            <a class="btn btn-bordered-warning btn-xs"
                               href="{{ route('blood-request-rescue',[$remainingBloodRequest->id]) }}"
                               popover="Rescue"
-                              popover-trigger="mouseenter">
+                              popover-trigger="mouseenter" title="Rescue">
                                <i class="fa fa-life-ring"></i>
                            </a>
                           </span>

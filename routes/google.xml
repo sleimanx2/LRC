@@ -1,0 +1,1047 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<Placemark>
+		<name>American University of Beirut Medical Center</name>
+		<styleUrl>#msn_ylw-pushpin</styleUrl>
+		<Point>
+			<coordinates>35.48582385166365,33.89764685205973</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Makassed Hospital</name>
+		<Point>
+			<coordinates>35.5040952,33.8753021</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Rafic Hariri University Hospital</name>
+		<styleUrl>#msn_ylw-pushpin</styleUrl>
+		<Point>
+			<coordinates>35.49083024377678,33.86367845006377</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Najjar Hospital</name>
+		<Point>
+			<coordinates>35.4867246,33.8968158</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Beirut Hospital</name>
+		<styleUrl>#msn_ylw-pushpin</styleUrl>
+		<Point>
+			<coordinates>35.49181058130887,33.87252845219628</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Zahraa Hospital</name>
+		<Point>
+			<coordinates>35.4868211,33.8640184</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Fouad Khoury Hospital</name>
+		<styleUrl>#failed4</styleUrl>
+		<Point>
+			<coordinates>35.484137,33.898572</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Haidar Hospital</name>
+		<styleUrl>#mfailed0</styleUrl>
+		<Point>
+			<coordinates>35.50416017387824,33.882042</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Trad Hospital</name>
+		<Point>
+			<coordinates>35.4918642,33.8968361</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Bakhaazy Hospital</name>
+		<Point>
+			<coordinates>35.4841872,33.898572</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Clemenceau Medical Center</name>
+		<Point>
+			<coordinates>35.4902233,33.8976822</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Mother And Baby Care Hospital</name>
+		<styleUrl>#mfailed0</styleUrl>
+		<Point>
+			<coordinates>35.485755,33.887574</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Hotel Dieu De France</name>
+		<Point>
+			<coordinates>35.5195856,33.8820289</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>St. Georges Hospital</name>
+		<Point>
+			<coordinates>35.523659,33.8937793</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Rizk Hospital</name>
+		<Point>
+			<coordinates>35.515033,33.885264</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Geitawi Hospital</name>
+		<styleUrl>#mfailed0</styleUrl>
+		<Point>
+			<coordinates>35.53072985711945,33.89385849682657</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Rosair Hospital</name>
+		<Point>
+			<coordinates>35.5148936,33.8956004</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Karantina Hospital</name>
+		<Point>
+			<coordinates>35.5305653,33.9019162</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Mouarbess Hospital</name>
+		<Point>
+			<coordinates>35.5189565,33.8729757</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Notre Dame de Lourdes Hospital</name>
+		<styleUrl>#mfailed0</styleUrl>
+		<Point>
+			<coordinates>35.518,33.8698</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Mont Liban Hospital</name>
+		<Point>
+			<coordinates>35.528157,33.859782</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Hayat Hospital</name>
+		<Point>
+			<coordinates>35.5252089,33.8578028</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Hayek Hospital</name>
+		<Point>
+			<coordinates>35.5378376,33.8704316</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Hopital Libano-Canadien</name>
+		<Point>
+			<coordinates>35.53509,33.8720506</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Hopital Militaire</name>
+		<Point>
+			<coordinates>35.5133743,33.8743011</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Levant Hospital</name>
+		<Point>
+			<coordinates>35.540522,33.871417</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Sahel Hospital</name>
+		<Point>
+			<coordinates>35.5035767,33.8580307</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Bahman Hospital</name>
+		<Point>
+			<coordinates>35.5059181,33.8535447</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Haifa Hospital</name>
+		<styleUrl>#default</styleUrl>
+		<Point>
+			<coordinates>35.50209494206338,33.846598</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Bourj / Khansa Hospital</name>
+		<styleUrl>#mfailed0</styleUrl>
+		<Point>
+			<coordinates>35.5091,33.8428</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Rassoul Al Aazam Hospital</name>
+		<Point>
+			<coordinates>35.4988016,33.8439832</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Hopital Notre Dame De Liban</name>
+		<Point>
+			<coordinates>35.6277894,33.9816965</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>St. Louis Hospital</name>
+		<styleUrl>#mfailed0</styleUrl>
+		<Point>
+			<coordinates>35.64055990484003,33.99310976619979</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>St. Georges Ajaltoun Hospital</name>
+		<Point>
+			<coordinates>35.6875976,33.960177</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Hajj Hospital</name>
+		<Point>
+			<coordinates>35.715049,33.988855</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Bouar Hospital</name>
+		<Point>
+			<coordinates>35.6483747,34.0449889</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Kortbawy Hospital</name>
+		<Point>
+			<coordinates>35.6485369,34.0198089</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Serhal Hospital</name>
+		<Point>
+			<coordinates>35.6084525,33.9150837</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>The Middle East Institute Of Health</name>
+		<Point>
+			<coordinates>35.5976281,33.9043464</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Saydeh Hospital</name>
+		<styleUrl>#mfailed0</styleUrl>
+		<Point>
+			<coordinates>35.58757879680601,33.91036287003821</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Eye And Ear Hospital</name>
+		<Point>
+			<coordinates>35.5915513,33.9270213</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Beit Chabeb Hospital</name>
+		<styleUrl>#mfailed0</styleUrl>
+		<Point>
+			<coordinates>35.67526976878305,33.93237575853897</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Bhannes Hospital</name>
+		<Point>
+			<coordinates>35.6562684,33.9051867</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Dahr Al Bashek Hospital</name>
+		<Point>
+			<coordinates>35.5990884,33.8830158</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Bellevue Medical Center</name>
+		<Point>
+			<coordinates>35.5595111,33.8479225</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Hopital Notre Dame De Secours</name>
+		<Point>
+			<coordinates>35.6589982,34.128076</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Hopital Notre Dame Martine</name>
+		<Point>
+			<coordinates>35.6525717,34.1157158</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>St. Michel Hospital</name>
+		<styleUrl>#mfailed0</styleUrl>
+		<Point>
+			<coordinates>35.64591785122862,34.14407619958137</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Abou Jawdeh Hospital</name>
+		<styleUrl>#mfailed0</styleUrl>
+		<Point>
+			<coordinates>35.581423,33.907222</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Arz Hospital</name>
+		<Point>
+			<coordinates>35.5731811,33.8991427</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Haroun Hospital</name>
+		<Point>
+			<coordinates>35.5719408,33.9007598</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>St. Joseph Hospital</name>
+		<Point>
+			<coordinates>35.5545545,33.8930318</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Hopital De La Croix</name>
+		<Point>
+			<coordinates>35.5849167,33.9010989</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Bitar Hospital</name>
+		<Point>
+			<coordinates>35.5604673,33.8794724</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>St. Jean Hospital</name>
+		<styleUrl>#mfailed0</styleUrl>
+		<Point>
+			<coordinates>35.5625,33.8784</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Al Jabal Hospital</name>
+		<styleUrl>#mfailed0</styleUrl>
+		<Point>
+			<coordinates>35.72226951723686,33.84599289898441</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Hamlin Hospital</name>
+		<styleUrl>#mfailed0</styleUrl>
+		<Point>
+			<coordinates>35.718802,33.819723</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Hopital Libano Francais</name>
+		<Point>
+			<coordinates>35.912482,33.833433</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Khoury Hospital</name>
+		<Point>
+			<coordinates>35.8956661,33.8528991</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Tell Shiha Hospital</name>
+		<Point>
+			<coordinates>35.9055648,33.8407536</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Khatib Hospital</name>
+		<Point>
+			<coordinates>35.9210535,33.8448209</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Elias Hraoui Governmental Hospital</name>
+		<styleUrl>#mfailed0</styleUrl>
+		<Point>
+			<coordinates>35.9185,33.8431</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Rayak Hospital</name>
+		<styleUrl>#mfailed0</styleUrl>
+		<Point>
+			<coordinates>36.01095941029289,33.86395720970292</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Temnine Hospital</name>
+		<Point>
+			<coordinates>35.9977829,33.8718971</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Mayss Hospital</name>
+		<styleUrl>#mfailed0</styleUrl>
+		<Point>
+			<coordinates>35.854,33.8144</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Bekaa Hospital</name>
+		<styleUrl>#mfailed0</styleUrl>
+		<Point>
+			<coordinates>35.86810365988546,33.80802898432913</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Chtoura Hospital</name>
+		<Point>
+			<coordinates>35.8588406,33.8193064</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Eben Sina Hospital</name>
+		<styleUrl>#mfailed0</styleUrl>
+		<Point>
+			<coordinates>36.1968568,34.027585</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Baalbeck Governmental Hospital</name>
+		<styleUrl>#mfailed0</styleUrl>
+		<Point>
+			<coordinates>36.213784,33.9990124</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Tatary Hospital</name>
+		<styleUrl>#mfailed0</styleUrl>
+		<Point>
+			<coordinates>36.20559757382614,34.01072839581698</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Al Ahly Hospital</name>
+		<styleUrl>#failed1</styleUrl>
+		<Point>
+			<coordinates>36.1475,33.978056</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Al Mortada Hospital</name>
+		<styleUrl>#mfailed</styleUrl>
+		<Point>
+			<coordinates>36.1742,33.9916</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Ablahh Hospital</name>
+		<styleUrl>#default</styleUrl>
+		<Point>
+			<coordinates>35.97277164507944,33.86732495077401</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Rayan Hospital</name>
+		<styleUrl>#default</styleUrl>
+		<Point>
+			<coordinates>36.19576619061706,34.0268634135948</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Dar El Hekma Hospital</name>
+		<styleUrl>#default</styleUrl>
+		<Point>
+			<coordinates>36.19066561228679,34.03805268933189</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Dar El Amal University Hospital</name>
+		<Point>
+			<coordinates>36.1612235,33.9836901</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Farhat Hospital</name>
+		<Point>
+			<coordinates>35.8039285,33.6298455</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>El Assy Hospital</name>
+		<styleUrl>#default</styleUrl>
+		<Point>
+			<coordinates>36.38537962038706,34.39578820561943</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Hermel Governmental Hospital</name>
+		<styleUrl>#default</styleUrl>
+		<Point>
+			<coordinates>36.3833038,34.39593</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Batoul Hospital</name>
+		<styleUrl>#default</styleUrl>
+		<Point>
+			<coordinates>36.4246032,34.3819052</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Universal Hospital</name>
+		<styleUrl>#default</styleUrl>
+		<Point>
+			<coordinates>36.4003467,34.2689932</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Al Atibaa Hospital</name>
+		<styleUrl>#default</styleUrl>
+		<Point>
+			<coordinates>35.87803185657831,33.64665752564504</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Bahmad Hospital</name>
+		<styleUrl>#default</styleUrl>
+		<Point>
+			<coordinates>35.83429211599731,33.52570237986163</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Rachaya Governmental Hospital</name>
+		<Point>
+			<coordinates>35.8271523,33.5095991</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Hammoud Hospital</name>
+		<styleUrl>#default</styleUrl>
+		<Point>
+			<coordinates>35.37605201850976,33.55981652179091</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Labib Hospital</name>
+		<Point>
+			<coordinates>35.3738319,33.5560725</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Dalaa Hospital</name>
+		<Point>
+			<coordinates>35.377547,33.5571728</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Cheaib Hospital</name>
+		<styleUrl>#default</styleUrl>
+		<Point>
+			<coordinates>35.36864627019695,33.55080420305237</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Al Raai Hospital</name>
+		<styleUrl>#default</styleUrl>
+		<Point>
+			<coordinates>35.362262,33.532167</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Elia Hospital</name>
+		<styleUrl>#default</styleUrl>
+		<Point>
+			<coordinates>35.37955,33.56295</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Nakib Hospital</name>
+		<Point>
+			<coordinates>35.3897272,33.5663125</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Hajj Jiyeh Hospital</name>
+		<styleUrl>#default</styleUrl>
+		<Point>
+			<coordinates>35.41990450350626,33.66281961646907</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Hamshary Hospital</name>
+		<Point>
+			<coordinates>35.3975285,33.542986</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Kassab Hospital</name>
+		<Point>
+			<coordinates>35.3916391,33.5687435</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Al Chab Nabih Hospital</name>
+		<styleUrl>#default</styleUrl>
+		<Point>
+			<coordinates>35.37138,33.55889</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Kods Hospital</name>
+		<styleUrl>#default</styleUrl>
+		<Point>
+			<coordinates>35.3864,33.5504</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Osseiran Hospital</name>
+		<styleUrl>#default</styleUrl>
+		<Point>
+			<coordinates>35.36986,33.55336</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Saida Governmental Hospital</name>
+		<Point>
+			<coordinates>35.3819086,33.5458082</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Jezzine Hospital</name>
+		<Point>
+			<coordinates>35.580872,33.538286</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Alaa Eddine Hospital</name>
+		<Point>
+			<coordinates>35.2893823,33.4597435</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Kharroubi Hospital</name>
+		<styleUrl>#default</styleUrl>
+		<Point>
+			<coordinates>35.2867,33.4531</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Nabatieh Hospital</name>
+		<Point>
+			<coordinates>35.4828307,33.3897372</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Al Janoub Hospital</name>
+		<Point>
+			<coordinates>35.4821723,33.3773755</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Ghandour Hospital</name>
+		<styleUrl>#default</styleUrl>
+		<Point>
+			<coordinates>35.4842,33.376</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Fanar Hospital</name>
+		<styleUrl>#default</styleUrl>
+		<Point>
+			<coordinates>35.38566,33.46178</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Al Najdeh Al Chaabieh Hospital</name>
+		<styleUrl>#default</styleUrl>
+		<Point>
+			<coordinates>35.49033615621847,33.39288052612063</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Ragheb Harb Hospital</name>
+		<styleUrl>#default</styleUrl>
+		<Point>
+			<coordinates>35.4457,33.39</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Hopital Islamique</name>
+		<styleUrl>#default</styleUrl>
+		<Point>
+			<coordinates>35.8366,34.4395</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Nini Hospital</name>
+		<Point>
+			<coordinates>35.8305423,34.4355955</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Mazloum Hospital</name>
+		<Point>
+			<coordinates>35.8326432,34.4319542</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Mounla Hospital</name>
+		<Point>
+			<coordinates>35.8299522,34.440845</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Haykal Hospital</name>
+		<Point>
+			<coordinates>35.832097,34.4123961</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Al Salam Hospital</name>
+		<Point>
+			<coordinates>35.8269318,34.4214453</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Husseini Hospital</name>
+		<styleUrl>#default</styleUrl>
+		<Point>
+			<coordinates>35.82152,34.44702</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Al Oumahat Hospital</name>
+		<styleUrl>#default</styleUrl>
+		<Point>
+			<coordinates>35.83401,34.44411</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Melki Hospital</name>
+		<styleUrl>#default</styleUrl>
+		<Point>
+			<coordinates>35.83002,34.44638</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Chahine Hospital</name>
+		<styleUrl>#default</styleUrl>
+		<Point>
+			<coordinates>35.8167,34.4483</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Al Bissar Hospital</name>
+		<Point>
+			<coordinates>35.8355691,34.4394162</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Al Zahraa Hospital</name>
+		<styleUrl>#default</styleUrl>
+		<Point>
+			<coordinates>35.85371,34.44256</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Tripoli Governmental Hospital</name>
+		<Point>
+			<coordinates>35.8602605,34.4374228</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Hanan Al Khayri Hospital</name>
+		<styleUrl>#default</styleUrl>
+		<Point>
+			<coordinates>35.83434,34.44321</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Dounnieh Governmental Hospital</name>
+		<styleUrl>#default</styleUrl>
+		<Point>
+			<coordinates>36.00861981103954,34.38249439942173</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Orange Nasso Hospital</name>
+		<Point>
+			<coordinates>35.8385829,34.4425827</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Batroun Hospital</name>
+		<Point>
+			<coordinates>35.6660325,34.2513465</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Tannourine Hospital</name>
+		<Point>
+			<coordinates>35.860967,34.2126769</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Koura Hospital</name>
+		<Point>
+			<coordinates>35.837859,34.3487073</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Bourji Hospital</name>
+		<styleUrl>#default</styleUrl>
+		<Point>
+			<coordinates>35.8221,34.2989</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>CHN Hospital</name>
+		<Point>
+			<coordinates>35.8983096,34.3695236</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Hopital Notre Dame De Zgharta</name>
+		<styleUrl>#default</styleUrl>
+		<Point>
+			<coordinates>35.8933,34.39888</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Al Rahban Hospital</name>
+		<styleUrl>#default</styleUrl>
+		<Point>
+			<coordinates>35.87317,34.41162</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Ehden Hospital</name>
+		<Point>
+			<coordinates>36.0105271,34.2500643</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>El Youssef Medical Center</name>
+		<styleUrl>#default</styleUrl>
+		<Point>
+			<coordinates>36.0724105,34.542908</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Rahal Hospital</name>
+		<Point>
+			<coordinates>36.0788952,34.549991</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Halba Governmental Hospital</name>
+		<styleUrl>#default</styleUrl>
+		<Point>
+			<coordinates>36.0935829,34.535182</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Khayr Hospital</name>
+		<Point>
+			<coordinates>35.9403741,34.482616</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Notre Dame De La Paix Hospital</name>
+		<styleUrl>#default</styleUrl>
+		<Point>
+			<coordinates>36.2698,34.57143</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>St. Charles Hospital</name>
+		<Point>
+			<coordinates>35.5506849,33.8445329</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Sacre Coeur Hospital</name>
+		<Point>
+			<coordinates>35.5389213,33.8497447</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Baabda Governmental Hospital</name>
+		<styleUrl>#default</styleUrl>
+		<Point>
+			<coordinates>35.53833,33.83497</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>St. Therese Hospital</name>
+		<styleUrl>#default</styleUrl>
+		<Point>
+			<coordinates>35.5274665,33.8448722</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>St. Georges Baabda Hospital</name>
+		<styleUrl>#default</styleUrl>
+		<Point>
+			<coordinates>35.52753,33.83687</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Ghoussain Hospital</name>
+		<styleUrl>#default</styleUrl>
+		<Point>
+			<coordinates>35.54023,33.85432</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Iman Hospital</name>
+		<styleUrl>#default</styleUrl>
+		<Point>
+			<coordinates>35.61292,33.81083</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>National Hospital</name>
+		<styleUrl>#default</styleUrl>
+		<Point>
+			<coordinates>35.59546,33.80614</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Al Ouyoun Hospital</name>
+		<styleUrl>#default</styleUrl>
+		<Point>
+			<coordinates>35.60257,33.80943</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Aazounieh Hospital</name>
+		<styleUrl>#default</styleUrl>
+		<Point>
+			<coordinates>35.70514,33.77262</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Ain Wa Zain Hospital</name>
+		<Point>
+			<coordinates>35.6106573,33.6807617</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Baakline Hospital</name>
+		<styleUrl>#default</styleUrl>
+		<Point>
+			<coordinates>35.5739884,33.678694</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Aarfan Hospital</name>
+		<Point>
+			<coordinates>35.5924987,33.6752996</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Mazboud Hospital</name>
+		<Point>
+			<coordinates>35.4724178,33.6140394</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Outhman Hospital</name>
+		<Point>
+			<coordinates>35.4650839,33.6139471</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Al Shehar Hospital</name>
+		<styleUrl>#default</styleUrl>
+		<Point>
+			<coordinates>35.5449,33.7529</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Jounblat Hospital</name>
+		<styleUrl>#default</styleUrl>
+		<Point>
+			<coordinates>35.5167,33.8167</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Bashour Hospital</name>
+		<styleUrl>#default</styleUrl>
+		<Point>
+			<coordinates>35.19503,33.273</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Jabal Aamel Hospital</name>
+		<Point>
+			<coordinates>35.2181725,33.2783662</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Najem Hospital</name>
+		<styleUrl>#default</styleUrl>
+		<Point>
+			<coordinates>35.22439,33.25346</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Sour Governmental Hospital</name>
+		<styleUrl>#default</styleUrl>
+		<Point>
+			<coordinates>35.21375,33.27423</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Hiram Hospital</name>
+		<Point>
+			<coordinates>35.2228761,33.2819113</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Tebnine Hospital</name>
+		<styleUrl>#default</styleUrl>
+		<Point>
+			<coordinates>35.4155579,33.1968471</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Marjeyoun Hospital</name>
+		<Point>
+			<coordinates>35.4300335,33.130578</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Bint Jbeil Hospital</name>
+		<Point>
+			<coordinates>35.4356524,33.12751</coordinates>
+		</Point>
+	</Placemark>
+</root>

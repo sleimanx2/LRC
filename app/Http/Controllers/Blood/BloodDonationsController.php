@@ -88,6 +88,8 @@ class BloodDonationsController extends Controller {
 
         $this->bloodDonorRepository->postponeDuty($data['delay'], $bloodDonor);
 
+        $this->bloodDonorRepository->updateNotes($data['note'], $bloodDonor);
+
         $this->bloodDonationRepository->destroyRelatedDonation($bloodDonor->id, $bloodRequest->id);
 
         $this->bloodRequestRepository->updateBloodStatistics($bloodRequest);

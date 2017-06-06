@@ -27,7 +27,9 @@
                         !!}
                         @include('forms.blood.donor')
                         {!! Form::close(); !!}
+
                         <hr/>
+
                         {!!Form::open([
                         'method'=>'delete',
                         'route'=>['blood-donor-destroy',$bloodDonor->id],

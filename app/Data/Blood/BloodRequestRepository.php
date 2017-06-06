@@ -135,6 +135,26 @@ class BloodRequestRepository {
 
         $bloodRequest->save();
 
+        $this->updateBloodStatistics($bloodRequest);
+    }
+
+    /**
+     * @param $data
+     * @param BloodRequest $bloodRequest
+     */
+    public function appendCallLog($data)
+    {
+        $attributes = [
+            'user_id'            => $data['user_id'],
+            'blood_request_id'     => $data['blood_request_id'],
+            'donor_id'     => $data['donor_id'],
+            'call_type' => $data['call_type'],
+        ];
+
+        $callLog = new BloodRequestCallLog;
+        $callLog->fill($attributes);
+
+        $callLog->save();
     }
 
     /**

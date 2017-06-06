@@ -48,6 +48,7 @@
                                 <a class="btn btn-info btn-sm" href="{{ route('blood-donor-edit',[$bloodDonor->id]) }}"
                                    popover="Edit" popover-trigger="mouseenter"><i
                                             class="fa fa-edit "></i></a>
+                                {{--
                                 {!! Form::open([
                                 'method'=>'delete',
                                 'route'=>['blood-donor-destroy',$bloodDonor->id],
@@ -60,7 +61,7 @@
                                             class="fa fa-remove"></i>
                                 </button>
 
-                                {!!Form::close()!!}
+                                {!!Form::close()!!} --}}
 
                                 <script type="text/javascript">
                                   $("#delete-donor-{{ $bloodDonor->id }}").click(function(e){

@@ -26,6 +26,7 @@ elixir(function (mix) {
             'vendor/autogrow/jquery.autogrow.min.js',
             'vendor/toastr/toastr.min.js',
             'vendor/tagsinput/tagsinput.js',
+            'vendor/chartjs/chart.min.js',
             'main.js',
         ],
         'resources/assets',

@@ -56,9 +56,9 @@
                         </fieldset>
                     </form>
 
-                    <section>
+                   <!--  <section>
                         <p class="text-center"><a href="/password/email">Forgot your password?</a></p>
-                    </section>
+                    </section> -->
 
                 </div>
             </div>

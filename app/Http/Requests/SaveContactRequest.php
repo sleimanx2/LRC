@@ -23,17 +23,16 @@ class SaveContactRequest extends Request {
     {
         $rules = [
             'name'            => 'required|max:255|min:2|unique:contacts,name',
-            'phone_primary'   => 'required|min:8|max:8',
-            'phone_secondary' => 'min:8|max:8',
-            'location'        => 'required',
-            'latitude'        => 'required',
-            'longitude'       => 'required',
+            'phone_numbers'   => 'required',
+            // 'location'        => 'required',
+            // 'latitude'        => 'required',
+            // 'longitude'       => 'required',
             'category_id'     => 'required'
         ];
 
         if ( $this->route()->getName() == 'contact-update')
         {
-            $rules['name'] = $rules['name'].','.$this->route()->getParameter('id');
+            $rules['name'] = $rules['name'].','.$this->route('id');
         }
 
         return $rules;
@@ -43,10 +42,10 @@ class SaveContactRequest extends Request {
     {
         return [
                 'category_id.required' => 'You should provide a valid category',
-                'location.required'    => 'Location not found',
-                'latitude.required'    => 'We cant find latitude or longitude',
-                'longitude.required'   => 'Make sure you select a valid suggested location',
-                'longitude.required'   => 'Make sure you select a valid suggested location'
+                // 'location.required'    => 'Location not found',
+                // 'latitude.required'    => 'We cant find latitude or longitude',
+                // 'longitude.required'   => 'Make sure you select a valid suggested location',
+                // 'longitude.required'   => 'Make sure you select a valid suggested location'
         ];
     }
 

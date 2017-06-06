@@ -16,7 +16,7 @@ class BloodRequestTableSeeder extends Seeder {
         // Delete Table
         DB::table('blood_requests')->delete();
 
-        $faker = Faker::create();
+        /*$faker = Faker::create();
 
         if ( app()->environment() == 'local' )
         {
@@ -26,7 +26,7 @@ class BloodRequestTableSeeder extends Seeder {
             $hospitalId = $contactCategories['Hospital'];
 
             $contacts   = Contact::where('category_id', '=', $hospitalId)->pluck('id');
-            $users      = User::pluck('id');
+            $users      = User::where('is_active', 1)->pluck('id');
             $bloodTypes = BloodType::pluck('id');
 
             $genders = ['male', 'female'];
@@ -75,7 +75,7 @@ class BloodRequestTableSeeder extends Seeder {
 
                 ));
             }
-        }
+        }*/
 
     }
 

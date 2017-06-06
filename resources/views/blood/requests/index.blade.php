@@ -4,7 +4,7 @@
 <div class="clearfix">
     <h5 class="page-title">Blood Requests</h5>
     <ul class="list-unstyled toolbar pull-right">
-        <li><a href="" class="btn btn-action btn-success" data-toggle="modal" data-target="#modalAddBloodRequest"><i class="fa fa-plus"></i>&nbsp;&nbsp;Blood Request</a></li>
+        <li><a href="" class="btn btn-action btn-success" data-toggle="modal" data-target="#modalAddBloodRequest"><i class="fa fa-plus"></i>&nbsp;&nbsp;Create Blood Request</a></li>
         <li>
             <form class="form-inline ng-pristine ng-valid" role="form" method="GET" action="{{ route('blood-requests-list') }}">
                 <div class="form-group">
@@ -54,7 +54,7 @@
                                     {{$bloodRequest->platelets_quantity_confirmed}} / {{$bloodRequest->platelets_quantity}}
                                 </span>
                             </td>
-                            <td>{{$bloodRequest->blood_bank->name or 'Not assigned' }}</td>
+                            <td>{{$bloodRequest->blood_bank->name_fmt or 'Not assigned' }}</td>
                             <td>
                                 <span class="badge {{$bloodRequest->due_date == date('Y-m-d',time()) ? 'badge-warning' : ''}} {{$bloodRequest->due_date < date('Y-m-d',time()) ? 'badge-danger' : 'badge-success'}}">
                                       {{$bloodRequest->due_date}}
@@ -62,17 +62,13 @@
                             </td>
                             <td>
                                 <a class="btn btn-bordered-warning btn-sm"
-                                   href="{{ route('blood-request-rescue',[$bloodRequest->id]) }}" popover="Rescue"
-                                   popover-trigger="mouseenter">
-
-                                    <i class="fa fa-life-ring"></i>
-
-                                </a>
-                                <a class="btn btn-info btn-sm"
+                                   href="{{ route('blood-request-rescue',[$bloodRequest->id]) }}">Rescue</a>
+                                <!-- <a class="btn btn-info btn-sm"
                                    href="{{ route('blood-request-edit',[$bloodRequest->id]) }}" popover="Edit"
                                    popover-trigger="mouseenter">
                                     <i class="fa fa-edit "></i>
-                                </a>
+                                </a> -->
+                                {{--
                                 {!! Form::open([
                                 'method'=>'delete',
                                 'route'=>['blood-request-destroy',$bloodRequest->id],
@@ -85,7 +81,7 @@
                                             class="fa fa-remove"></i>
                                 </button>
 
-                                {!!Form::close()!!}
+                                {!!Form::close()!!} --}}
                                 <script type="text/javascript">
                                   $("#delete-request-{{ $bloodRequest->id }}").click(function(e){
                                     swal({
