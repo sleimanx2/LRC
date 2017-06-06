@@ -184,6 +184,7 @@
                     <strong><i class="fa fa-address-book panel-ico"></i>Call Logs</strong>
                 </div>
                 <div class="panel-body">
+                    @if($callLogs->count())
                     <table class="table">
                         <thead>
                             <th>Call Type</th>
@@ -206,6 +207,9 @@
                             @endforeach
                         </tbody>
                     </table>
+                    @else
+                    <p class="text-center"><i>No calls made for this request yet.</i></p>
+                    @endif
                 </div>
             </div>
         </div>
