@@ -1,7 +1,10 @@
 <?php namespace LRC\Http\Controllers\Blood;
 
+use DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Http\Request;
+use LRC\Data\Blood\BloodDonor;
 use LRC\Data\Blood\BloodDonorRepository;
 use LRC\Data\Blood\BloodTypeRepository;
 use LRC\Http\Requests;
@@ -126,6 +129,43 @@ class BloodDonorsController extends Controller {
         return redirect()->intended(route('blood-donors-list'))->with('success', $bloodDonor->first_name . ' ' . $bloodDonor->last_name . ' was deleted successfully updated');
 
 
+    }
+
+    /**
+     * Returns list of donors in JSON format for search.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        $donors_columns = [DB::raw("concat(first_name, ' ', last_name)"), 'phone_primary', 'phone_secondary'];
+
+        $term = str_replace(' ', '.*', trim($request->term));
+
+        $donors = BloodDonor::where(function ($q) use ($donors_columns, $term) {
+            foreach ($donors_columns as $index => $column) {
+                $q->orWhere($column, 'regexp', "{$term}");
+            }
+        })->get();
+
+        $result = array();
+
+        foreach($donors as $donor) {
+            $item["id"] = $donor->id;
+            $item["gender"] = $donor->gender;
+            $item["golden"] = $donor->golden_donor;
+            $item["name"] = $donor->first_name . " " . $donor->last_name;
+            $item["age"] = floor((time() - strtotime($donor->birthday))/31556926);
+            $item["phone"] = $donor->phone_numbers;
+            $item["phone_primary"] = $donor->phone_primary;
+            $item["phone_secondary"] = $donor->phone_secondary;
+            $item["location"] = $donor->location;
+            $item["notes"] = nl2br($donor->note);
+
+            array_push($result, $item);
+        }
+
+        return json_encode($result);
     }
 
 }

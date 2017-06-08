@@ -290,6 +290,9 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <strong><i class="fa fa-tint panel-ico"></i>Suggested Blood Donors</strong>
+                    <div class="panel-control">
+                        <a class="btn btn-primary btn-sm" style="margin-top: -2px" href="javascript:void(0);" data-toggle="modal" data-target="#modalSearchDonor"><i class="fa fa-search"></i></a>
+                    </div>
                 </div>
 
                 <div class="panel-group" id="accordion-potential-donations">
@@ -306,7 +309,7 @@
                                     <span class="text-small sub-panel-title">{{ $bloodDonor->first_name }} {{$bloodDonor->last_name}}</span>
 
                                     <span class="pull-right">
-                                        <span class="badge badge-distance" popover="Distance" popover-trigger="mouseenter">{{Html::distance($bloodDonor->distance)}}</span>
+                                        <span class="badge badge-distance" popover="Distance" popover-trigger="mouseenter">{{Html::distance($bloodDonor->distance_value/1000) }} | {{ $bloodDonor->duration_value }}</span>
                                         <span class="badge">{{ Html::age($bloodDonor->birthday) }} Years </span>
                                     </span>
                                 </div>
@@ -447,6 +450,136 @@
                 <button class="btn btn-success" type="submit">SAVE</button>
             </div>
             {!! Form::close() !!}
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalSearchDonor" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">Search for Donor</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                            {!! Form::select('donor_id', [], null, ['class' => 'form-control ajax-search-select donors-search-select']) !!}
+                        </div>
+                    </div>
+                    <div class="search-result-container" style="display: none">
+                        <hr>
+                        <div class="col-md-12 m-b-md">
+                            <span class="badge-gender badge"><i class="fa"></i></span>
+                            <span class="badge-golden badge badge-warning">GD</span>
+                            <span class="badge badge-age"></span>
+                            <span class="donor-name sub-panel-title"><b></b></span>
+                            <span class="pull-right">
+                                <button class="btn btn-primary dial-item-btn m-l-sm btn-sm" data-dial='' data-dial-name="" data-log-request-id="{{ $bloodRequest->id }}" data-log-call-type="donor" data-log-donor-id=""><i class="fa fa-phone"></i>&nbsp;&nbsp;DIAL</button>
+                            </span>
+                        </div>
+                        <div class="col-md-12">
+                            <div role="tabpanel">
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="active"><a href="#tabWillDonate" role="tab" data-toggle="tab" aria-expanded="true">Will Donate</a></li>
+                                    <li role="presentation" class=""><a href="#tabCantDonate" role="tab" data-toggle="tab" aria-expanded="false">Can't Donate</a></li>
+                                </ul>
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane fade active in" id="tabWillDonate">
+                                        {!! Form::open(['route' => 'blood-donor-will-donate', 'method' => 'post']) !!}
+                                        <input type="hidden" name="donor_id" id="donorId" value="12"/>
+                                        <input type="hidden" name="blood_request_id" value="{{$bloodRequest->id}}"/>
+                                        <br>
+                                        <span class="list-unstyled">
+                                            <label class="ui-radio">
+                                              <input name="will_donate_on" checked="checked" type="radio" value="{{strtotime('+0 day')}}"><span> Today</span>
+                                            </label>
+                                            <label class="ui-radio">
+                                                <input name="will_donate_on" checked="checked" type="radio" value="{{strtotime('+1 day')}}"><span> Tomorrow</span>
+                                            </label>
+                                            <label class="ui-radio">
+                                                <input name="will_donate_on" type="radio" value="{{strtotime('+2 day')}}"><span> After Tomorrow</span>
+                                            </label>
+                                        </span>
+                                        <div class="row m-t-sm">
+                                            <div class="col-md-6">
+                                                <h5>Will Donate At</h5>
+                                                <div class="input-group ui-datepicker">
+                                                    <input name="time" required class="form-control timepicker">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h5>Donation Type</h5>
+                                                <span class="list-unstyled" style="padding-top: 4px; display: block;">
+                                                    @if($bloodRequest->blood_quantity !== $bloodRequest->blood_quantity_confirmed)
+                                                        <label class="ui-radio">
+                                                            <input name="donation_type" checked="checked" type="radio" value="blood"><span> Blood</span>
+                                                        </label>
+                                                    @endif
+                                                    @if($bloodRequest->platelets_quantity !== $bloodRequest->platelets_quantity_confirmed)
+                                                        <label class="ui-radio">
+                                                            <input name="donation_type" type="radio" value="platelets"><span> Platelets</span>
+                                                        </label>
+                                                    @endif
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="pull-right m-t-md">
+                                            <button class="btn btn-default m-r-xs" data-dismiss="modal" type="reset">CANCEL</button>
+                                            <button class="btn btn-success" type="submit">SAVE</button>
+                                        </div>
+                                        {!! Form::close() !!}
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane fade" id="tabCantDonate">
+                                        {!! Form::open(['route' => 'blood-donor-wont-donate', 'method' => 'post']) !!}
+                                        <input type="hidden" name="bloodDonorId" id="bloodDonorId"/>
+                                        <input type="hidden" name="bloodRequestId" value="{{$bloodRequest->id}}"/>
+                                        <br>
+                                        <span class="list-unstyled">
+                                            <label class="ui-radio">
+                                                <input name="delay" checked="checked" type="radio" value="{{strtotime('+1 day')}}"><span> Tomorrow</span>
+                                            </label>
+                                            <label class="ui-radio">
+                                                <input name="delay" type="radio" value="{{strtotime('+2 weeks')}}"><span> 2 Weeks</span>
+                                            </label>
+                                            <label class="ui-radio">
+                                                <input name="delay" type="radio" value="{{strtotime('+3 weeks')}}"><span> 3 Weeks</span>
+                                            </label>
+                                            <label class="ui-radio">
+                                                <input name="delay" type="radio" value="{{strtotime('+1 month')}}"><span> 1 Month</span>
+                                            </label>
+                                            <label class="ui-radio">
+                                                <input name="delay" type="radio" value="{{strtotime('+3 months')}}"><span> 3 Months</span>
+                                            </label>
+                                            <label class="ui-radio">
+                                                <input name="delay" type="radio" value="{{strtotime('+6 months')}}"><span> 6 Months</span>
+                                            </label>
+                                            <label class="ui-radio">
+                                                <input name="delay" type="radio" value="{{strtotime('+1 year')}}"><span> 1 Year</span>
+                                            </label>
+                                        </span>
+
+                                        <hr/>
+                                        
+                                        <h5>Donor Notes</h5>
+                                        <textarea name="note" class="donor-notes form-control autogrow"></textarea>
+
+                                        <div class="pull-right m-t-md">
+                                            <button class="btn btn-default m-r-xs" data-dismiss="modal" type="reset">CANCEL</button>
+                                            <button class="btn btn-success" type="submit">SAVE</button>
+                                        </div>
+                                        {!! Form::close() !!}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

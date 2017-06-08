@@ -20,12 +20,10 @@ Route::get('/phonebook/get-organizations-json', 'PhonebookController@getOrganiza
 Route::post('/phonebook/dial-number-api', 'PhonebookController@dialNumberAPI');
 
 // OR Dashboard Routes
-//Route::group(['middleware' => 'guest'], function () {
 Route::get('/dashboard', 'DashboardController@index');
 Route::get('/dashboard/or', 'DashboardController@showORDashboard');
 Route::get('/dashboard/phonebook', 'DashboardController@showPhonebookDashboard')->name('dashboard-phonebook');
 Route::post('/blood/requests/store', 'Blood\BloodRequestsController@store')->name('blood-request-store');
-//});
 
 // Authenticated User Routes
 Route::group(['middleware' => 'auth'], function () {
@@ -66,6 +64,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('donors/{id}/edit', 'BloodDonorsController@edit')->name('blood-donor-edit');
         Route::post('donors/{id}/update', 'BloodDonorsController@update')->name('blood-donor-update');
         Route::delete('donors/{id}/destroy', 'BloodDonorsController@destroy')->name('blood-donor-destroy');
+        Route::post('donors/search', 'BloodDonorsController@search')->name('blood-donor-search');
 
         // Requests
         Route::get('requests', 'BloodRequestsController@index')->name('blood-requests-list');

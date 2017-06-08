@@ -27,4 +27,19 @@ class BloodDonor extends Model {
         return $this->belongsTo('LRC\Data\Blood\BloodType');
     }
 
+    /**
+     * Return the donor's phone number(s)
+     *
+     * @return mixed
+     */
+    public function getPhoneNumbersAttribute()
+    {
+        $phone_numbers = $this->phone_primary;
+        
+        if($this->phone_secondary)
+            $phone_numbers .= ", " . $this->phone_secondary;
+
+        return $phone_numbers;
+    }
+
 }

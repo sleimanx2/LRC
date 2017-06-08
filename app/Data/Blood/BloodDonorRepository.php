@@ -1,8 +1,8 @@
 <?php
 
-
 namespace LRC\Data\Blood;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class BloodDonorRepository {
@@ -35,20 +35,57 @@ class BloodDonorRepository {
 
     public function findBestMatch(array $options = ['latitude' => null, 'logitude' => null, 'blood_type_id' => null, 'limit' => 25])
     {
+        // Get donors by straight-line lat-long distance calculation
         $bloodDonors = $this->bloodDonor
             ->select('*', DB::raw('
             ( 6371 * acos( cos( radians(' . $options['latitude'] . ') ) * cos( radians(latitude) ) * cos( radians(longitude) - radians(' . $options['longitude'] . ')) + sin( radians(' . $options['latitude'] . ') ) * sin( radians(latitude) ) )) AS distance
             '))
             ->where('blood_type_id', $options['blood_type_id'])
             ->where('incapable_till', '<=', date("Y-m-d"))
-            ->orderBy('golden_donor', 'desc')
             ->orderBy('distance')
-            ->limit($options['limit'])
+            ->limit(25)
             ->get();
 
-        return $bloodDonors;
+        // Re-sort donors based on Google Maps API distance and duration calculation
+        $apiOrigins = "origins=" . $options['latitude'] . "," . $options['longitude'];
+        $apiKey = "AIzaSyC4L4Pe9fVAf18MUQLf-c64vUlyd8Z0GBs";
+        
+        $apiDestinations = "destinations=";
+        foreach($bloodDonors as $donor)
+            $apiDestinations .= $donor->latitude . "," . $donor->longitude . "|";
+        $apiDestinations = substr($apiDestinations, 0, -1);
 
+        $apiURL = "https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&" . $apiOrigins . "&" . $apiDestinations . "&" . $apiKey;
+        $apiResult = json_decode(file_get_contents($apiURL));
 
+        foreach($bloodDonors as $index => $donor) {
+            $donor->distance_value = $apiResult->rows[0]->elements[$index]->distance->value;
+            $donor->duration = $apiResult->rows[0]->elements[$index]->duration->value;
+            $donor->duration_value = Carbon::now()->addSeconds($donor->duration)->diffForHumans(null, true);
+        }
+
+        // Apply the sorting
+        $makeComparer = function($criteria) {
+            $comparer = function ($first, $second) use ($criteria) {
+                foreach ($criteria as $key => $orderType) {
+                    $orderType = strtolower($orderType);
+
+                    if ($first[$key] < $second[$key])
+                        return $orderType === "asc" ? -1 : 1;
+                    else if ($first[$key] > $second[$key])
+                        return $orderType === "asc" ? 1 : -1;
+                }
+                return 0;
+            };
+            return $comparer;
+        };
+
+        $sortCriteria = ["golder_donor" => "desc", "duration" => "asc", "distance_value" => "asc"];
+
+        $comparer = $makeComparer($sortCriteria);
+        $sortedDonors = $bloodDonors->sort($comparer);
+        
+        return $sortedDonors->slice(0, $options['limit'])->values()->all();
     }
 
     /**
@@ -103,8 +140,14 @@ class BloodDonorRepository {
             'longitude'       => $data['longitude'],
             'gender'          => $data['gender'],
             'birthday'        => $data['birthday'],
-            'note'            => $data['note']
+            'note'            => $data['note'],
+            'incapable_till'  => $data['incapable_till']
         ];
+
+        if (isset($data['golden_donor']))
+            $attributes['golden_donor'] = 1;
+        else
+            $attributes['golden_donor'] = 0;
 
         return $this->bloodDonor->create($data);
     }
@@ -129,13 +172,16 @@ class BloodDonorRepository {
             'gender'          => $data['gender'],
             'birthday'        => $data['birthday'],
             'note'            => $data['note'],
-            'incapable_till'  => $data['incapable_till'],
+            'incapable_till'  => $data['incapable_till']
         ];
 
+        if (isset($data['golden_donor']))
+            $attributes['golden_donor'] = 1;
+        else
+            $attributes['golden_donor'] = 0;
+
         if ( $bloodDonor->email != $data['email'] )
-        {
             $attributes['email'] = $data['email'];
-        }
 
         $bloodDonor->fill($attributes);
 

@@ -18,9 +18,8 @@
     <link rel="stylesheet" href="/dist/vendor.min.css">
     <link rel="stylesheet" href="/dist/app.min.css">
 
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places&key=AIzaSyC2OagaYbI14yXJ9D_i-4401gYT0FZN9LY"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyC4L4Pe9fVAf18MUQLf-c64vUlyd8Z0GBs"></script>
     <script type="text/javascript" src="/dist/app.min.js"></script>
-
 </head>
 <body>
     <div>

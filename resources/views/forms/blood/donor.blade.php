@@ -58,6 +58,15 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="">Golden Donor</label>
+                    <label class="ui-checkbox ui-block" for="">
+                    {!! Form::checkbox('golden_donor', null, old('golden_donor')) !!}
+                    <span></span>
+                    </label>
+                </div>
+            </div>
         </div>
         <hr/>
         <div class="row">
