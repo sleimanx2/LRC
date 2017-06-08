@@ -36,6 +36,7 @@
 	</div>
 </div>
 
+@if(auth()->check())
 <div class="modal fade" id="modalChangeUserPassword" role="dialog">
     <div class="modal-dialog modal-md">
         <div class="modal-content">
@@ -69,3 +70,4 @@
         </div>
     </div>
 </div>
+@endif
