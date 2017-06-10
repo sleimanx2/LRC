@@ -141,14 +141,10 @@ class BloodDonorRepository {
             'gender'          => $data['gender'],
             'birthday'        => $data['birthday'],
             'note'            => $data['note'],
-            'incapable_till'  => $data['incapable_till']
+            'incapable_till'  => $data['incapable_till'],
+			'golden_donor'	  => isset($data['golden_donor']) ? 1 : 0,
         ];
-
-        if (isset($data['golden_donor']))
-            $attributes['golden_donor'] = 1;
-        else
-            $attributes['golden_donor'] = 0;
-
+		dd($data);
         return $this->bloodDonor->create($data);
     }
 
@@ -172,13 +168,9 @@ class BloodDonorRepository {
             'gender'          => $data['gender'],
             'birthday'        => $data['birthday'],
             'note'            => $data['note'],
-            'incapable_till'  => $data['incapable_till']
+            'incapable_till'  => $data['incapable_till'],
+			'golden_donor'	  => isset($data['golden_donor']) ? 1 : 0,
         ];
-
-        if (isset($data['golden_donor']))
-            $attributes['golden_donor'] = 1;
-        else
-            $attributes['golden_donor'] = 0;
 
         if ( $bloodDonor->email != $data['email'] )
             $attributes['email'] = $data['email'];

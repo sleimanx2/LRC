@@ -34,6 +34,7 @@
                         <th>Last Name</th>
                         <th>Phone Primary</th>
                         <th>Blood Type</th>
+						<th>Location</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
@@ -44,6 +45,7 @@
                             <td>{{$bloodDonor->last_name}}</td>
                             <td>{{$bloodDonor->phone_primary}}</td>
                             <td>{{$bloodDonor->blood_type->name}}</td>
+							<td>{{$bloodDonor->location}}</td>
                             <td>
                                 <a class="btn btn-info btn-sm" href="{{ route('blood-donor-edit',[$bloodDonor->id]) }}"
                                    popover="Edit" popover-trigger="mouseenter"><i
