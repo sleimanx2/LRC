@@ -23,7 +23,7 @@ class PhonebookController extends Controller
          	array_push($arr["data"], array(
         		"DT_RowClass" => "phonebook-row dial-item-btn",
         		"DT_RowData" => [
-	                "dial" => json_encode($first_aider->phone_numbers),
+	                "dial" => $first_aider->phone_numbers,
 	                "dial-name" => $first_aider->full_name
 	            ],
 
@@ -61,7 +61,7 @@ class PhonebookController extends Controller
          	array_push($arr["data"], array(
         		"DT_RowClass" => "phonebook-row dial-item-btn",
         		"DT_RowData" => [
-	                "dial" => json_encode($medical_center->phone_numbers),
+	                "dial" => $medical_center->phone_numbers,
 	                "dial-name" => $medical_center->name
 	            ],
 
@@ -96,7 +96,7 @@ class PhonebookController extends Controller
          	array_push($arr["data"], array(
         		"DT_RowClass" => "phonebook-row dial-item-btn",
         		"DT_RowData" => [
-	                "dial" => json_encode($lrc_center->phone_numbers),
+	                "dial" => $lrc_center->phone_numbers,
 	                "dial-name" => $lrc_center->sector . " (" . $lrc_center->name . ")"
 	            ],
 
@@ -126,7 +126,7 @@ class PhonebookController extends Controller
          	array_push($arr["data"], array(
         		"DT_RowClass" => "phonebook-row dial-item-btn",
         		"DT_RowData" => [
-	                "dial" => json_encode($organization->phone_numbers),
+	                "dial" => $organization->phone_numbers,
 	                "dial-name" => $organization->name
 	            ],
 

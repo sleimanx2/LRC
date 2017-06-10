@@ -126,14 +126,11 @@ $(document).on('input', '.format-phone', function(event) {
         $modal.find(".dial-buttons").html("");
 
         $data = $(this).data("dial");
-
-        if(isJSONString($data))
-            $returnData = JSON.parse($data);
-        else
-            $returnData = $data;
         
-        $.each($returnData, function(i, item) {
-            if(item) $modal.find(".dial-buttons").append("<a class='btn btn-default btn-phone-number' data-phone-number='" + item + "'>" + formatPhone(item) + "</button>")
+        $.each($data, function(i, item) {
+			console.log(item);
+            if(item) 
+				$modal.find(".dial-buttons").append("<a class='btn btn-default btn-phone-number' data-phone-number='" + item + "'>" + formatPhone(item) + "</button>");
         });
  
         if($(this).data("log-request-id") && $(this).data("log-call-type")) {
@@ -180,8 +177,8 @@ $(document).on('input', '.format-phone', function(event) {
 
     $(".dataTables_filter").find("input").attr("tabindex", "-1");
 
-    $(".quickdial-OR").data("dial", '["05458204"]');
-    $(".quickdial-206").data("dial", '["140"]');
+    $(".quickdial-OR").data("dial", [].concat("05458204"));
+    $(".quickdial-206").data("dial", [].concat("140"));
 }
 
 function formatPhone(phoneNumber) {
@@ -541,18 +538,6 @@ function initDonorsSearchSelect() {
         $(".donors-search-select").val(null).trigger("change");
         $("#modalSearchDonor").find(".search-result-container").hide();
     });
-}
-
-/*
-* Helper Functions
-*/
-function isJSONString(str) {
-    try {
-        JSON.parse(str);
-    } catch (e) {
-        return false;
-    }
-    return true;
 }
 
 /*

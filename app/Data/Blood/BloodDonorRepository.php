@@ -48,7 +48,7 @@ class BloodDonorRepository {
 
         // Re-sort donors based on Google Maps API distance and duration calculation
         $apiOrigins = "origins=" . $options['latitude'] . "," . $options['longitude'];
-        $apiKey = "AIzaSyC4L4Pe9fVAf18MUQLf-c64vUlyd8Z0GBs";
+        $apiKey = "key=AIzaSyDohD5KwxyAlD7LK5F_eV8fo0z0Csu3Cfc";
         
         $apiDestinations = "destinations=";
         foreach($bloodDonors as $donor)
@@ -57,7 +57,7 @@ class BloodDonorRepository {
 
         $apiURL = "https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&" . $apiOrigins . "&" . $apiDestinations . "&" . $apiKey;
         $apiResult = json_decode(file_get_contents($apiURL));
-
+		
         foreach($bloodDonors as $index => $donor) {
             $donor->distance_value = $apiResult->rows[0]->elements[$index]->distance->value;
             $donor->duration = $apiResult->rows[0]->elements[$index]->duration->value;
