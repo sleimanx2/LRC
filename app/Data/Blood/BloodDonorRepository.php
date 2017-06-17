@@ -144,7 +144,7 @@ class BloodDonorRepository {
             'incapable_till'  => $data['incapable_till'],
 			'golden_donor'	  => isset($data['golden_donor']) ? 1 : 0,
         ];
-		dd($data);
+		
         return $this->bloodDonor->create($data);
     }
 

@@ -77,7 +77,7 @@ class BloodDonorsController extends Controller {
     {
         $this->bloodDonorRepository->create($request->all());
 
-        return redirect()->intended(route('blood-donors-list'))->with('success', 'A blood donor was added successfully');
+        return redirect()->intended(route('blood-donors-list'))->with('success', 'Blood Donor was created successfully');
     }
 
 
@@ -109,7 +109,7 @@ class BloodDonorsController extends Controller {
 
         $this->bloodDonorRepository->update($request->all(), $bloodDonor);
 
-        return redirect()->intended(route('blood-donors-list'))->with('success', $bloodDonor->first_name . ' ' . $bloodDonor->last_name . ' was added successfully updated');
+        return redirect()->intended(route('blood-donors-list'))->with('success', 'Blood Donor was updated successfully');
 
     }
 
@@ -126,7 +126,7 @@ class BloodDonorsController extends Controller {
 
         $this->bloodDonorRepository->destroy($id);
 
-        return redirect()->intended(route('blood-donors-list'))->with('success', $bloodDonor->first_name . ' ' . $bloodDonor->last_name . ' was deleted successfully updated');
+        return redirect()->intended(route('blood-donors-list'))->with('success', 'Blood Donor was deleted successfully');
 
 
     }

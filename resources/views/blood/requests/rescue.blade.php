@@ -2,6 +2,7 @@
 
 @section('sub-header')
 <div class="clearfix">
+	<a href="{{ route('blood-donors-list') }}" class="btn btn-success btn-no-bg" style="margin-top: -5px; margin-right: 10px"><i class="fa fa-angle-left"></i></a>
     <h5 class="page-title">Blood Rescue</h5>
     <ul class="list-unstyled toolbar pull-right">
         <li class="blood-request-info-header">
@@ -198,7 +199,7 @@
                                 <th><span class="label label-log-{{ $callLog->call_type }}">{{ ucWords($callLog->call_type) }}</span></th>
                                 <td>{{ $callLog->user->full_name }}</td>
                                 @if($callLog->call_type == "donor")
-                                <td><a class="label label-success" href="/blood/donors/{{ $callLog->donor->id }}/edit" target="blank">{{ strtoupper($callLog->donor->first_name) }} {{ strtoupper($callLog->donor->last_name) }}</a></td>
+                                <td><a class="label label-success" href="/blood/donors/{{ $callLog->donor->id }}/edit" target="blank">{{ strtoupper($callLog->donor->first_name) }} {{ strtoupper($callLog->donor->last_name) }} {{ $callLog->donor->trashed() ? ' (Deleted)' : '' }}</a></td>
                                 @else
                                 <td></td>
                                 @endif

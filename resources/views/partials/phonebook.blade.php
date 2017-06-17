@@ -14,7 +14,11 @@
               <li><a class="dial-item-btn quickdial-206" data-dial-name="206 (Jal el Dib)" tabindex="-1"><i class="fa fa-phone"></i>&nbsp;&nbsp;<b>206</b></a></li>
             </ul>
         </div>
-        <button class="btn btn-header btn-refresh light no-border" onclick="refreshPhonebook()" tabindex="-1"><i class="fa fa-refresh"></i></button>
+		@if(Request::is('dashboard/phonebook'))
+        <button class="btn btn-header btn-refresh light no-border" onclick="location.reload();" tabindex="-1"><i class="fa fa-refresh"></i></button>
+		@else
+		<button class="btn btn-header btn-refresh light no-border" onclick="refreshPhonebook()" tabindex="-1"><i class="fa fa-refresh"></i></button>
+		@endif
         <button class="btn btn-header btn-close light no-border" onclick="hidePhonebookSidebar()" tabindex="-1"><i class="fa fa-times"></i></button>
         @if(Request::is('dashboard/phonebook'))
         <button class="btn btn-header btn-blood-request red" data-toggle="modal" data-target="#modalAddBloodRequest"><i class="fa fa-tint"></i></button>

@@ -45,6 +45,6 @@ class BloodRequestCallLog extends Model
      */
     public function donor()
     {
-        return $this->belongsTo('LRC\Data\Blood\BloodDonor','donor_id');
+        return $this->belongsTo('LRC\Data\Blood\BloodDonor','donor_id')->withTrashed();
     }
 }
