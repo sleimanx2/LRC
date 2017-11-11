@@ -2,6 +2,7 @@
 
 namespace LRC\Data\Blood;
 
+use Log;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -33,7 +34,7 @@ class BloodDonorRepository {
         return $this->bloodDonor->findOrFail($id);
     }
 
-    public function findBestMatch(array $options = ['latitude' => null, 'logitude' => null, 'blood_type_id' => null, 'limit' => 25])
+    public function findBestMatch(array $options = ['latitude' => null, 'logitude' => null, 'blood_type_id' => null, 'limit' => 25, 'use_distance_marix' => false])
     {
         // Get donors by straight-line lat-long distance calculation
         $bloodDonors = $this->bloodDonor
@@ -45,6 +46,10 @@ class BloodDonorRepository {
             ->orderBy('distance')
             ->limit(25)
             ->get();
+        
+        // If not using distance matrix
+        if(!$options['use_distance_matrix'])
+            return $bloodDonors;
 
         // Re-sort donors based on Google Maps API distance and duration calculation
         $apiOrigins = "origins=" . $options['latitude'] . "," . $options['longitude'];

@@ -120,10 +120,11 @@ class BloodRequestsController extends Controller {
         $bloodRequest = $this->bloodRequestRepository->findOrFail($id);
 
         $bloodDonors = $this->bloodDonorRepository->findBestMatch([
-            'latitude'      => $bloodRequest->blood_bank->latitude,
-            'longitude'     => $bloodRequest->blood_bank->longitude,
-            'blood_type_id' => $bloodRequest->blood_type_id,
-            'limit'         => 20
+            'latitude'              => $bloodRequest->blood_bank->latitude,
+            'longitude'             => $bloodRequest->blood_bank->longitude,
+            'blood_type_id'         => $bloodRequest->blood_type_id,
+            'limit'                 => 20,
+            'use_distance_matrix'   => false
         ]);
 
         $bloodDonations = $bloodRequest->blood_donations;
