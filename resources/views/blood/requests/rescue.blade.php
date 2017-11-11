@@ -309,7 +309,7 @@
                                     <span class="text-small sub-panel-title">{{ $bloodDonor->first_name }} {{$bloodDonor->last_name}}</span>
 
                                     <span class="pull-right">
-                                        <span class="badge badge-distance" popover="Distance" popover-trigger="mouseenter">{{Html::distance($bloodDonor->distance_value/1000) }} | {{ $bloodDonor->duration_value }}</span>
+                                        <span class="badge badge-distance" popover="Distance" popover-trigger="mouseenter">{{ $bloodDonor->distance_value ? Html::distance($bloodDonor->distance_value/1000) . ' | ' . $bloodDonor->duration_value : Html::distance($bloodDonor->distance) }}</span>
                                         <span class="badge">{{ Html::age($bloodDonor->birthday) }} Years </span>
                                     </span>
                                 </div>
